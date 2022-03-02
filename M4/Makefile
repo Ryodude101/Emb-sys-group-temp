@@ -60,7 +60,7 @@ endif
 ######################################
 # C sources
 C_SOURCES =  \
-Source/m4.c \
+Source/app.c \
 
 
 # ASM sources

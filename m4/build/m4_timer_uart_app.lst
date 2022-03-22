@@ -1,0 +1,1071 @@
+ARM GAS  /tmp/cc2sX7Xg.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"m4_timer_uart_app.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.TOGGLE_LD2,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	TOGGLE_LD2:
+  26              	.LFB5:
+  27              		.file 1 "src/embsysS20.h"
+   1:src/embsysS20.h **** // HINT for TASK #2 -- FALL 2022
+   2:src/embsysS20.h **** 
+   3:src/embsysS20.h **** #ifndef EMBSYSS20_H
+   4:src/embsysS20.h **** #define EMBSYSS20_H
+   5:src/embsysS20.h **** 
+   6:src/embsysS20.h **** #ifdef __cplusplus
+   7:src/embsysS20.h **** extern "C" {
+   8:src/embsysS20.h **** #endif
+   9:src/embsysS20.h **** 
+  10:src/embsysS20.h **** //************** I N C L U D E S *****************
+  11:src/embsysS20.h **** 
+  12:src/embsysS20.h **** #include <errno.h>
+  13:src/embsysS20.h **** #include <stdio.h>
+  14:src/embsysS20.h **** #include <unistd.h>
+  15:src/embsysS20.h **** #include "embsysS20.h"
+  16:src/embsysS20.h **** #include <libopencm3/stm32/rcc.h>
+  17:src/embsysS20.h **** #include <libopencm3/stm32/gpio.h>
+  18:src/embsysS20.h **** #include <libopencm3/cm3/nvic.h>
+  19:src/embsysS20.h **** #include <libopencm3/stm32/exti.h>
+  20:src/embsysS20.h **** #include <libopencm3/stm32/flash.h>
+  21:src/embsysS20.h **** #include <libopencm3/stm32/timer.h>
+  22:src/embsysS20.h **** #include <string.h>
+  23:src/embsysS20.h **** #include <stdlib.h>
+  24:src/embsysS20.h **** #include <stdbool.h>
+  25:src/embsysS20.h **** 
+  26:src/embsysS20.h **** 
+  27:src/embsysS20.h **** //************** G L O B A L S *****************
+  28:src/embsysS20.h **** 
+  29:src/embsysS20.h **** #define LD2_Pin GPIO5 // Connected to PA5
+  30:src/embsysS20.h **** #define LD2_Port GPIOA
+  31:src/embsysS20.h **** #define B1_Pin GPIO13 // Connected to PC13
+ARM GAS  /tmp/cc2sX7Xg.s 			page 2
+
+
+  32:src/embsysS20.h **** #define B1_Port GPIOC
+  33:src/embsysS20.h **** 
+  34:src/embsysS20.h **** 
+  35:src/embsysS20.h **** //********* S U P P O R T     F U N C T I O N S *****************
+  36:src/embsysS20.h **** 
+  37:src/embsysS20.h **** static void TURN_ON_LD2(void){
+  38:src/embsysS20.h **** 	gpio_set(LD2_Port, LD2_Pin);
+  39:src/embsysS20.h **** }
+  40:src/embsysS20.h **** 
+  41:src/embsysS20.h **** static void TURN_OFF_LD2(void){
+  42:src/embsysS20.h **** 	gpio_clear(LD2_Port, LD2_Pin);
+  43:src/embsysS20.h **** }
+  44:src/embsysS20.h **** 
+  45:src/embsysS20.h **** static void TOGGLE_LD2(void){
+  28              		.loc 1 45 29 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  46:src/embsysS20.h **** 	gpio_toggle(LD2_Port, LD2_Pin);
+  37              		.loc 1 46 2 view .LVU1
+  38 0002 2021     		movs	r1, #32
+  39 0004 4FF09040 		mov	r0, #1207959552
+  40 0008 FFF7FEFF 		bl	gpio_toggle
+  41              	.LVL0:
+  47:src/embsysS20.h **** }
+  42              		.loc 1 47 1 is_stmt 0 view .LVU2
+  43 000c 08BD     		pop	{r3, pc}
+  44              		.cfi_endproc
+  45              	.LFE5:
+  47              		.section	.text.IS_B1_RELEASED,"ax",%progbits
+  48              		.align	1
+  49              		.syntax unified
+  50              		.thumb
+  51              		.thumb_func
+  53              	IS_B1_RELEASED:
+  54              	.LFB8:
+  48:src/embsysS20.h **** 
+  49:src/embsysS20.h **** static bool IS_LD2_SET(void){
+  50:src/embsysS20.h **** 	if (gpio_get(LD2_Port, LD2_Pin) == 1)
+  51:src/embsysS20.h **** 		return true;
+  52:src/embsysS20.h **** 	else
+  53:src/embsysS20.h **** 		return false;
+  54:src/embsysS20.h **** }
+  55:src/embsysS20.h **** 
+  56:src/embsysS20.h **** static bool IS_LD2_RESET(void){
+  57:src/embsysS20.h **** 	if (gpio_get(LD2_Port, LD2_Pin) == 0)
+  58:src/embsysS20.h **** 		return true;
+  59:src/embsysS20.h **** 	else
+  60:src/embsysS20.h **** 		return false;
+  61:src/embsysS20.h **** }
+  62:src/embsysS20.h **** 
+  63:src/embsysS20.h **** static bool IS_B1_RELEASED(void){
+ARM GAS  /tmp/cc2sX7Xg.s 			page 3
+
+
+  55              		.loc 1 63 33 is_stmt 1 view -0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59 0000 08B5     		push	{r3, lr}
+  60              	.LCFI1:
+  61              		.cfi_def_cfa_offset 8
+  62              		.cfi_offset 3, -8
+  63              		.cfi_offset 14, -4
+  64:src/embsysS20.h **** 	if (gpio_get(B1_Port, B1_Pin) > 0)
+  64              		.loc 1 64 2 view .LVU4
+  65              		.loc 1 64 6 is_stmt 0 view .LVU5
+  66 0002 4FF40051 		mov	r1, #8192
+  67 0006 0448     		ldr	r0, .L7
+  68 0008 FFF7FEFF 		bl	gpio_get
+  69              	.LVL1:
+  70              		.loc 1 64 5 view .LVU6
+  71 000c 08B1     		cbz	r0, .L5
+  65:src/embsysS20.h **** 		return true;
+  72              		.loc 1 65 10 view .LVU7
+  73 000e 0120     		movs	r0, #1
+  74              	.L4:
+  66:src/embsysS20.h **** 	else
+  67:src/embsysS20.h **** 		return false;
+  68:src/embsysS20.h **** }
+  75              		.loc 1 68 1 view .LVU8
+  76 0010 08BD     		pop	{r3, pc}
+  77              	.L5:
+  67:src/embsysS20.h **** }
+  78              		.loc 1 67 10 view .LVU9
+  79 0012 0020     		movs	r0, #0
+  80 0014 FCE7     		b	.L4
+  81              	.L8:
+  82 0016 00BF     		.align	2
+  83              	.L7:
+  84 0018 00080048 		.word	1207961600
+  85              		.cfi_endproc
+  86              	.LFE8:
+  88              		.section	.text.flash_LED,"ax",%progbits
+  89              		.align	1
+  90              		.global	flash_LED
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  95              	flash_LED:
+  96              	.LVL2:
+  97              	.LFB10:
+  98              		.file 2 "src/m4_timer_uart_app.c"
+   1:src/m4_timer_uart_app.c **** /*
+   2:src/m4_timer_uart_app.c ****  * "Copyright (c) 2019 J. W. Bruce ("AUTHOR(S)")"
+   3:src/m4_timer_uart_app.c ****  * All rights reserved.
+   4:src/m4_timer_uart_app.c ****  * (J. W. Bruce, jwbruce_AT_tntech.edu, Tennessee Tech University)
+   5:src/m4_timer_uart_app.c ****  *
+   6:src/m4_timer_uart_app.c ****  * Permission to use, copy, modify, and distribute this software and its
+   7:src/m4_timer_uart_app.c ****  * documentation for any purpose, without fee, and without written agreement is
+   8:src/m4_timer_uart_app.c ****  * hereby granted, provided that the above copyright notice, the following
+   9:src/m4_timer_uart_app.c ****  * two paragraphs and the authors appear in all copies of this software.
+ARM GAS  /tmp/cc2sX7Xg.s 			page 4
+
+
+  10:src/m4_timer_uart_app.c ****  *
+  11:src/m4_timer_uart_app.c ****  * IN NO EVENT SHALL THE "AUTHORS" BE LIABLE TO ANY PARTY FOR
+  12:src/m4_timer_uart_app.c ****  * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
+  13:src/m4_timer_uart_app.c ****  * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE "AUTHORS"
+  14:src/m4_timer_uart_app.c ****  * HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  15:src/m4_timer_uart_app.c ****  *
+  16:src/m4_timer_uart_app.c ****  * THE "AUTHORS" SPECIFICALLY DISCLAIMS ANY WARRANTIES,
+  17:src/m4_timer_uart_app.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+  18:src/m4_timer_uart_app.c ****  * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
+  19:src/m4_timer_uart_app.c ****  * ON AN "AS IS" BASIS, AND THE "AUTHORS" HAS NO OBLIGATION TO
+  20:src/m4_timer_uart_app.c ****  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
+  21:src/m4_timer_uart_app.c ****  *
+  22:src/m4_timer_uart_app.c ****  * Please maintain this header in its entirety when copying/modifying
+  23:src/m4_timer_uart_app.c ****  * these files.
+  24:src/m4_timer_uart_app.c ****  *
+  25:src/m4_timer_uart_app.c ****  *
+  26:src/m4_timer_uart_app.c ****  */
+  27:src/m4_timer_uart_app.c **** 
+  28:src/m4_timer_uart_app.c **** // #define ESOS_USE_IRQS
+  29:src/m4_timer_uart_app.c **** 
+  30:src/m4_timer_uart_app.c **** // INCLUDEs go here  (First include the main esos.h file)
+  31:src/m4_timer_uart_app.c **** //      After that, the user can include what they need
+  32:src/m4_timer_uart_app.c **** #include    "esos.h"
+  33:src/m4_timer_uart_app.c **** #include  "embsysS20.h"
+  34:src/m4_timer_uart_app.c **** #ifdef __linux
+  35:src/m4_timer_uart_app.c **** #include    "esos_pc.h"
+  36:src/m4_timer_uart_app.c **** #include    "esos_pc_stdio.h"
+  37:src/m4_timer_uart_app.c **** // INCLUDE these so our printf and other PC hacks work
+  38:src/m4_timer_uart_app.c **** #include <stdio.h>
+  39:src/m4_timer_uart_app.c **** #include <sys/select.h>
+  40:src/m4_timer_uart_app.c **** #include <termios.h>
+  41:src/m4_timer_uart_app.c **** #include <unistd.h>
+  42:src/m4_timer_uart_app.c **** #else
+  43:src/m4_timer_uart_app.c **** #include    "esos_stm32l4.h"
+  44:src/m4_timer_uart_app.c **** #include    "esos_stm32l4_rs232.h"
+  45:src/m4_timer_uart_app.c **** #endif
+  46:src/m4_timer_uart_app.c **** 
+  47:src/m4_timer_uart_app.c **** // Defines
+  48:src/m4_timer_uart_app.c **** #define DECODE_FLASH 62 // Half of 0.125 s period for decoding flash rounded down to avoid floats
+  49:src/m4_timer_uart_app.c **** #define ENCODE_FLASH 500 // Half of 0.5 s period for encoding flash
+  50:src/m4_timer_uart_app.c **** #define SPACE_INPUT 0x00 // ASCII for [space] input
+  51:src/m4_timer_uart_app.c **** 
+  52:src/m4_timer_uart_app.c **** void __user_init_hw( void );
+  53:src/m4_timer_uart_app.c **** 
+  54:src/m4_timer_uart_app.c **** 
+  55:src/m4_timer_uart_app.c **** // GLOBALs go here
+  56:src/m4_timer_uart_app.c **** //  Generally, the user-created semaphores will be defined/allocated here
+  57:src/m4_timer_uart_app.c **** //static uint8_t psz_CRNL[3]= {0x0D, 0x0A, 0};
+  58:src/m4_timer_uart_app.c **** 
+  59:src/m4_timer_uart_app.c **** // timer globals
+  60:src/m4_timer_uart_app.c **** 
+  61:src/m4_timer_uart_app.c **** #ifdef _linux
+  62:src/m4_timer_uart_app.c **** #endif
+  63:src/m4_timer_uart_app.c **** 
+  64:src/m4_timer_uart_app.c **** ESOS_USER_TASK( flash_LED ) 
+  65:src/m4_timer_uart_app.c **** {
+  99              		.loc 2 65 1 is_stmt 1 view -0
+ARM GAS  /tmp/cc2sX7Xg.s 			page 5
+
+
+ 100              		.cfi_startproc
+ 101              		@ args = 0, pretend = 0, frame = 0
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103              		.loc 2 65 1 is_stmt 0 view .LVU11
+ 104 0000 38B5     		push	{r3, r4, r5, lr}
+ 105              	.LCFI2:
+ 106              		.cfi_def_cfa_offset 16
+ 107              		.cfi_offset 3, -16
+ 108              		.cfi_offset 4, -12
+ 109              		.cfi_offset 5, -8
+ 110              		.cfi_offset 14, -4
+ 111 0002 0446     		mov	r4, r0
+  66:src/m4_timer_uart_app.c **** 	ESOS_TASK_BEGIN();
+ 112              		.loc 2 66 2 is_stmt 1 view .LVU12
+ 113 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 114 0006 63F07F03 		orn	r3, r3, #127
+ 115 000a 8370     		strb	r3, [r0, #2]
+ 116              		.loc 2 66 2 view .LVU13
+ 117 000c 0388     		ldrh	r3, [r0]
+ 118 000e 482B     		cmp	r3, #72
+ 119 0010 22D0     		beq	.L10
+ 120 0012 4C2B     		cmp	r3, #76
+ 121 0014 36D0     		beq	.L11
+ 122 0016 93B1     		cbz	r3, .L18
+  67:src/m4_timer_uart_app.c **** 	while (TRUE) 
+  68:src/m4_timer_uart_app.c **** 	{
+  69:src/m4_timer_uart_app.c **** 		TOGGLE_LD2();
+  70:src/m4_timer_uart_app.c **** 		if (IS_B1_RELEASED())
+  71:src/m4_timer_uart_app.c **** 		{
+  72:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_TICKS( ENCODE_FLASH );
+  73:src/m4_timer_uart_app.c **** 		}
+  74:src/m4_timer_uart_app.c **** 		else
+  75:src/m4_timer_uart_app.c **** 		{ 
+  76:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_TICKS( DECODE_FLASH );
+  77:src/m4_timer_uart_app.c **** 		}
+  78:src/m4_timer_uart_app.c **** 
+  79:src/m4_timer_uart_app.c **** 	} // endof while(TRUE)
+  80:src/m4_timer_uart_app.c **** 	ESOS_TASK_END();
+ 123              		.loc 2 80 2 view .LVU14
+ 124              		.loc 2 80 2 view .LVU15
+ 125 0018 0823     		movs	r3, #8
+ 126 001a 8370     		strb	r3, [r0, #2]
+ 127              		.loc 2 80 2 view .LVU16
+ 128 001c 0023     		movs	r3, #0
+ 129 001e 0380     		strh	r3, [r0]	@ movhi
+ 130              		.loc 2 80 2 view .LVU17
+ 131              		.loc 2 80 2 view .LVU18
+ 132              		.loc 2 80 2 view .LVU19
+ 133 0020 0325     		movs	r5, #3
+ 134              	.LVL3:
+ 135              	.L15:
+ 136              		.loc 2 80 17 discriminator 1 view .LVU20
+  81:src/m4_timer_uart_app.c **** } // end flash_LED() 
+ 137              		.loc 2 81 1 is_stmt 0 discriminator 1 view .LVU21
+ 138 0022 2846     		mov	r0, r5
+ 139 0024 38BD     		pop	{r3, r4, r5, pc}
+ 140              	.LVL4:
+ARM GAS  /tmp/cc2sX7Xg.s 			page 6
+
+
+ 141              	.L23:
+  72:src/m4_timer_uart_app.c **** 		}
+ 142              		.loc 2 72 4 is_stmt 1 discriminator 2 view .LVU22
+ 143 0026 0423     		movs	r3, #4
+ 144 0028 A370     		strb	r3, [r4, #2]
+  72:src/m4_timer_uart_app.c **** 		}
+ 145              		.loc 2 72 4 discriminator 2 view .LVU23
+ 146 002a 0325     		movs	r5, #3
+ 147 002c F9E7     		b	.L15
+ 148              	.L16:
+  72:src/m4_timer_uart_app.c **** 		}
+ 149              		.loc 2 72 4 discriminator 5 view .LVU24
+ 150 002e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 151 0030 43F00103 		orr	r3, r3, #1
+ 152 0034 A370     		strb	r3, [r4, #2]
+ 153              	.L17:
+  72:src/m4_timer_uart_app.c **** 		}
+ 154              		.loc 2 72 4 discriminator 7 view .LVU25
+ 155 0036 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 156 0038 13F0010F 		tst	r3, #1
+ 157 003c F1D1     		bne	.L15
+ 158              	.L18:
+  66:src/m4_timer_uart_app.c **** 	while (TRUE) 
+ 159              		.loc 2 66 19 discriminator 1 view .LVU26
+  67:src/m4_timer_uart_app.c **** 	{
+ 160              		.loc 2 67 2 discriminator 1 view .LVU27
+  69:src/m4_timer_uart_app.c **** 		if (IS_B1_RELEASED())
+ 161              		.loc 2 69 3 discriminator 1 view .LVU28
+ 162 003e FFF7FEFF 		bl	TOGGLE_LD2
+ 163              	.LVL5:
+  70:src/m4_timer_uart_app.c **** 		{
+ 164              		.loc 2 70 3 discriminator 1 view .LVU29
+  70:src/m4_timer_uart_app.c **** 		{
+ 165              		.loc 2 70 7 is_stmt 0 discriminator 1 view .LVU30
+ 166 0042 FFF7FEFF 		bl	IS_B1_RELEASED
+ 167              	.LVL6:
+  70:src/m4_timer_uart_app.c **** 		{
+ 168              		.loc 2 70 6 discriminator 1 view .LVU31
+ 169 0046 B0B1     		cbz	r0, .L13
+  72:src/m4_timer_uart_app.c **** 		}
+ 170              		.loc 2 72 4 is_stmt 1 view .LVU32
+  72:src/m4_timer_uart_app.c **** 		}
+ 171              		.loc 2 72 4 view .LVU33
+ 172 0048 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 173              	.LVL7:
+ 174 004c A060     		str	r0, [r4, #8]
+  72:src/m4_timer_uart_app.c **** 		}
+ 175              		.loc 2 72 4 view .LVU34
+ 176 004e 4FF4FA73 		mov	r3, #500
+ 177 0052 E360     		str	r3, [r4, #12]
+  72:src/m4_timer_uart_app.c **** 		}
+ 178              		.loc 2 72 4 view .LVU35
+  72:src/m4_timer_uart_app.c **** 		}
+ 179              		.loc 2 72 4 view .LVU36
+ 180 0054 4823     		movs	r3, #72
+ 181 0056 2380     		strh	r3, [r4]	@ movhi
+ 182              	.L10:
+ARM GAS  /tmp/cc2sX7Xg.s 			page 7
+
+
+  72:src/m4_timer_uart_app.c **** 		}
+ 183              		.loc 2 72 4 discriminator 1 view .LVU37
+  72:src/m4_timer_uart_app.c **** 		}
+ 184              		.loc 2 72 4 discriminator 1 view .LVU38
+ 185 0058 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 186 005a 15F00405 		ands	r5, r5, #4
+ 187 005e E2D1     		bne	.L23
+  72:src/m4_timer_uart_app.c **** 		}
+ 188              		.loc 2 72 4 discriminator 3 view .LVU39
+ 189 0060 E168     		ldr	r1, [r4, #12]
+ 190 0062 A068     		ldr	r0, [r4, #8]
+ 191 0064 FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 192              	.LVL8:
+ 193 0068 0028     		cmp	r0, #0
+ 194 006a E0D0     		beq	.L16
+  72:src/m4_timer_uart_app.c **** 		}
+ 195              		.loc 2 72 4 discriminator 4 view .LVU40
+ 196 006c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 197 006e 23F00103 		bic	r3, r3, #1
+ 198 0072 A370     		strb	r3, [r4, #2]
+ 199 0074 DFE7     		b	.L17
+ 200              	.L13:
+  76:src/m4_timer_uart_app.c **** 		}
+ 201              		.loc 2 76 4 view .LVU41
+  76:src/m4_timer_uart_app.c **** 		}
+ 202              		.loc 2 76 4 view .LVU42
+ 203 0076 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 204              	.LVL9:
+ 205 007a A060     		str	r0, [r4, #8]
+  76:src/m4_timer_uart_app.c **** 		}
+ 206              		.loc 2 76 4 view .LVU43
+ 207 007c 3E23     		movs	r3, #62
+ 208 007e E360     		str	r3, [r4, #12]
+  76:src/m4_timer_uart_app.c **** 		}
+ 209              		.loc 2 76 4 view .LVU44
+  76:src/m4_timer_uart_app.c **** 		}
+ 210              		.loc 2 76 4 view .LVU45
+ 211 0080 4C23     		movs	r3, #76
+ 212 0082 2380     		strh	r3, [r4]	@ movhi
+ 213              	.L11:
+  76:src/m4_timer_uart_app.c **** 		}
+ 214              		.loc 2 76 4 discriminator 1 view .LVU46
+  76:src/m4_timer_uart_app.c **** 		}
+ 215              		.loc 2 76 4 discriminator 1 view .LVU47
+ 216 0084 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 217 0086 15F00405 		ands	r5, r5, #4
+ 218 008a 0DD1     		bne	.L24
+  76:src/m4_timer_uart_app.c **** 		}
+ 219              		.loc 2 76 4 discriminator 3 view .LVU48
+ 220 008c E168     		ldr	r1, [r4, #12]
+ 221 008e A068     		ldr	r0, [r4, #8]
+ 222 0090 FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 223              	.LVL10:
+ 224 0094 60B1     		cbz	r0, .L20
+  76:src/m4_timer_uart_app.c **** 		}
+ 225              		.loc 2 76 4 discriminator 4 view .LVU49
+ 226 0096 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ARM GAS  /tmp/cc2sX7Xg.s 			page 8
+
+
+ 227 0098 23F00103 		bic	r3, r3, #1
+ 228 009c A370     		strb	r3, [r4, #2]
+ 229              	.L21:
+  76:src/m4_timer_uart_app.c **** 		}
+ 230              		.loc 2 76 4 discriminator 7 view .LVU50
+ 231 009e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 232 00a0 13F0010F 		tst	r3, #1
+ 233 00a4 CBD0     		beq	.L18
+ 234 00a6 BCE7     		b	.L15
+ 235              	.L24:
+  76:src/m4_timer_uart_app.c **** 		}
+ 236              		.loc 2 76 4 discriminator 2 view .LVU51
+ 237 00a8 0423     		movs	r3, #4
+ 238 00aa A370     		strb	r3, [r4, #2]
+  76:src/m4_timer_uart_app.c **** 		}
+ 239              		.loc 2 76 4 discriminator 2 view .LVU52
+ 240 00ac 0325     		movs	r5, #3
+ 241 00ae B8E7     		b	.L15
+ 242              	.L20:
+  76:src/m4_timer_uart_app.c **** 		}
+ 243              		.loc 2 76 4 discriminator 5 view .LVU53
+ 244 00b0 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 245 00b2 43F00103 		orr	r3, r3, #1
+ 246 00b6 A370     		strb	r3, [r4, #2]
+ 247 00b8 F1E7     		b	.L21
+ 248              		.cfi_endproc
+ 249              	.LFE10:
+ 251              		.section	.text.usart_comms,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	usart_comms
+ 254              		.syntax unified
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	usart_comms:
+ 259              	.LVL11:
+ 260              	.LFB11:
+  82:src/m4_timer_uart_app.c **** 
+  83:src/m4_timer_uart_app.c **** ESOS_USER_TASK( usart_comms )
+  84:src/m4_timer_uart_app.c **** {
+ 261              		.loc 2 84 1 view -0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265              		.loc 2 84 1 is_stmt 0 view .LVU55
+ 266 0000 38B5     		push	{r3, r4, r5, lr}
+ 267              	.LCFI3:
+ 268              		.cfi_def_cfa_offset 16
+ 269              		.cfi_offset 3, -16
+ 270              		.cfi_offset 4, -12
+ 271              		.cfi_offset 5, -8
+ 272              		.cfi_offset 14, -4
+ 273 0002 0446     		mov	r4, r0
+  85:src/m4_timer_uart_app.c **** 	static uint8_t u8_incoming;
+ 274              		.loc 2 85 2 is_stmt 1 view .LVU56
+  86:src/m4_timer_uart_app.c **** 
+  87:src/m4_timer_uart_app.c **** 	ESOS_TASK_BEGIN();
+ 275              		.loc 2 87 2 view .LVU57
+ARM GAS  /tmp/cc2sX7Xg.s 			page 9
+
+
+ 276 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 277 0006 63F07F03 		orn	r3, r3, #127
+ 278 000a 8370     		strb	r3, [r0, #2]
+ 279              		.loc 2 87 2 view .LVU58
+ 280 000c 0388     		ldrh	r3, [r0]
+ 281 000e 002B     		cmp	r3, #0
+ 282 0010 56D0     		beq	.L26
+ 283 0012 662B     		cmp	r3, #102
+ 284 0014 00F2A480 		bhi	.L27
+ 285 0018 5B2B     		cmp	r3, #91
+ 286 001a C0F0A180 		bcc	.L27
+ 287 001e 5B3B     		subs	r3, r3, #91
+ 288 0020 0B2B     		cmp	r3, #11
+ 289 0022 00F29D80 		bhi	.L27
+ 290 0026 DFE803F0 		tbb	[pc, r3]
+ 291              	.L29:
+ 292 002a 4D       		.byte	(.L32-.L29)/2
+ 293 002b 67       		.byte	(.L31-.L29)/2
+ 294 002c 9B       		.byte	(.L27-.L29)/2
+ 295 002d 9B       		.byte	(.L27-.L29)/2
+ 296 002e 9B       		.byte	(.L27-.L29)/2
+ 297 002f 9B       		.byte	(.L27-.L29)/2
+ 298 0030 9B       		.byte	(.L27-.L29)/2
+ 299 0031 9B       		.byte	(.L27-.L29)/2
+ 300 0032 9B       		.byte	(.L27-.L29)/2
+ 301 0033 9B       		.byte	(.L27-.L29)/2
+ 302 0034 19       		.byte	(.L30-.L29)/2
+ 303 0035 33       		.byte	(.L28-.L29)/2
+ 304              	.LVL12:
+ 305              		.p2align 1
+ 306              	.L50:
+  88:src/m4_timer_uart_app.c **** 	while (TRUE) {
+  89:src/m4_timer_uart_app.c **** 	
+  90:src/m4_timer_uart_app.c **** 	// ESOS UART comms uses 57.6k/8/N/1
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_AVAILABLE_IN_COMM();
+ 307              		.loc 2 91 3 discriminator 2 view .LVU59
+ 308 0036 0423     		movs	r3, #4
+ 309 0038 A370     		strb	r3, [r4, #2]
+ 310              		.loc 2 91 3 discriminator 2 view .LVU60
+ 311 003a 0325     		movs	r5, #3
+ 312 003c 95E0     		b	.L34
+ 313              	.L35:
+ 314              		.loc 2 91 3 discriminator 5 view .LVU61
+ 315 003e 43F00103 		orr	r3, r3, #1
+ 316 0042 A370     		strb	r3, [r4, #2]
+ 317 0044 4AE0     		b	.L36
+ 318              	.L51:
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 319              		.loc 2 92 3 discriminator 2 view .LVU62
+ 320 0046 0423     		movs	r3, #4
+ 321 0048 A370     		strb	r3, [r4, #2]
+ 322              		.loc 2 92 3 discriminator 2 view .LVU63
+ 323 004a 0325     		movs	r5, #3
+ 324 004c 8DE0     		b	.L34
+ 325              	.L38:
+ 326              		.loc 2 92 3 discriminator 5 view .LVU64
+ 327 004e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ARM GAS  /tmp/cc2sX7Xg.s 			page 10
+
+
+ 328 0050 43F00103 		orr	r3, r3, #1
+ 329 0054 A370     		strb	r3, [r4, #2]
+ 330 0056 5EE0     		b	.L39
+ 331              	.L40:
+  93:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+  94:src/m4_timer_uart_app.c **** 
+  95:src/m4_timer_uart_app.c **** 		if (u8_incoming >= 'a' && u8_incoming <='z') // Capitalizes if input is a letter
+  96:src/m4_timer_uart_app.c **** 			u8_incoming = u8_incoming - 'a' + 'A';
+  97:src/m4_timer_uart_app.c **** 			
+  98:src/m4_timer_uart_app.c **** 		// FIXME: Here, input processing should be added (cipher and user command system)
+  99:src/m4_timer_uart_app.c **** 			
+ 100:src/m4_timer_uart_app.c **** 
+ 101:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 332              		.loc 2 101 3 view .LVU65
+ 333              		.loc 2 101 3 view .LVU66
+ 334 0058 6523     		movs	r3, #101
+ 335 005a 2380     		strh	r3, [r4]	@ movhi
+ 336              	.L30:
+ 337              		.loc 2 101 3 discriminator 1 view .LVU67
+ 338              		.loc 2 101 3 discriminator 1 view .LVU68
+ 339 005c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 340 005e 13F00405 		ands	r5, r3, #4
+ 341 0062 6CD1     		bne	.L48
+ 342              		.loc 2 101 3 discriminator 3 view .LVU69
+ 343 0064 424A     		ldr	r2, .L52
+ 344 0066 1268     		ldr	r2, [r2]
+ 345 0068 12F0040F 		tst	r2, #4
+ 346 006c 6BD1     		bne	.L42
+ 347              		.loc 2 101 3 discriminator 4 view .LVU70
+ 348 006e 23F00103 		bic	r3, r3, #1
+ 349 0072 A370     		strb	r3, [r4, #2]
+ 350              	.L43:
+ 351              		.loc 2 101 3 discriminator 7 view .LVU71
+ 352 0074 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 353 0076 13F0010F 		tst	r3, #1
+ 354 007a 76D1     		bne	.L34
+ 355              		.loc 2 101 3 discriminator 9 view .LVU72
+ 356              		.loc 2 101 3 discriminator 9 view .LVU73
+ 357 007c 3C4A     		ldr	r2, .L52
+ 358 007e 1368     		ldr	r3, [r2]
+ 359 0080 43F00403 		orr	r3, r3, #4
+ 360 0084 1360     		str	r3, [r2]
+ 102:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 361              		.loc 2 102 3 discriminator 9 view .LVU74
+ 362              		.loc 2 102 3 discriminator 9 view .LVU75
+ 363 0086 3B4B     		ldr	r3, .L52+4
+ 364 0088 0022     		movs	r2, #0
+ 365 008a 1A80     		strh	r2, [r3]	@ movhi
+ 366              		.loc 2 102 3 discriminator 9 view .LVU76
+ 367              		.loc 2 102 3 discriminator 9 view .LVU77
+ 368              		.loc 2 102 3 discriminator 9 view .LVU78
+ 369              		.loc 2 102 3 discriminator 9 view .LVU79
+ 370 008c 6623     		movs	r3, #102
+ 371 008e 2380     		strh	r3, [r4]	@ movhi
+ 372              	.L28:
+ 373              		.loc 2 102 3 discriminator 1 view .LVU80
+ 374              		.loc 2 102 3 discriminator 1 view .LVU81
+ARM GAS  /tmp/cc2sX7Xg.s 			page 11
+
+
+ 375 0090 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 376 0092 15F00405 		ands	r5, r5, #4
+ 377 0096 5AD1     		bne	.L49
+ 378              		.loc 2 102 3 discriminator 3 view .LVU82
+ 379 0098 374B     		ldr	r3, .L52+8
+ 380 009a 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 381 009c 3548     		ldr	r0, .L52+4
+ 382 009e FFF7FEFF 		bl	__esos_OutChar
+ 383              	.LVL13:
+ 384 00a2 0228     		cmp	r0, #2
+ 385 00a4 57D9     		bls	.L45
+ 386              		.loc 2 102 3 discriminator 4 view .LVU83
+ 387 00a6 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 388 00a8 23F00103 		bic	r3, r3, #1
+ 389 00ac A370     		strb	r3, [r4, #2]
+ 390              	.L46:
+ 391              		.loc 2 102 3 discriminator 7 view .LVU84
+ 392 00ae A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 393 00b0 13F0010F 		tst	r3, #1
+ 394 00b4 59D1     		bne	.L34
+ 395              		.loc 2 102 3 discriminator 9 view .LVU85
+ 396              		.loc 2 102 3 discriminator 9 view .LVU86
+ 103:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 397              		.loc 2 103 3 discriminator 9 view .LVU87
+ 398 00b6 2E4A     		ldr	r2, .L52
+ 399 00b8 1368     		ldr	r3, [r2]
+ 400 00ba 23F00403 		bic	r3, r3, #4
+ 401 00be 1360     		str	r3, [r2]
+  88:src/m4_timer_uart_app.c **** 	
+ 402              		.loc 2 88 8 discriminator 9 view .LVU88
+ 403              	.L26:
+  87:src/m4_timer_uart_app.c **** 	while (TRUE) {
+ 404              		.loc 2 87 19 discriminator 1 view .LVU89
+  88:src/m4_timer_uart_app.c **** 	
+ 405              		.loc 2 88 2 discriminator 1 view .LVU90
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 406              		.loc 2 91 3 discriminator 1 view .LVU91
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 407              		.loc 2 91 3 discriminator 1 view .LVU92
+ 408 00c0 5B23     		movs	r3, #91
+ 409 00c2 2380     		strh	r3, [r4]	@ movhi
+ 410              	.L32:
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 411              		.loc 2 91 3 discriminator 1 view .LVU93
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 412              		.loc 2 91 3 discriminator 1 view .LVU94
+ 413 00c4 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 414 00c6 13F00405 		ands	r5, r3, #4
+ 415 00ca B4D1     		bne	.L50
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 416              		.loc 2 91 3 discriminator 3 view .LVU95
+ 417 00cc 284A     		ldr	r2, .L52
+ 418 00ce 1268     		ldr	r2, [r2]
+ 419 00d0 12F0080F 		tst	r2, #8
+ 420 00d4 B3D1     		bne	.L35
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 421              		.loc 2 91 3 discriminator 4 view .LVU96
+ARM GAS  /tmp/cc2sX7Xg.s 			page 12
+
+
+ 422 00d6 23F00103 		bic	r3, r3, #1
+ 423 00da A370     		strb	r3, [r4, #2]
+ 424              	.L36:
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 425              		.loc 2 91 3 discriminator 7 view .LVU97
+ 426 00dc A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 427 00de 13F0010F 		tst	r3, #1
+ 428 00e2 42D1     		bne	.L34
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 429              		.loc 2 91 3 discriminator 9 view .LVU98
+  91:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 430              		.loc 2 91 3 discriminator 9 view .LVU99
+ 431 00e4 224A     		ldr	r2, .L52
+ 432 00e6 1368     		ldr	r3, [r2]
+ 433 00e8 43F00803 		orr	r3, r3, #8
+ 434 00ec 1360     		str	r3, [r2]
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 435              		.loc 2 92 3 discriminator 9 view .LVU100
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 436              		.loc 2 92 3 discriminator 9 view .LVU101
+ 437 00ee 234B     		ldr	r3, .L52+12
+ 438 00f0 0022     		movs	r2, #0
+ 439 00f2 1A80     		strh	r2, [r3]	@ movhi
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 440              		.loc 2 92 3 discriminator 9 view .LVU102
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 441              		.loc 2 92 3 discriminator 9 view .LVU103
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 442              		.loc 2 92 3 discriminator 9 view .LVU104
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 443              		.loc 2 92 3 discriminator 9 view .LVU105
+ 444 00f4 5C23     		movs	r3, #92
+ 445 00f6 2380     		strh	r3, [r4]	@ movhi
+ 446              	.L31:
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 447              		.loc 2 92 3 discriminator 1 view .LVU106
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 448              		.loc 2 92 3 discriminator 1 view .LVU107
+ 449 00f8 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 450 00fa 15F00405 		ands	r5, r5, #4
+ 451 00fe A2D1     		bne	.L51
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 452              		.loc 2 92 3 discriminator 3 view .LVU108
+ 453 0100 0122     		movs	r2, #1
+ 454 0102 1D49     		ldr	r1, .L52+8
+ 455 0104 1D48     		ldr	r0, .L52+12
+ 456 0106 FFF7FEFF 		bl	__esos_getBuffer
+ 457              	.LVL14:
+ 458 010a 0228     		cmp	r0, #2
+ 459 010c 9FD9     		bls	.L38
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 460              		.loc 2 92 3 discriminator 4 view .LVU109
+ 461 010e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 462 0110 23F00103 		bic	r3, r3, #1
+ 463 0114 A370     		strb	r3, [r4, #2]
+ 464              	.L39:
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ARM GAS  /tmp/cc2sX7Xg.s 			page 13
+
+
+ 465              		.loc 2 92 3 discriminator 7 view .LVU110
+ 466 0116 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 467 0118 13F0010F 		tst	r3, #1
+ 468 011c 25D1     		bne	.L34
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 469              		.loc 2 92 3 discriminator 9 view .LVU111
+  92:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 470              		.loc 2 92 3 discriminator 9 view .LVU112
+  93:src/m4_timer_uart_app.c **** 
+ 471              		.loc 2 93 3 discriminator 9 view .LVU113
+ 472 011e 144A     		ldr	r2, .L52
+ 473 0120 1368     		ldr	r3, [r2]
+ 474 0122 23F00803 		bic	r3, r3, #8
+ 475 0126 1360     		str	r3, [r2]
+  95:src/m4_timer_uart_app.c **** 			u8_incoming = u8_incoming - 'a' + 'A';
+ 476              		.loc 2 95 3 discriminator 9 view .LVU114
+  95:src/m4_timer_uart_app.c **** 			u8_incoming = u8_incoming - 'a' + 'A';
+ 477              		.loc 2 95 26 is_stmt 0 discriminator 9 view .LVU115
+ 478 0128 134B     		ldr	r3, .L52+8
+ 479 012a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 480 012c A2F16103 		sub	r3, r2, #97
+ 481 0130 DBB2     		uxtb	r3, r3
+  95:src/m4_timer_uart_app.c **** 			u8_incoming = u8_incoming - 'a' + 'A';
+ 482              		.loc 2 95 6 discriminator 9 view .LVU116
+ 483 0132 192B     		cmp	r3, #25
+ 484 0134 90D8     		bhi	.L40
+  96:src/m4_timer_uart_app.c **** 			
+ 485              		.loc 2 96 4 is_stmt 1 view .LVU117
+  96:src/m4_timer_uart_app.c **** 			
+ 486              		.loc 2 96 36 is_stmt 0 view .LVU118
+ 487 0136 203A     		subs	r2, r2, #32
+  96:src/m4_timer_uart_app.c **** 			
+ 488              		.loc 2 96 16 view .LVU119
+ 489 0138 0F4B     		ldr	r3, .L52+8
+ 490 013a 1A70     		strb	r2, [r3]
+ 491 013c 8CE7     		b	.L40
+ 492              	.L48:
+ 101:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 493              		.loc 2 101 3 is_stmt 1 discriminator 2 view .LVU120
+ 494 013e 0423     		movs	r3, #4
+ 495 0140 A370     		strb	r3, [r4, #2]
+ 101:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 496              		.loc 2 101 3 discriminator 2 view .LVU121
+ 497 0142 0325     		movs	r5, #3
+ 498 0144 11E0     		b	.L34
+ 499              	.L42:
+ 101:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 500              		.loc 2 101 3 discriminator 5 view .LVU122
+ 501 0146 43F00103 		orr	r3, r3, #1
+ 502 014a A370     		strb	r3, [r4, #2]
+ 503 014c 92E7     		b	.L43
+ 504              	.L49:
+ 102:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 505              		.loc 2 102 3 discriminator 2 view .LVU123
+ 506 014e 0423     		movs	r3, #4
+ 507 0150 A370     		strb	r3, [r4, #2]
+ 102:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ARM GAS  /tmp/cc2sX7Xg.s 			page 14
+
+
+ 508              		.loc 2 102 3 discriminator 2 view .LVU124
+ 509 0152 0325     		movs	r5, #3
+ 510 0154 09E0     		b	.L34
+ 511              	.L45:
+ 102:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 512              		.loc 2 102 3 discriminator 5 view .LVU125
+ 513 0156 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 514 0158 43F00103 		orr	r3, r3, #1
+ 515 015c A370     		strb	r3, [r4, #2]
+ 516 015e A6E7     		b	.L46
+ 517              	.LVL15:
+ 518              	.L27:
+ 104:src/m4_timer_uart_app.c **** 
+ 105:src/m4_timer_uart_app.c **** 		} // endof while(TRUE)
+ 106:src/m4_timer_uart_app.c **** 	ESOS_TASK_END();
+ 519              		.loc 2 106 2 view .LVU126
+ 520              		.loc 2 106 2 view .LVU127
+ 521 0160 0823     		movs	r3, #8
+ 522 0162 A370     		strb	r3, [r4, #2]
+ 523              		.loc 2 106 2 view .LVU128
+ 524 0164 0023     		movs	r3, #0
+ 525 0166 2380     		strh	r3, [r4]	@ movhi
+ 526              		.loc 2 106 2 view .LVU129
+ 527              		.loc 2 106 2 view .LVU130
+ 528              		.loc 2 106 2 view .LVU131
+ 529 0168 0325     		movs	r5, #3
+ 530              	.LVL16:
+ 531              	.L34:
+ 532              		.loc 2 106 17 discriminator 1 view .LVU132
+ 107:src/m4_timer_uart_app.c **** } // end echo()
+ 533              		.loc 2 107 1 is_stmt 0 discriminator 1 view .LVU133
+ 534 016a 2846     		mov	r0, r5
+ 535 016c 38BD     		pop	{r3, r4, r5, pc}
+ 536              	.LVL17:
+ 537              	.L53:
+ 538              		.loc 2 107 1 discriminator 1 view .LVU134
+ 539 016e 00BF     		.align	2
+ 540              	.L52:
+ 541 0170 00000000 		.word	__esos_u32SystemFlags
+ 542 0174 00000000 		.word	__stChildTaskTx
+ 543 0178 00000000 		.word	.LANCHOR0
+ 544 017c 00000000 		.word	__stChildTaskRx
+ 545              		.cfi_endproc
+ 546              	.LFE11:
+ 548              		.section	.text.__user_init_hw,"ax",%progbits
+ 549              		.align	1
+ 550              		.global	__user_init_hw
+ 551              		.syntax unified
+ 552              		.thumb
+ 553              		.thumb_func
+ 555              	__user_init_hw:
+ 556              	.LFB12:
+ 108:src/m4_timer_uart_app.c **** 
+ 109:src/m4_timer_uart_app.c **** /************************************************************************
+ 110:src/m4_timer_uart_app.c ****  * User supplied functions
+ 111:src/m4_timer_uart_app.c ****  ************************************************************************
+ 112:src/m4_timer_uart_app.c ****  */
+ARM GAS  /tmp/cc2sX7Xg.s 			page 15
+
+
+ 113:src/m4_timer_uart_app.c **** void __user_init_hw(void) {
+ 557              		.loc 2 113 27 is_stmt 1 view -0
+ 558              		.cfi_startproc
+ 559              		@ args = 0, pretend = 0, frame = 0
+ 560              		@ frame_needed = 0, uses_anonymous_args = 0
+ 561 0000 08B5     		push	{r3, lr}
+ 562              	.LCFI4:
+ 563              		.cfi_def_cfa_offset 8
+ 564              		.cfi_offset 3, -8
+ 565              		.cfi_offset 14, -4
+ 114:src/m4_timer_uart_app.c ****   /* GPIO Ports Clock Enable */
+ 115:src/m4_timer_uart_app.c ****   rcc_periph_clock_enable(GPIOA);
+ 566              		.loc 2 115 3 view .LVU136
+ 567 0002 0020     		movs	r0, #0
+ 568 0004 FFF7FEFF 		bl	rcc_periph_clock_enable
+ 569              	.LVL18:
+ 116:src/m4_timer_uart_app.c ****   rcc_periph_clock_enable(GPIOC);
+ 570              		.loc 2 116 3 view .LVU137
+ 571 0008 4FF40060 		mov	r0, #2048
+ 572 000c FFF7FEFF 		bl	rcc_periph_clock_enable
+ 573              	.LVL19:
+ 117:src/m4_timer_uart_app.c **** 
+ 118:src/m4_timer_uart_app.c ****   /*Configure GPIO pin : PC13 */
+ 119:src/m4_timer_uart_app.c ****   gpio_mode_setup(B1_Port, GPIO_MODE_INPUT, GPIO_PUPD_NONE, B1_Pin);
+ 574              		.loc 2 119 3 view .LVU138
+ 575 0010 4FF40053 		mov	r3, #8192
+ 576 0014 0022     		movs	r2, #0
+ 577 0016 1146     		mov	r1, r2
+ 578 0018 0548     		ldr	r0, .L56
+ 579 001a FFF7FEFF 		bl	gpio_mode_setup
+ 580              	.LVL20:
+ 120:src/m4_timer_uart_app.c **** 
+ 121:src/m4_timer_uart_app.c ****   /*Configure GPIO pin : LED2_Pin */
+ 122:src/m4_timer_uart_app.c ****   gpio_mode_setup(LD2_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LD2_Pin);
+ 581              		.loc 2 122 3 view .LVU139
+ 582 001e 2023     		movs	r3, #32
+ 583 0020 0022     		movs	r2, #0
+ 584 0022 0121     		movs	r1, #1
+ 585 0024 4FF09040 		mov	r0, #1207959552
+ 586 0028 FFF7FEFF 		bl	gpio_mode_setup
+ 587              	.LVL21:
+ 123:src/m4_timer_uart_app.c **** 
+ 124:src/m4_timer_uart_app.c **** }
+ 588              		.loc 2 124 1 is_stmt 0 view .LVU140
+ 589 002c 08BD     		pop	{r3, pc}
+ 590              	.L57:
+ 591 002e 00BF     		.align	2
+ 592              	.L56:
+ 593 0030 00080048 		.word	1207961600
+ 594              		.cfi_endproc
+ 595              	.LFE12:
+ 597              		.section	.rodata.user_init.str1.4,"aMS",%progbits,1
+ 598              		.align	2
+ 599              	.LC0:
+ 600 0000 0A737263 		.ascii	"\012src/m4_timer_uart_app.c, built on Mar 22 2022 a"
+ 600      2F6D345F 
+ 600      74696D65 
+ARM GAS  /tmp/cc2sX7Xg.s 			page 16
+
+
+ 600      725F7561 
+ 600      72745F61 
+ 601 0030 74203133 		.ascii	"t 13:00:42\012\000"
+ 601      3A30303A 
+ 601      34320A00 
+ 602              		.section	.text.user_init,"ax",%progbits
+ 603              		.align	1
+ 604              		.global	user_init
+ 605              		.syntax unified
+ 606              		.thumb
+ 607              		.thumb_func
+ 609              	user_init:
+ 610              	.LFB13:
+ 125:src/m4_timer_uart_app.c **** 
+ 126:src/m4_timer_uart_app.c **** 
+ 127:src/m4_timer_uart_app.c **** 
+ 128:src/m4_timer_uart_app.c **** /******************************************************************************
+ 129:src/m4_timer_uart_app.c ****  * Function:        void user_init(void)
+ 130:src/m4_timer_uart_app.c ****  *
+ 131:src/m4_timer_uart_app.c ****  * PreCondition:    None
+ 132:src/m4_timer_uart_app.c ****  *
+ 133:src/m4_timer_uart_app.c ****  * Input:           None
+ 134:src/m4_timer_uart_app.c ****  *
+ 135:src/m4_timer_uart_app.c ****  * Output:          None
+ 136:src/m4_timer_uart_app.c ****  *
+ 137:src/m4_timer_uart_app.c ****  * Side Effects:    None
+ 138:src/m4_timer_uart_app.c ****  *
+ 139:src/m4_timer_uart_app.c ****  * Overview:        user_init is a centralized initialization routine where
+ 140:src/m4_timer_uart_app.c ****  *                  the user can setup their application.   It is called
+ 141:src/m4_timer_uart_app.c ****  *                  automagically by ES_OS during the operating system
+ 142:src/m4_timer_uart_app.c ****  *                  initialization.
+ 143:src/m4_timer_uart_app.c ****  *
+ 144:src/m4_timer_uart_app.c ****  * Note:            The user should set up any state machines and init
+ 145:src/m4_timer_uart_app.c ****  *                  all application variables.  They can also turn on
+ 146:src/m4_timer_uart_app.c ****  *                  any needed peripherals here.
+ 147:src/m4_timer_uart_app.c ****  *
+ 148:src/m4_timer_uart_app.c ****  *                  The user SHALL NOT mess with the interrupt hardware
+ 149:src/m4_timer_uart_app.c ****  *                  directly!!!  The ES_OS must be aware of the interrupts
+ 150:src/m4_timer_uart_app.c ****  *                  and provides osXXXXXXX functions for the user to use.
+ 151:src/m4_timer_uart_app.c ****  *                  Using these ES_OS-provided functions, the user may
+ 152:src/m4_timer_uart_app.c ****  *                  (and probably should) initialize, register, and enable
+ 153:src/m4_timer_uart_app.c ****  *                  interrupts in this routine.
+ 154:src/m4_timer_uart_app.c ****  *
+ 155:src/m4_timer_uart_app.c ****  *                  Furthermore, the user should register AT LEAST one
+ 156:src/m4_timer_uart_app.c ****  *                  user application task here (via esos_RegisterTask) or
+ 157:src/m4_timer_uart_app.c ****  *                  the ES_OS scheduler will have nothing to schedule
+ 158:src/m4_timer_uart_app.c ****  *                  to run when this function returns.
+ 159:src/m4_timer_uart_app.c ****  *
+ 160:src/m4_timer_uart_app.c ****  *****************************************************************************/
+ 161:src/m4_timer_uart_app.c **** void user_init(void) {
+ 611              		.loc 2 161 22 is_stmt 1 view -0
+ 612              		.cfi_startproc
+ 613              		@ args = 0, pretend = 0, frame = 0
+ 614              		@ frame_needed = 0, uses_anonymous_args = 0
+ 615 0000 08B5     		push	{r3, lr}
+ 616              	.LCFI5:
+ 617              		.cfi_def_cfa_offset 8
+ARM GAS  /tmp/cc2sX7Xg.s 			page 17
+
+
+ 618              		.cfi_offset 3, -8
+ 619              		.cfi_offset 14, -4
+ 162:src/m4_timer_uart_app.c **** 
+ 163:src/m4_timer_uart_app.c ****   // setup our software structures here
+ 164:src/m4_timer_uart_app.c ****   
+ 165:src/m4_timer_uart_app.c ****   // call our function to setup the hardware we like it.
+ 166:src/m4_timer_uart_app.c ****   __user_init_hw();
+ 620              		.loc 2 166 3 view .LVU142
+ 621 0002 FFF7FEFF 		bl	__user_init_hw
+ 622              	.LVL22:
+ 167:src/m4_timer_uart_app.c **** 
+ 168:src/m4_timer_uart_app.c ****   // Drive the UART directly.....  to print the HELLO_MSG
+ 169:src/m4_timer_uart_app.c ****   __esos_unsafe_PutString( HELLO_MSG );
+ 623              		.loc 2 169 3 view .LVU143
+ 624 0006 0548     		ldr	r0, .L60
+ 625 0008 FFF7FEFF 		bl	__esos_unsafe_PutString
+ 626              	.LVL23:
+ 170:src/m4_timer_uart_app.c **** 
+ 171:src/m4_timer_uart_app.c ****   /*
+ 172:src/m4_timer_uart_app.c ****    * Now, let's get down and dirty with ESOS and our user tasks
+ 173:src/m4_timer_uart_app.c ****    *
+ 174:src/m4_timer_uart_app.c ****    *   Once tasks are registered, they will start executing in
+ 175:src/m4_timer_uart_app.c ****    *   the ESOS scheduler.
+ 176:src/m4_timer_uart_app.c ****    */
+ 177:src/m4_timer_uart_app.c ****   esos_RegisterTask( flash_LED );
+ 627              		.loc 2 177 3 view .LVU144
+ 628 000c 0448     		ldr	r0, .L60+4
+ 629 000e FFF7FEFF 		bl	esos_RegisterTask
+ 630              	.LVL24:
+ 178:src/m4_timer_uart_app.c ****   esos_RegisterTask( usart_comms );
+ 631              		.loc 2 178 3 view .LVU145
+ 632 0012 0448     		ldr	r0, .L60+8
+ 633 0014 FFF7FEFF 		bl	esos_RegisterTask
+ 634              	.LVL25:
+ 179:src/m4_timer_uart_app.c **** 
+ 180:src/m4_timer_uart_app.c **** } // end user_init()
+ 635              		.loc 2 180 1 is_stmt 0 view .LVU146
+ 636 0018 08BD     		pop	{r3, pc}
+ 637              	.L61:
+ 638 001a 00BF     		.align	2
+ 639              	.L60:
+ 640 001c 00000000 		.word	.LC0
+ 641 0020 00000000 		.word	flash_LED
+ 642 0024 00000000 		.word	usart_comms
+ 643              		.cfi_endproc
+ 644              	.LFE13:
+ 646              		.section	.bss.u8_incoming.0,"aw",%nobits
+ 647              		.set	.LANCHOR0,. + 0
+ 650              	u8_incoming.0:
+ 651 0000 00       		.space	1
+ 652              		.text
+ 653              	.Letext0:
+ 654              		.file 3 "/home/bdreed43/Documents/gcc/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine
+ 655              		.file 4 "/home/bdreed43/Documents/gcc/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_st
+ 656              		.file 5 "/home/bdreed43/Documents/gcc/esos32/include/lc-switch.h"
+ 657              		.file 6 "/home/bdreed43/Documents/gcc/esos32/include/esos_cb.h"
+ 658              		.file 7 "/home/bdreed43/Documents/gcc/esos32/include/esos_mail.h"
+ARM GAS  /tmp/cc2sX7Xg.s 			page 18
+
+
+ 659              		.file 8 "/home/bdreed43/Documents/gcc/esos32/include/esos_task.h"
+ 660              		.file 9 "/home/bdreed43/Documents/gcc/esos32/include/esos_comm.h"
+ 661              		.file 10 "/home/bdreed43/Documents/gcc/esos32/include/esos.h"
+ 662              		.file 11 "/home/bdreed43/Documents/gcc/libopencm3/include/libopencm3/stm32/common/rcc_common_all.h
+ 663              		.file 12 "/home/bdreed43/Documents/gcc/libopencm3/include/libopencm3/stm32/common/gpio_common_f234
+ 664              		.file 13 "/home/bdreed43/Documents/gcc/libopencm3/include/libopencm3/stm32/common/gpio_common_all.
+ 665              		.file 14 "/home/bdreed43/Documents/gcc/esos32/include/all_generic.h"
+ARM GAS  /tmp/cc2sX7Xg.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 m4_timer_uart_app.c
+     /tmp/cc2sX7Xg.s:20     .text.TOGGLE_LD2:0000000000000000 $t
+     /tmp/cc2sX7Xg.s:25     .text.TOGGLE_LD2:0000000000000000 TOGGLE_LD2
+     /tmp/cc2sX7Xg.s:48     .text.IS_B1_RELEASED:0000000000000000 $t
+     /tmp/cc2sX7Xg.s:53     .text.IS_B1_RELEASED:0000000000000000 IS_B1_RELEASED
+     /tmp/cc2sX7Xg.s:84     .text.IS_B1_RELEASED:0000000000000018 $d
+     /tmp/cc2sX7Xg.s:89     .text.flash_LED:0000000000000000 $t
+     /tmp/cc2sX7Xg.s:95     .text.flash_LED:0000000000000000 flash_LED
+     /tmp/cc2sX7Xg.s:252    .text.usart_comms:0000000000000000 $t
+     /tmp/cc2sX7Xg.s:258    .text.usart_comms:0000000000000000 usart_comms
+     /tmp/cc2sX7Xg.s:292    .text.usart_comms:000000000000002a $d
+     /tmp/cc2sX7Xg.s:305    .text.usart_comms:0000000000000036 $t
+     /tmp/cc2sX7Xg.s:541    .text.usart_comms:0000000000000170 $d
+     /tmp/cc2sX7Xg.s:549    .text.__user_init_hw:0000000000000000 $t
+     /tmp/cc2sX7Xg.s:555    .text.__user_init_hw:0000000000000000 __user_init_hw
+     /tmp/cc2sX7Xg.s:593    .text.__user_init_hw:0000000000000030 $d
+     /tmp/cc2sX7Xg.s:598    .rodata.user_init.str1.4:0000000000000000 $d
+     /tmp/cc2sX7Xg.s:603    .text.user_init:0000000000000000 $t
+     /tmp/cc2sX7Xg.s:609    .text.user_init:0000000000000000 user_init
+     /tmp/cc2sX7Xg.s:640    .text.user_init:000000000000001c $d
+     /tmp/cc2sX7Xg.s:650    .bss.u8_incoming.0:0000000000000000 u8_incoming.0
+     /tmp/cc2sX7Xg.s:651    .bss.u8_incoming.0:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+gpio_toggle
+gpio_get
+__esos_hw_GetSystemTickCount
+__esos_hasTickDurationPassed
+__esos_OutChar
+__esos_getBuffer
+__esos_u32SystemFlags
+__stChildTaskTx
+__stChildTaskRx
+rcc_periph_clock_enable
+gpio_mode_setup
+__esos_unsafe_PutString
+esos_RegisterTask

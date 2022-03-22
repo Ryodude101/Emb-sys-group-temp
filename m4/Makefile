@@ -1,5 +1,5 @@
-# Makefile    J.W.Bruce (C) 2020, 2021
 ##########################################################################################################################
+# Makefile    J.W.Bruce (C) 2020
 ##########################################################################################################################
 
 
@@ -22,12 +22,13 @@ else
 endif
 
 
+
 ######################################
 # target
 ######################################
 all: $(TARGET)
 
-TARGET = m4
+TARGET = m4_timer_uart_app
 
 ######################################
 # building variables
@@ -41,26 +42,35 @@ OPT = -Og
 # paths
 #######################################
 # Build path
-BUILD_DIR = Build
-
-# CM3 and GCC Paths
-
-# Do not modify these paths
+BUILD_DIR = build
+# ESOS base path
+ESOS_DIR = /home/jwbruce/GITs/esos32
+# CM3 base path
 ifdef CPATH
   CM3_DIR = /home/tyler/Documents/Github/libopencm3
   GCC_PATH = /home/tyler/gcc-arm-none-eabi-10.3-2021.10/bin
 else
   # Your paths here
-  CM3_DIR = /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3
-  GCC_PATH = /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi-10.3-2021.10/bin
+  ESOS_DIR = /home/bdreed43/Documents/gcc/esos32
+  CM3_DIR = /home/bdreed43/Documents/gcc/libopencm3
+  GCC_PATH = /home/bdreed43/Documents/gcc/gcc-arm-none-eabi-10.3-2021.10/bin
 endif
+
 
 ######################################
 # source
 ######################################
 # C sources
 C_SOURCES =  \
-Source/app.c \
+src/m4_timer_uart_app.c \
+$(ESOS_DIR)/src/esos.c \
+$(ESOS_DIR)/src/esos_cb.c \
+$(ESOS_DIR)/src/esos_utils.c \
+$(ESOS_DIR)/src/esos_comm.c \
+$(ESOS_DIR)/src/esos_mail.c \
+$(ESOS_DIR)/src/stm32l4_ocm3/esos_stm32l4_tick.c \
+$(ESOS_DIR)/src/stm32l4_ocm3/esos_stm32l4_utils.c \
+$(ESOS_DIR)/src/stm32l4_ocm3/esos_stm32l4_rs232.c \
 
 
 # ASM sources
@@ -72,7 +82,6 @@ ASM_SOURCES =  \
 PREFIX = arm-none-eabi-
 # The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
 # either it can be added to the PATH environment variable.
-
 ifdef GCC_PATH
 CC = $(GCC_PATH)/$(PREFIX)gcc
 AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
@@ -107,9 +116,14 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 AS_DEFS = 
 
 # C defines
-C_DEFS =  						\
-# -DSTM32L452xx  					\
+C_DEFS =  \
+-DSTM32L4						\
+-DSTM32L452xx  					\
+-DHARDWARE_PLATFORM=NUCLEO64	\
+-DESOS_USE_SERIAL_PORT			\
+-D__PTB_APOLLO_BOARD
 
+# FOR THE APOLLO BOARD  -D__PTB_APOLLO_BOARD
 
 # AS includes
 AS_INCLUDES = 
@@ -117,15 +131,15 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -Iinclude \
+-I$(ESOS_DIR)/include \
+-I$(ESOS_DIR)/include/stm32l4_ocm3 \
 -I$(CM3_DIR)/include \
 -L$(CM3_DIR)/lib
-
-
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
-CFLAGS = --save-temps $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections -nostartfiles -specs=nosys.specs
+CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections -nostartfiles -specs=nosys.specs
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
@@ -140,15 +154,15 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = Dependencies/ld.stm32.basic
+LDSCRIPT = ld.stm32.basic
 
 # libraries
 LIBS = -lc -lm -lnosys -lopencm3_stm32l4
 LIBDIR = -L$(CM3_DIR)/lib
-LDFLAGS = $(MCU) -specs=nano.specs -specs=nosys.specs -T $(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections -nostartfiles
+LDFLAGS = $(MCU) -specs=nano.specs -specs=nosys.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections -nostartfiles
 
 # default action: build all
-all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
+all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin 
 
 
 #######################################
@@ -161,12 +175,10 @@ vpath %.c $(sort $(dir $(C_SOURCES)))
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
+
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 
-$(BUILD_DIR)/%.S: %.c Makefile | $(BUILD_DIR)
-	$(AS) -S $(CFLAGS)  $< -o $@
-    
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
 	$(AS) -c $(CFLAGS) $< -o $@
 
@@ -189,11 +201,11 @@ $(BUILD_DIR):
 clean:
 	-$(MAKECLEANCMD) $(MAKECLEANFLAGS) $(BUILD_DIR)
   
+  
 #######################################
 # dependencies
 #######################################
 -include $(wildcard $(BUILD_DIR)/*.d)
 
 # *** EOF ***
-
 

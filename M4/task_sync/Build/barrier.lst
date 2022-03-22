@@ -1,0 +1,1083 @@
+ARM GAS  /tmp/ccIHDalf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"barrier.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.led_heartbeat,"ax",%progbits
+  20              		.align	1
+  21              		.global	led_heartbeat
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	led_heartbeat:
+  27              	.LVL0:
+  28              	.LFB0:
+  29              		.file 1 "Source/barrier.c"
+   1:Source/barrier.c **** /*
+   2:Source/barrier.c ****  * Indigo Team
+   3:Source/barrier.c ****  * Embedded Systems Milestone 4
+   4:Source/barrier.c ****  * 03.22.22
+   5:Source/barrier.c ****  * Task Synchronization applet for Milestone 4.
+   6:Source/barrier.c ****  */
+   7:Source/barrier.c **** 
+   8:Source/barrier.c **** // INCLUDEs go here  (First include the main esos.h file)
+   9:Source/barrier.c **** //      After that, the user can include what they need
+  10:Source/barrier.c **** #include    "esos.h"
+  11:Source/barrier.c **** #ifdef __linux
+  12:Source/barrier.c **** #include    "esos_pc.h"
+  13:Source/barrier.c **** #include    "esos_pc_stdio.h"
+  14:Source/barrier.c **** // INCLUDE these so our printf and other PC hacks work
+  15:Source/barrier.c **** #include <stdio.h>
+  16:Source/barrier.c **** #include <sys/select.h>
+  17:Source/barrier.c **** #include <termios.h>
+  18:Source/barrier.c **** #include <string.h>
+  19:Source/barrier.c **** #include <unistd.h>
+  20:Source/barrier.c **** #else
+  21:Source/barrier.c **** #include    "esos_stm32l4.h"
+  22:Source/barrier.c **** #include    "esos_stm32l4_rs232.h"
+  23:Source/barrier.c **** #endif
+  24:Source/barrier.c **** #include "barrier.h"
+  25:Source/barrier.c **** 
+  26:Source/barrier.c **** //Globals
+  27:Source/barrier.c **** ESOS_SEMAPHORE(sync1Ready);
+  28:Source/barrier.c **** ESOS_SEMAPHORE(sync2Ready);
+  29:Source/barrier.c **** 
+ARM GAS  /tmp/ccIHDalf.s 			page 2
+
+
+  30:Source/barrier.c **** ESOS_USER_TASK(led_heartbeat){
+  30              		.loc 1 30 30 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 30 30 is_stmt 0 view .LVU1
+  35 0000 38B5     		push	{r3, r4, r5, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 16
+  38              		.cfi_offset 3, -16
+  39              		.cfi_offset 4, -12
+  40              		.cfi_offset 5, -8
+  41              		.cfi_offset 14, -4
+  42 0002 0446     		mov	r4, r0
+  31:Source/barrier.c ****   ESOS_TASK_BEGIN();
+  43              		.loc 1 31 3 is_stmt 1 view .LVU2
+  44 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+  45 0006 63F07F03 		orn	r3, r3, #127
+  46 000a 8370     		strb	r3, [r0, #2]
+  47              		.loc 1 31 3 view .LVU3
+  48 000c 0388     		ldrh	r3, [r0]
+  49 000e A3B1     		cbz	r3, .L2
+  50 0010 232B     		cmp	r3, #35
+  51 0012 1FD0     		beq	.L3
+  32:Source/barrier.c ****   while (TRUE) 
+  33:Source/barrier.c ****   {
+  34:Source/barrier.c ****     gpio_toggle(LED2_GPIO_Port,LED2_Pin);
+  35:Source/barrier.c ****     ESOS_TASK_WAIT_TICKS(500);
+  36:Source/barrier.c ****   }
+  37:Source/barrier.c ****   ESOS_TASK_END();
+  52              		.loc 1 37 3 view .LVU4
+  53              		.loc 1 37 3 view .LVU5
+  54 0014 0823     		movs	r3, #8
+  55 0016 8370     		strb	r3, [r0, #2]
+  56              		.loc 1 37 3 view .LVU6
+  57 0018 0023     		movs	r3, #0
+  58 001a 0380     		strh	r3, [r0]	@ movhi
+  59              		.loc 1 37 3 view .LVU7
+  60              		.loc 1 37 3 view .LVU8
+  61              		.loc 1 37 3 view .LVU9
+  62 001c 0325     		movs	r5, #3
+  63              	.LVL1:
+  64              	.L6:
+  65              		.loc 1 37 18 discriminator 1 view .LVU10
+  38:Source/barrier.c **** }
+  66              		.loc 1 38 1 is_stmt 0 discriminator 1 view .LVU11
+  67 001e 2846     		mov	r0, r5
+  68 0020 38BD     		pop	{r3, r4, r5, pc}
+  69              	.LVL2:
+  70              	.L11:
+  35:Source/barrier.c ****   }
+  71              		.loc 1 35 5 is_stmt 1 discriminator 2 view .LVU12
+  72 0022 0423     		movs	r3, #4
+  73 0024 A370     		strb	r3, [r4, #2]
+  35:Source/barrier.c ****   }
+  74              		.loc 1 35 5 discriminator 2 view .LVU13
+  75 0026 0325     		movs	r5, #3
+ARM GAS  /tmp/ccIHDalf.s 			page 3
+
+
+  76 0028 F9E7     		b	.L6
+  77              	.L7:
+  35:Source/barrier.c ****   }
+  78              		.loc 1 35 5 discriminator 5 view .LVU14
+  79 002a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+  80 002c 43F00103 		orr	r3, r3, #1
+  81 0030 A370     		strb	r3, [r4, #2]
+  82              	.L8:
+  35:Source/barrier.c ****   }
+  83              		.loc 1 35 5 discriminator 7 view .LVU15
+  84 0032 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+  85 0034 13F0010F 		tst	r3, #1
+  86 0038 F1D1     		bne	.L6
+  87              	.L2:
+  31:Source/barrier.c ****   while (TRUE) 
+  88              		.loc 1 31 20 discriminator 1 view .LVU16
+  32:Source/barrier.c ****   {
+  89              		.loc 1 32 3 discriminator 1 view .LVU17
+  34:Source/barrier.c ****     ESOS_TASK_WAIT_TICKS(500);
+  90              		.loc 1 34 5 discriminator 1 view .LVU18
+  91 003a 2021     		movs	r1, #32
+  92 003c 4FF09040 		mov	r0, #1207959552
+  93 0040 FFF7FEFF 		bl	gpio_toggle
+  94              	.LVL3:
+  35:Source/barrier.c ****   }
+  95              		.loc 1 35 5 discriminator 1 view .LVU19
+  35:Source/barrier.c ****   }
+  96              		.loc 1 35 5 discriminator 1 view .LVU20
+  97 0044 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+  98              	.LVL4:
+  99 0048 A060     		str	r0, [r4, #8]
+  35:Source/barrier.c ****   }
+ 100              		.loc 1 35 5 discriminator 1 view .LVU21
+ 101 004a 4FF4FA73 		mov	r3, #500
+ 102 004e E360     		str	r3, [r4, #12]
+  35:Source/barrier.c ****   }
+ 103              		.loc 1 35 5 discriminator 1 view .LVU22
+  35:Source/barrier.c ****   }
+ 104              		.loc 1 35 5 discriminator 1 view .LVU23
+ 105 0050 2323     		movs	r3, #35
+ 106 0052 2380     		strh	r3, [r4]	@ movhi
+ 107              	.L3:
+  35:Source/barrier.c ****   }
+ 108              		.loc 1 35 5 discriminator 1 view .LVU24
+  35:Source/barrier.c ****   }
+ 109              		.loc 1 35 5 discriminator 1 view .LVU25
+ 110 0054 A078     		ldrb	r0, [r4, #2]	@ zero_extendqisi2
+ 111 0056 10F00405 		ands	r5, r0, #4
+ 112 005a E2D1     		bne	.L11
+  35:Source/barrier.c ****   }
+ 113              		.loc 1 35 5 discriminator 3 view .LVU26
+ 114 005c E168     		ldr	r1, [r4, #12]
+ 115 005e A068     		ldr	r0, [r4, #8]
+ 116 0060 FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 117              	.LVL5:
+ 118 0064 0028     		cmp	r0, #0
+ 119 0066 E0D0     		beq	.L7
+ARM GAS  /tmp/ccIHDalf.s 			page 4
+
+
+  35:Source/barrier.c ****   }
+ 120              		.loc 1 35 5 discriminator 4 view .LVU27
+ 121 0068 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 122 006a 23F00103 		bic	r3, r3, #1
+ 123 006e A370     		strb	r3, [r4, #2]
+ 124 0070 DFE7     		b	.L8
+ 125              		.cfi_endproc
+ 126              	.LFE0:
+ 128              		.section	.rodata.sync1.str1.4,"aMS",%progbits,1
+ 129              		.align	2
+ 130              	.LC0:
+ 131 0000 48656C6C 		.ascii	"Hello Worl\012\015\000"
+ 131      6F20576F 
+ 131      726C0A0D 
+ 131      00
+ 132              		.section	.text.sync1,"ax",%progbits
+ 133              		.align	1
+ 134              		.global	sync1
+ 135              		.syntax unified
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	sync1:
+ 140              	.LVL6:
+ 141              	.LFB1:
+  39:Source/barrier.c **** 
+  40:Source/barrier.c **** ESOS_USER_TASK(sync1){
+ 142              		.loc 1 40 22 view -0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146              		.loc 1 40 22 is_stmt 0 view .LVU29
+ 147 0000 38B5     		push	{r3, r4, r5, lr}
+ 148              	.LCFI1:
+ 149              		.cfi_def_cfa_offset 16
+ 150              		.cfi_offset 3, -16
+ 151              		.cfi_offset 4, -12
+ 152              		.cfi_offset 5, -8
+ 153              		.cfi_offset 14, -4
+ 154 0002 0446     		mov	r4, r0
+  41:Source/barrier.c ****   ESOS_TASK_BEGIN();
+ 155              		.loc 1 41 3 is_stmt 1 view .LVU30
+ 156 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 157 0006 63F07F03 		orn	r3, r3, #127
+ 158 000a 8370     		strb	r3, [r0, #2]
+ 159              		.loc 1 41 3 view .LVU31
+ 160 000c 0388     		ldrh	r3, [r0]
+ 161 000e 9BB3     		cbz	r3, .L13
+ 162 0010 302B     		cmp	r3, #48
+ 163 0012 00F29480 		bhi	.L14
+ 164 0016 2C2B     		cmp	r3, #44
+ 165 0018 C0F09180 		bcc	.L14
+ 166 001c 2C3B     		subs	r3, r3, #44
+ 167 001e 042B     		cmp	r3, #4
+ 168 0020 00F28D80 		bhi	.L14
+ 169 0024 DFE803F0 		tbb	[pc, r3]
+ 170              	.L16:
+ 171 0028 2E       		.byte	(.L19-.L16)/2
+ARM GAS  /tmp/ccIHDalf.s 			page 5
+
+
+ 172 0029 43       		.byte	(.L18-.L16)/2
+ 173 002a 5D       		.byte	(.L17-.L16)/2
+ 174 002b 8B       		.byte	(.L14-.L16)/2
+ 175 002c 7C       		.byte	(.L15-.L16)/2
+ 176              	.LVL7:
+ 177 002d 00       		.p2align 1
+ 178              	.L34:
+  42:Source/barrier.c ****   while(true){
+  43:Source/barrier.c ****     ESOS_SIGNAL_SEMAPHORE(sync1Ready, 1);
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_SEMAPHORE(sync2Ready, 1);
+ 179              		.loc 1 44 5 discriminator 2 view .LVU32
+ 180 002e 0423     		movs	r3, #4
+ 181 0030 A370     		strb	r3, [r4, #2]
+ 182              		.loc 1 44 5 discriminator 2 view .LVU33
+ 183 0032 0325     		movs	r5, #3
+ 184 0034 88E0     		b	.L21
+ 185              	.L22:
+ 186              		.loc 1 44 5 discriminator 5 view .LVU34
+ 187 0036 43F00103 		orr	r3, r3, #1
+ 188 003a A370     		strb	r3, [r4, #2]
+ 189 003c 2EE0     		b	.L23
+ 190              	.L35:
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 191              		.loc 1 45 5 discriminator 2 view .LVU35
+ 192 003e 0423     		movs	r3, #4
+ 193 0040 A370     		strb	r3, [r4, #2]
+ 194              		.loc 1 45 5 discriminator 2 view .LVU36
+ 195 0042 0325     		movs	r5, #3
+ 196 0044 80E0     		b	.L21
+ 197              	.L25:
+ 198              		.loc 1 45 5 discriminator 5 view .LVU37
+ 199 0046 43F00103 		orr	r3, r3, #1
+ 200 004a A370     		strb	r3, [r4, #2]
+ 201 004c 3BE0     		b	.L26
+ 202              	.L36:
+  46:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 203              		.loc 1 46 5 discriminator 2 view .LVU38
+ 204 004e 0423     		movs	r3, #4
+ 205 0050 A370     		strb	r3, [r4, #2]
+ 206              		.loc 1 46 5 discriminator 2 view .LVU39
+ 207 0052 0325     		movs	r5, #3
+ 208 0054 78E0     		b	.L21
+ 209              	.L28:
+ 210              		.loc 1 46 5 discriminator 5 view .LVU40
+ 211 0056 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 212 0058 43F00103 		orr	r3, r3, #1
+ 213 005c A370     		strb	r3, [r4, #2]
+ 214 005e 4EE0     		b	.L29
+ 215              	.L37:
+  47:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+  48:Source/barrier.c ****     ESOS_TASK_WAIT_TICKS(1000);
+ 216              		.loc 1 48 5 discriminator 2 view .LVU41
+ 217 0060 0423     		movs	r3, #4
+ 218 0062 A370     		strb	r3, [r4, #2]
+ 219              		.loc 1 48 5 discriminator 2 view .LVU42
+ 220 0064 0325     		movs	r5, #3
+ 221 0066 6FE0     		b	.L21
+ARM GAS  /tmp/ccIHDalf.s 			page 6
+
+
+ 222              	.L31:
+ 223              		.loc 1 48 5 discriminator 5 view .LVU43
+ 224 0068 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 225 006a 43F00103 		orr	r3, r3, #1
+ 226 006e A370     		strb	r3, [r4, #2]
+ 227              	.L32:
+ 228              		.loc 1 48 5 discriminator 7 view .LVU44
+ 229 0070 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 230 0072 13F0010F 		tst	r3, #1
+ 231 0076 67D1     		bne	.L21
+ 232              	.L13:
+  41:Source/barrier.c ****   while(true){
+ 233              		.loc 1 41 20 discriminator 1 view .LVU45
+  42:Source/barrier.c ****     ESOS_SIGNAL_SEMAPHORE(sync1Ready, 1);
+ 234              		.loc 1 42 3 discriminator 1 view .LVU46
+  43:Source/barrier.c ****     ESOS_TASK_WAIT_SEMAPHORE(sync2Ready, 1);
+ 235              		.loc 1 43 5 discriminator 1 view .LVU47
+ 236 0078 344A     		ldr	r2, .L38
+ 237 007a 1388     		ldrh	r3, [r2]
+ 238 007c 0133     		adds	r3, r3, #1
+ 239 007e 1380     		strh	r3, [r2]	@ movhi
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 240              		.loc 1 44 5 discriminator 1 view .LVU48
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 241              		.loc 1 44 5 discriminator 1 view .LVU49
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 242              		.loc 1 44 5 discriminator 1 view .LVU50
+ 243 0080 2C23     		movs	r3, #44
+ 244 0082 2380     		strh	r3, [r4]	@ movhi
+ 245              	.L19:
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 246              		.loc 1 44 5 discriminator 1 view .LVU51
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 247              		.loc 1 44 5 discriminator 1 view .LVU52
+ 248 0084 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 249 0086 13F00405 		ands	r5, r3, #4
+ 250 008a D0D1     		bne	.L34
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 251              		.loc 1 44 5 discriminator 3 view .LVU53
+ 252 008c 304A     		ldr	r2, .L38+4
+ 253 008e B2F90020 		ldrsh	r2, [r2]
+ 254 0092 002A     		cmp	r2, #0
+ 255 0094 CFDD     		ble	.L22
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 256              		.loc 1 44 5 discriminator 4 view .LVU54
+ 257 0096 23F00103 		bic	r3, r3, #1
+ 258 009a A370     		strb	r3, [r4, #2]
+ 259              	.L23:
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 260              		.loc 1 44 5 discriminator 7 view .LVU55
+ 261 009c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 262 009e 13F0010F 		tst	r3, #1
+ 263 00a2 51D1     		bne	.L21
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 264              		.loc 1 44 5 discriminator 9 view .LVU56
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 265              		.loc 1 44 5 discriminator 9 view .LVU57
+ARM GAS  /tmp/ccIHDalf.s 			page 7
+
+
+ 266 00a4 013A     		subs	r2, r2, #1
+ 267 00a6 2A4B     		ldr	r3, .L38+4
+ 268 00a8 1A80     		strh	r2, [r3]	@ movhi
+  44:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 269              		.loc 1 44 5 discriminator 9 view .LVU58
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 270              		.loc 1 45 5 discriminator 9 view .LVU59
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 271              		.loc 1 45 5 discriminator 9 view .LVU60
+ 272 00aa 2D23     		movs	r3, #45
+ 273 00ac 2380     		strh	r3, [r4]	@ movhi
+ 274              	.L18:
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 275              		.loc 1 45 5 discriminator 1 view .LVU61
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 276              		.loc 1 45 5 discriminator 1 view .LVU62
+ 277 00ae A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 278 00b0 13F00405 		ands	r5, r3, #4
+ 279 00b4 C3D1     		bne	.L35
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 280              		.loc 1 45 5 discriminator 3 view .LVU63
+ 281 00b6 274A     		ldr	r2, .L38+8
+ 282 00b8 1268     		ldr	r2, [r2]
+ 283 00ba 12F0040F 		tst	r2, #4
+ 284 00be C2D1     		bne	.L25
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 285              		.loc 1 45 5 discriminator 4 view .LVU64
+ 286 00c0 23F00103 		bic	r3, r3, #1
+ 287 00c4 A370     		strb	r3, [r4, #2]
+ 288              	.L26:
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 289              		.loc 1 45 5 discriminator 7 view .LVU65
+ 290 00c6 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 291 00c8 13F0010F 		tst	r3, #1
+ 292 00cc 3CD1     		bne	.L21
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 293              		.loc 1 45 5 discriminator 9 view .LVU66
+  45:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Hello Worl\n\r");
+ 294              		.loc 1 45 5 discriminator 9 view .LVU67
+ 295 00ce 214A     		ldr	r2, .L38+8
+ 296 00d0 1368     		ldr	r3, [r2]
+ 297 00d2 43F00403 		orr	r3, r3, #4
+ 298 00d6 1360     		str	r3, [r2]
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 299              		.loc 1 46 5 discriminator 9 view .LVU68
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 300              		.loc 1 46 5 discriminator 9 view .LVU69
+ 301 00d8 1F4B     		ldr	r3, .L38+12
+ 302 00da 0022     		movs	r2, #0
+ 303 00dc 1A80     		strh	r2, [r3]	@ movhi
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 304              		.loc 1 46 5 discriminator 9 view .LVU70
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 305              		.loc 1 46 5 discriminator 9 view .LVU71
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 306              		.loc 1 46 5 discriminator 9 view .LVU72
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ARM GAS  /tmp/ccIHDalf.s 			page 8
+
+
+ 307              		.loc 1 46 5 discriminator 9 view .LVU73
+ 308 00de 2E23     		movs	r3, #46
+ 309 00e0 2380     		strh	r3, [r4]	@ movhi
+ 310              	.L17:
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 311              		.loc 1 46 5 discriminator 1 view .LVU74
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 312              		.loc 1 46 5 discriminator 1 view .LVU75
+ 313 00e2 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 314 00e4 15F00405 		ands	r5, r5, #4
+ 315 00e8 B1D1     		bne	.L36
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 316              		.loc 1 46 5 discriminator 3 view .LVU76
+ 317 00ea 1C49     		ldr	r1, .L38+16
+ 318 00ec 1A48     		ldr	r0, .L38+12
+ 319 00ee FFF7FEFF 		bl	__esos_OutString
+ 320              	.LVL8:
+ 321 00f2 0228     		cmp	r0, #2
+ 322 00f4 AFD9     		bls	.L28
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 323              		.loc 1 46 5 discriminator 4 view .LVU77
+ 324 00f6 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 325 00f8 23F00103 		bic	r3, r3, #1
+ 326 00fc A370     		strb	r3, [r4, #2]
+ 327              	.L29:
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 328              		.loc 1 46 5 discriminator 7 view .LVU78
+ 329 00fe A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 330 0100 13F0010F 		tst	r3, #1
+ 331 0104 20D1     		bne	.L21
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 332              		.loc 1 46 5 discriminator 9 view .LVU79
+  46:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 333              		.loc 1 46 5 discriminator 9 view .LVU80
+  47:Source/barrier.c ****     ESOS_TASK_WAIT_TICKS(1000);
+ 334              		.loc 1 47 5 discriminator 9 view .LVU81
+ 335 0106 134A     		ldr	r2, .L38+8
+ 336 0108 1368     		ldr	r3, [r2]
+ 337 010a 23F00403 		bic	r3, r3, #4
+ 338 010e 1360     		str	r3, [r2]
+ 339              		.loc 1 48 5 discriminator 9 view .LVU82
+ 340              		.loc 1 48 5 discriminator 9 view .LVU83
+ 341 0110 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 342              	.LVL9:
+ 343 0114 A060     		str	r0, [r4, #8]
+ 344              		.loc 1 48 5 discriminator 9 view .LVU84
+ 345 0116 4FF47A73 		mov	r3, #1000
+ 346 011a E360     		str	r3, [r4, #12]
+ 347              		.loc 1 48 5 discriminator 9 view .LVU85
+ 348              		.loc 1 48 5 discriminator 9 view .LVU86
+ 349 011c 3023     		movs	r3, #48
+ 350 011e 2380     		strh	r3, [r4]	@ movhi
+ 351              	.L15:
+ 352              		.loc 1 48 5 discriminator 1 view .LVU87
+ 353              		.loc 1 48 5 discriminator 1 view .LVU88
+ 354 0120 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 355 0122 15F00405 		ands	r5, r5, #4
+ARM GAS  /tmp/ccIHDalf.s 			page 9
+
+
+ 356 0126 9BD1     		bne	.L37
+ 357              		.loc 1 48 5 discriminator 3 view .LVU89
+ 358 0128 E168     		ldr	r1, [r4, #12]
+ 359 012a A068     		ldr	r0, [r4, #8]
+ 360 012c FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 361              	.LVL10:
+ 362 0130 0028     		cmp	r0, #0
+ 363 0132 99D0     		beq	.L31
+ 364              		.loc 1 48 5 discriminator 4 view .LVU90
+ 365 0134 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 366 0136 23F00103 		bic	r3, r3, #1
+ 367 013a A370     		strb	r3, [r4, #2]
+ 368 013c 98E7     		b	.L32
+ 369              	.LVL11:
+ 370              	.L14:
+  49:Source/barrier.c ****   }
+  50:Source/barrier.c ****   ESOS_TASK_END();
+ 371              		.loc 1 50 3 view .LVU91
+ 372              		.loc 1 50 3 view .LVU92
+ 373 013e 0823     		movs	r3, #8
+ 374 0140 A370     		strb	r3, [r4, #2]
+ 375              		.loc 1 50 3 view .LVU93
+ 376 0142 0023     		movs	r3, #0
+ 377 0144 2380     		strh	r3, [r4]	@ movhi
+ 378              		.loc 1 50 3 view .LVU94
+ 379              		.loc 1 50 3 view .LVU95
+ 380              		.loc 1 50 3 view .LVU96
+ 381 0146 0325     		movs	r5, #3
+ 382              	.LVL12:
+ 383              	.L21:
+ 384              		.loc 1 50 18 discriminator 1 view .LVU97
+  51:Source/barrier.c **** }
+ 385              		.loc 1 51 1 is_stmt 0 discriminator 1 view .LVU98
+ 386 0148 2846     		mov	r0, r5
+ 387 014a 38BD     		pop	{r3, r4, r5, pc}
+ 388              	.LVL13:
+ 389              	.L39:
+ 390              		.loc 1 51 1 discriminator 1 view .LVU99
+ 391              		.align	2
+ 392              	.L38:
+ 393 014c 00000000 		.word	.LANCHOR0
+ 394 0150 00000000 		.word	.LANCHOR1
+ 395 0154 00000000 		.word	__esos_u32SystemFlags
+ 396 0158 00000000 		.word	__stChildTaskTx
+ 397 015c 00000000 		.word	.LC0
+ 398              		.cfi_endproc
+ 399              	.LFE1:
+ 401              		.section	.rodata.sync2.str1.4,"aMS",%progbits,1
+ 402              		.align	2
+ 403              	.LC1:
+ 404 0000 476F6F64 		.ascii	"Goodbye Cruel Worl\012\015\000"
+ 404      62796520 
+ 404      43727565 
+ 404      6C20576F 
+ 404      726C0A0D 
+ 405              		.section	.text.sync2,"ax",%progbits
+ 406              		.align	1
+ARM GAS  /tmp/ccIHDalf.s 			page 10
+
+
+ 407              		.global	sync2
+ 408              		.syntax unified
+ 409              		.thumb
+ 410              		.thumb_func
+ 412              	sync2:
+ 413              	.LVL14:
+ 414              	.LFB2:
+  52:Source/barrier.c **** 
+  53:Source/barrier.c **** ESOS_USER_TASK(sync2){
+ 415              		.loc 1 53 22 is_stmt 1 view -0
+ 416              		.cfi_startproc
+ 417              		@ args = 0, pretend = 0, frame = 0
+ 418              		@ frame_needed = 0, uses_anonymous_args = 0
+ 419              		.loc 1 53 22 is_stmt 0 view .LVU101
+ 420 0000 38B5     		push	{r3, r4, r5, lr}
+ 421              	.LCFI2:
+ 422              		.cfi_def_cfa_offset 16
+ 423              		.cfi_offset 3, -16
+ 424              		.cfi_offset 4, -12
+ 425              		.cfi_offset 5, -8
+ 426              		.cfi_offset 14, -4
+ 427 0002 0446     		mov	r4, r0
+  54:Source/barrier.c ****   ESOS_TASK_BEGIN();
+ 428              		.loc 1 54 3 is_stmt 1 view .LVU102
+ 429 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 430 0006 63F07F03 		orn	r3, r3, #127
+ 431 000a 8370     		strb	r3, [r0, #2]
+ 432              		.loc 1 54 3 view .LVU103
+ 433 000c 0388     		ldrh	r3, [r0]
+ 434 000e 9BB3     		cbz	r3, .L41
+ 435 0010 3D2B     		cmp	r3, #61
+ 436 0012 00F29480 		bhi	.L42
+ 437 0016 392B     		cmp	r3, #57
+ 438 0018 C0F09180 		bcc	.L42
+ 439 001c 393B     		subs	r3, r3, #57
+ 440 001e 042B     		cmp	r3, #4
+ 441 0020 00F28D80 		bhi	.L42
+ 442 0024 DFE803F0 		tbb	[pc, r3]
+ 443              	.L44:
+ 444 0028 2E       		.byte	(.L47-.L44)/2
+ 445 0029 43       		.byte	(.L46-.L44)/2
+ 446 002a 5D       		.byte	(.L45-.L44)/2
+ 447 002b 8B       		.byte	(.L42-.L44)/2
+ 448 002c 7C       		.byte	(.L43-.L44)/2
+ 449              	.LVL15:
+ 450 002d 00       		.p2align 1
+ 451              	.L62:
+  55:Source/barrier.c ****   while(true){
+  56:Source/barrier.c ****     ESOS_SIGNAL_SEMAPHORE(sync2Ready, 1);
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_SEMAPHORE(sync1Ready, 1);
+ 452              		.loc 1 57 5 discriminator 2 view .LVU104
+ 453 002e 0423     		movs	r3, #4
+ 454 0030 A370     		strb	r3, [r4, #2]
+ 455              		.loc 1 57 5 discriminator 2 view .LVU105
+ 456 0032 0325     		movs	r5, #3
+ 457 0034 88E0     		b	.L49
+ 458              	.L50:
+ARM GAS  /tmp/ccIHDalf.s 			page 11
+
+
+ 459              		.loc 1 57 5 discriminator 5 view .LVU106
+ 460 0036 43F00103 		orr	r3, r3, #1
+ 461 003a A370     		strb	r3, [r4, #2]
+ 462 003c 2EE0     		b	.L51
+ 463              	.L63:
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 464              		.loc 1 58 5 discriminator 2 view .LVU107
+ 465 003e 0423     		movs	r3, #4
+ 466 0040 A370     		strb	r3, [r4, #2]
+ 467              		.loc 1 58 5 discriminator 2 view .LVU108
+ 468 0042 0325     		movs	r5, #3
+ 469 0044 80E0     		b	.L49
+ 470              	.L53:
+ 471              		.loc 1 58 5 discriminator 5 view .LVU109
+ 472 0046 43F00103 		orr	r3, r3, #1
+ 473 004a A370     		strb	r3, [r4, #2]
+ 474 004c 3BE0     		b	.L54
+ 475              	.L64:
+  59:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 476              		.loc 1 59 5 discriminator 2 view .LVU110
+ 477 004e 0423     		movs	r3, #4
+ 478 0050 A370     		strb	r3, [r4, #2]
+ 479              		.loc 1 59 5 discriminator 2 view .LVU111
+ 480 0052 0325     		movs	r5, #3
+ 481 0054 78E0     		b	.L49
+ 482              	.L56:
+ 483              		.loc 1 59 5 discriminator 5 view .LVU112
+ 484 0056 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 485 0058 43F00103 		orr	r3, r3, #1
+ 486 005c A370     		strb	r3, [r4, #2]
+ 487 005e 4EE0     		b	.L57
+ 488              	.L65:
+  60:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+  61:Source/barrier.c ****     ESOS_TASK_WAIT_TICKS(1000);
+ 489              		.loc 1 61 5 discriminator 2 view .LVU113
+ 490 0060 0423     		movs	r3, #4
+ 491 0062 A370     		strb	r3, [r4, #2]
+ 492              		.loc 1 61 5 discriminator 2 view .LVU114
+ 493 0064 0325     		movs	r5, #3
+ 494 0066 6FE0     		b	.L49
+ 495              	.L59:
+ 496              		.loc 1 61 5 discriminator 5 view .LVU115
+ 497 0068 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 498 006a 43F00103 		orr	r3, r3, #1
+ 499 006e A370     		strb	r3, [r4, #2]
+ 500              	.L60:
+ 501              		.loc 1 61 5 discriminator 7 view .LVU116
+ 502 0070 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 503 0072 13F0010F 		tst	r3, #1
+ 504 0076 67D1     		bne	.L49
+ 505              	.L41:
+  54:Source/barrier.c ****   while(true){
+ 506              		.loc 1 54 20 discriminator 1 view .LVU117
+  55:Source/barrier.c ****     ESOS_SIGNAL_SEMAPHORE(sync2Ready, 1);
+ 507              		.loc 1 55 3 discriminator 1 view .LVU118
+  56:Source/barrier.c ****     ESOS_TASK_WAIT_SEMAPHORE(sync1Ready, 1);
+ 508              		.loc 1 56 5 discriminator 1 view .LVU119
+ARM GAS  /tmp/ccIHDalf.s 			page 12
+
+
+ 509 0078 344A     		ldr	r2, .L66
+ 510 007a 1388     		ldrh	r3, [r2]
+ 511 007c 0133     		adds	r3, r3, #1
+ 512 007e 1380     		strh	r3, [r2]	@ movhi
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 513              		.loc 1 57 5 discriminator 1 view .LVU120
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 514              		.loc 1 57 5 discriminator 1 view .LVU121
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 515              		.loc 1 57 5 discriminator 1 view .LVU122
+ 516 0080 3923     		movs	r3, #57
+ 517 0082 2380     		strh	r3, [r4]	@ movhi
+ 518              	.L47:
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 519              		.loc 1 57 5 discriminator 1 view .LVU123
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 520              		.loc 1 57 5 discriminator 1 view .LVU124
+ 521 0084 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 522 0086 13F00405 		ands	r5, r3, #4
+ 523 008a D0D1     		bne	.L62
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 524              		.loc 1 57 5 discriminator 3 view .LVU125
+ 525 008c 304A     		ldr	r2, .L66+4
+ 526 008e B2F90020 		ldrsh	r2, [r2]
+ 527 0092 002A     		cmp	r2, #0
+ 528 0094 CFDD     		ble	.L50
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 529              		.loc 1 57 5 discriminator 4 view .LVU126
+ 530 0096 23F00103 		bic	r3, r3, #1
+ 531 009a A370     		strb	r3, [r4, #2]
+ 532              	.L51:
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 533              		.loc 1 57 5 discriminator 7 view .LVU127
+ 534 009c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 535 009e 13F0010F 		tst	r3, #1
+ 536 00a2 51D1     		bne	.L49
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 537              		.loc 1 57 5 discriminator 9 view .LVU128
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 538              		.loc 1 57 5 discriminator 9 view .LVU129
+ 539 00a4 013A     		subs	r2, r2, #1
+ 540 00a6 2A4B     		ldr	r3, .L66+4
+ 541 00a8 1A80     		strh	r2, [r3]	@ movhi
+  57:Source/barrier.c ****     ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 542              		.loc 1 57 5 discriminator 9 view .LVU130
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 543              		.loc 1 58 5 discriminator 9 view .LVU131
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 544              		.loc 1 58 5 discriminator 9 view .LVU132
+ 545 00aa 3A23     		movs	r3, #58
+ 546 00ac 2380     		strh	r3, [r4]	@ movhi
+ 547              	.L46:
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 548              		.loc 1 58 5 discriminator 1 view .LVU133
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 549              		.loc 1 58 5 discriminator 1 view .LVU134
+ 550 00ae A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ARM GAS  /tmp/ccIHDalf.s 			page 13
+
+
+ 551 00b0 13F00405 		ands	r5, r3, #4
+ 552 00b4 C3D1     		bne	.L63
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 553              		.loc 1 58 5 discriminator 3 view .LVU135
+ 554 00b6 274A     		ldr	r2, .L66+8
+ 555 00b8 1268     		ldr	r2, [r2]
+ 556 00ba 12F0040F 		tst	r2, #4
+ 557 00be C2D1     		bne	.L53
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 558              		.loc 1 58 5 discriminator 4 view .LVU136
+ 559 00c0 23F00103 		bic	r3, r3, #1
+ 560 00c4 A370     		strb	r3, [r4, #2]
+ 561              	.L54:
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 562              		.loc 1 58 5 discriminator 7 view .LVU137
+ 563 00c6 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 564 00c8 13F0010F 		tst	r3, #1
+ 565 00cc 3CD1     		bne	.L49
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 566              		.loc 1 58 5 discriminator 9 view .LVU138
+  58:Source/barrier.c ****     ESOS_TASK_WAIT_ON_SEND_STRING("Goodbye Cruel Worl\n\r");
+ 567              		.loc 1 58 5 discriminator 9 view .LVU139
+ 568 00ce 214A     		ldr	r2, .L66+8
+ 569 00d0 1368     		ldr	r3, [r2]
+ 570 00d2 43F00403 		orr	r3, r3, #4
+ 571 00d6 1360     		str	r3, [r2]
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 572              		.loc 1 59 5 discriminator 9 view .LVU140
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 573              		.loc 1 59 5 discriminator 9 view .LVU141
+ 574 00d8 1F4B     		ldr	r3, .L66+12
+ 575 00da 0022     		movs	r2, #0
+ 576 00dc 1A80     		strh	r2, [r3]	@ movhi
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 577              		.loc 1 59 5 discriminator 9 view .LVU142
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 578              		.loc 1 59 5 discriminator 9 view .LVU143
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 579              		.loc 1 59 5 discriminator 9 view .LVU144
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 580              		.loc 1 59 5 discriminator 9 view .LVU145
+ 581 00de 3B23     		movs	r3, #59
+ 582 00e0 2380     		strh	r3, [r4]	@ movhi
+ 583              	.L45:
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 584              		.loc 1 59 5 discriminator 1 view .LVU146
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 585              		.loc 1 59 5 discriminator 1 view .LVU147
+ 586 00e2 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 587 00e4 15F00405 		ands	r5, r5, #4
+ 588 00e8 B1D1     		bne	.L64
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 589              		.loc 1 59 5 discriminator 3 view .LVU148
+ 590 00ea 1C49     		ldr	r1, .L66+16
+ 591 00ec 1A48     		ldr	r0, .L66+12
+ 592 00ee FFF7FEFF 		bl	__esos_OutString
+ 593              	.LVL16:
+ARM GAS  /tmp/ccIHDalf.s 			page 14
+
+
+ 594 00f2 0228     		cmp	r0, #2
+ 595 00f4 AFD9     		bls	.L56
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 596              		.loc 1 59 5 discriminator 4 view .LVU149
+ 597 00f6 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 598 00f8 23F00103 		bic	r3, r3, #1
+ 599 00fc A370     		strb	r3, [r4, #2]
+ 600              	.L57:
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 601              		.loc 1 59 5 discriminator 7 view .LVU150
+ 602 00fe A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 603 0100 13F0010F 		tst	r3, #1
+ 604 0104 20D1     		bne	.L49
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 605              		.loc 1 59 5 discriminator 9 view .LVU151
+  59:Source/barrier.c ****     ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 606              		.loc 1 59 5 discriminator 9 view .LVU152
+  60:Source/barrier.c ****     ESOS_TASK_WAIT_TICKS(1000);
+ 607              		.loc 1 60 5 discriminator 9 view .LVU153
+ 608 0106 134A     		ldr	r2, .L66+8
+ 609 0108 1368     		ldr	r3, [r2]
+ 610 010a 23F00403 		bic	r3, r3, #4
+ 611 010e 1360     		str	r3, [r2]
+ 612              		.loc 1 61 5 discriminator 9 view .LVU154
+ 613              		.loc 1 61 5 discriminator 9 view .LVU155
+ 614 0110 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 615              	.LVL17:
+ 616 0114 A060     		str	r0, [r4, #8]
+ 617              		.loc 1 61 5 discriminator 9 view .LVU156
+ 618 0116 4FF47A73 		mov	r3, #1000
+ 619 011a E360     		str	r3, [r4, #12]
+ 620              		.loc 1 61 5 discriminator 9 view .LVU157
+ 621              		.loc 1 61 5 discriminator 9 view .LVU158
+ 622 011c 3D23     		movs	r3, #61
+ 623 011e 2380     		strh	r3, [r4]	@ movhi
+ 624              	.L43:
+ 625              		.loc 1 61 5 discriminator 1 view .LVU159
+ 626              		.loc 1 61 5 discriminator 1 view .LVU160
+ 627 0120 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 628 0122 15F00405 		ands	r5, r5, #4
+ 629 0126 9BD1     		bne	.L65
+ 630              		.loc 1 61 5 discriminator 3 view .LVU161
+ 631 0128 E168     		ldr	r1, [r4, #12]
+ 632 012a A068     		ldr	r0, [r4, #8]
+ 633 012c FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 634              	.LVL18:
+ 635 0130 0028     		cmp	r0, #0
+ 636 0132 99D0     		beq	.L59
+ 637              		.loc 1 61 5 discriminator 4 view .LVU162
+ 638 0134 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 639 0136 23F00103 		bic	r3, r3, #1
+ 640 013a A370     		strb	r3, [r4, #2]
+ 641 013c 98E7     		b	.L60
+ 642              	.LVL19:
+ 643              	.L42:
+  62:Source/barrier.c ****   }
+  63:Source/barrier.c ****   ESOS_TASK_END();
+ARM GAS  /tmp/ccIHDalf.s 			page 15
+
+
+ 644              		.loc 1 63 3 view .LVU163
+ 645              		.loc 1 63 3 view .LVU164
+ 646 013e 0823     		movs	r3, #8
+ 647 0140 A370     		strb	r3, [r4, #2]
+ 648              		.loc 1 63 3 view .LVU165
+ 649 0142 0023     		movs	r3, #0
+ 650 0144 2380     		strh	r3, [r4]	@ movhi
+ 651              		.loc 1 63 3 view .LVU166
+ 652              		.loc 1 63 3 view .LVU167
+ 653              		.loc 1 63 3 view .LVU168
+ 654 0146 0325     		movs	r5, #3
+ 655              	.LVL20:
+ 656              	.L49:
+ 657              		.loc 1 63 18 discriminator 1 view .LVU169
+  64:Source/barrier.c **** }
+ 658              		.loc 1 64 1 is_stmt 0 discriminator 1 view .LVU170
+ 659 0148 2846     		mov	r0, r5
+ 660 014a 38BD     		pop	{r3, r4, r5, pc}
+ 661              	.LVL21:
+ 662              	.L67:
+ 663              		.loc 1 64 1 discriminator 1 view .LVU171
+ 664              		.align	2
+ 665              	.L66:
+ 666 014c 00000000 		.word	.LANCHOR1
+ 667 0150 00000000 		.word	.LANCHOR0
+ 668 0154 00000000 		.word	__esos_u32SystemFlags
+ 669 0158 00000000 		.word	__stChildTaskTx
+ 670 015c 00000000 		.word	.LC1
+ 671              		.cfi_endproc
+ 672              	.LFE2:
+ 674              		.section	.text.init_hw,"ax",%progbits
+ 675              		.align	1
+ 676              		.global	init_hw
+ 677              		.syntax unified
+ 678              		.thumb
+ 679              		.thumb_func
+ 681              	init_hw:
+ 682              	.LFB4:
+  65:Source/barrier.c **** 
+  66:Source/barrier.c **** void user_init(void){
+  67:Source/barrier.c ****   init_hw();
+  68:Source/barrier.c ****   init_sw();
+  69:Source/barrier.c ****   esos_RegisterTask(led_heartbeat);
+  70:Source/barrier.c ****   esos_RegisterTask(sync1);
+  71:Source/barrier.c ****   esos_RegisterTask(sync2); 
+  72:Source/barrier.c **** }
+  73:Source/barrier.c **** 
+  74:Source/barrier.c **** void init_hw(){
+ 683              		.loc 1 74 15 is_stmt 1 view -0
+ 684              		.cfi_startproc
+ 685              		@ args = 0, pretend = 0, frame = 0
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 687 0000 08B5     		push	{r3, lr}
+ 688              	.LCFI3:
+ 689              		.cfi_def_cfa_offset 8
+ 690              		.cfi_offset 3, -8
+ 691              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccIHDalf.s 			page 16
+
+
+  75:Source/barrier.c ****   rcc_periph_clock_enable(GPIOA);
+ 692              		.loc 1 75 3 view .LVU173
+ 693 0002 0020     		movs	r0, #0
+ 694 0004 FFF7FEFF 		bl	rcc_periph_clock_enable
+ 695              	.LVL22:
+  76:Source/barrier.c ****   gpio_mode_setup(LED2_GPIO_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, LED2_Pin);
+ 696              		.loc 1 76 3 view .LVU174
+ 697 0008 2023     		movs	r3, #32
+ 698 000a 0122     		movs	r2, #1
+ 699 000c 1146     		mov	r1, r2
+ 700 000e 4FF09040 		mov	r0, #1207959552
+ 701 0012 FFF7FEFF 		bl	gpio_mode_setup
+ 702              	.LVL23:
+  77:Source/barrier.c **** }
+ 703              		.loc 1 77 1 is_stmt 0 view .LVU175
+ 704 0016 08BD     		pop	{r3, pc}
+ 705              		.cfi_endproc
+ 706              	.LFE4:
+ 708              		.section	.text.init_sw,"ax",%progbits
+ 709              		.align	1
+ 710              		.global	init_sw
+ 711              		.syntax unified
+ 712              		.thumb
+ 713              		.thumb_func
+ 715              	init_sw:
+ 716              	.LFB5:
+  78:Source/barrier.c **** 
+  79:Source/barrier.c **** void init_sw(){
+ 717              		.loc 1 79 15 is_stmt 1 view -0
+ 718              		.cfi_startproc
+ 719              		@ args = 0, pretend = 0, frame = 0
+ 720              		@ frame_needed = 0, uses_anonymous_args = 0
+ 721              		@ link register save eliminated.
+  80:Source/barrier.c ****   ESOS_INIT_SEMAPHORE(sync1Ready, 0);
+ 722              		.loc 1 80 3 view .LVU177
+ 723 0000 0023     		movs	r3, #0
+ 724 0002 024A     		ldr	r2, .L71
+ 725 0004 1380     		strh	r3, [r2]	@ movhi
+  81:Source/barrier.c ****   ESOS_INIT_SEMAPHORE(sync2Ready, 0);
+ 726              		.loc 1 81 3 view .LVU178
+ 727 0006 024A     		ldr	r2, .L71+4
+ 728 0008 1380     		strh	r3, [r2]	@ movhi
+  82:Source/barrier.c **** }...
+ 729              		.loc 1 82 1 is_stmt 0 view .LVU179
+ 730 000a 7047     		bx	lr
+ 731              	.L72:
+ 732              		.align	2
+ 733              	.L71:
+ 734 000c 00000000 		.word	.LANCHOR0
+ 735 0010 00000000 		.word	.LANCHOR1
+ 736              		.cfi_endproc
+ 737              	.LFE5:
+ 739              		.section	.text.user_init,"ax",%progbits
+ 740              		.align	1
+ 741              		.global	user_init
+ 742              		.syntax unified
+ 743              		.thumb
+ARM GAS  /tmp/ccIHDalf.s 			page 17
+
+
+ 744              		.thumb_func
+ 746              	user_init:
+ 747              	.LFB3:
+  66:Source/barrier.c **** void user_init(void){
+ 748              		.loc 1 66 21 is_stmt 1 view -0
+ 749              		.cfi_startproc
+ 750              		@ args = 0, pretend = 0, frame = 0
+ 751              		@ frame_needed = 0, uses_anonymous_args = 0
+ 752 0000 08B5     		push	{r3, lr}
+ 753              	.LCFI4:
+ 754              		.cfi_def_cfa_offset 8
+ 755              		.cfi_offset 3, -8
+ 756              		.cfi_offset 14, -4
+  67:Source/barrier.c ****   init_hw();
+ 757              		.loc 1 67 3 view .LVU181
+ 758 0002 FFF7FEFF 		bl	init_hw
+ 759              	.LVL24:
+  68:Source/barrier.c ****   init_sw();
+ 760              		.loc 1 68 3 view .LVU182
+ 761 0006 FFF7FEFF 		bl	init_sw
+ 762              	.LVL25:
+  69:Source/barrier.c ****   esos_RegisterTask(led_heartbeat);
+ 763              		.loc 1 69 3 view .LVU183
+ 764 000a 0548     		ldr	r0, .L75
+ 765 000c FFF7FEFF 		bl	esos_RegisterTask
+ 766              	.LVL26:
+  70:Source/barrier.c ****   esos_RegisterTask(sync1);
+ 767              		.loc 1 70 3 view .LVU184
+ 768 0010 0448     		ldr	r0, .L75+4
+ 769 0012 FFF7FEFF 		bl	esos_RegisterTask
+ 770              	.LVL27:
+  71:Source/barrier.c ****   esos_RegisterTask(sync2); 
+ 771              		.loc 1 71 3 view .LVU185
+ 772 0016 0448     		ldr	r0, .L75+8
+ 773 0018 FFF7FEFF 		bl	esos_RegisterTask
+ 774              	.LVL28:
+  72:Source/barrier.c **** }
+ 775              		.loc 1 72 1 is_stmt 0 view .LVU186
+ 776 001c 08BD     		pop	{r3, pc}
+ 777              	.L76:
+ 778 001e 00BF     		.align	2
+ 779              	.L75:
+ 780 0020 00000000 		.word	led_heartbeat
+ 781 0024 00000000 		.word	sync1
+ 782 0028 00000000 		.word	sync2
+ 783              		.cfi_endproc
+ 784              	.LFE3:
+ 786              		.global	sync2Ready
+ 787              		.global	sync1Ready
+ 788              		.section	.bss.sync1Ready,"aw",%nobits
+ 789              		.align	2
+ 790              		.set	.LANCHOR0,. + 0
+ 793              	sync1Ready:
+ 794 0000 0000     		.space	2
+ 795              		.section	.bss.sync2Ready,"aw",%nobits
+ 796              		.align	2
+ 797              		.set	.LANCHOR1,. + 0
+ARM GAS  /tmp/ccIHDalf.s 			page 18
+
+
+ 800              	sync2Ready:
+ 801 0000 0000     		.space	2
+ 802              		.text
+ 803              	.Letext0:
+ 804              		.file 2 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 805              		.file 3 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 806              		.file 4 "/home/ryan/Documents/Github/esos32/include/lc-switch.h"
+ 807              		.file 5 "/home/ryan/Documents/Github/esos32/include/esos_cb.h"
+ 808              		.file 6 "/home/ryan/Documents/Github/esos32/include/esos_mail.h"
+ 809              		.file 7 "/home/ryan/Documents/Github/esos32/include/esos_task.h"
+ 810              		.file 8 "/home/ryan/Documents/Github/esos32/include/esos_comm.h"
+ 811              		.file 9 "/home/ryan/Documents/Github/esos32/include/esos.h"
+ 812              		.file 10 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 813              		.file 11 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 814              		.file 12 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 815              		.file 13 "/home/ryan/Documents/Github/esos32/include/all_generic.h"
+ARM GAS  /tmp/ccIHDalf.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 barrier.c
+     /tmp/ccIHDalf.s:20     .text.led_heartbeat:0000000000000000 $t
+     /tmp/ccIHDalf.s:26     .text.led_heartbeat:0000000000000000 led_heartbeat
+     /tmp/ccIHDalf.s:129    .rodata.sync1.str1.4:0000000000000000 $d
+     /tmp/ccIHDalf.s:133    .text.sync1:0000000000000000 $t
+     /tmp/ccIHDalf.s:139    .text.sync1:0000000000000000 sync1
+     /tmp/ccIHDalf.s:171    .text.sync1:0000000000000028 $d
+     /tmp/ccIHDalf.s:393    .text.sync1:000000000000014c $d
+     /tmp/ccIHDalf.s:402    .rodata.sync2.str1.4:0000000000000000 $d
+     /tmp/ccIHDalf.s:406    .text.sync2:0000000000000000 $t
+     /tmp/ccIHDalf.s:412    .text.sync2:0000000000000000 sync2
+     /tmp/ccIHDalf.s:444    .text.sync2:0000000000000028 $d
+     /tmp/ccIHDalf.s:666    .text.sync2:000000000000014c $d
+     /tmp/ccIHDalf.s:675    .text.init_hw:0000000000000000 $t
+     /tmp/ccIHDalf.s:681    .text.init_hw:0000000000000000 init_hw
+     /tmp/ccIHDalf.s:709    .text.init_sw:0000000000000000 $t
+     /tmp/ccIHDalf.s:715    .text.init_sw:0000000000000000 init_sw
+     /tmp/ccIHDalf.s:734    .text.init_sw:000000000000000c $d
+     /tmp/ccIHDalf.s:740    .text.user_init:0000000000000000 $t
+     /tmp/ccIHDalf.s:746    .text.user_init:0000000000000000 user_init
+     /tmp/ccIHDalf.s:780    .text.user_init:0000000000000020 $d
+     /tmp/ccIHDalf.s:800    .bss.sync2Ready:0000000000000000 sync2Ready
+     /tmp/ccIHDalf.s:793    .bss.sync1Ready:0000000000000000 sync1Ready
+     /tmp/ccIHDalf.s:789    .bss.sync1Ready:0000000000000000 $d
+     /tmp/ccIHDalf.s:796    .bss.sync2Ready:0000000000000000 $d
+     /tmp/ccIHDalf.s:177    .text.sync1:000000000000002d $d
+     /tmp/ccIHDalf.s:177    .text.sync1:000000000000002e $t
+     /tmp/ccIHDalf.s:450    .text.sync2:000000000000002d $d
+     /tmp/ccIHDalf.s:450    .text.sync2:000000000000002e $t
+
+UNDEFINED SYMBOLS
+gpio_toggle
+__esos_hw_GetSystemTickCount
+__esos_hasTickDurationPassed
+__esos_OutString
+__esos_u32SystemFlags
+__stChildTaskTx
+rcc_periph_clock_enable
+gpio_mode_setup
+esos_RegisterTask

@@ -5,13 +5,13 @@ Archive member included to satisfy reference by file (symbol)
 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
                               Build/esos_stm32l4_tick.o (flash_dcache_enable)
 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
-                              Build/queue.o (gpio_toggle)
+                              Build/barrier.o (gpio_toggle)
 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
-                              Build/queue.o (gpio_mode_setup)
+                              Build/barrier.o (gpio_mode_setup)
 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
                               Build/esos_stm32l4_tick.o (rcc_wait_for_sysclk_status)
 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
-                              Build/queue.o (rcc_periph_clock_enable)
+                              Build/barrier.o (rcc_periph_clock_enable)
 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
                               Build/esos_stm32l4_utils.o (rng_enable)
 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
@@ -29,9 +29,9 @@ Archive member included to satisfy reference by file (symbol)
 
 Discarded input sections
 
- .text          0x0000000000000000        0x0 Build/queue.o
- .data          0x0000000000000000        0x0 Build/queue.o
- .bss           0x0000000000000000        0x0 Build/queue.o
+ .text          0x0000000000000000        0x0 Build/barrier.o
+ .data          0x0000000000000000        0x0 Build/barrier.o
+ .bss           0x0000000000000000        0x0 Build/barrier.o
  .text          0x0000000000000000        0x0 Build/esos.o
  .data          0x0000000000000000        0x0 Build/esos.o
  .bss           0x0000000000000000        0x0 Build/esos.o
@@ -88,6 +88,8 @@ Discarded input sections
                 0x0000000000000000       0x10 Build/esos_comm.o
  .text.__esos_OutUint8AsHexString
                 0x0000000000000000       0x94 Build/esos_comm.o
+ .text.__esos_OutUint8AsDecString
+                0x0000000000000000      0x10c Build/esos_comm.o
  .text.__esos_OutUint32AsHexString
                 0x0000000000000000       0xec Build/esos_comm.o
  .text.__esos_OutCharBuffer
@@ -104,7 +106,12 @@ Discarded input sections
                 0x0000000000000000        0x5 Build/esos_comm.o
  .bss.au8_String.6
                 0x0000000000000000        0xb Build/esos_comm.o
+ .bss.au8_String.8
+                0x0000000000000000        0x5 Build/esos_comm.o
  .bss.u8_c.5    0x0000000000000000        0x1 Build/esos_comm.o
+ .bss.u8_c.7    0x0000000000000000        0x1 Build/esos_comm.o
+ .bss.u8_digit.9
+                0x0000000000000000        0x1 Build/esos_comm.o
  .bss.u8_i.0    0x0000000000000000        0x1 Build/esos_comm.o
  .text          0x0000000000000000        0x0 Build/esos_mail.o
  .data          0x0000000000000000        0x0 Build/esos_mail.o
@@ -745,7 +752,7 @@ ram              0x0000000020000000 0x0000000000028000 xrw
 
 Linker script and memory map
 
-LOAD Build/queue.o
+LOAD Build/barrier.o
 LOAD Build/esos.o
 LOAD Build/esos_cb.o
 LOAD Build/esos_utils.o
@@ -773,448 +780,417 @@ LOAD /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc
 LOAD /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a
 END GROUP
 
-.text           0x0000000008000000     0x2c48
+.text           0x0000000008000000     0x2bd4
  *(.vectors)
  .vectors       0x0000000008000000      0x1ac /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
                 0x0000000008000000                vector_table
  *(.text*)
  .text.led_heartbeat
-                0x00000000080001ac       0x72 Build/queue.o
+                0x00000000080001ac       0x72 Build/barrier.o
                 0x00000000080001ac                led_heartbeat
  *fill*         0x000000000800021e        0x2 
  .text.consumer1
-                0x0000000008000220      0x1b8 Build/queue.o
+                0x0000000008000220      0x42c Build/barrier.o
                 0x0000000008000220                consumer1
  .text.consumer2
-                0x00000000080003d8      0x1a4 Build/queue.o
-                0x00000000080003d8                consumer2
+                0x000000000800064c      0x464 Build/barrier.o
+                0x000000000800064c                consumer2
  .text.consumer3
-                0x000000000800057c      0x1a4 Build/queue.o
-                0x000000000800057c                consumer3
+                0x0000000008000ab0      0x400 Build/barrier.o
+                0x0000000008000ab0                consumer3
  .text.consumer4
-                0x0000000008000720      0x1a4 Build/queue.o
-                0x0000000008000720                consumer4
+                0x0000000008000eb0      0x400 Build/barrier.o
+                0x0000000008000eb0                consumer4
  .text.consumer5
-                0x00000000080008c4      0x1a4 Build/queue.o
-                0x00000000080008c4                consumer5
+                0x00000000080012b0      0x400 Build/barrier.o
+                0x00000000080012b0                consumer5
  .text.consumer6
-                0x0000000008000a68      0x1a4 Build/queue.o
-                0x0000000008000a68                consumer6
- .text.producer1
-                0x0000000008000c0c      0x170 Build/queue.o
-                0x0000000008000c0c                producer1
- .text.producer2
-                0x0000000008000d7c      0x170 Build/queue.o
-                0x0000000008000d7c                producer2
- .text.producer3
-                0x0000000008000eec      0x170 Build/queue.o
-                0x0000000008000eec                producer3
- .text.producer4
-                0x000000000800105c      0x170 Build/queue.o
-                0x000000000800105c                producer4
- .text.producer5
-                0x00000000080011cc      0x170 Build/queue.o
-                0x00000000080011cc                producer5
- .text.producer6
-                0x000000000800133c      0x170 Build/queue.o
-                0x000000000800133c                producer6
- .text.product_report
-                0x00000000080014ac      0x1a4 Build/queue.o
-                0x00000000080014ac                product_report
+                0x00000000080016b0      0x400 Build/barrier.o
+                0x00000000080016b0                consumer6
  .text.create_consumer_producers
-                0x0000000008001650       0xe8 Build/queue.o
-                0x0000000008001650                create_consumer_producers
- .text.Synchronize
-                0x0000000008001738      0x498 Build/queue.o
-                0x0000000008001738                Synchronize
- .text.init_hw  0x0000000008001bd0       0x18 Build/queue.o
-                0x0000000008001bd0                init_hw
- .text.init_sw  0x0000000008001be8        0xc Build/queue.o
-                0x0000000008001be8                init_sw
+                0x0000000008001ab0       0x2c Build/barrier.o
+                0x0000000008001ab0                create_consumer_producers
+ .text.Initialize
+                0x0000000008001adc      0x2c4 Build/barrier.o
+                0x0000000008001adc                Initialize
+ .text.init_hw  0x0000000008001da0       0x18 Build/barrier.o
+                0x0000000008001da0                init_hw
+ .text.init_sw  0x0000000008001db8       0x3c Build/barrier.o
+                0x0000000008001db8                init_sw
  .text.user_init
-                0x0000000008001bf4       0xa4 Build/queue.o
-                0x0000000008001bf4                user_init
+                0x0000000008001df4       0x5c Build/barrier.o
+                0x0000000008001df4                user_init
  .text.esos_RegisterTask
-                0x0000000008001c98       0xe0 Build/esos.o
-                0x0000000008001c98                esos_RegisterTask
+                0x0000000008001e50       0xe0 Build/esos.o
+                0x0000000008001e50                esos_RegisterTask
  .text.esos_UnregisterTask
-                0x0000000008001d78       0x54 Build/esos.o
-                0x0000000008001d78                esos_UnregisterTask
+                0x0000000008001f30       0x54 Build/esos.o
+                0x0000000008001f30                esos_UnregisterTask
  .text.esos_GetFreeChildTaskStruct
-                0x0000000008001dcc       0x2c Build/esos.o
-                0x0000000008001dcc                esos_GetFreeChildTaskStruct
+                0x0000000008001f84       0x2c Build/esos.o
+                0x0000000008001f84                esos_GetFreeChildTaskStruct
  .text.__esos_hasTickDurationPassed
-                0x0000000008001df8       0x1e Build/esos.o
-                0x0000000008001df8                __esos_hasTickDurationPassed
- *fill*         0x0000000008001e16        0x2 
+                0x0000000008001fb0       0x1e Build/esos.o
+                0x0000000008001fb0                __esos_hasTickDurationPassed
+ *fill*         0x0000000008001fce        0x2 
  .text.__esos_tmrSvcsExecute
-                0x0000000008001e18       0x5c Build/esos.o
-                0x0000000008001e18                __esos_tmrSvcsExecute
+                0x0000000008001fd0       0x5c Build/esos.o
+                0x0000000008001fd0                __esos_tmrSvcsExecute
  .text.__esosInit
-                0x0000000008001e74       0xc0 Build/esos.o
-                0x0000000008001e74                __esosInit
- .text.main     0x0000000008001f34       0xa8 Build/esos.o
-                0x0000000008001f34                main
+                0x000000000800202c       0xc0 Build/esos.o
+                0x000000000800202c                __esosInit
+ .text.main     0x00000000080020ec       0xa8 Build/esos.o
+                0x00000000080020ec                main
  .text.__esos_CB_Init
-                0x0000000008001fdc        0xc Build/esos_cb.o
-                0x0000000008001fdc                __esos_CB_Init
+                0x0000000008002194        0xc Build/esos_cb.o
+                0x0000000008002194                __esos_CB_Init
  .text.__esos_CB_WriteUINT8
-                0x0000000008001fe8       0x24 Build/esos_cb.o
-                0x0000000008001fe8                __esos_CB_WriteUINT8
+                0x00000000080021a0       0x24 Build/esos_cb.o
+                0x00000000080021a0                __esos_CB_WriteUINT8
  .text.__esos_CB_OverwriteUINT8
-                0x000000000800200c       0x34 Build/esos_cb.o
-                0x000000000800200c                __esos_CB_OverwriteUINT8
+                0x00000000080021c4       0x34 Build/esos_cb.o
+                0x00000000080021c4                __esos_CB_OverwriteUINT8
  .text.__esos_CB_ReadUINT8
-                0x0000000008002040       0x1e Build/esos_cb.o
-                0x0000000008002040                __esos_CB_ReadUINT8
- *fill*         0x000000000800205e        0x2 
+                0x00000000080021f8       0x1e Build/esos_cb.o
+                0x00000000080021f8                __esos_CB_ReadUINT8
+ *fill*         0x0000000008002216        0x2 
  .text.__esos_set_PRNG_U32Seed
-                0x0000000008002060        0xc Build/esos_utils.o
-                0x0000000008002060                __esos_set_PRNG_U32Seed
+                0x0000000008002218        0xc Build/esos_utils.o
+                0x0000000008002218                __esos_set_PRNG_U32Seed
  .text.__esos_get_PRNG_RandomUint32
-                0x000000000800206c       0x48 Build/esos_utils.o
-                0x000000000800206c                __esos_get_PRNG_RandomUint32
+                0x0000000008002224       0x48 Build/esos_utils.o
+                0x0000000008002224                __esos_get_PRNG_RandomUint32
  .text.esos_GetRandomUint32
-                0x00000000080020b4        0x8 Build/esos_utils.o
-                0x00000000080020b4                esos_GetRandomUint32
+                0x000000000800226c        0x8 Build/esos_utils.o
+                0x000000000800226c                esos_GetRandomUint32
  .text.__esos_InitCommSystem
-                0x00000000080020bc       0x40 Build/esos_comm.o
-                0x00000000080020bc                __esos_InitCommSystem
+                0x0000000008002274       0x40 Build/esos_comm.o
+                0x0000000008002274                __esos_InitCommSystem
  .text.__esos_OutChar
-                0x00000000080020fc       0x74 Build/esos_comm.o
-                0x00000000080020fc                __esos_OutChar
- .text.__esos_OutUint8AsDecString
-                0x0000000008002170      0x10c Build/esos_comm.o
-                0x0000000008002170                __esos_OutUint8AsDecString
+                0x00000000080022b4       0x74 Build/esos_comm.o
+                0x00000000080022b4                __esos_OutChar
  .text.__esos_OutString
-                0x000000000800227c       0x84 Build/esos_comm.o
-                0x000000000800227c                __esos_OutString
+                0x0000000008002328       0x84 Build/esos_comm.o
+                0x0000000008002328                __esos_OutString
  .text.__esos_getBuffer
-                0x0000000008002300       0x98 Build/esos_comm.o
-                0x0000000008002300                __esos_getBuffer
+                0x00000000080023ac       0x98 Build/esos_comm.o
+                0x00000000080023ac                __esos_getBuffer
  .text.__esos_InitMailbox
-                0x0000000008002398        0xc Build/esos_mail.o
-                0x0000000008002398                __esos_InitMailbox
+                0x0000000008002444        0xc Build/esos_mail.o
+                0x0000000008002444                __esos_InitMailbox
  .text.__esos_hw_InitSystemTick
-                0x00000000080023a4       0xb4 Build/esos_stm32l4_tick.o
-                0x00000000080023a4                __esos_hw_InitSystemTick
+                0x0000000008002450       0xb4 Build/esos_stm32l4_tick.o
+                0x0000000008002450                __esos_hw_InitSystemTick
  .text.__esos_hw_GetSystemTickCount
-                0x0000000008002458        0xc Build/esos_stm32l4_tick.o
-                0x0000000008002458                __esos_hw_GetSystemTickCount
+                0x0000000008002504        0xc Build/esos_stm32l4_tick.o
+                0x0000000008002504                __esos_hw_GetSystemTickCount
  .text.sys_tick_handler
-                0x0000000008002464       0x14 Build/esos_stm32l4_tick.o
-                0x0000000008002464                sys_tick_handler
+                0x0000000008002510       0x14 Build/esos_stm32l4_tick.o
+                0x0000000008002510                sys_tick_handler
  .text.__esos_hw_PRNG_u32
-                0x0000000008002478        0x8 Build/esos_stm32l4_utils.o
-                0x0000000008002478                __esos_hw_PRNG_u32
+                0x0000000008002524        0x8 Build/esos_stm32l4_utils.o
+                0x0000000008002524                __esos_hw_PRNG_u32
  .text.__esos_hw_config_PRNG
-                0x0000000008002480        0x8 Build/esos_stm32l4_utils.o
-                0x0000000008002480                __esos_hw_config_PRNG
+                0x000000000800252c        0x8 Build/esos_stm32l4_utils.o
+                0x000000000800252c                __esos_hw_config_PRNG
  .text.__esos_hw_signal_start_tx
-                0x0000000008002488       0x44 Build/esos_stm32l4_rs232.o
-                0x0000000008002488                __esos_hw_signal_start_tx
+                0x0000000008002534       0x44 Build/esos_stm32l4_rs232.o
+                0x0000000008002534                __esos_hw_signal_start_tx
  .text.usart2_isr
-                0x00000000080024cc       0x9c Build/esos_stm32l4_rs232.o
-                0x00000000080024cc                usart2_isr
+                0x0000000008002578       0x9c Build/esos_stm32l4_rs232.o
+                0x0000000008002578                usart2_isr
  .text.__esos_configUART1
-                0x0000000008002568       0xa0 Build/esos_stm32l4_rs232.o
-                0x0000000008002568                __esos_configUART1
+                0x0000000008002614       0xa0 Build/esos_stm32l4_rs232.o
+                0x0000000008002614                __esos_configUART1
  .text.__esos_hw_InitCommSystem
-                0x0000000008002608        0xc Build/esos_stm32l4_rs232.o
-                0x0000000008002608                __esos_hw_InitCommSystem
+                0x00000000080026b4        0xc Build/esos_stm32l4_rs232.o
+                0x00000000080026b4                __esos_hw_InitCommSystem
  .text.flash_prefetch_enable
-                0x0000000008002614       0x10 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
-                0x0000000008002614                flash_prefetch_enable
+                0x00000000080026c0       0x10 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+                0x00000000080026c0                flash_prefetch_enable
  .text.flash_set_ws
-                0x0000000008002624       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
-                0x0000000008002624                flash_set_ws
+                0x00000000080026d0       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+                0x00000000080026d0                flash_set_ws
  .text.flash_dcache_enable
-                0x0000000008002638       0x10 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
-                0x0000000008002638                flash_dcache_enable
+                0x00000000080026e4       0x10 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+                0x00000000080026e4                flash_dcache_enable
  .text.flash_icache_enable
-                0x0000000008002648       0x10 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
-                0x0000000008002648                flash_icache_enable
+                0x00000000080026f4       0x10 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+                0x00000000080026f4                flash_icache_enable
  .text.gpio_toggle
-                0x0000000008002658       0x12 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
-                0x0000000008002658                gpio_toggle
+                0x0000000008002704       0x12 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+                0x0000000008002704                gpio_toggle
  .text.gpio_mode_setup
-                0x000000000800266a       0x40 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
-                0x000000000800266a                gpio_mode_setup
+                0x0000000008002716       0x40 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                0x0000000008002716                gpio_mode_setup
  .text.gpio_set_output_options
-                0x00000000080026aa       0x36 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
-                0x00000000080026aa                gpio_set_output_options
+                0x0000000008002756       0x36 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                0x0000000008002756                gpio_set_output_options
  .text.gpio_set_af
-                0x00000000080026e0       0x58 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
-                0x00000000080026e0                gpio_set_af
+                0x000000000800278c       0x58 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                0x000000000800278c                gpio_set_af
  .text.rcc_wait_for_sysclk_status
-                0x0000000008002738       0x48 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
-                0x0000000008002738                rcc_wait_for_sysclk_status
+                0x00000000080027e4       0x48 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+                0x00000000080027e4                rcc_wait_for_sysclk_status
  .text.rcc_osc_on
-                0x0000000008002780       0x70 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
-                0x0000000008002780                rcc_osc_on
+                0x000000000800282c       0x70 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+                0x000000000800282c                rcc_osc_on
  .text.rcc_set_sysclk_source
-                0x00000000080027f0       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
-                0x00000000080027f0                rcc_set_sysclk_source
+                0x000000000800289c       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+                0x000000000800289c                rcc_set_sysclk_source
  .text.rcc_set_main_pll
-                0x0000000008002804       0x28 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
-                0x0000000008002804                rcc_set_main_pll
+                0x00000000080028b0       0x28 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+                0x00000000080028b0                rcc_set_main_pll
  .text.rcc_periph_clock_enable
-                0x000000000800282c       0x1c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
-                0x000000000800282c                rcc_periph_clock_enable
+                0x00000000080028d8       0x1c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+                0x00000000080028d8                rcc_periph_clock_enable
  .text.rng_enable
-                0x0000000008002848       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
-                0x0000000008002848                rng_enable
+                0x00000000080028f4       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+                0x00000000080028f4                rng_enable
  .text.usart_set_baudrate
-                0x000000000800285c       0x4c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x000000000800285c                usart_set_baudrate
+                0x0000000008002908       0x4c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x0000000008002908                usart_set_baudrate
  .text.usart_set_databits
-                0x00000000080028a8       0x12 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028a8                usart_set_databits
+                0x0000000008002954       0x12 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x0000000008002954                usart_set_databits
  .text.usart_set_stopbits
-                0x00000000080028ba        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028ba                usart_set_stopbits
+                0x0000000008002966        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x0000000008002966                usart_set_stopbits
  .text.usart_set_parity
-                0x00000000080028c6        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028c6                usart_set_parity
+                0x0000000008002972        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x0000000008002972                usart_set_parity
  .text.usart_set_mode
-                0x00000000080028d2        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028d2                usart_set_mode
+                0x000000000800297e        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x000000000800297e                usart_set_mode
  .text.usart_set_flow_control
-                0x00000000080028de        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028de                usart_set_flow_control
+                0x000000000800298a        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x000000000800298a                usart_set_flow_control
  .text.usart_enable
-                0x00000000080028ea        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028ea                usart_enable
+                0x0000000008002996        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x0000000008002996                usart_enable
  .text.usart_enable_rx_interrupt
-                0x00000000080028f4        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028f4                usart_enable_rx_interrupt
+                0x00000000080029a0        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x00000000080029a0                usart_enable_rx_interrupt
  .text.usart_enable_tx_interrupt
-                0x00000000080028fe        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x00000000080028fe                usart_enable_tx_interrupt
+                0x00000000080029aa        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x00000000080029aa                usart_enable_tx_interrupt
  .text.usart_disable_tx_interrupt
-                0x0000000008002908        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-                0x0000000008002908                usart_disable_tx_interrupt
+                0x00000000080029b4        0xa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x00000000080029b4                usart_disable_tx_interrupt
  .text.usart_send
-                0x0000000008002912        0x8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
-                0x0000000008002912                usart_send
+                0x00000000080029be        0x8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+                0x00000000080029be                usart_send
  .text.usart_recv
-                0x000000000800291a        0x8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
-                0x000000000800291a                usart_recv
+                0x00000000080029c6        0x8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+                0x00000000080029c6                usart_recv
  .text.blocking_handler
-                0x0000000008002922        0x2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-                0x0000000008002922                i2c4_ev_isr
-                0x0000000008002922                usart3_isr
-                0x0000000008002922                swpmi1_isr
-                0x0000000008002922                tim7_isr
-                0x0000000008002922                dma2d_isr
-                0x0000000008002922                rng_isr
-                0x0000000008002922                adc1_2_isr
-                0x0000000008002922                i2c4_er_isr
-                0x0000000008002922                blocking_handler
-                0x0000000008002922                tsc_isr
-                0x0000000008002922                tim5_isr
-                0x0000000008002922                rtc_wkup_isr
-                0x0000000008002922                otg_fs_isr
-                0x0000000008002922                tim1_up_tim16_isr
-                0x0000000008002922                spi1_isr
-                0x0000000008002922                i2c3_er_isr
-                0x0000000008002922                dma2_channel7_isr
-                0x0000000008002922                exti2_isr
-                0x0000000008002922                dma1_channel6_isr
-                0x0000000008002922                dma1_channel5_isr
-                0x0000000008002922                dma2_channel5_isr
-                0x0000000008002922                tamp_stamp_isr
-                0x0000000008002922                fmc_isr
-                0x0000000008002922                can1_rx1_isr
-                0x0000000008002922                usart1_isr
-                0x0000000008002922                i2c3_ev_isr
-                0x0000000008002922                usage_fault_handler
-                0x0000000008002922                tim8_trg_com_isr
-                0x0000000008002922                can2_rx0_isr
-                0x0000000008002922                tim1_trg_com_tim17_isr
-                0x0000000008002922                can2_rx1_isr
-                0x0000000008002922                can1_sce_isr
-                0x0000000008002922                tim1_cc_isr
-                0x0000000008002922                can1_tx_isr
-                0x0000000008002922                dma1_channel4_isr
-                0x0000000008002922                tim8_brk_isr
-                0x0000000008002922                dma2_channel4_isr
-                0x0000000008002922                lptim1_isr
-                0x0000000008002922                lpuart1_isr
-                0x0000000008002922                can1_rx0_isr
-                0x0000000008002922                rcc_isr
-                0x0000000008002922                flash_isr
-                0x0000000008002922                uart4_isr
-                0x0000000008002922                rtc_alarm_isr
-                0x0000000008002922                exti15_10_isr
-                0x0000000008002922                hard_fault_handler
-                0x0000000008002922                exti1_isr
-                0x0000000008002922                i2c1_ev_isr
-                0x0000000008002922                dma2_channel1_isr
-                0x0000000008002922                dfsdm2_isr
-                0x0000000008002922                spi2_isr
-                0x0000000008002922                aes_isr
-                0x0000000008002922                tim8_up_isr
-                0x0000000008002922                tim6_dacunder_isr
-                0x0000000008002922                dma2_channel6_isr
-                0x0000000008002922                dma2_channel2_isr
-                0x0000000008002922                exti3_isr
-                0x0000000008002922                adc3_isr
-                0x0000000008002922                tim3_isr
-                0x0000000008002922                sai1_isr
-                0x0000000008002922                fpu_isr
-                0x0000000008002922                i2c2_er_isr
-                0x0000000008002922                i2c2_ev_isr
-                0x0000000008002922                uart5_isr
-                0x0000000008002922                dma1_channel1_isr
-                0x0000000008002922                exti4_isr
-                0x0000000008002922                dfsdm3_isr
-                0x0000000008002922                comp_isr
-                0x0000000008002922                mem_manage_handler
-                0x0000000008002922                can2_tx_isr
-                0x0000000008002922                lptim2_isr
-                0x0000000008002922                lcd_isr
-                0x0000000008002922                exti9_5_isr
-                0x0000000008002922                dma2_channel3_isr
-                0x0000000008002922                dfsdm1_isr
-                0x0000000008002922                dma1_channel7_isr
-                0x0000000008002922                pvd_pvm_isr
-                0x0000000008002922                can2_sce_isr
-                0x0000000008002922                tim4_isr
-                0x0000000008002922                sai2_isr
-                0x0000000008002922                dma1_channel2_isr
-                0x0000000008002922                i2c1_er_isr
-                0x0000000008002922                tim8_cc_isr
-                0x0000000008002922                dcmi_isr
-                0x0000000008002922                hash_crs_isr
-                0x0000000008002922                bus_fault_handler
-                0x0000000008002922                wwdg_isr
-                0x0000000008002922                tim1_brk_tim15_isr
-                0x0000000008002922                dma1_channel3_isr
-                0x0000000008002922                sdmmc1_isr
-                0x0000000008002922                spi3_isr
-                0x0000000008002922                quadspi_isr
-                0x0000000008002922                dfsdm0_isr
-                0x0000000008002922                tim2_isr
-                0x0000000008002922                exti0_isr
+                0x00000000080029ce        0x2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x00000000080029ce                i2c4_ev_isr
+                0x00000000080029ce                usart3_isr
+                0x00000000080029ce                swpmi1_isr
+                0x00000000080029ce                tim7_isr
+                0x00000000080029ce                dma2d_isr
+                0x00000000080029ce                rng_isr
+                0x00000000080029ce                adc1_2_isr
+                0x00000000080029ce                i2c4_er_isr
+                0x00000000080029ce                blocking_handler
+                0x00000000080029ce                tsc_isr
+                0x00000000080029ce                tim5_isr
+                0x00000000080029ce                rtc_wkup_isr
+                0x00000000080029ce                otg_fs_isr
+                0x00000000080029ce                tim1_up_tim16_isr
+                0x00000000080029ce                spi1_isr
+                0x00000000080029ce                i2c3_er_isr
+                0x00000000080029ce                dma2_channel7_isr
+                0x00000000080029ce                exti2_isr
+                0x00000000080029ce                dma1_channel6_isr
+                0x00000000080029ce                dma1_channel5_isr
+                0x00000000080029ce                dma2_channel5_isr
+                0x00000000080029ce                tamp_stamp_isr
+                0x00000000080029ce                fmc_isr
+                0x00000000080029ce                can1_rx1_isr
+                0x00000000080029ce                usart1_isr
+                0x00000000080029ce                i2c3_ev_isr
+                0x00000000080029ce                usage_fault_handler
+                0x00000000080029ce                tim8_trg_com_isr
+                0x00000000080029ce                can2_rx0_isr
+                0x00000000080029ce                tim1_trg_com_tim17_isr
+                0x00000000080029ce                can2_rx1_isr
+                0x00000000080029ce                can1_sce_isr
+                0x00000000080029ce                tim1_cc_isr
+                0x00000000080029ce                can1_tx_isr
+                0x00000000080029ce                dma1_channel4_isr
+                0x00000000080029ce                tim8_brk_isr
+                0x00000000080029ce                dma2_channel4_isr
+                0x00000000080029ce                lptim1_isr
+                0x00000000080029ce                lpuart1_isr
+                0x00000000080029ce                can1_rx0_isr
+                0x00000000080029ce                rcc_isr
+                0x00000000080029ce                flash_isr
+                0x00000000080029ce                uart4_isr
+                0x00000000080029ce                rtc_alarm_isr
+                0x00000000080029ce                exti15_10_isr
+                0x00000000080029ce                hard_fault_handler
+                0x00000000080029ce                exti1_isr
+                0x00000000080029ce                i2c1_ev_isr
+                0x00000000080029ce                dma2_channel1_isr
+                0x00000000080029ce                dfsdm2_isr
+                0x00000000080029ce                spi2_isr
+                0x00000000080029ce                aes_isr
+                0x00000000080029ce                tim8_up_isr
+                0x00000000080029ce                tim6_dacunder_isr
+                0x00000000080029ce                dma2_channel6_isr
+                0x00000000080029ce                dma2_channel2_isr
+                0x00000000080029ce                exti3_isr
+                0x00000000080029ce                adc3_isr
+                0x00000000080029ce                tim3_isr
+                0x00000000080029ce                sai1_isr
+                0x00000000080029ce                fpu_isr
+                0x00000000080029ce                i2c2_er_isr
+                0x00000000080029ce                i2c2_ev_isr
+                0x00000000080029ce                uart5_isr
+                0x00000000080029ce                dma1_channel1_isr
+                0x00000000080029ce                exti4_isr
+                0x00000000080029ce                dfsdm3_isr
+                0x00000000080029ce                comp_isr
+                0x00000000080029ce                mem_manage_handler
+                0x00000000080029ce                can2_tx_isr
+                0x00000000080029ce                lptim2_isr
+                0x00000000080029ce                lcd_isr
+                0x00000000080029ce                exti9_5_isr
+                0x00000000080029ce                dma2_channel3_isr
+                0x00000000080029ce                dfsdm1_isr
+                0x00000000080029ce                dma1_channel7_isr
+                0x00000000080029ce                pvd_pvm_isr
+                0x00000000080029ce                can2_sce_isr
+                0x00000000080029ce                tim4_isr
+                0x00000000080029ce                sai2_isr
+                0x00000000080029ce                dma1_channel2_isr
+                0x00000000080029ce                i2c1_er_isr
+                0x00000000080029ce                tim8_cc_isr
+                0x00000000080029ce                dcmi_isr
+                0x00000000080029ce                hash_crs_isr
+                0x00000000080029ce                bus_fault_handler
+                0x00000000080029ce                wwdg_isr
+                0x00000000080029ce                tim1_brk_tim15_isr
+                0x00000000080029ce                dma1_channel3_isr
+                0x00000000080029ce                sdmmc1_isr
+                0x00000000080029ce                spi3_isr
+                0x00000000080029ce                quadspi_isr
+                0x00000000080029ce                dfsdm0_isr
+                0x00000000080029ce                tim2_isr
+                0x00000000080029ce                exti0_isr
  .text.null_handler
-                0x0000000008002924        0x2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-                0x0000000008002924                null_handler
-                0x0000000008002924                sv_call_handler
-                0x0000000008002924                pend_sv_handler
-                0x0000000008002924                debug_monitor_handler
-                0x0000000008002924                nmi_handler
- *fill*         0x0000000008002926        0x2 
+                0x00000000080029d0        0x2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x00000000080029d0                null_handler
+                0x00000000080029d0                sv_call_handler
+                0x00000000080029d0                pend_sv_handler
+                0x00000000080029d0                debug_monitor_handler
+                0x00000000080029d0                nmi_handler
+ *fill*         0x00000000080029d2        0x2 
  .text.reset_handler
-                0x0000000008002928       0xa0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-                0x0000000008002928                reset_handler
+                0x00000000080029d4       0xa0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x00000000080029d4                reset_handler
  .text.systick_set_reload
-                0x00000000080029c8        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
-                0x00000000080029c8                systick_set_reload
+                0x0000000008002a74        0xc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+                0x0000000008002a74                systick_set_reload
  .text.systick_set_clocksource
-                0x00000000080029d4       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
-                0x00000000080029d4                systick_set_clocksource
+                0x0000000008002a80       0x14 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+                0x0000000008002a80                systick_set_clocksource
  .text.systick_interrupt_enable
-                0x00000000080029e8        0xe /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
-                0x00000000080029e8                systick_interrupt_enable
+                0x0000000008002a94        0xe /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+                0x0000000008002a94                systick_interrupt_enable
  .text.systick_counter_enable
-                0x00000000080029f6        0xe /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
-                0x00000000080029f6                systick_counter_enable
+                0x0000000008002aa2        0xe /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+                0x0000000008002aa2                systick_counter_enable
  .text.nvic_enable_irq
-                0x0000000008002a04       0x1c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
-                0x0000000008002a04                nvic_enable_irq
-                0x0000000008002a20                . = ALIGN (0x4)
+                0x0000000008002ab0       0x1c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+                0x0000000008002ab0                nvic_enable_irq
+                0x0000000008002acc                . = ALIGN (0x4)
  *(.rodata*)
  .rodata.consumer1.str1.4
-                0x0000000008002a20       0x20 Build/queue.o
+                0x0000000008002acc       0x28 Build/barrier.o
  .rodata.consumer2.str1.4
-                0x0000000008002a40       0x20 Build/queue.o
+                0x0000000008002af4       0x1b Build/barrier.o
+ *fill*         0x0000000008002b0f        0x1 
  .rodata.consumer3.str1.4
-                0x0000000008002a60       0x20 Build/queue.o
+                0x0000000008002b10       0x1b Build/barrier.o
+ *fill*         0x0000000008002b2b        0x1 
  .rodata.consumer4.str1.4
-                0x0000000008002a80       0x20 Build/queue.o
+                0x0000000008002b2c       0x1b Build/barrier.o
+ *fill*         0x0000000008002b47        0x1 
  .rodata.consumer5.str1.4
-                0x0000000008002aa0       0x20 Build/queue.o
+                0x0000000008002b48       0x1b Build/barrier.o
+ *fill*         0x0000000008002b63        0x1 
  .rodata.consumer6.str1.4
-                0x0000000008002ac0       0x20 Build/queue.o
- .rodata.producer1.str1.4
-                0x0000000008002ae0       0x20 Build/queue.o
- .rodata.producer2.str1.4
-                0x0000000008002b00       0x20 Build/queue.o
- .rodata.producer3.str1.4
-                0x0000000008002b20       0x20 Build/queue.o
- .rodata.producer4.str1.4
-                0x0000000008002b40       0x20 Build/queue.o
- .rodata.producer5.str1.4
-                0x0000000008002b60       0x20 Build/queue.o
- .rodata.producer6.str1.4
-                0x0000000008002b80       0x20 Build/queue.o
- .rodata.product_report.str1.4
-                0x0000000008002ba0       0x20 Build/queue.o
- .rodata.Synchronize.str1.4
-                0x0000000008002bc0       0x85 Build/queue.o
-                0x0000000008002c48                . = ALIGN (0x4)
- *fill*         0x0000000008002c45        0x3 
+                0x0000000008002b64       0x1b Build/barrier.o
+ *fill*         0x0000000008002b7f        0x1 
+ .rodata.Initialize.str1.4
+                0x0000000008002b80       0x52 Build/barrier.o
+                                         0x56 (size before relaxing)
+                0x0000000008002bd4                . = ALIGN (0x4)
+ *fill*         0x0000000008002bd2        0x2 
 
-.glue_7         0x0000000008002c48        0x0
- .glue_7        0x0000000008002c48        0x0 linker stubs
+.glue_7         0x0000000008002bd4        0x0
+ .glue_7        0x0000000008002bd4        0x0 linker stubs
 
-.glue_7t        0x0000000008002c48        0x0
- .glue_7t       0x0000000008002c48        0x0 linker stubs
+.glue_7t        0x0000000008002bd4        0x0
+ .glue_7t       0x0000000008002bd4        0x0 linker stubs
 
-.vfp11_veneer   0x0000000008002c48        0x0
- .vfp11_veneer  0x0000000008002c48        0x0 linker stubs
+.vfp11_veneer   0x0000000008002bd4        0x0
+ .vfp11_veneer  0x0000000008002bd4        0x0 linker stubs
 
-.v4_bx          0x0000000008002c48        0x0
- .v4_bx         0x0000000008002c48        0x0 linker stubs
+.v4_bx          0x0000000008002bd4        0x0
+ .v4_bx         0x0000000008002bd4        0x0 linker stubs
 
-.iplt           0x0000000008002c48        0x0
- .iplt          0x0000000008002c48        0x0 Build/queue.o
+.iplt           0x0000000008002bd4        0x0
+ .iplt          0x0000000008002bd4        0x0 Build/barrier.o
 
-.rel.dyn        0x0000000008002c48        0x0
- .rel.iplt      0x0000000008002c48        0x0 Build/queue.o
+.rel.dyn        0x0000000008002bd4        0x0
+ .rel.iplt      0x0000000008002bd4        0x0 Build/barrier.o
 
-.preinit_array  0x0000000008002c48        0x0
-                0x0000000008002c48                . = ALIGN (0x4)
-                0x0000000008002c48                __preinit_array_start = .
+.preinit_array  0x0000000008002bd4        0x0
+                0x0000000008002bd4                . = ALIGN (0x4)
+                0x0000000008002bd4                __preinit_array_start = .
  *(.preinit_array)
-                0x0000000008002c48                __preinit_array_end = .
+                0x0000000008002bd4                __preinit_array_end = .
 
-.init_array     0x0000000008002c48        0x0
-                0x0000000008002c48                . = ALIGN (0x4)
-                0x0000000008002c48                __init_array_start = .
+.init_array     0x0000000008002bd4        0x0
+                0x0000000008002bd4                . = ALIGN (0x4)
+                0x0000000008002bd4                __init_array_start = .
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
-                0x0000000008002c48                __init_array_end = .
+                0x0000000008002bd4                __init_array_end = .
 
-.fini_array     0x0000000008002c48        0x0
-                0x0000000008002c48                . = ALIGN (0x4)
-                0x0000000008002c48                __fini_array_start = .
+.fini_array     0x0000000008002bd4        0x0
+                0x0000000008002bd4                . = ALIGN (0x4)
+                0x0000000008002bd4                __fini_array_start = .
  *(.fini_array)
  *(SORT_BY_NAME(.fini_array.*))
-                0x0000000008002c48                __fini_array_end = .
+                0x0000000008002bd4                __fini_array_end = .
 
 .ARM.extab
  *(.ARM.extab*)
 
-.ARM.exidx      0x0000000008002c48        0x0
-                0x0000000008002c48                __exidx_start = .
+.ARM.exidx      0x0000000008002bd4        0x0
+                0x0000000008002bd4                __exidx_start = .
  *(.ARM.exidx*)
-                0x0000000008002c48                __exidx_end = .
-                0x0000000008002c48                . = ALIGN (0x4)
-                0x0000000008002c48                _etext = .
+                0x0000000008002bd4                __exidx_end = .
+                0x0000000008002bd4                . = ALIGN (0x4)
+                0x0000000008002bd4                _etext = .
 
 .noinit
  *(.noinit*)
-                0x0000000008002c48                . = ALIGN (0x4)
+                0x0000000008002bd4                . = ALIGN (0x4)
 
-.data           0x0000000020000000       0x10 load address 0x0000000008002c48
+.data           0x0000000020000000       0x10 load address 0x0000000008002bd4
                 0x0000000020000000                _data = .
  *(.data*)
+ .data.u8_max_threads
+                0x0000000020000000        0x1 Build/barrier.o
+                0x0000000020000000                u8_max_threads
  .data.u8_numConsumers.1
-                0x0000000020000000        0x1 Build/queue.o
- .data.u8_numProducers.2
-                0x0000000020000001        0x1 Build/queue.o
+                0x0000000020000001        0x1 Build/barrier.o
  *fill*         0x0000000020000002        0x2 
  .data.rcc_ahb_frequency
                 0x0000000020000004        0x4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
@@ -1228,372 +1204,349 @@ END GROUP
  *(.ramtext*)
                 0x0000000020000010                . = ALIGN (0x4)
                 0x0000000020000010                _edata = .
-                0x0000000008002c48                _data_loadaddr = LOADADDR (.data)
+                0x0000000008002bd4                _data_loadaddr = LOADADDR (.data)
 
-.igot.plt       0x0000000020000010        0x0 load address 0x0000000008002c58
- .igot.plt      0x0000000020000010        0x0 Build/queue.o
+.igot.plt       0x0000000020000010        0x0 load address 0x0000000008002be4
+ .igot.plt      0x0000000020000010        0x0 Build/barrier.o
 
-.bss            0x0000000020000010     0x197c load address 0x0000000008002c58
+.bss            0x0000000020000010     0x1978 load address 0x0000000008002be4
  *(.bss*)
- .bss.CONSUMER1
-                0x0000000020000010        0x1 Build/queue.o
-                0x0000000020000010                CONSUMER1
- .bss.CONSUMER2
-                0x0000000020000011        0x1 Build/queue.o
-                0x0000000020000011                CONSUMER2
- .bss.CONSUMER3
-                0x0000000020000012        0x1 Build/queue.o
-                0x0000000020000012                CONSUMER3
- .bss.CONSUMER4
-                0x0000000020000013        0x1 Build/queue.o
-                0x0000000020000013                CONSUMER4
- .bss.CONSUMER5
-                0x0000000020000014        0x1 Build/queue.o
-                0x0000000020000014                CONSUMER5
- .bss.CONSUMER6
-                0x0000000020000015        0x1 Build/queue.o
-                0x0000000020000015                CONSUMER6
- .bss.PRODUCER1
-                0x0000000020000016        0x1 Build/queue.o
-                0x0000000020000016                PRODUCER1
- .bss.PRODUCER2
-                0x0000000020000017        0x1 Build/queue.o
-                0x0000000020000017                PRODUCER2
- .bss.PRODUCER3
-                0x0000000020000018        0x1 Build/queue.o
-                0x0000000020000018                PRODUCER3
- .bss.PRODUCER4
-                0x0000000020000019        0x1 Build/queue.o
-                0x0000000020000019                PRODUCER4
- .bss.PRODUCER5
-                0x000000002000001a        0x1 Build/queue.o
-                0x000000002000001a                PRODUCER5
- .bss.PRODUCER6
-                0x000000002000001b        0x1 Build/queue.o
-                0x000000002000001b                PRODUCER6
- .bss.product   0x000000002000001c        0x2 Build/queue.o
-                0x000000002000001c                product
+ .bss.Consumer1
+                0x0000000020000010        0x2 Build/barrier.o
+                0x0000000020000010                Consumer1
+ *fill*         0x0000000020000012        0x2 
+ .bss.Consumer2
+                0x0000000020000014        0x2 Build/barrier.o
+                0x0000000020000014                Consumer2
+ *fill*         0x0000000020000016        0x2 
+ .bss.Consumer3
+                0x0000000020000018        0x2 Build/barrier.o
+                0x0000000020000018                Consumer3
+ *fill*         0x000000002000001a        0x2 
+ .bss.Consumer4
+                0x000000002000001c        0x2 Build/barrier.o
+                0x000000002000001c                Consumer4
  *fill*         0x000000002000001e        0x2 
+ .bss.Consumer5
+                0x0000000020000020        0x2 Build/barrier.o
+                0x0000000020000020                Consumer5
+ *fill*         0x0000000020000022        0x2 
+ .bss.Consumer6
+                0x0000000020000024        0x2 Build/barrier.o
+                0x0000000020000024                Consumer6
+ *fill*         0x0000000020000026        0x2 
  .bss.th_child.0
-                0x0000000020000020        0x4 Build/queue.o
- .bss.u8_numConsumers.3
-                0x0000000020000024        0x1 Build/queue.o
- .bss.u8_numOfProducts
-                0x0000000020000025        0x1 Build/queue.o
-                0x0000000020000025                u8_numOfProducts
- .bss.u8_numProducers.4
-                0x0000000020000026        0x1 Build/queue.o
- *fill*         0x0000000020000027        0x1 
+                0x0000000020000028        0x4 Build/barrier.o
+ .bss.threads   0x000000002000002c        0x2 Build/barrier.o
+                0x000000002000002c                threads
+ .bss.u8_passed_programs
+                0x000000002000002e        0x1 Build/barrier.o
+                0x000000002000002e                u8_passed_programs
+ *fill*         0x000000002000002f        0x1 
  .bss.__astChildTaskPool
-                0x0000000020000028      0x300 Build/esos.o
-                0x0000000020000028                __astChildTaskPool
+                0x0000000020000030      0x300 Build/esos.o
+                0x0000000020000030                __astChildTaskPool
  .bss.__astCircularBuffers
-                0x0000000020000328      0x180 Build/esos.o
-                0x0000000020000328                __astCircularBuffers
+                0x0000000020000330      0x180 Build/esos.o
+                0x0000000020000330                __astCircularBuffers
  .bss.__astMailbox
-                0x00000000200004a8      0x100 Build/esos.o
-                0x00000000200004a8                __astMailbox
+                0x00000000200004b0      0x100 Build/esos.o
+                0x00000000200004b0                __astMailbox
  .bss.__astTmrSvcs
-                0x00000000200005a8       0xc0 Build/esos.o
-                0x00000000200005a8                __astTmrSvcs
+                0x00000000200005b0       0xc0 Build/esos.o
+                0x00000000200005b0                __astTmrSvcs
  .bss.__astUserTaskPool
-                0x0000000020000668      0x300 Build/esos.o
-                0x0000000020000668                __astUserTaskPool
+                0x0000000020000670      0x300 Build/esos.o
+                0x0000000020000670                __astUserTaskPool
  .bss.__au8UserTaskStructIndex
-                0x0000000020000968       0x20 Build/esos.o
-                0x0000000020000968                __au8UserTaskStructIndex
+                0x0000000020000970       0x20 Build/esos.o
+                0x0000000020000970                __au8UserTaskStructIndex
  .bss.__au8_MBData
-                0x0000000020000988      0xf00 Build/esos.o
-                0x0000000020000988                __au8_MBData
+                0x0000000020000990      0xf00 Build/esos.o
+                0x0000000020000990                __au8_MBData
  .bss.__esos_u32SystemFlags
-                0x0000000020001888        0x4 Build/esos.o
-                0x0000000020001888                __esos_u32SystemFlags
+                0x0000000020001890        0x4 Build/esos.o
+                0x0000000020001890                __esos_u32SystemFlags
  .bss.__esos_u32TmrActiveFlags
-                0x000000002000188c        0x4 Build/esos.o
-                0x000000002000188c                __esos_u32TmrActiveFlags
+                0x0000000020001894        0x4 Build/esos.o
+                0x0000000020001894                __esos_u32TmrActiveFlags
  .bss.__esos_u8TmrSvcsRegistered
-                0x0000000020001890        0x1 Build/esos.o
-                0x0000000020001890                __esos_u8TmrSvcsRegistered
- *fill*         0x0000000020001891        0x1 
+                0x0000000020001898        0x1 Build/esos.o
+                0x0000000020001898                __esos_u8TmrSvcsRegistered
+ *fill*         0x0000000020001899        0x1 
  .bss.__u16NumTasksEverCreated
-                0x0000000020001892        0x2 Build/esos.o
-                0x0000000020001892                __u16NumTasksEverCreated
+                0x000000002000189a        0x2 Build/esos.o
+                0x000000002000189a                __u16NumTasksEverCreated
  .bss.__u8ChildTasksRegistered
-                0x0000000020001894        0x1 Build/esos.o
-                0x0000000020001894                __u8ChildTasksRegistered
+                0x000000002000189c        0x1 Build/esos.o
+                0x000000002000189c                __u8ChildTasksRegistered
  .bss.__u8UserTasksRegistered
-                0x0000000020001895        0x1 Build/esos.o
-                0x0000000020001895                __u8UserTasksRegistered
- *fill*         0x0000000020001896        0x2 
+                0x000000002000189d        0x1 Build/esos.o
+                0x000000002000189d                __u8UserTasksRegistered
+ *fill*         0x000000002000189e        0x2 
  .bss.__u32_esos_PRNG_Seed
-                0x0000000020001898        0x4 Build/esos_utils.o
-                0x0000000020001898                __u32_esos_PRNG_Seed
+                0x00000000200018a0        0x4 Build/esos_utils.o
+                0x00000000200018a0                __u32_esos_PRNG_Seed
  .bss.__esos_comm_rx_buff
-                0x000000002000189c       0x40 Build/esos_comm.o
-                0x000000002000189c                __esos_comm_rx_buff
+                0x00000000200018a4       0x40 Build/esos_comm.o
+                0x00000000200018a4                __esos_comm_rx_buff
  .bss.__esos_comm_tx_buff
-                0x00000000200018dc       0x40 Build/esos_comm.o
-                0x00000000200018dc                __esos_comm_tx_buff
+                0x00000000200018e4       0x40 Build/esos_comm.o
+                0x00000000200018e4                __esos_comm_tx_buff
  .bss.__pst_CB_Rx
-                0x000000002000191c        0x4 Build/esos_comm.o
-                0x000000002000191c                __pst_CB_Rx
+                0x0000000020001924        0x4 Build/esos_comm.o
+                0x0000000020001924                __pst_CB_Rx
  .bss.__pst_CB_Tx
-                0x0000000020001920        0x4 Build/esos_comm.o
-                0x0000000020001920                __pst_CB_Tx
+                0x0000000020001928        0x4 Build/esos_comm.o
+                0x0000000020001928                __pst_CB_Tx
  .bss.__stChildTaskRx
-                0x0000000020001924       0x18 Build/esos_comm.o
-                0x0000000020001924                __stChildTaskRx
+                0x000000002000192c       0x18 Build/esos_comm.o
+                0x000000002000192c                __stChildTaskRx
  .bss.__stChildTaskTx
-                0x000000002000193c       0x18 Build/esos_comm.o
-                0x000000002000193c                __stChildTaskTx
+                0x0000000020001944       0x18 Build/esos_comm.o
+                0x0000000020001944                __stChildTaskTx
  .bss.__st_CB_Rx
-                0x0000000020001954        0xc Build/esos_comm.o
-                0x0000000020001954                __st_CB_Rx
+                0x000000002000195c        0xc Build/esos_comm.o
+                0x000000002000195c                __st_CB_Rx
  .bss.__st_CB_Tx
-                0x0000000020001960        0xc Build/esos_comm.o
-                0x0000000020001960                __st_CB_Tx
- .bss.au8_String.8
-                0x000000002000196c        0x5 Build/esos_comm.o
- *fill*         0x0000000020001971        0x3 
+                0x0000000020001968        0xc Build/esos_comm.o
+                0x0000000020001968                __st_CB_Tx
  .bss.pau8_LocalPtr.2
                 0x0000000020001974        0x4 Build/esos_comm.o
  .bss.psz_local.4
                 0x0000000020001978        0x4 Build/esos_comm.o
  .bss.u8_LocalSize.3
                 0x000000002000197c        0x1 Build/esos_comm.o
- .bss.u8_c.7    0x000000002000197d        0x1 Build/esos_comm.o
- .bss.u8_digit.9
-                0x000000002000197e        0x1 Build/esos_comm.o
- .bss.u8_i.1    0x000000002000197f        0x1 Build/esos_comm.o
+ .bss.u8_i.1    0x000000002000197d        0x1 Build/esos_comm.o
  .bss.u8_localChar.11
-                0x0000000020001980        0x1 Build/esos_comm.o
- *fill*         0x0000000020001981        0x3 
+                0x000000002000197e        0x1 Build/esos_comm.o
+ *fill*         0x000000002000197f        0x1 
  .bss.esos_tick_count
-                0x0000000020001984        0x4 Build/esos_stm32l4_tick.o
-                0x0000000020001984                esos_tick_count
+                0x0000000020001980        0x4 Build/esos_stm32l4_tick.o
+                0x0000000020001980                esos_tick_count
  .bss.u8_uartRXbuf
-                0x0000000020001988        0x1 Build/esos_stm32l4_rs232.o
-                0x0000000020001988                u8_uartRXbuf
+                0x0000000020001984        0x1 Build/esos_stm32l4_rs232.o
+                0x0000000020001984                u8_uartRXbuf
  .bss.u8_uartTXbuf
-                0x0000000020001989        0x1 Build/esos_stm32l4_rs232.o
-                0x0000000020001989                u8_uartTXbuf
+                0x0000000020001985        0x1 Build/esos_stm32l4_rs232.o
+                0x0000000020001985                u8_uartTXbuf
  *(COMMON)
-                0x000000002000198c                . = ALIGN (0x4)
- *fill*         0x000000002000198a        0x2 
-                0x000000002000198c                _ebss = .
+                0x0000000020001988                . = ALIGN (0x4)
+ *fill*         0x0000000020001986        0x2 
+                0x0000000020001988                _ebss = .
 
 /DISCARD/
  *(.eh_frame)
-                0x000000002000198c                . = ALIGN (0x4)
-                0x000000002000198c                end = .
+                0x0000000020001988                . = ALIGN (0x4)
+                0x0000000020001988                end = .
                 0x0000000020028000                PROVIDE (_stack = (ORIGIN (ram) + LENGTH (ram)))
-OUTPUT(Build/queue.elf elf32-littlearm)
+OUTPUT(Build/barrier.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x0000000000000000     0x6989
- .debug_info    0x0000000000000000      0xdca Build/queue.o
- .debug_info    0x0000000000000dca      0xa5b Build/esos.o
- .debug_info    0x0000000000001825      0x491 Build/esos_cb.o
- .debug_info    0x0000000000001cb6      0x2f2 Build/esos_utils.o
- .debug_info    0x0000000000001fa8      0x9b6 Build/esos_comm.o
- .debug_info    0x000000000000295e      0x52c Build/esos_mail.o
- .debug_info    0x0000000000002e8a      0x73b Build/esos_stm32l4_tick.o
- .debug_info    0x00000000000035c5      0x129 Build/esos_stm32l4_utils.o
- .debug_info    0x00000000000036ee      0x92b Build/esos_stm32l4_rs232.o
- .debug_info    0x0000000000004019       0xfc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
- .debug_info    0x0000000000004115       0xf4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
- .debug_info    0x0000000000004209      0x266 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
- .debug_info    0x000000000000446f      0x233 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
- .debug_info    0x00000000000046a2      0x7c7 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
- .debug_info    0x0000000000004e69      0x847 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
- .debug_info    0x00000000000056b0      0x1a4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
- .debug_info    0x0000000000005854      0x5c4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
- .debug_info    0x0000000000005e18      0x3ae /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
- .debug_info    0x00000000000061c6      0x2f2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
- .debug_info    0x00000000000064b8      0x280 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
- .debug_info    0x0000000000006738      0x251 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+.debug_info     0x0000000000000000     0x65b1
+ .debug_info    0x0000000000000000      0x9f2 Build/barrier.o
+ .debug_info    0x00000000000009f2      0xa5b Build/esos.o
+ .debug_info    0x000000000000144d      0x491 Build/esos_cb.o
+ .debug_info    0x00000000000018de      0x2f2 Build/esos_utils.o
+ .debug_info    0x0000000000001bd0      0x9b6 Build/esos_comm.o
+ .debug_info    0x0000000000002586      0x52c Build/esos_mail.o
+ .debug_info    0x0000000000002ab2      0x73b Build/esos_stm32l4_tick.o
+ .debug_info    0x00000000000031ed      0x129 Build/esos_stm32l4_utils.o
+ .debug_info    0x0000000000003316      0x92b Build/esos_stm32l4_rs232.o
+ .debug_info    0x0000000000003c41       0xfc /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+ .debug_info    0x0000000000003d3d       0xf4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+ .debug_info    0x0000000000003e31      0x266 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_info    0x0000000000004097      0x233 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_info    0x00000000000042ca      0x7c7 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+ .debug_info    0x0000000000004a91      0x847 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_info    0x00000000000052d8      0x1a4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+ .debug_info    0x000000000000547c      0x5c4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+ .debug_info    0x0000000000005a40      0x3ae /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+ .debug_info    0x0000000000005dee      0x2f2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_info    0x00000000000060e0      0x280 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+ .debug_info    0x0000000000006360      0x251 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
-.debug_abbrev   0x0000000000000000     0x1c21
- .debug_abbrev  0x0000000000000000      0x21b Build/queue.o
- .debug_abbrev  0x000000000000021b      0x2c9 Build/esos.o
- .debug_abbrev  0x00000000000004e4      0x12d Build/esos_cb.o
- .debug_abbrev  0x0000000000000611      0x158 Build/esos_utils.o
- .debug_abbrev  0x0000000000000769      0x202 Build/esos_comm.o
- .debug_abbrev  0x000000000000096b      0x17f Build/esos_mail.o
- .debug_abbrev  0x0000000000000aea      0x150 Build/esos_stm32l4_tick.o
- .debug_abbrev  0x0000000000000c3a       0xc1 Build/esos_stm32l4_utils.o
- .debug_abbrev  0x0000000000000cfb      0x1b5 Build/esos_stm32l4_rs232.o
- .debug_abbrev  0x0000000000000eb0       0x9a /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
- .debug_abbrev  0x0000000000000f4a       0x56 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
- .debug_abbrev  0x0000000000000fa0      0x116 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
- .debug_abbrev  0x00000000000010b6       0xbf /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
- .debug_abbrev  0x0000000000001175      0x251 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
- .debug_abbrev  0x00000000000013c6      0x177 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
- .debug_abbrev  0x000000000000153d      0x12e /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
- .debug_abbrev  0x000000000000166b      0x129 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
- .debug_abbrev  0x0000000000001794      0x128 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
- .debug_abbrev  0x00000000000018bc      0x15b /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
- .debug_abbrev  0x0000000000001a17      0x155 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
- .debug_abbrev  0x0000000000001b6c       0xb5 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+.debug_abbrev   0x0000000000000000     0x1c10
+ .debug_abbrev  0x0000000000000000      0x20a Build/barrier.o
+ .debug_abbrev  0x000000000000020a      0x2c9 Build/esos.o
+ .debug_abbrev  0x00000000000004d3      0x12d Build/esos_cb.o
+ .debug_abbrev  0x0000000000000600      0x158 Build/esos_utils.o
+ .debug_abbrev  0x0000000000000758      0x202 Build/esos_comm.o
+ .debug_abbrev  0x000000000000095a      0x17f Build/esos_mail.o
+ .debug_abbrev  0x0000000000000ad9      0x150 Build/esos_stm32l4_tick.o
+ .debug_abbrev  0x0000000000000c29       0xc1 Build/esos_stm32l4_utils.o
+ .debug_abbrev  0x0000000000000cea      0x1b5 Build/esos_stm32l4_rs232.o
+ .debug_abbrev  0x0000000000000e9f       0x9a /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+ .debug_abbrev  0x0000000000000f39       0x56 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+ .debug_abbrev  0x0000000000000f8f      0x116 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_abbrev  0x00000000000010a5       0xbf /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_abbrev  0x0000000000001164      0x251 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+ .debug_abbrev  0x00000000000013b5      0x177 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_abbrev  0x000000000000152c      0x12e /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+ .debug_abbrev  0x000000000000165a      0x129 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+ .debug_abbrev  0x0000000000001783      0x128 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+ .debug_abbrev  0x00000000000018ab      0x15b /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_abbrev  0x0000000000001a06      0x155 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+ .debug_abbrev  0x0000000000001b5b       0xb5 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
-.debug_loc      0x0000000000000000     0x34fd
- .debug_loc     0x0000000000000000      0x723 Build/queue.o
- .debug_loc     0x0000000000000723      0xa8c Build/esos.o
- .debug_loc     0x00000000000011af      0x3bf Build/esos_cb.o
- .debug_loc     0x000000000000156e      0x24d Build/esos_utils.o
- .debug_loc     0x00000000000017bb      0x72c Build/esos_comm.o
- .debug_loc     0x0000000000001ee7      0x20d Build/esos_mail.o
- .debug_loc     0x00000000000020f4       0x58 Build/esos_stm32l4_tick.o
- .debug_loc     0x000000000000214c       0x40 Build/esos_stm32l4_utils.o
- .debug_loc     0x000000000000218c       0xb2 Build/esos_stm32l4_rs232.o
- .debug_loc     0x000000000000223e       0x47 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
- .debug_loc     0x0000000000002285       0xbe /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
- .debug_loc     0x0000000000002343      0x14f /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
- .debug_loc     0x0000000000002492      0x7c7 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
- .debug_loc     0x0000000000002c59      0x120 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
- .debug_loc     0x0000000000002d79       0xbb /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
- .debug_loc     0x0000000000002e34      0x1e2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
- .debug_loc     0x0000000000003016       0xe0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
- .debug_loc     0x00000000000030f6      0x128 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
- .debug_loc     0x000000000000321e      0x192 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
- .debug_loc     0x00000000000033b0      0x14d /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+.debug_loc      0x0000000000000000     0x313b
+ .debug_loc     0x0000000000000000      0x361 Build/barrier.o
+ .debug_loc     0x0000000000000361      0xa8c Build/esos.o
+ .debug_loc     0x0000000000000ded      0x3bf Build/esos_cb.o
+ .debug_loc     0x00000000000011ac      0x24d Build/esos_utils.o
+ .debug_loc     0x00000000000013f9      0x72c Build/esos_comm.o
+ .debug_loc     0x0000000000001b25      0x20d Build/esos_mail.o
+ .debug_loc     0x0000000000001d32       0x58 Build/esos_stm32l4_tick.o
+ .debug_loc     0x0000000000001d8a       0x40 Build/esos_stm32l4_utils.o
+ .debug_loc     0x0000000000001dca       0xb2 Build/esos_stm32l4_rs232.o
+ .debug_loc     0x0000000000001e7c       0x47 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+ .debug_loc     0x0000000000001ec3       0xbe /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_loc     0x0000000000001f81      0x14f /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_loc     0x00000000000020d0      0x7c7 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+ .debug_loc     0x0000000000002897      0x120 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_loc     0x00000000000029b7       0xbb /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+ .debug_loc     0x0000000000002a72      0x1e2 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+ .debug_loc     0x0000000000002c54       0xe0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+ .debug_loc     0x0000000000002d34      0x128 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_loc     0x0000000000002e5c      0x192 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+ .debug_loc     0x0000000000002fee      0x14d /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
-.debug_aranges  0x0000000000000000      0x8b8
+.debug_aranges  0x0000000000000000      0x880
  .debug_aranges
-                0x0000000000000000       0xb0 Build/queue.o
+                0x0000000000000000       0x78 Build/barrier.o
  .debug_aranges
-                0x00000000000000b0       0x88 Build/esos.o
+                0x0000000000000078       0x88 Build/esos.o
  .debug_aranges
-                0x0000000000000138       0x68 Build/esos_cb.o
+                0x0000000000000100       0x68 Build/esos_cb.o
  .debug_aranges
-                0x00000000000001a0       0x50 Build/esos_utils.o
+                0x0000000000000168       0x50 Build/esos_utils.o
  .debug_aranges
-                0x00000000000001f0       0x88 Build/esos_comm.o
+                0x00000000000001b8       0x88 Build/esos_comm.o
  .debug_aranges
-                0x0000000000000278       0x30 Build/esos_mail.o
+                0x0000000000000240       0x30 Build/esos_mail.o
  .debug_aranges
-                0x00000000000002a8       0x40 Build/esos_stm32l4_tick.o
+                0x0000000000000270       0x40 Build/esos_stm32l4_tick.o
  .debug_aranges
-                0x00000000000002e8       0x30 Build/esos_stm32l4_utils.o
+                0x00000000000002b0       0x30 Build/esos_stm32l4_utils.o
  .debug_aranges
-                0x0000000000000318       0x58 Build/esos_stm32l4_rs232.o
+                0x00000000000002e0       0x58 Build/esos_stm32l4_rs232.o
  .debug_aranges
-                0x0000000000000370       0x38 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+                0x0000000000000338       0x38 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
  .debug_aranges
-                0x00000000000003a8       0x48 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+                0x0000000000000370       0x48 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
  .debug_aranges
-                0x00000000000003f0       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+                0x00000000000003b8       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
  .debug_aranges
-                0x0000000000000440       0x30 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+                0x0000000000000408       0x30 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
  .debug_aranges
-                0x0000000000000470      0x118 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+                0x0000000000000438      0x118 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
  .debug_aranges
-                0x0000000000000588       0x60 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+                0x0000000000000550       0x60 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
  .debug_aranges
-                0x00000000000005e8       0x48 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+                0x00000000000005b0       0x48 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
  .debug_aranges
-                0x0000000000000630       0xd8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+                0x00000000000005f8       0xd8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
  .debug_aranges
-                0x0000000000000708       0xa8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+                0x00000000000006d0       0xa8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
  .debug_aranges
-                0x00000000000007b0       0x30 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+                0x0000000000000778       0x30 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
  .debug_aranges
-                0x00000000000007e0       0x78 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+                0x00000000000007a8       0x78 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
  .debug_aranges
-                0x0000000000000858       0x60 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+                0x0000000000000820       0x60 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
-.debug_ranges   0x0000000000000000      0x7f8
- .debug_ranges  0x0000000000000000       0xd0 Build/queue.o
- .debug_ranges  0x00000000000000d0       0x78 Build/esos.o
- .debug_ranges  0x0000000000000148       0x58 Build/esos_cb.o
- .debug_ranges  0x00000000000001a0       0x40 Build/esos_utils.o
- .debug_ranges  0x00000000000001e0       0x78 Build/esos_comm.o
- .debug_ranges  0x0000000000000258       0x20 Build/esos_mail.o
- .debug_ranges  0x0000000000000278       0x30 Build/esos_stm32l4_tick.o
- .debug_ranges  0x00000000000002a8       0x20 Build/esos_stm32l4_utils.o
- .debug_ranges  0x00000000000002c8       0x48 Build/esos_stm32l4_rs232.o
- .debug_ranges  0x0000000000000310       0x28 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
- .debug_ranges  0x0000000000000338       0x38 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
- .debug_ranges  0x0000000000000370       0x40 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
- .debug_ranges  0x00000000000003b0       0x20 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
- .debug_ranges  0x00000000000003d0      0x138 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
- .debug_ranges  0x0000000000000508       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
- .debug_ranges  0x0000000000000558       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
- .debug_ranges  0x00000000000005a8       0xc8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
- .debug_ranges  0x0000000000000670       0x98 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
- .debug_ranges  0x0000000000000708       0x20 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
- .debug_ranges  0x0000000000000728       0x80 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
- .debug_ranges  0x00000000000007a8       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+.debug_ranges   0x0000000000000000      0x7a8
+ .debug_ranges  0x0000000000000000       0x80 Build/barrier.o
+ .debug_ranges  0x0000000000000080       0x78 Build/esos.o
+ .debug_ranges  0x00000000000000f8       0x58 Build/esos_cb.o
+ .debug_ranges  0x0000000000000150       0x40 Build/esos_utils.o
+ .debug_ranges  0x0000000000000190       0x78 Build/esos_comm.o
+ .debug_ranges  0x0000000000000208       0x20 Build/esos_mail.o
+ .debug_ranges  0x0000000000000228       0x30 Build/esos_stm32l4_tick.o
+ .debug_ranges  0x0000000000000258       0x20 Build/esos_stm32l4_utils.o
+ .debug_ranges  0x0000000000000278       0x48 Build/esos_stm32l4_rs232.o
+ .debug_ranges  0x00000000000002c0       0x28 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+ .debug_ranges  0x00000000000002e8       0x38 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+ .debug_ranges  0x0000000000000320       0x40 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_ranges  0x0000000000000360       0x20 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_ranges  0x0000000000000380      0x138 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+ .debug_ranges  0x00000000000004b8       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_ranges  0x0000000000000508       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+ .debug_ranges  0x0000000000000558       0xc8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+ .debug_ranges  0x0000000000000620       0x98 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+ .debug_ranges  0x00000000000006b8       0x20 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_ranges  0x00000000000006d8       0x80 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+ .debug_ranges  0x0000000000000758       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
-.debug_line     0x0000000000000000     0x8a4d
- .debug_line    0x0000000000000000     0x1cff Build/queue.o
- .debug_line    0x0000000000001cff      0x96f Build/esos.o
- .debug_line    0x000000000000266e      0x549 Build/esos_cb.o
- .debug_line    0x0000000000002bb7      0x37b Build/esos_utils.o
- .debug_line    0x0000000000002f32      0xaa8 Build/esos_comm.o
- .debug_line    0x00000000000039da      0x4bc Build/esos_mail.o
- .debug_line    0x0000000000003e96      0x40c Build/esos_stm32l4_tick.o
- .debug_line    0x00000000000042a2      0x29b Build/esos_stm32l4_utils.o
- .debug_line    0x000000000000453d      0x52d Build/esos_stm32l4_rs232.o
- .debug_line    0x0000000000004a6a      0x3fa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
- .debug_line    0x0000000000004e64      0x413 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
- .debug_line    0x0000000000005277      0x470 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
- .debug_line    0x00000000000056e7      0x558 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
- .debug_line    0x0000000000005c3f      0xadb /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
- .debug_line    0x000000000000671a      0x4aa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
- .debug_line    0x0000000000006bc4      0x49a /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
- .debug_line    0x000000000000705e      0x6ef /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
- .debug_line    0x000000000000774d      0x593 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
- .debug_line    0x0000000000007ce0      0x4ec /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
- .debug_line    0x00000000000081cc      0x438 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
- .debug_line    0x0000000000008604      0x449 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+.debug_line     0x0000000000000000     0x8a07
+ .debug_line    0x0000000000000000     0x1cb9 Build/barrier.o
+ .debug_line    0x0000000000001cb9      0x96f Build/esos.o
+ .debug_line    0x0000000000002628      0x549 Build/esos_cb.o
+ .debug_line    0x0000000000002b71      0x37b Build/esos_utils.o
+ .debug_line    0x0000000000002eec      0xaa8 Build/esos_comm.o
+ .debug_line    0x0000000000003994      0x4bc Build/esos_mail.o
+ .debug_line    0x0000000000003e50      0x40c Build/esos_stm32l4_tick.o
+ .debug_line    0x000000000000425c      0x29b Build/esos_stm32l4_utils.o
+ .debug_line    0x00000000000044f7      0x52d Build/esos_stm32l4_rs232.o
+ .debug_line    0x0000000000004a24      0x3fa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+ .debug_line    0x0000000000004e1e      0x413 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+ .debug_line    0x0000000000005231      0x470 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_line    0x00000000000056a1      0x558 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_line    0x0000000000005bf9      0xadb /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+ .debug_line    0x00000000000066d4      0x4aa /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_line    0x0000000000006b7e      0x49a /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+ .debug_line    0x0000000000007018      0x6ef /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+ .debug_line    0x0000000000007707      0x593 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+ .debug_line    0x0000000000007c9a      0x4ec /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_line    0x0000000000008186      0x438 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+ .debug_line    0x00000000000085be      0x449 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
-.debug_str      0x0000000000000000    0x11c4d
- .debug_str     0x0000000000000000      0x4d4 Build/queue.o
-                                        0x593 (size before relaxing)
- .debug_str     0x00000000000004d4      0x3a7 Build/esos.o
+.debug_str      0x0000000000000000    0x11bb8
+ .debug_str     0x0000000000000000      0x424 Build/barrier.o
+                                        0x4e5 (size before relaxing)
+ .debug_str     0x0000000000000424      0x3a7 Build/esos.o
                                         0x6a4 (size before relaxing)
- .debug_str     0x000000000000087b      0x169 Build/esos_cb.o
+ .debug_str     0x00000000000007cb      0x169 Build/esos_cb.o
                                         0x362 (size before relaxing)
- .debug_str     0x00000000000009e4      0x109 Build/esos_utils.o
+ .debug_str     0x0000000000000934      0x109 Build/esos_utils.o
                                         0x2c8 (size before relaxing)
- .debug_str     0x0000000000000aed      0x21c Build/esos_comm.o
+ .debug_str     0x0000000000000a3d      0x237 Build/esos_comm.o
                                         0x56a (size before relaxing)
- .debug_str     0x0000000000000d09      0x128 Build/esos_mail.o
+ .debug_str     0x0000000000000c74      0x128 Build/esos_mail.o
                                         0x478 (size before relaxing)
- .debug_str     0x0000000000000e31      0x675 Build/esos_stm32l4_tick.o
+ .debug_str     0x0000000000000d9c      0x675 Build/esos_stm32l4_tick.o
                                         0x869 (size before relaxing)
- .debug_str     0x00000000000014a6       0x6c Build/esos_stm32l4_utils.o
+ .debug_str     0x0000000000001411       0x6c Build/esos_stm32l4_utils.o
                                         0x245 (size before relaxing)
- .debug_str     0x0000000000001512      0x21a Build/esos_stm32l4_rs232.o
+ .debug_str     0x000000000000147d      0x21a Build/esos_stm32l4_rs232.o
                                         0x93d (size before relaxing)
- .debug_str     0x000000000000172c     0x5cf7 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+ .debug_str     0x0000000000001697     0x5cf7 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
                                        0x5e89 (size before relaxing)
- .debug_str     0x0000000000007423       0x71 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+ .debug_str     0x000000000000738e       0x71 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
                                        0x5eab (size before relaxing)
- .debug_str     0x0000000000007494     0x1664 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_str     0x00000000000073ff     0x1664 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
                                        0x6578 (size before relaxing)
- .debug_str     0x0000000000008af8       0x61 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_str     0x0000000000008a63       0x61 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
                                        0x659a (size before relaxing)
- .debug_str     0x0000000000008b59     0x3b3e /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+ .debug_str     0x0000000000008ac4     0x3b3e /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
                                        0x8b31 (size before relaxing)
- .debug_str     0x000000000000c697      0x3c3 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_str     0x000000000000c602      0x3c3 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
                                        0x8f8d (size before relaxing)
- .debug_str     0x000000000000ca5a      0x19b /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+ .debug_str     0x000000000000c9c5      0x19b /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
                                        0x5090 (size before relaxing)
- .debug_str     0x000000000000cbf5     0x1e91 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+ .debug_str     0x000000000000cb60     0x1e91 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
                                        0xa679 (size before relaxing)
- .debug_str     0x000000000000ea86      0x190 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+ .debug_str     0x000000000000e9f1      0x190 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
                                        0x6dbf (size before relaxing)
- .debug_str     0x000000000000ec16     0x2c88 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_str     0x000000000000eb81     0x2c88 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
                                        0x6dd6 (size before relaxing)
- .debug_str     0x000000000001189e      0x2eb /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+ .debug_str     0x0000000000011809      0x2eb /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
                                        0x44b8 (size before relaxing)
- .debug_str     0x0000000000011b89       0xc4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+ .debug_str     0x0000000000011af4       0xc4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
                                        0x60a8 (size before relaxing)
 
 .comment        0x0000000000000000       0x49
- .comment       0x0000000000000000       0x49 Build/queue.o
+ .comment       0x0000000000000000       0x49 Build/barrier.o
                                          0x4a (size before relaxing)
  .comment       0x0000000000000049       0x4a Build/esos.o
  .comment       0x0000000000000049       0x4a Build/esos_cb.o
@@ -1619,7 +1572,7 @@ LOAD linker stubs
 .ARM.attributes
                 0x0000000000000000       0x34
  .ARM.attributes
-                0x0000000000000000       0x34 Build/queue.o
+                0x0000000000000000       0x34 Build/barrier.o
  .ARM.attributes
                 0x0000000000000034       0x34 Build/esos.o
  .ARM.attributes
@@ -1661,28 +1614,28 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000000000000410       0x34 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
-.debug_frame    0x0000000000000000     0x11f8
- .debug_frame   0x0000000000000000      0x204 Build/queue.o
- .debug_frame   0x0000000000000204      0x154 Build/esos.o
- .debug_frame   0x0000000000000358       0xec Build/esos_cb.o
- .debug_frame   0x0000000000000444       0x88 Build/esos_utils.o
- .debug_frame   0x00000000000004cc      0x170 Build/esos_comm.o
- .debug_frame   0x000000000000063c       0x68 Build/esos_mail.o
- .debug_frame   0x00000000000006a4       0x78 Build/esos_stm32l4_tick.o
- .debug_frame   0x000000000000071c       0x50 Build/esos_stm32l4_utils.o
- .debug_frame   0x000000000000076c       0xb4 Build/esos_stm32l4_rs232.o
- .debug_frame   0x0000000000000820       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
- .debug_frame   0x0000000000000870       0x70 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
- .debug_frame   0x00000000000008e0       0x80 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
- .debug_frame   0x0000000000000960       0x70 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
- .debug_frame   0x00000000000009d0      0x228 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
- .debug_frame   0x0000000000000bf8       0xe0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
- .debug_frame   0x0000000000000cd8       0x78 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
- .debug_frame   0x0000000000000d50      0x1b4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
- .debug_frame   0x0000000000000f04      0x130 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
- .debug_frame   0x0000000000001034       0x4c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
- .debug_frame   0x0000000000001080       0xd8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
- .debug_frame   0x0000000000001158       0xa0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
+.debug_frame    0x0000000000000000     0x1134
+ .debug_frame   0x0000000000000000      0x140 Build/barrier.o
+ .debug_frame   0x0000000000000140      0x154 Build/esos.o
+ .debug_frame   0x0000000000000294       0xec Build/esos_cb.o
+ .debug_frame   0x0000000000000380       0x88 Build/esos_utils.o
+ .debug_frame   0x0000000000000408      0x170 Build/esos_comm.o
+ .debug_frame   0x0000000000000578       0x68 Build/esos_mail.o
+ .debug_frame   0x00000000000005e0       0x78 Build/esos_stm32l4_tick.o
+ .debug_frame   0x0000000000000658       0x50 Build/esos_stm32l4_utils.o
+ .debug_frame   0x00000000000006a8       0xb4 Build/esos_stm32l4_rs232.o
+ .debug_frame   0x000000000000075c       0x50 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
+ .debug_frame   0x00000000000007ac       0x70 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_idcache.o)
+ .debug_frame   0x000000000000081c       0x80 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
+ .debug_frame   0x000000000000089c       0x70 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
+ .debug_frame   0x000000000000090c      0x228 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
+ .debug_frame   0x0000000000000b34       0xe0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
+ .debug_frame   0x0000000000000c14       0x78 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rng_common_v1.o)
+ .debug_frame   0x0000000000000c8c      0x1b4 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
+ .debug_frame   0x0000000000000e40      0x130 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
+ .debug_frame   0x0000000000000f70       0x4c /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+ .debug_frame   0x0000000000000fbc       0xd8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
+ .debug_frame   0x0000000000001094       0xa0 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 
 .debug_macro    0x0000000000000000     0x433f
  .debug_macro   0x0000000000000000       0xc8 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(flash_common_all.o)
@@ -1731,21 +1684,15 @@ LOAD linker stubs
 Cross Reference Table
 
 Symbol                                            File
-CONSUMER1                                         Build/queue.o
-CONSUMER2                                         Build/queue.o
-CONSUMER3                                         Build/queue.o
-CONSUMER4                                         Build/queue.o
-CONSUMER5                                         Build/queue.o
-CONSUMER6                                         Build/queue.o
+Consumer1                                         Build/barrier.o
+Consumer2                                         Build/barrier.o
+Consumer3                                         Build/barrier.o
+Consumer4                                         Build/barrier.o
+Consumer5                                         Build/barrier.o
+Consumer6                                         Build/barrier.o
 Default_Handler                                   Build/esos_stm32l4_tick.o
 Error_Handler                                     Build/esos_stm32l4_tick.o
-PRODUCER1                                         Build/queue.o
-PRODUCER2                                         Build/queue.o
-PRODUCER3                                         Build/queue.o
-PRODUCER4                                         Build/queue.o
-PRODUCER5                                         Build/queue.o
-PRODUCER6                                         Build/queue.o
-Synchronize                                       Build/queue.o
+Initialize                                        Build/barrier.o
 __astChildTaskPool                                Build/esos.o
 __astCircularBuffers                              Build/esos.o
 __astMailbox                                      Build/esos.o
@@ -1782,13 +1729,12 @@ __esos_InitCommSystem                             Build/esos_comm.o
 __esos_InitMailbox                                Build/esos_mail.o
                                                   Build/esos.o
 __esos_OutChar                                    Build/esos_comm.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __esos_OutCharBuffer                              Build/esos_comm.o
 __esos_OutString                                  Build/esos_comm.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __esos_OutUint32AsHexString                       Build/esos_comm.o
 __esos_OutUint8AsDecString                        Build/esos_comm.o
-                                                  Build/queue.o
 __esos_OutUint8AsHexString                        Build/esos_comm.o
 __esos_ReadMailMessage                            Build/esos_mail.o
 __esos_SendMailMessage                            Build/esos_mail.o
@@ -1796,16 +1742,16 @@ __esos_comm_rx_buff                               Build/esos_comm.o
 __esos_comm_tx_buff                               Build/esos_comm.o
 __esos_configUART1                                Build/esos_stm32l4_rs232.o
 __esos_getBuffer                                  Build/esos_comm.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __esos_getString                                  Build/esos_comm.o
 __esos_get_PRNG_RandomUint32                      Build/esos_utils.o
                                                   Build/esos_stm32l4_utils.o
 __esos_hasTickDurationPassed                      Build/esos.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __esos_hw_GetSystemTickCount                      Build/esos_stm32l4_tick.o
                                                   Build/esos_mail.o
                                                   Build/esos.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __esos_hw_InitCommSystem                          Build/esos_stm32l4_rs232.o
                                                   Build/esos_comm.o
 __esos_hw_InitSystemTick                          Build/esos_stm32l4_tick.o
@@ -1825,7 +1771,7 @@ __esos_tmrSvcsExecute                             Build/esos.o
 __esos_u32FNVHash                                 Build/esos_utils.o
 __esos_u32SystemFlags                             Build/esos.o
                                                   Build/esos_stm32l4_rs232.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __esos_u32TmrActiveFlags                          Build/esos.o
 __esos_u32UserFlags                               Build/esos.o
 __esos_u8TmrSvcsRegistered                        Build/esos.o
@@ -1845,9 +1791,9 @@ __pst_CB_Rx                                       Build/esos_comm.o
 __pst_CB_Tx                                       Build/esos_comm.o
                                                   Build/esos_stm32l4_rs232.o
 __stChildTaskRx                                   Build/esos_comm.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __stChildTaskTx                                   Build/esos_comm.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 __st_CB_Rx                                        Build/esos_comm.o
 __st_CB_Tx                                        Build/esos_comm.o
 __u16NumTasksEverCreated                          Build/esos.o
@@ -1878,14 +1824,14 @@ cm3_assert_failed                                 /home/ryan/Documents/Gitlab/em
                                                   /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
 cm3_assert_failed_verbose                         /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(assert.o)
 comp_isr                                          /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-consumer1                                         Build/queue.o
-consumer2                                         Build/queue.o
-consumer3                                         Build/queue.o
-consumer4                                         Build/queue.o
-consumer5                                         Build/queue.o
-consumer6                                         Build/queue.o
+consumer1                                         Build/barrier.o
+consumer2                                         Build/barrier.o
+consumer3                                         Build/barrier.o
+consumer4                                         Build/barrier.o
+consumer5                                         Build/barrier.o
+consumer6                                         Build/barrier.o
 count                                             Build/esos_stm32l4_tick.o
-create_consumer_producers                         Build/queue.o
+create_consumer_producers                         Build/barrier.o
 dcmi_isr                                          /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 debug_monitor_handler                             /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 dfsdm0_isr                                        /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
@@ -1911,16 +1857,16 @@ esos_ChangeTimerPeriod                            Build/esos.o
 esos_GetCommSystemMaxInDataLen                    Build/esos_stm32l4_rs232.o
 esos_GetCommSystemMaxOutDataLen                   Build/esos_stm32l4_rs232.o
 esos_GetFreeChildTaskStruct                       Build/esos.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 esos_GetMaxNumberTasks                            Build/esos.o
 esos_GetRandomUint32                              Build/esos_utils.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 esos_GetTaskHandle                                Build/esos.o
 esos_GetTaskHandleFromID                          Build/esos.o
                                                   Build/esos_mail.o
 esos_GetTimerHandle                               Build/esos.o
 esos_RegisterTask                                 Build/esos.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 esos_RegisterTimer                                Build/esos.o
 esos_UnregisterTask                               Build/esos.o
 esos_UnregisterTimer                              Build/esos.o
@@ -1957,7 +1903,7 @@ gpio_clear                                        /home/ryan/Documents/Gitlab/em
 gpio_get                                          /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
 gpio_mode_setup                                   /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
                                                   Build/esos_stm32l4_rs232.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 gpio_port_config_lock                             /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
 gpio_port_read                                    /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
 gpio_port_write                                   /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
@@ -1967,7 +1913,7 @@ gpio_set_af                                       /home/ryan/Documents/Gitlab/em
 gpio_set_output_options                           /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_f0234.o)
                                                   Build/esos_stm32l4_rs232.o
 gpio_toggle                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(gpio_common_all.o)
-                                                  Build/queue.o
+                                                  Build/barrier.o
 hard_fault_handler                                /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 hash_crs_isr                                      /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 i2c1_er_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
@@ -1978,10 +1924,10 @@ i2c3_er_isr                                       /home/ryan/Documents/Gitlab/em
 i2c3_ev_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 i2c4_er_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 i2c4_ev_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-init_hw                                           Build/queue.o
-init_sw                                           Build/queue.o
+init_hw                                           Build/barrier.o
+init_sw                                           Build/barrier.o
 lcd_isr                                           /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-led_heartbeat                                     Build/queue.o
+led_heartbeat                                     Build/barrier.o
 lptim1_isr                                        /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 lptim2_isr                                        /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 lpuart1_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
@@ -2002,14 +1948,6 @@ nvic_set_pending_irq                              /home/ryan/Documents/Gitlab/em
 nvic_set_priority                                 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(nvic.o)
 otg_fs_isr                                        /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 pend_sv_handler                                   /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-producer1                                         Build/queue.o
-producer2                                         Build/queue.o
-producer3                                         Build/queue.o
-producer4                                         Build/queue.o
-producer5                                         Build/queue.o
-producer6                                         Build/queue.o
-product                                           Build/queue.o
-product_report                                    Build/queue.o
 pvd_pvm_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 quadspi_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 rcc_ahb_frequency                                 /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc.o)
@@ -2047,7 +1985,7 @@ rcc_periph_clock_disable                          /home/ryan/Documents/Gitlab/em
 rcc_periph_clock_enable                           /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
                                                   Build/esos_stm32l4_rs232.o
                                                   Build/esos_stm32l4_tick.o
-                                                  Build/queue.o
+                                                  Build/barrier.o
 rcc_periph_reset_hold                             /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
 rcc_periph_reset_pulse                            /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
 rcc_periph_reset_release                          /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(rcc_common_all.o)
@@ -2110,6 +2048,7 @@ systick_set_frequency                             /home/ryan/Documents/Gitlab/em
 systick_set_reload                                /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(systick.o)
                                                   Build/esos_stm32l4_tick.o
 tamp_stamp_isr                                    /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
+threads                                           Build/barrier.o
 tim1_brk_tim15_isr                                /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 tim1_cc_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 tim1_trg_com_tim17_isr                            /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
@@ -2125,7 +2064,8 @@ tim8_cc_isr                                       /home/ryan/Documents/Gitlab/em
 tim8_trg_com_isr                                  /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 tim8_up_isr                                       /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 tsc_isr                                           /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
-u8_numOfProducts                                  Build/queue.o
+u8_max_threads                                    Build/barrier.o
+u8_passed_programs                                Build/barrier.o
 u8_uartRXbuf                                      Build/esos_stm32l4_rs232.o
 u8_uartTXbuf                                      Build/esos_stm32l4_rs232.o
 uart4_isr                                         /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
@@ -2192,7 +2132,7 @@ usart_wait_recv_ready                             /home/ryan/Documents/Gitlab/em
                                                   /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
 usart_wait_send_ready                             /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_v2.o)
                                                   /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(usart_common_all.o)
-user_init                                         Build/queue.o
+user_init                                         Build/barrier.o
                                                   Build/esos.o
 vector_table                                      /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)
 wwdg_isr                                          /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/lib/libopencm3_stm32l4.a(vector.o)

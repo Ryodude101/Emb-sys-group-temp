@@ -22,19 +22,6 @@
     #define LED2_Pin GPIO5  //Pin number for PA5, the LED2 pin, can be found in nucleo board 64 user manual
     #define LED2_GPIO_Port GPIOA  //PORTA address, can be found in libopencm3 docs
 
-    /*#define PRODUCER1 ESOS_USER_FLAG_0
-    #define PRODUCER2 ESOS_USER_FLAG_1
-    #define PRODUCER3 ESOS_USER_FLAG_2
-    #define PRODUCER4 ESOS_USER_FLAG_3
-    #define PRODUCER5 ESOS_USER_FLAG_4
-    #define PRODUCER6 ESOS_USER_FLAG_5
-    #define CONSUMER1 ESOS_USER_FLAG_6
-    #define CONSUMER2 ESOS_USER_FLAG_7
-    #define CONSUMER3 ESOS_USER_FLAG_8
-    #define CONSUMER4 ESOS_USER_FLAG_9
-    #define CONSUMER5 ESOS_USER_FLAG_10
-    #define CONSUMER6 ESOS_USER_FLAG_11*/
-
     uint8_t u8_max_threads = 3;
     uint8_t u8_passed_programs = 0;
 

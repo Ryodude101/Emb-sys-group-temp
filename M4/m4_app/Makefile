@@ -51,9 +51,9 @@ ifdef CPATH
   GCC_PATH = /home/tyler/gcc-arm-none-eabi-10.3-2021.10/bin
 else
   # Your paths here
-  ESOS_DIR = /home/bdreed43/Documents/gcc/esos32
-  CM3_DIR = /home/bdreed43/Documents/gcc/libopencm3
-  GCC_PATH = /home/bdreed43/Documents/gcc/gcc-arm-none-eabi-10.3-2021.10/bin
+  ESOS_DIR = /home/callie/esos32
+  CM3_DIR = /home/callie/libopencm3
+  GCC_PATH = /home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/bin
 endif
 
 

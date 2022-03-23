@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccEkjIhY.s 			page 1
+ARM GAS  /tmp/cc3hiuDd.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -27,75 +27,75 @@ ARM GAS  /tmp/ccEkjIhY.s 			page 1
   24              		.thumb_func
   26              	__esos_hw_PRNG_u32:
   27              	.LFB0:
-  28              		.file 1 "/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c"
-   1:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /*
-   2:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * "Copyright (c) 2019 J. W. Bruce ("AUTHOR(S)")"
-   3:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * All rights reserved.
-   4:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * (J. W. Bruce, jwbruce_AT_tntech.edu, Tennessee Tech University)
-   5:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
-   6:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * Permission to use, copy, modify, and distribute this software and its
-   7:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * documentation for any purpose, without fee, and without written agreement is
-   8:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * hereby granted, provided that the above copyright notice, the following
-   9:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * two paragraphs and the authors appear in all copies of this software.
-  10:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
-  11:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * IN NO EVENT SHALL THE "AUTHORS" BE LIABLE TO ANY PARTY FOR
-  12:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
-  13:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE "AUTHORS"
-  14:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  15:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
-  16:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * THE "AUTHORS" SPECIFICALLY DISCLAIMS ANY WARRANTIES,
-  17:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
-  18:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
-  19:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * ON AN "AS IS" BASIS, AND THE "AUTHORS" HAS NO OBLIGATION TO
-  20:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
-  21:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
-  22:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * Please maintain this header in its entirety when copying/modifying
-  23:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * these files.
-  24:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
-  25:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
-  26:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  */
-  27:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  28:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // Documentation for this file. If the \file tag isn't present,
-  29:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // this file won't be documented.
-  30:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /** \file
-ARM GAS  /tmp/ccEkjIhY.s 			page 2
+  28              		.file 1 "/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c"
+   1:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /*
+   2:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * "Copyright (c) 2019 J. W. Bruce ("AUTHOR(S)")"
+   3:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * All rights reserved.
+   4:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * (J. W. Bruce, jwbruce_AT_tntech.edu, Tennessee Tech University)
+   5:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
+   6:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * Permission to use, copy, modify, and distribute this software and its
+   7:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * documentation for any purpose, without fee, and without written agreement is
+   8:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * hereby granted, provided that the above copyright notice, the following
+   9:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * two paragraphs and the authors appear in all copies of this software.
+  10:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
+  11:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * IN NO EVENT SHALL THE "AUTHORS" BE LIABLE TO ANY PARTY FOR
+  12:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
+  13:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE "AUTHORS"
+  14:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  15:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
+  16:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * THE "AUTHORS" SPECIFICALLY DISCLAIMS ANY WARRANTIES,
+  17:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+  18:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
+  19:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * ON AN "AS IS" BASIS, AND THE "AUTHORS" HAS NO OBLIGATION TO
+  20:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
+  21:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
+  22:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * Please maintain this header in its entirety when copying/modifying
+  23:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * these files.
+  24:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
+  25:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  *
+  26:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  */
+  27:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  28:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // Documentation for this file. If the \file tag isn't present,
+  29:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // this file won't be documented.
+  30:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /** \file
+ARM GAS  /tmp/cc3hiuDd.s 			page 2
 
 
-  31:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief STM32L4xx hardware support for various ESOS utilities
-  32:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * random numbers, CRC, hashes, etc.  executed in hardware, *if available*
-  33:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** */
-  34:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  35:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // Include any HW-specific header files to pick up the HW register
-  36:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** //  definitions, macros, etc.
-  37:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #include    "esos_stm32l4.h"
-  38:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #include	"esos_stm32l4_utils.h"
-  39:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  40:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // VARIABLES
-  41:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #ifdef STM32L452xx
-  42:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** //RNG_HandleTypeDef hrng;
-  43:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
-  44:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  45:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /***************************************************
-  46:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * 
-  47:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * HARDWARE-specific ESOS utility functions
-  48:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * 
-  49:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * *************************************************/
-  50:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  51:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /* ******************************************************
-  52:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief HW pseudo-random number generation...
-  53:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
-  54:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \note All hardware must implement this function.
-  55:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
-  56:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying hardware has PRNG on-board, it can
-  57:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * implement it here and return the uint32 "random" number.
-  58:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
-  59:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying HW does not have PRNG on-board, it
-  60:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * can call the hidden ESOS function for software RNG
-  61:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *         uint32 __esos_get_PRNG_RandomUint32(void)
-  62:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * and return that value.
-  63:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
-  64:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** ********************************************************/
-  65:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** uint32_t   __esos_hw_PRNG_u32(void) {
+  31:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief STM32L4xx hardware support for various ESOS utilities
+  32:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * random numbers, CRC, hashes, etc.  executed in hardware, *if available*
+  33:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** */
+  34:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  35:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // Include any HW-specific header files to pick up the HW register
+  36:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** //  definitions, macros, etc.
+  37:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #include    "esos_stm32l4.h"
+  38:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #include	"esos_stm32l4_utils.h"
+  39:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  40:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // VARIABLES
+  41:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #ifdef STM32L452xx
+  42:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** //RNG_HandleTypeDef hrng;
+  43:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
+  44:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  45:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /***************************************************
+  46:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * 
+  47:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * HARDWARE-specific ESOS utility functions
+  48:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * 
+  49:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****  * *************************************************/
+  50:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  51:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /* ******************************************************
+  52:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief HW pseudo-random number generation...
+  53:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
+  54:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \note All hardware must implement this function.
+  55:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
+  56:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying hardware has PRNG on-board, it can
+  57:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * implement it here and return the uint32 "random" number.
+  58:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
+  59:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying HW does not have PRNG on-board, it
+  60:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * can call the hidden ESOS function for software RNG
+  61:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *         uint32 __esos_get_PRNG_RandomUint32(void)
+  62:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * and return that value.
+  63:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
+  64:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** ********************************************************/
+  65:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** uint32_t   __esos_hw_PRNG_u32(void) {
   29              		.loc 1 65 37 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
@@ -105,31 +105,31 @@ ARM GAS  /tmp/ccEkjIhY.s 			page 1
   35              		.cfi_def_cfa_offset 8
   36              		.cfi_offset 3, -8
   37              		.cfi_offset 14, -4
-  66:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** //#ifdef STM32L452xx
-  67:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #if 0
-  68:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   uint32_t		u32_randomNum;
-  69:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   
-  70:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   #if 1
-  71:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	rng_get_random(&u32_randomNum);
-  72:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   #else
-  73:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     // not sure why this doesn't work...... should be
-  74:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     // faster than above as we will read last RNG and then
-  75:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     //  kick off the RNG hardware to make a new RNG before
-  76:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     //  our next read.   Need to study HAL more to figure this out.
-  77:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  78:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   #endif
-ARM GAS  /tmp/ccEkjIhY.s 			page 3
+  66:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** //#ifdef STM32L452xx
+  67:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #if 0
+  68:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   uint32_t		u32_randomNum;
+  69:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   
+  70:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   #if 1
+  71:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	rng_get_random(&u32_randomNum);
+  72:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   #else
+  73:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     // not sure why this doesn't work...... should be
+  74:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     // faster than above as we will read last RNG and then
+  75:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     //  kick off the RNG hardware to make a new RNG before
+  76:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     //  our next read.   Need to study HAL more to figure this out.
+  77:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  78:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   #endif
+ARM GAS  /tmp/cc3hiuDd.s 			page 3
 
 
-  79:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   return u32_randomNum;
-  80:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #else
-  81:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   return ( __esos_get_PRNG_RandomUint32() );
+  79:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   return u32_randomNum;
+  80:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #else
+  81:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   return ( __esos_get_PRNG_RandomUint32() );
   38              		.loc 1 81 3 view .LVU1
   39              		.loc 1 81 12 is_stmt 0 view .LVU2
   40 0002 FFF7FEFF 		bl	__esos_get_PRNG_RandomUint32
   41              	.LVL0:
-  82:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
-  83:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** } // end __esos_hw_PRNG_u32(void)
+  82:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
+  83:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** } // end __esos_hw_PRNG_u32(void)
   42              		.loc 1 83 1 view .LVU3
   43 0006 08BD     		pop	{r3, pc}
   44              		.cfi_endproc
@@ -142,21 +142,21 @@ ARM GAS  /tmp/ccEkjIhY.s 			page 1
   52              		.thumb_func
   54              	__esos_hw_config_PRNG:
   55              	.LFB1:
-  84:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  85:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
-  86:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /* *******************************************************
-  87:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief user-provided function to config the HW RNG
-  88:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
-  89:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \note All hardware must implement this function.
-  90:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
-  91:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying hardware has PRNG on-board, HW-specific code
-  92:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * for intializing the PRNG hardware goes here.
-  93:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
-  94:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying HW does not have PRNG on-board, this
-  95:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * function should just return.
-  96:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
-  97:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *******************************************************  */
-  98:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** void   __esos_hw_config_PRNG(void) {
+  84:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  85:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+  86:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /* *******************************************************
+  87:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief user-provided function to config the HW RNG
+  88:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
+  89:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \note All hardware must implement this function.
+  90:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
+  91:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying hardware has PRNG on-board, HW-specific code
+  92:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * for intializing the PRNG hardware goes here.
+  93:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
+  94:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying HW does not have PRNG on-board, this
+  95:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * function should just return.
+  96:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
+  97:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *******************************************************  */
+  98:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** void   __esos_hw_config_PRNG(void) {
   56              		.loc 1 98 36 is_stmt 1 view -0
   57              		.cfi_startproc
   58              		@ args = 0, pretend = 0, frame = 0
@@ -166,28 +166,28 @@ ARM GAS  /tmp/ccEkjIhY.s 			page 1
   62              		.cfi_def_cfa_offset 8
   63              		.cfi_offset 3, -8
   64              		.cfi_offset 14, -4
-  99:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #ifdef STM32L452xx	
- 100:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   
- 101:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	//HAL VERSION
- 102:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	/*hrng.Instance = RNG;
- 103:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   if (HAL_RNG_Init(&hrng) != HAL_OK)
- 104:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   {
- 105:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     Error_Handler();
- 106:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   }*/
- 107:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	
- 108:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	///////////////
- 109:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	//CM3 VERSION//
- 110:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	///////////////
-ARM GAS  /tmp/ccEkjIhY.s 			page 4
+  99:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #ifdef STM32L452xx	
+ 100:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   
+ 101:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	//HAL VERSION
+ 102:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	/*hrng.Instance = RNG;
+ 103:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   if (HAL_RNG_Init(&hrng) != HAL_OK)
+ 104:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   {
+ 105:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****     Error_Handler();
+ 106:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   }*/
+ 107:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	
+ 108:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	///////////////
+ 109:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	//CM3 VERSION//
+ 110:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	///////////////
+ARM GAS  /tmp/cc3hiuDd.s 			page 4
 
 
- 111:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	rng_enable();
+ 111:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	rng_enable();
   65              		.loc 1 111 2 view .LVU5
   66 0002 FFF7FEFF 		bl	rng_enable
   67              	.LVL1:
- 112:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	
- 113:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
- 114:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** }  // end __esos_hw_config_PRNG(void)
+ 112:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 	
+ 113:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
+ 114:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** }  // end __esos_hw_config_PRNG(void)
   68              		.loc 1 114 1 is_stmt 0 view .LVU6
   69 0006 08BD     		pop	{r3, pc}
   70              		.cfi_endproc
@@ -201,59 +201,59 @@ ARM GAS  /tmp/ccEkjIhY.s 			page 1
   80              	__esos_hw_set_PRNG_Seed:
   81              	.LVL2:
   82              	.LFB2:
- 115:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
- 116:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /* *******************************************************
- 117:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief seed the HW pseudo-random number generator...
- 118:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
- 119:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \note All hardware must implement this function.
- 120:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
- 121:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying hardware has PRNG on-board, it can
- 122:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * do what it needs to "seed" the PRNG.
- 123:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
- 124:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying HW does not have PRNG on-board, it
- 125:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * can call the hidden ESOS function for seeding the
- 126:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * ESOS software RNG function
- 127:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *         void __esos_setSWRNGU32Seed(uint32)
- 128:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
- 129:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *  \sa __esos_get_PRNG_RandomUint32
- 130:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
- 131:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** ********************************************************** */
- 132:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** void __esos_hw_set_PRNG_Seed(uint32_t u32_seed) {
+ 115:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** 
+ 116:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** /* *******************************************************
+ 117:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \brief seed the HW pseudo-random number generator...
+ 118:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
+ 119:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * \note All hardware must implement this function.
+ 120:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
+ 121:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying hardware has PRNG on-board, it can
+ 122:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * do what it needs to "seed" the PRNG.
+ 123:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * 
+ 124:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * If the underlying HW does not have PRNG on-board, it
+ 125:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * can call the hidden ESOS function for seeding the
+ 126:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** * ESOS software RNG function
+ 127:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *         void __esos_setSWRNGU32Seed(uint32)
+ 128:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
+ 129:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *  \sa __esos_get_PRNG_RandomUint32
+ 130:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** *
+ 131:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** ********************************************************** */
+ 132:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** void __esos_hw_set_PRNG_Seed(uint32_t u32_seed) {
   83              		.loc 1 132 49 is_stmt 1 view -0
   84              		.cfi_startproc
   85              		@ args = 0, pretend = 0, frame = 0
   86              		@ frame_needed = 0, uses_anonymous_args = 0
   87              		@ link register save eliminated.
- 133:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #ifndef STM32L452xx
- 134:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // RNG hardware doesn't let us set the seed
- 135:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****    __esos_set_PRNG_U32Seed(u32_seed);
- 136:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
- 137:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   
- 138:/home/bdreed43/Documents/gcc/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** } // end __esos_hw_setPRNG_Seed(uint32)
+ 133:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #ifndef STM32L452xx
+ 134:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** // RNG hardware doesn't let us set the seed
+ 135:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****    __esos_set_PRNG_U32Seed(u32_seed);
+ 136:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** #endif
+ 137:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c ****   
+ 138:/home/callie/esos32/src/stm32l4_ocm3/esos_stm32l4_utils.c **** } // end __esos_hw_setPRNG_Seed(uint32)
   88              		.loc 1 138 1 view .LVU8
   89 0000 7047     		bx	lr
   90              		.cfi_endproc
   91              	.LFE2:
   93              		.text
   94              	.Letext0:
-  95              		.file 2 "/home/bdreed43/Documents/gcc/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine
-  96              		.file 3 "/home/bdreed43/Documents/gcc/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_st
-ARM GAS  /tmp/ccEkjIhY.s 			page 5
+  95              		.file 2 "/home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_defa
+  96              		.file 3 "/home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h
+ARM GAS  /tmp/cc3hiuDd.s 			page 5
 
 
-  97              		.file 4 "/home/bdreed43/Documents/gcc/libopencm3/include/libopencm3/stm32/common/rng_common_v1.h"
-  98              		.file 5 "/home/bdreed43/Documents/gcc/esos32/include/esos_utils.h"
-ARM GAS  /tmp/ccEkjIhY.s 			page 6
+  97              		.file 4 "/home/callie/libopencm3/include/libopencm3/stm32/common/rng_common_v1.h"
+  98              		.file 5 "/home/callie/esos32/include/esos_utils.h"
+ARM GAS  /tmp/cc3hiuDd.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 esos_stm32l4_utils.c
-     /tmp/ccEkjIhY.s:20     .text.__esos_hw_PRNG_u32:0000000000000000 $t
-     /tmp/ccEkjIhY.s:26     .text.__esos_hw_PRNG_u32:0000000000000000 __esos_hw_PRNG_u32
-     /tmp/ccEkjIhY.s:48     .text.__esos_hw_config_PRNG:0000000000000000 $t
-     /tmp/ccEkjIhY.s:54     .text.__esos_hw_config_PRNG:0000000000000000 __esos_hw_config_PRNG
-     /tmp/ccEkjIhY.s:74     .text.__esos_hw_set_PRNG_Seed:0000000000000000 $t
-     /tmp/ccEkjIhY.s:80     .text.__esos_hw_set_PRNG_Seed:0000000000000000 __esos_hw_set_PRNG_Seed
+     /tmp/cc3hiuDd.s:20     .text.__esos_hw_PRNG_u32:0000000000000000 $t
+     /tmp/cc3hiuDd.s:26     .text.__esos_hw_PRNG_u32:0000000000000000 __esos_hw_PRNG_u32
+     /tmp/cc3hiuDd.s:48     .text.__esos_hw_config_PRNG:0000000000000000 $t
+     /tmp/cc3hiuDd.s:54     .text.__esos_hw_config_PRNG:0000000000000000 __esos_hw_config_PRNG
+     /tmp/cc3hiuDd.s:74     .text.__esos_hw_set_PRNG_Seed:0000000000000000 $t
+     /tmp/cc3hiuDd.s:80     .text.__esos_hw_set_PRNG_Seed:0000000000000000 __esos_hw_set_PRNG_Seed
 
 UNDEFINED SYMBOLS
 __esos_get_PRNG_RandomUint32

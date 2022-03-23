@@ -47,25 +47,20 @@
 
 // Defines
 #define DECODE_FLASH 62 // Half of 0.125 s period for decoding flash rounded down to avoid floats
-#define ENCODE_FLASH 250 // Half of 0.5 s period for encoding flash
-#define SPACE_INPUT 0x00 // ASCII for [space] input
+#define ENCODE_FLASH 250 // Half of 0.5 s period for encoding flash. Used for default encode period
 
 void __user_init_hw( void );
 
 
 // GLOBALs go here
-static uint16_t u16_encode_periodHalf = ENCODE_FLASH;
-//  Generally, the user-created semaphores will be defined/allocated here
-//static uint8_t psz_CRNL[3]= {0x0D, 0x0A, 0};
-
-// timer globals
+static uint16_t u16_encode_periodHalf = ENCODE_FLASH; // Global encode period variable to be changed in usart_comms and used in flash_LED. Starting period is 0.5 s
 
 #ifdef _linux
 #endif
 
 ESOS_USER_TASK( flash_LED ) 
 {
-	ESOS_TASK_BEGIN();
+	ESOS_TASK_BEGIN(); // Start flash_LED
 	while (TRUE) 
 	{
 		TOGGLE_LD2();
@@ -84,22 +79,21 @@ ESOS_USER_TASK( flash_LED )
 
 ESOS_USER_TASK( usart_comms )
 {
-	static uint8_t u8_incoming;
-	static uint8_t au8_key[] = {'T', 'E', 'N', 'N', 'E', 'S', 'S', 'E', 'E', 'T', 'E', 'C', 'H'};
-	static uint8_t u8_countEncode = 0;
-	static uint8_t u8_countDecode = 0;
-	static uint8_t u8_exclamCount = 0;
-	static bool b_changeFlag = FALSE;
-	static uint8_t u8_digitCount = 0;
-	static uint16_t u16_changePeriod = 0;
-	static bool b_skipPrint = FALSE;
-	static char ac_charArr[10];
-	static uint8_t u8_charCount = 0;
-	static bool b_changeFlagSkip = FALSE;
-	static bool b_exclamSkip = FALSE;
+	// Variable declarations
+	static uint8_t u8_incoming; // Holds UART input/output character
+	static uint8_t au8_key[] = {'T', 'E', 'N', 'N', 'E', 'S', 'S', 'E', 'E', 'T', 'E', 'C', 'H'}; // Array of characters for Vigenere encode/decode
+	static uint8_t u8_countEncode = 0; // Encode function's position in Vigenere key
+	static uint8_t u8_countDecode = 0; // Decode's position in key
+	static uint8_t u8_exclamCount = 0; // Counter for exclamation commands !!!L and !!!S####
+	static bool b_changeFlag = FALSE; // Flag for if period is being changed
+	static uint8_t u8_digitCount = 0; // Counter for digit position when changing led flash period
+	static uint16_t u16_changePeriod = 0; // Holds new period's value
+	static bool b_skipPrint = FALSE; // Flag to skip standard output printing
+	static char ac_charArr[10]; // Character array to cycle through for outputting period during !!!L command
+	static uint8_t u8_charCount = 0; // Counter for position in charArr[]
+	static bool b_changeFlagSkip = FALSE; // Flag for instances where period change function needs to be skipped
 	
-	
-	ESOS_TASK_BEGIN();
+	ESOS_TASK_BEGIN(); // Beginning of usart_comms
 	while (TRUE) {
 	
 	// ESOS UART comms uses 57.6k/8/N/1
@@ -146,16 +140,16 @@ ESOS_USER_TASK( usart_comms )
 		//report period !!!L
 		else if((u8_exclamCount >= 3) && ((u8_incoming == 'L')))
 		{
-			if(IS_B1_RELEASED())
+			if(IS_B1_RELEASED()) // Outputs encode period is B! is not pressed
 			{
-				itoa((u16_encode_periodHalf * 2), ac_charArr, 10);
+				itoa((u16_encode_periodHalf * 2), ac_charArr, 10); // Converts current period to array
 				
 				ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
 				
 				u8_charCount =0;
 				
-				while(ac_charArr[u8_charCount] != '\0')
+				while(ac_charArr[u8_charCount] != '\0') // Cycles through ac_charArr to output period value
 				{
 					ESOS_TASK_WAIT_ON_SEND_UINT8( ac_charArr[u8_charCount] );
 					u8_charCount++;
@@ -163,7 +157,7 @@ ESOS_USER_TASK( usart_comms )
 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
 			}
 			
-			else if(IS_B1_PRESSED())
+			else if(IS_B1_PRESSED()) // Outputs decode period if B1 is pressed
 			{
 				u8_incoming = (DECODE_FLASH * 2);
 				
@@ -173,8 +167,8 @@ ESOS_USER_TASK( usart_comms )
 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
 			}
 			
-			b_skipPrint = TRUE;
-			u8_exclamCount = 0;
+			b_skipPrint = TRUE; // Skips standard character print
+			u8_exclamCount = 0; // Resets exclamation count
 		}
 		
 		//change period !!!S####
@@ -225,14 +219,14 @@ ESOS_USER_TASK( usart_comms )
 		
 		b_changeFlagSkip = FALSE;
 
-		if(!b_skipPrint)
+		if(!b_skipPrint) // Standard print if b_skipPrint is low
 		{
 			ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
 		}
 		
-		else
+		else // Resets b_skipPrint
 		{
 			b_skipPrint = FALSE;
 		}

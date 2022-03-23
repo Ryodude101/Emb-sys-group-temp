@@ -24,7 +24,7 @@ endif
 ######################################
 # target
 ######################################
-TARGET = m4_timer_uart_app
+TARGET = m4_app
 
 ######################################
 # building variables
@@ -58,7 +58,7 @@ endif
 ######################################
 # C sources
 C_SOURCES =  \
-src/m4_timer_uart_app.c \
+src/m4_app.c \
 $(ESOS_DIR)/src/esos.c \
 $(ESOS_DIR)/src/esos_cb.c \
 $(ESOS_DIR)/src/esos_utils.c \

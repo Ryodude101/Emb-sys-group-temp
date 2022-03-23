@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccq8YaFo.s 			page 1
+ARM GAS  /tmp/ccRPI9l3.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
   27:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** 
   28:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** /** \file
   29:/home/ryan/Documents/Github/esos32/src/esos_utils.c ****  * \brief Various hardware independent utilties for ESOS32 and its user applications
-ARM GAS  /tmp/ccq8YaFo.s 			page 2
+ARM GAS  /tmp/ccRPI9l3.s 			page 2
 
 
   30:/home/ryan/Documents/Github/esos32/src/esos_utils.c ****  *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
   41              	.L3:
   42 0006 00BF     		.align	2
   43              	.L2:
-ARM GAS  /tmp/ccq8YaFo.s 			page 3
+ARM GAS  /tmp/ccRPI9l3.s 			page 3
 
 
   44 0008 00000000 		.word	.LANCHOR0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
   87              	.LVL3:
   86:/home/ryan/Documents/Github/esos32/src/esos_utils.c ****   lo += (hi >> 15);
   88              		.loc 1 86 3 is_stmt 1 view .LVU15
-ARM GAS  /tmp/ccq8YaFo.s 			page 4
+ARM GAS  /tmp/ccRPI9l3.s 			page 4
 
 
   87:/home/ryan/Documents/Github/esos32/src/esos_utils.c ****   if (lo > 0x7FFFFFFF) lo -= 0x7FFFFFFF;
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
   98:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** * \note Visit http://www.firstpr.com.au/dsp/rand31/ for more information
   99:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** */
  100:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** inline uint32_t    esos_GetRandomUint32(void) {
-ARM GAS  /tmp/ccq8YaFo.s 			page 5
+ARM GAS  /tmp/ccRPI9l3.s 			page 5
 
 
  130              		.loc 1 100 47 is_stmt 1 view -0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
  169              		.loc 1 117 3 view .LVU35
  112:/home/ryan/Documents/Github/esos32/src/esos_utils.c ****   uint32_t        u32_temp = 2166136261uL;
  170              		.loc 1 112 19 is_stmt 0 view .LVU36
-ARM GAS  /tmp/ccq8YaFo.s 			page 6
+ARM GAS  /tmp/ccRPI9l3.s 			page 6
 
 
  171 0002 0A4A     		ldr	r2, .L14
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
  217              		.section	.text.esos_buffer_hash_u32,"ax",%progbits
  218              		.align	1
  219              		.global	esos_buffer_hash_u32
-ARM GAS  /tmp/ccq8YaFo.s 			page 7
+ARM GAS  /tmp/ccRPI9l3.s 			page 7
 
 
  220              		.syntax unified
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
  247 000a 1A01     		lsls	r2, r3, #4
  248              		.loc 1 153 49 view .LVU62
  249 000c 02EB4302 		add	r2, r2, r3, lsl #1
-ARM GAS  /tmp/ccq8YaFo.s 			page 8
+ARM GAS  /tmp/ccRPI9l3.s 			page 8
 
 
  250              		.loc 1 153 74 view .LVU63
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
  164:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** 
  165:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** /**
  166:/home/ryan/Documents/Github/esos32/src/esos_utils.c ****  * Create a 32-bit (uint32_t) hash value for a provided string
-ARM GAS  /tmp/ccq8YaFo.s 			page 9
+ARM GAS  /tmp/ccRPI9l3.s 			page 9
 
 
  167:/home/ryan/Documents/Github/esos32/src/esos_utils.c ****  * Routine maintains "state" in the form of variable __esos_u32FNVHash
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
  323              		.loc 1 192 5 is_stmt 1 view .LVU86
  324              	.LVL25:
  325              		.loc 1 192 36 is_stmt 0 view .LVU87
-ARM GAS  /tmp/ccq8YaFo.s 			page 10
+ARM GAS  /tmp/ccRPI9l3.s 			page 10
 
 
  326 001c 10F8012B 		ldrb	r2, [r0], #1	@ zero_extendqisi2
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
  201:/home/ryan/Documents/Github/esos32/src/esos_utils.c **** }
  371              		.loc 1 201 1 view .LVU98
  372 0004 80B2     		uxth	r0, r0
-ARM GAS  /tmp/ccq8YaFo.s 			page 11
+ARM GAS  /tmp/ccRPI9l3.s 			page 11
 
 
  373 0006 7047     		bx	lr
@@ -622,34 +622,34 @@ ARM GAS  /tmp/ccq8YaFo.s 			page 1
  396              		.file 3 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
  397              		.file 4 "/home/ryan/Documents/Github/esos32/include/esos_utils.h"
  398              		.file 5 "/home/ryan/Documents/Github/esos32/include/esos.h"
-ARM GAS  /tmp/ccq8YaFo.s 			page 12
+ARM GAS  /tmp/ccRPI9l3.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 esos_utils.c
-     /tmp/ccq8YaFo.s:20     .text.__esos_set_PRNG_U32Seed:0000000000000000 $t
-     /tmp/ccq8YaFo.s:26     .text.__esos_set_PRNG_U32Seed:0000000000000000 __esos_set_PRNG_U32Seed
-     /tmp/ccq8YaFo.s:44     .text.__esos_set_PRNG_U32Seed:0000000000000008 $d
-     /tmp/ccq8YaFo.s:49     .text.__esos_get_PRNG_RandomUint32:0000000000000000 $t
-     /tmp/ccq8YaFo.s:55     .text.__esos_get_PRNG_RandomUint32:0000000000000000 __esos_get_PRNG_RandomUint32
-     /tmp/ccq8YaFo.s:116    .text.__esos_get_PRNG_RandomUint32:0000000000000040 $d
-     /tmp/ccq8YaFo.s:122    .text.esos_GetRandomUint32:0000000000000000 $t
-     /tmp/ccq8YaFo.s:128    .text.esos_GetRandomUint32:0000000000000000 esos_GetRandomUint32
-     /tmp/ccq8YaFo.s:149    .text.esos_taskname_hash_u16:0000000000000000 $t
-     /tmp/ccq8YaFo.s:155    .text.esos_taskname_hash_u16:0000000000000000 esos_taskname_hash_u16
-     /tmp/ccq8YaFo.s:213    .text.esos_taskname_hash_u16:000000000000002c $d
-     /tmp/ccq8YaFo.s:218    .text.esos_buffer_hash_u32:0000000000000000 $t
-     /tmp/ccq8YaFo.s:224    .text.esos_buffer_hash_u32:0000000000000000 esos_buffer_hash_u32
-     /tmp/ccq8YaFo.s:281    .text.esos_buffer_hash_u32:0000000000000034 $d
-     /tmp/ccq8YaFo.s:286    .text.esos_string_hash_u32:0000000000000000 $t
-     /tmp/ccq8YaFo.s:292    .text.esos_string_hash_u32:0000000000000000 esos_string_hash_u32
-     /tmp/ccq8YaFo.s:348    .text.esos_string_hash_u32:0000000000000030 $d
-     /tmp/ccq8YaFo.s:353    .text.esos_hash_u32_to_u16:0000000000000000 $t
-     /tmp/ccq8YaFo.s:359    .text.esos_hash_u32_to_u16:0000000000000000 esos_hash_u32_to_u16
-     /tmp/ccq8YaFo.s:391    .data.__esos_u32FNVHash:0000000000000000 __esos_u32FNVHash
-     /tmp/ccq8YaFo.s:384    .bss.__u32_esos_PRNG_Seed:0000000000000000 __u32_esos_PRNG_Seed
-     /tmp/ccq8YaFo.s:380    .bss.__u32_esos_PRNG_Seed:0000000000000000 $d
-     /tmp/ccq8YaFo.s:387    .data.__esos_u32FNVHash:0000000000000000 $d
+     /tmp/ccRPI9l3.s:20     .text.__esos_set_PRNG_U32Seed:0000000000000000 $t
+     /tmp/ccRPI9l3.s:26     .text.__esos_set_PRNG_U32Seed:0000000000000000 __esos_set_PRNG_U32Seed
+     /tmp/ccRPI9l3.s:44     .text.__esos_set_PRNG_U32Seed:0000000000000008 $d
+     /tmp/ccRPI9l3.s:49     .text.__esos_get_PRNG_RandomUint32:0000000000000000 $t
+     /tmp/ccRPI9l3.s:55     .text.__esos_get_PRNG_RandomUint32:0000000000000000 __esos_get_PRNG_RandomUint32
+     /tmp/ccRPI9l3.s:116    .text.__esos_get_PRNG_RandomUint32:0000000000000040 $d
+     /tmp/ccRPI9l3.s:122    .text.esos_GetRandomUint32:0000000000000000 $t
+     /tmp/ccRPI9l3.s:128    .text.esos_GetRandomUint32:0000000000000000 esos_GetRandomUint32
+     /tmp/ccRPI9l3.s:149    .text.esos_taskname_hash_u16:0000000000000000 $t
+     /tmp/ccRPI9l3.s:155    .text.esos_taskname_hash_u16:0000000000000000 esos_taskname_hash_u16
+     /tmp/ccRPI9l3.s:213    .text.esos_taskname_hash_u16:000000000000002c $d
+     /tmp/ccRPI9l3.s:218    .text.esos_buffer_hash_u32:0000000000000000 $t
+     /tmp/ccRPI9l3.s:224    .text.esos_buffer_hash_u32:0000000000000000 esos_buffer_hash_u32
+     /tmp/ccRPI9l3.s:281    .text.esos_buffer_hash_u32:0000000000000034 $d
+     /tmp/ccRPI9l3.s:286    .text.esos_string_hash_u32:0000000000000000 $t
+     /tmp/ccRPI9l3.s:292    .text.esos_string_hash_u32:0000000000000000 esos_string_hash_u32
+     /tmp/ccRPI9l3.s:348    .text.esos_string_hash_u32:0000000000000030 $d
+     /tmp/ccRPI9l3.s:353    .text.esos_hash_u32_to_u16:0000000000000000 $t
+     /tmp/ccRPI9l3.s:359    .text.esos_hash_u32_to_u16:0000000000000000 esos_hash_u32_to_u16
+     /tmp/ccRPI9l3.s:391    .data.__esos_u32FNVHash:0000000000000000 __esos_u32FNVHash
+     /tmp/ccRPI9l3.s:384    .bss.__u32_esos_PRNG_Seed:0000000000000000 __u32_esos_PRNG_Seed
+     /tmp/ccRPI9l3.s:380    .bss.__u32_esos_PRNG_Seed:0000000000000000 $d
+     /tmp/ccRPI9l3.s:387    .data.__esos_u32FNVHash:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __esos_hw_PRNG_u32

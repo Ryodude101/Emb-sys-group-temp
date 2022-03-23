@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccChiUF5.s 			page 1
+ARM GAS  /tmp/ccX5ilNJ.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
   27:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
   28:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /** \file
   29:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * \brief Circular buffer routines for ESOS32
-ARM GAS  /tmp/ccChiUF5.s 			page 2
+ARM GAS  /tmp/ccX5ilNJ.s 			page 2
 
 
   30:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
   53:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** ******************************************/
   54:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** #define __WRITE_CB_UINT8(pstB,u8x,u16e)                                       \
   55:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   do {                                                                        \
-ARM GAS  /tmp/ccChiUF5.s 			page 3
+ARM GAS  /tmp/ccX5ilNJ.s 			page 3
 
 
   56:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     if ((pstB)->u16_Count < (pstB)->u16_Length) {                             \
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
   74 0008 0BD2     		bcs	.L2
   75              		.loc 1 98 3 discriminator 1 view .LVU14
   76 000a 4288     		ldrh	r2, [r0, #2]
-ARM GAS  /tmp/ccChiUF5.s 			page 4
+ARM GAS  /tmp/ccX5ilNJ.s 			page 4
 
 
   77 000c 1344     		add	r3, r3, r2
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  127              		.loc 1 104 3 is_stmt 0 view .LVU26
  128 0014 D154     		strb	r1, [r2, r3]
  129              		.loc 1 104 3 is_stmt 1 view .LVU27
-ARM GAS  /tmp/ccChiUF5.s 			page 5
+ARM GAS  /tmp/ccX5ilNJ.s 			page 5
 
 
  130 0016 8388     		ldrh	r3, [r0, #4]
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  111:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) u16_x & 0xFF;
  177              		.loc 1 111 3 view .LVU39
  178              	.LVL9:
-ARM GAS  /tmp/ccChiUF5.s 			page 6
+ARM GAS  /tmp/ccX5ilNJ.s 			page 6
 
 
  112:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  230 004a 0133     		adds	r3, r3, #1
  231 004c 8380     		strh	r3, [r0, #4]	@ movhi
  232              		.loc 1 114 3 is_stmt 1 discriminator 1 view .LVU57
-ARM GAS  /tmp/ccChiUF5.s 			page 7
+ARM GAS  /tmp/ccX5ilNJ.s 			page 7
 
 
  233              	.L8:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  281 0024 8388     		ldrh	r3, [r0, #4]
  282              	.LVL18:
  283              		.loc 1 122 3 is_stmt 0 discriminator 1 view .LVU70
-ARM GAS  /tmp/ccChiUF5.s 			page 8
+ARM GAS  /tmp/ccX5ilNJ.s 			page 8
 
 
  284 0026 0133     		adds	r3, r3, #1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  334 006c 8268     		ldr	r2, [r0, #8]
  335 006e 9BB2     		uxth	r3, r3
  336              		.loc 1 126 3 is_stmt 0 discriminator 1 view .LVU88
-ARM GAS  /tmp/ccChiUF5.s 			page 9
+ARM GAS  /tmp/ccX5ilNJ.s 			page 9
 
 
  337 0070 02F803E0 		strb	lr, [r2, r3]
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  130:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
  131:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT8Buffer(CBUFFER* pst_CBuffer, uint8_t* pu8_x, uint16_t u16_size ) {
  390              		.loc 1 131 91 is_stmt 1 view -0
-ARM GAS  /tmp/ccChiUF5.s 			page 10
+ARM GAS  /tmp/ccX5ilNJ.s 			page 10
 
 
  391              		.cfi_startproc
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  435              	.LVL32:
  436              		.loc 1 135 5 discriminator 1 view .LVU119
  437 002a 8468     		ldr	r4, [r0, #8]
-ARM GAS  /tmp/ccChiUF5.s 			page 11
+ARM GAS  /tmp/ccX5ilNJ.s 			page 11
 
 
  438 002c 1FFA8CFC 		uxth	ip, ip
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  484              	.LVL35:
  485              		.loc 1 145 3 view .LVU129
  486 0008 0132     		adds	r2, r2, #1
-ARM GAS  /tmp/ccChiUF5.s 			page 12
+ARM GAS  /tmp/ccX5ilNJ.s 			page 12
 
 
  487 000a 1988     		ldrh	r1, [r3]
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  535 0016 9BB2     		uxth	r3, r3
  536 0018 4380     		strh	r3, [r0, #2]	@ movhi
  537              		.loc 1 153 3 view .LVU141
-ARM GAS  /tmp/ccChiUF5.s 			page 13
+ARM GAS  /tmp/ccX5ilNJ.s 			page 13
 
 
  538 001a 8288     		ldrh	r2, [r0, #4]
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  587              	.LCFI5:
  588              		.cfi_def_cfa_offset 12
  589              		.cfi_offset 4, -12
-ARM GAS  /tmp/ccChiUF5.s 			page 14
+ARM GAS  /tmp/ccX5ilNJ.s 			page 14
 
 
  590              		.cfi_offset 5, -8
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  636 003c 14F803E0 		ldrb	lr, [r4, r3]	@ zero_extendqisi2
  637              	.LVL46:
  638              		.loc 1 168 3 view .LVU174
-ARM GAS  /tmp/ccChiUF5.s 			page 15
+ARM GAS  /tmp/ccX5ilNJ.s 			page 15
 
 
  639 0040 0133     		adds	r3, r3, #1
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  176:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_ReadUINT8Buffer(CBUFFER* pst_CBuffer, uint8_t* pu8_x, uint16_t u16_size ) {
  688              		.loc 1 176 90 is_stmt 1 view -0
  689              		.cfi_startproc
-ARM GAS  /tmp/ccChiUF5.s 			page 16
+ARM GAS  /tmp/ccX5ilNJ.s 			page 16
 
 
  690              		@ args = 0, pretend = 0, frame = 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  734              		.loc 1 179 3 is_stmt 0 discriminator 3 view .LVU205
  735 0034 9445     		cmp	ip, r2
  736 0036 E8D3     		bcc	.L34
-ARM GAS  /tmp/ccChiUF5.s 			page 17
+ARM GAS  /tmp/ccX5ilNJ.s 			page 17
 
 
  181:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   }
@@ -979,30 +979,30 @@ ARM GAS  /tmp/ccChiUF5.s 			page 1
  751              		.file 2 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
  752              		.file 3 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
  753              		.file 4 "/home/ryan/Documents/Github/esos32/include/esos_cb.h"
-ARM GAS  /tmp/ccChiUF5.s 			page 18
+ARM GAS  /tmp/ccX5ilNJ.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 esos_cb.c
-     /tmp/ccChiUF5.s:20     .text.__esos_CB_Init:0000000000000000 $t
-     /tmp/ccChiUF5.s:26     .text.__esos_CB_Init:0000000000000000 __esos_CB_Init
-     /tmp/ccChiUF5.s:54     .text.__esos_CB_WriteUINT8:0000000000000000 $t
-     /tmp/ccChiUF5.s:60     .text.__esos_CB_WriteUINT8:0000000000000000 __esos_CB_WriteUINT8
-     /tmp/ccChiUF5.s:100    .text.__esos_CB_OverwriteUINT8:0000000000000000 $t
-     /tmp/ccChiUF5.s:106    .text.__esos_CB_OverwriteUINT8:0000000000000000 __esos_CB_OverwriteUINT8
-     /tmp/ccChiUF5.s:157    .text.__esos_CB_WriteUINT16:0000000000000000 $t
-     /tmp/ccChiUF5.s:163    .text.__esos_CB_WriteUINT16:0000000000000000 __esos_CB_WriteUINT16
-     /tmp/ccChiUF5.s:240    .text.__esos_CB_WriteUINT32:0000000000000000 $t
-     /tmp/ccChiUF5.s:246    .text.__esos_CB_WriteUINT32:0000000000000000 __esos_CB_WriteUINT32
-     /tmp/ccChiUF5.s:381    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 $t
-     /tmp/ccChiUF5.s:387    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 __esos_CB_WriteUINT8Buffer
-     /tmp/ccChiUF5.s:462    .text.__esos_CB_ReadUINT8:0000000000000000 $t
-     /tmp/ccChiUF5.s:468    .text.__esos_CB_ReadUINT8:0000000000000000 __esos_CB_ReadUINT8
-     /tmp/ccChiUF5.s:503    .text.__esos_CB_ReadUINT16:0000000000000000 $t
-     /tmp/ccChiUF5.s:509    .text.__esos_CB_ReadUINT16:0000000000000000 __esos_CB_ReadUINT16
-     /tmp/ccChiUF5.s:572    .text.__esos_CB_ReadUINT32:0000000000000000 $t
-     /tmp/ccChiUF5.s:578    .text.__esos_CB_ReadUINT32:0000000000000000 __esos_CB_ReadUINT32
-     /tmp/ccChiUF5.s:679    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 $t
-     /tmp/ccChiUF5.s:685    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 __esos_CB_ReadUINT8Buffer
+     /tmp/ccX5ilNJ.s:20     .text.__esos_CB_Init:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:26     .text.__esos_CB_Init:0000000000000000 __esos_CB_Init
+     /tmp/ccX5ilNJ.s:54     .text.__esos_CB_WriteUINT8:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:60     .text.__esos_CB_WriteUINT8:0000000000000000 __esos_CB_WriteUINT8
+     /tmp/ccX5ilNJ.s:100    .text.__esos_CB_OverwriteUINT8:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:106    .text.__esos_CB_OverwriteUINT8:0000000000000000 __esos_CB_OverwriteUINT8
+     /tmp/ccX5ilNJ.s:157    .text.__esos_CB_WriteUINT16:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:163    .text.__esos_CB_WriteUINT16:0000000000000000 __esos_CB_WriteUINT16
+     /tmp/ccX5ilNJ.s:240    .text.__esos_CB_WriteUINT32:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:246    .text.__esos_CB_WriteUINT32:0000000000000000 __esos_CB_WriteUINT32
+     /tmp/ccX5ilNJ.s:381    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:387    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 __esos_CB_WriteUINT8Buffer
+     /tmp/ccX5ilNJ.s:462    .text.__esos_CB_ReadUINT8:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:468    .text.__esos_CB_ReadUINT8:0000000000000000 __esos_CB_ReadUINT8
+     /tmp/ccX5ilNJ.s:503    .text.__esos_CB_ReadUINT16:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:509    .text.__esos_CB_ReadUINT16:0000000000000000 __esos_CB_ReadUINT16
+     /tmp/ccX5ilNJ.s:572    .text.__esos_CB_ReadUINT32:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:578    .text.__esos_CB_ReadUINT32:0000000000000000 __esos_CB_ReadUINT32
+     /tmp/ccX5ilNJ.s:679    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 $t
+     /tmp/ccX5ilNJ.s:685    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 __esos_CB_ReadUINT8Buffer
 
 NO UNDEFINED SYMBOLS

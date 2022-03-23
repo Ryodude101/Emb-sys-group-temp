@@ -1,4 +1,4 @@
-Build/barrier.o: Source/barrier.c \
+Build/queue.o: Source/queue.c Source/queue.h \
  /home/ryan/Documents/Github/esos32/include/esos.h \
  /home/ryan/Documents/Github/esos32/include/all_generic.h \
  /home/ryan/Documents/Github/esos32/include/esos_utils.h \
@@ -48,8 +48,8 @@ Build/barrier.o: Source/barrier.c \
  /home/ryan/Documents/Github/esos32/include/stm32l4_ocm3/esos_stm32l4_rs232.h \
  /home/ryan/Documents/Github/esos32/include/esos_comm.h \
  /home/ryan/Documents/Github/esos32/include/stm32l4_ocm3/esos_stm32l4.h \
- /home/ryan/Documents/Github/esos32/include/stm32l4_ocm3/esos_stm32l4_rs232.h \
- Source/barrier.h
+ /home/ryan/Documents/Github/esos32/include/stm32l4_ocm3/esos_stm32l4_rs232.h
+Source/queue.h:
 /home/ryan/Documents/Github/esos32/include/esos.h:
 /home/ryan/Documents/Github/esos32/include/all_generic.h:
 /home/ryan/Documents/Github/esos32/include/esos_utils.h:
@@ -100,4 +100,3 @@ Build/barrier.o: Source/barrier.c \
 /home/ryan/Documents/Github/esos32/include/esos_comm.h:
 /home/ryan/Documents/Github/esos32/include/stm32l4_ocm3/esos_stm32l4.h:
 /home/ryan/Documents/Github/esos32/include/stm32l4_ocm3/esos_stm32l4_rs232.h:
-Source/barrier.h:

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cczPjNUk.s 			page 1
+ARM GAS  /tmp/ccJYE3HW.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
   28:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** /**
   29:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c ****  * \addtogroup ESOS_Tick
   30:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c ****  * @{
-ARM GAS  /tmp/cczPjNUk.s 			page 2
+ARM GAS  /tmp/ccJYE3HW.s 			page 2
 
 
   31:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c ****  */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
   36              		.cfi_offset 4, -8
   37              		.cfi_offset 14, -4
   38 0002 82B0     		sub	sp, sp, #8
-ARM GAS  /tmp/cczPjNUk.s 			page 3
+ARM GAS  /tmp/ccJYE3HW.s 			page 3
 
 
   39              	.LCFI1:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
   77 0038 2822     		movs	r2, #40
   78 003a 0421     		movs	r1, #4
   79 003c 0220     		movs	r0, #2
-ARM GAS  /tmp/cczPjNUk.s 			page 4
+ARM GAS  /tmp/ccJYE3HW.s 			page 4
 
 
   80 003e FFF7FEFF 		bl	rcc_set_main_pll
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
  117              	.LVL18:
  111:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** 	/* FIXME - eventually handled internally */
  112:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** 	rcc_ahb_frequency = 80e6;
-ARM GAS  /tmp/cczPjNUk.s 			page 5
+ARM GAS  /tmp/ccJYE3HW.s 			page 5
 
 
  118              		.loc 1 112 2 view .LVU20
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
  125:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** * \pre ESOS system tick is running/working.
  126:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** *
  127:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** * \return A 32-bit value of the number of ESOS system ticks
-ARM GAS  /tmp/cczPjNUk.s 			page 6
+ARM GAS  /tmp/ccJYE3HW.s 			page 6
 
 
  128:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** * since the system has booted.
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
  148:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** 	// Increment the esos tick counter
  149:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** 	esos_tick_count++;
  198              		.loc 1 149 2 view .LVU34
-ARM GAS  /tmp/cczPjNUk.s 			page 7
+ARM GAS  /tmp/ccJYE3HW.s 			page 7
 
 
  199              		.loc 1 149 17 is_stmt 0 view .LVU35
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
  163:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c ****   * @brief  This function is executed in case of error occurrence.
  164:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c ****   * @retval None
  165:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c ****   */
-ARM GAS  /tmp/cczPjNUk.s 			page 8
+ARM GAS  /tmp/ccJYE3HW.s 			page 8
 
 
  166:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_tick.c **** void Error_Handler(void) {
@@ -457,28 +457,28 @@ ARM GAS  /tmp/cczPjNUk.s 			page 1
  276              		.file 7 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/li
  277              		.file 8 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/li
  278              		.file 9 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/li
-ARM GAS  /tmp/cczPjNUk.s 			page 9
+ARM GAS  /tmp/ccJYE3HW.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 esos_stm32l4_tick.c
-     /tmp/cczPjNUk.s:20     .text.__esos_hw_InitSystemTick:0000000000000000 $t
-     /tmp/cczPjNUk.s:26     .text.__esos_hw_InitSystemTick:0000000000000000 __esos_hw_InitSystemTick
-     /tmp/cczPjNUk.s:144    .text.__esos_hw_InitSystemTick:000000000000009c $d
-     /tmp/cczPjNUk.s:154    .text.__esos_hw_GetSystemTickCount:0000000000000000 $t
-     /tmp/cczPjNUk.s:160    .text.__esos_hw_GetSystemTickCount:0000000000000000 __esos_hw_GetSystemTickCount
-     /tmp/cczPjNUk.s:176    .text.__esos_hw_GetSystemTickCount:0000000000000008 $d
-     /tmp/cczPjNUk.s:181    .text.sys_tick_handler:0000000000000000 $t
-     /tmp/cczPjNUk.s:187    .text.sys_tick_handler:0000000000000000 sys_tick_handler
-     /tmp/cczPjNUk.s:212    .text.sys_tick_handler:0000000000000010 $d
-     /tmp/cczPjNUk.s:217    .text.Default_Handler:0000000000000000 $t
-     /tmp/cczPjNUk.s:223    .text.Default_Handler:0000000000000000 Default_Handler
-     /tmp/cczPjNUk.s:236    .text.Error_Handler:0000000000000000 $t
-     /tmp/cczPjNUk.s:242    .text.Error_Handler:0000000000000000 Error_Handler
-     /tmp/cczPjNUk.s:260    .bss.count:0000000000000000 count
-     /tmp/cczPjNUk.s:267    .bss.esos_tick_count:0000000000000000 esos_tick_count
-     /tmp/cczPjNUk.s:257    .bss.count:0000000000000000 $d
-     /tmp/cczPjNUk.s:263    .bss.esos_tick_count:0000000000000000 $d
+     /tmp/ccJYE3HW.s:20     .text.__esos_hw_InitSystemTick:0000000000000000 $t
+     /tmp/ccJYE3HW.s:26     .text.__esos_hw_InitSystemTick:0000000000000000 __esos_hw_InitSystemTick
+     /tmp/ccJYE3HW.s:144    .text.__esos_hw_InitSystemTick:000000000000009c $d
+     /tmp/ccJYE3HW.s:154    .text.__esos_hw_GetSystemTickCount:0000000000000000 $t
+     /tmp/ccJYE3HW.s:160    .text.__esos_hw_GetSystemTickCount:0000000000000000 __esos_hw_GetSystemTickCount
+     /tmp/ccJYE3HW.s:176    .text.__esos_hw_GetSystemTickCount:0000000000000008 $d
+     /tmp/ccJYE3HW.s:181    .text.sys_tick_handler:0000000000000000 $t
+     /tmp/ccJYE3HW.s:187    .text.sys_tick_handler:0000000000000000 sys_tick_handler
+     /tmp/ccJYE3HW.s:212    .text.sys_tick_handler:0000000000000010 $d
+     /tmp/ccJYE3HW.s:217    .text.Default_Handler:0000000000000000 $t
+     /tmp/ccJYE3HW.s:223    .text.Default_Handler:0000000000000000 Default_Handler
+     /tmp/ccJYE3HW.s:236    .text.Error_Handler:0000000000000000 $t
+     /tmp/ccJYE3HW.s:242    .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/ccJYE3HW.s:260    .bss.count:0000000000000000 count
+     /tmp/ccJYE3HW.s:267    .bss.esos_tick_count:0000000000000000 esos_tick_count
+     /tmp/ccJYE3HW.s:257    .bss.count:0000000000000000 $d
+     /tmp/ccJYE3HW.s:263    .bss.esos_tick_count:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 systick_set_clocksource

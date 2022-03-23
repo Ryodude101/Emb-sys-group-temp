@@ -24,7 +24,7 @@ endif
 ######################################
 # target
 ######################################
-TARGET = barrier
+TARGET = queue
 
 ######################################
 # building variables
@@ -58,7 +58,7 @@ endif
 ######################################
 # C sources
 C_SOURCES =  \
-Source/barrier.c \
+Source/queue.c \
 $(ESOS_DIR)/src/esos.c \
 $(ESOS_DIR)/src/esos_cb.c \
 $(ESOS_DIR)/src/esos_utils.c \

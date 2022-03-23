@@ -1,15 +1,14 @@
+# Milestone 4 M4_Application
 
-Milestone 4 M4 Application
 
-
-How to Build and Run
+## How to Build and Run
 
 To build, simply type "make" while you are in the directory with the Makefile in the terminal. The hex file should be in the ./Build directory as "m4_app.hex".
 		
 The program uses a UART that uses serial communication. The UART uses the settings 57.6k baud, 8 data bits, 1 stop bit, and no parity. The moment you load up your serial client, the program can be used.
 
 
-Basic Functionality
+## Basic Functionality
 
 The program has two modes: encoding and decoding. Encoding occurs while B1 is not pressed, and decoding while B1 is pressed. While encoding and decoding messages, input using ONLY lowercase letters. They will become uppercase and encode/decode. Capital letters will not work.
 

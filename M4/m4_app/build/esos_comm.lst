@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccZdmLSG.s 			page 1
+ARM GAS  /tmp/cc1PRbE5.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
   28:/home/ryan/Documents/Github/esos32/src/esos_comm.c **** /** \file
   29:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****  * \brief Hardware independent code for ESOS32 Communications service
   30:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****  *
-ARM GAS  /tmp/ccZdmLSG.s 			page 2
+ARM GAS  /tmp/cc1PRbE5.s 			page 2
 
 
   31:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****  */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
   55:/home/ryan/Documents/Github/esos32/src/esos_comm.c **** 
   56:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   __esos_hw_InitCommSystem();
   59              		.loc 1 56 3 view .LVU7
-ARM GAS  /tmp/ccZdmLSG.s 			page 3
+ARM GAS  /tmp/cc1PRbE5.s 			page 3
 
 
   60 0020 FFF7FEFF 		bl	__esos_hw_InitCommSystem
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
   65:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   else return('0'+u8_c);
  108              		.loc 1 65 8 is_stmt 1 view .LVU18
  109              		.loc 1 65 18 is_stmt 0 view .LVU19
-ARM GAS  /tmp/ccZdmLSG.s 			page 4
+ARM GAS  /tmp/cc1PRbE5.s 			page 4
 
 
  110 000c 03F13000 		add	r0, r3, #48
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  158              		.section	.text.__esos_OutChar,"ax",%progbits
  159              		.align	1
  160              		.global	__esos_OutChar
-ARM GAS  /tmp/ccZdmLSG.s 			page 5
+ARM GAS  /tmp/cc1PRbE5.s 			page 5
 
 
  161              		.syntax unified
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  199              		.loc 1 91 3 view .LVU42
  200              		.loc 1 91 3 view .LVU43
  201 001c 0320     		movs	r0, #3
-ARM GAS  /tmp/ccZdmLSG.s 			page 6
+ARM GAS  /tmp/cc1PRbE5.s 			page 6
 
 
  202              	.L16:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
   86:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   // signal the hardware that a xfer should be started if
  242              		.loc 1 86 3 discriminator 9 view .LVU59
  243 0048 084B     		ldr	r3, .L21
-ARM GAS  /tmp/ccZdmLSG.s 			page 7
+ARM GAS  /tmp/cc1PRbE5.s 			page 7
 
 
  244 004a 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  293              		.cfi_offset 4, -16
  294              		.cfi_offset 5, -12
  295              		.cfi_offset 6, -8
-ARM GAS  /tmp/ccZdmLSG.s 			page 8
+ARM GAS  /tmp/cc1PRbE5.s 			page 8
 
 
  296              		.cfi_offset 14, -4
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
   99:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   au8_String[0] = '0';
  331              		.loc 1 99 17 is_stmt 0 discriminator 1 view .LVU80
  332 0022 1A4E     		ldr	r6, .L33
-ARM GAS  /tmp/ccZdmLSG.s 			page 9
+ARM GAS  /tmp/cc1PRbE5.s 			page 9
 
 
  333 0024 3023     		movs	r3, #48
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  371 004e 1168     		ldr	r1, [r2]
  372 0050 0A88     		ldrh	r2, [r1]
  373 0052 8988     		ldrh	r1, [r1, #4]
-ARM GAS  /tmp/ccZdmLSG.s 			page 10
+ARM GAS  /tmp/cc1PRbE5.s 			page 10
 
 
  374 0054 521A     		subs	r2, r2, r1
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  421              		.thumb
  422              		.thumb_func
  424              	__esos_OutUint8AsDecString:
-ARM GAS  /tmp/ccZdmLSG.s 			page 11
+ARM GAS  /tmp/cc1PRbE5.s 			page 11
 
 
  425              	.LVL30:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  452              		.loc 1 139 3 view .LVU112
  453              		.loc 1 139 3 view .LVU113
  454 0014 0823     		movs	r3, #8
-ARM GAS  /tmp/ccZdmLSG.s 			page 12
+ARM GAS  /tmp/cc1PRbE5.s 			page 12
 
 
  455 0016 A370     		strb	r3, [r4, #2]
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  496              		.loc 1 126 5 is_stmt 1 view .LVU131
  126:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   au8_String[u8_digit++] = '0' + (u8_x % 10);
  497              		.loc 1 126 24 is_stmt 0 view .LVU132
-ARM GAS  /tmp/ccZdmLSG.s 			page 13
+ARM GAS  /tmp/cc1PRbE5.s 			page 13
 
 
  498 0040 2C4B     		ldr	r3, .L50
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  129:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   while (u8_c < u8_digit) {
  542              		.loc 1 129 3 is_stmt 1 view .LVU143
  129:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   while (u8_c < u8_digit) {
-ARM GAS  /tmp/ccZdmLSG.s 			page 14
+ARM GAS  /tmp/cc1PRbE5.s 			page 14
 
 
  543              		.loc 1 129 8 is_stmt 0 view .LVU144
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  134:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   } //end while()
  584              		.loc 1 134 55 is_stmt 0 discriminator 9 view .LVU158
  585 00c6 0F4A     		ldr	r2, .L50+16
-ARM GAS  /tmp/ccZdmLSG.s 			page 15
+ARM GAS  /tmp/cc1PRbE5.s 			page 15
 
 
  586 00c8 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  142:/home/ryan/Documents/Github/esos32/src/esos_comm.c **** ESOS_CHILD_TASK( __esos_OutUint32AsHexString, uint32_t u32_x) {
  636              		.loc 1 142 63 view -0
  637              		.cfi_startproc
-ARM GAS  /tmp/ccZdmLSG.s 			page 16
+ARM GAS  /tmp/cc1PRbE5.s 			page 16
 
 
  638              		@ args = 0, pretend = 0, frame = 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  665              		.loc 1 169 3 view .LVU171
  666 0016 0823     		movs	r3, #8
  667 0018 A370     		strb	r3, [r4, #2]
-ARM GAS  /tmp/ccZdmLSG.s 			page 17
+ARM GAS  /tmp/cc1PRbE5.s 			page 17
 
 
  668              		.loc 1 169 3 view .LVU172
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  151:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   u8_c = (u32_x >> 16);
  708              		.loc 1 151 19 is_stmt 0 discriminator 1 view .LVU191
  709 0042 4046     		mov	r0, r8
-ARM GAS  /tmp/ccZdmLSG.s 			page 18
+ARM GAS  /tmp/cc1PRbE5.s 			page 18
 
 
  710 0044 FFF7FEFF 		bl	__esos_u8_GetLSBHexCharFromUint8
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  157:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   u8_c = u32_x;
  748              		.loc 1 157 17 discriminator 1 view .LVU208
  749 0078 F071     		strb	r0, [r6, #7]
-ARM GAS  /tmp/ccZdmLSG.s 			page 19
+ARM GAS  /tmp/cc1PRbE5.s 			page 19
 
 
  158:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   au8_String[8] = __esos_u8_GetMSBHexCharFromUint8(u8_c);
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  164:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   __esos_CB_WriteUINT8Buffer( __pst_CB_Tx, &au8_String[0], 10 );
  787              		.loc 1 164 3 discriminator 3 view .LVU226
  788 00a0 114A     		ldr	r2, .L62+8
-ARM GAS  /tmp/ccZdmLSG.s 			page 20
+ARM GAS  /tmp/cc1PRbE5.s 			page 20
 
 
  789 00a2 1168     		ldr	r1, [r2]
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  836              		.section	.text.__esos_OutCharBuffer,"ax",%progbits
  837              		.align	1
  838              		.global	__esos_OutCharBuffer
-ARM GAS  /tmp/ccZdmLSG.s 			page 21
+ARM GAS  /tmp/cc1PRbE5.s 			page 21
 
 
  839              		.syntax unified
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  181:/home/ryan/Documents/Github/esos32/src/esos_comm.c **** } // end __esos_OutCharBuffer
  885              		.loc 1 181 1 is_stmt 0 discriminator 1 view .LVU247
  886 001e 38BD     		pop	{r3, r4, r5, pc}
-ARM GAS  /tmp/ccZdmLSG.s 			page 22
+ARM GAS  /tmp/cc1PRbE5.s 			page 22
 
 
  887              	.LVL55:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  929 005a A370     		strb	r3, [r4, #2]
  175:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   __esos_CB_WriteUINT8Buffer( __pst_CB_Tx, pu8_out, u8_len );
  930              		.loc 1 175 3 discriminator 2 view .LVU260
-ARM GAS  /tmp/ccZdmLSG.s 			page 23
+ARM GAS  /tmp/cc1PRbE5.s 			page 23
 
 
  931 005c 0320     		movs	r0, #3
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  190:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     // wait for room in the TX CB to appear
  191:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     ESOS_TASK_WAIT_WHILE_CB_IS_FULL( __pst_CB_Tx );
  192:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     // write the data in the TX CB
-ARM GAS  /tmp/ccZdmLSG.s 			page 24
+ARM GAS  /tmp/cc1PRbE5.s 			page 24
 
 
  193:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     __esos_CB_WriteUINT8( __pst_CB_Tx, *psz_local++ );
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  191:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     // write the data in the TX CB
  1017              		.loc 1 191 5 discriminator 1 view .LVU285
  1018 0032 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
-ARM GAS  /tmp/ccZdmLSG.s 			page 25
+ARM GAS  /tmp/cc1PRbE5.s 			page 25
 
 
  1019 0034 13F00400 		ands	r0, r3, #4
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1062 0074 43F00103 		orr	r3, r3, #1
  1063 0078 A370     		strb	r3, [r4, #2]
  1064 007a E7E7     		b	.L84
-ARM GAS  /tmp/ccZdmLSG.s 			page 26
+ARM GAS  /tmp/cc1PRbE5.s 			page 26
 
 
  1065              	.L89:
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1109 0012 14D0     		beq	.L92
  1110              	.LVL66:
  1111              	.L93:
-ARM GAS  /tmp/ccZdmLSG.s 			page 27
+ARM GAS  /tmp/cc1PRbE5.s 			page 27
 
 
  210:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   u8_LocalSize = u8_size;
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1147              		.loc 1 213 16 is_stmt 1 discriminator 2 view .LVU320
  213:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     //wait for the RX character to arrive
  1148              		.loc 1 213 20 is_stmt 0 discriminator 2 view .LVU321
-ARM GAS  /tmp/ccZdmLSG.s 			page 28
+ARM GAS  /tmp/cc1PRbE5.s 			page 28
 
 
  1149 002e 184B     		ldr	r3, .L102+8
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  216:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   } // end for(...)
  1191              		.loc 1 216 25 discriminator 9 view .LVU334
  1192 006c B855     		strb	r0, [r7, r6]
-ARM GAS  /tmp/ccZdmLSG.s 			page 29
+ARM GAS  /tmp/cc1PRbE5.s 			page 29
 
 
  213:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     //wait for the RX character to arrive
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1231              		.loc 1 232 53 view -0
  1232              		.cfi_startproc
  1233              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccZdmLSG.s 			page 30
+ARM GAS  /tmp/cc1PRbE5.s 			page 30
 
 
  1234              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  235:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   for (u8_i=0; u8_i<(ESOS_SERIAL_OUT_EP_SIZE-1); u8_i++) {
  1276              		.loc 1 235 20 is_stmt 1 discriminator 1 view .LVU353
  236:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   for (u8_i=0; u8_i<(ESOS_SERIAL_OUT_EP_SIZE-1); u8_i++) {
-ARM GAS  /tmp/ccZdmLSG.s 			page 31
+ARM GAS  /tmp/cc1PRbE5.s 			page 31
 
 
  1277              		.loc 1 236 3 discriminator 1 view .LVU354
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1317 0052 0F4E     		ldr	r6, .L117
  1318 0054 3778     		ldrb	r7, [r6]	@ zero_extendqisi2
  239:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****     if ((pau8_buff[u8_i] == '\n') || (pau8_buff[u8_i] == '\r') || (pau8_buff[u8_i] == 0)) break;
-ARM GAS  /tmp/ccZdmLSG.s 			page 32
+ARM GAS  /tmp/cc1PRbE5.s 			page 32
 
 
  1319              		.loc 1 239 23 discriminator 9 view .LVU369
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  242:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   ESOS_TASK_END();
  1360              		.loc 1 242 19 view .LVU383
  1361 0088 0022     		movs	r2, #0
-ARM GAS  /tmp/ccZdmLSG.s 			page 33
+ARM GAS  /tmp/cc1PRbE5.s 			page 33
 
 
  1362 008a EA54     		strb	r2, [r5, r3]
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1405 000e F9D0     		beq	.L120
  258:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   // write the data in the TX CB
  259:/home/ryan/Documents/Github/esos32/src/esos_comm.c ****   __esos_CB_WriteUINT8( __pst_CB_Tx, u8_c);
-ARM GAS  /tmp/ccZdmLSG.s 			page 34
+ARM GAS  /tmp/cc1PRbE5.s 			page 34
 
 
  1406              		.loc 1 259 3 is_stmt 1 view .LVU391
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1452 000a 0288     		ldrh	r2, [r0]
  1453 000c 8388     		ldrh	r3, [r0, #4]
  1454              		.loc 1 269 11 discriminator 1 view .LVU401
-ARM GAS  /tmp/ccZdmLSG.s 			page 35
+ARM GAS  /tmp/cc1PRbE5.s 			page 35
 
 
  1455 000e 9A42     		cmp	r2, r3
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1498 0000 08B5     		push	{r3, lr}
  1499              	.LCFI11:
  1500              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/ccZdmLSG.s 			page 36
+ARM GAS  /tmp/cc1PRbE5.s 			page 36
 
 
  1501              		.cfi_offset 3, -8
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1548              		.section	.bss.__pst_CB_Rx,"aw",%nobits
  1549              		.align	2
  1550              		.set	.LANCHOR0,. + 0
-ARM GAS  /tmp/ccZdmLSG.s 			page 37
+ARM GAS  /tmp/cc1PRbE5.s 			page 37
 
 
  1553              	__pst_CB_Rx:
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1608 0000 00000000 		.space	5
  1608      00
  1609              		.section	.bss.pau8_LocalPtr.2,"aw",%nobits
-ARM GAS  /tmp/ccZdmLSG.s 			page 38
+ARM GAS  /tmp/cc1PRbE5.s 			page 38
 
 
  1610              		.align	2
@@ -2267,94 +2267,94 @@ ARM GAS  /tmp/ccZdmLSG.s 			page 1
  1671              		.file 6 "/home/ryan/Documents/Github/esos32/include/esos_mail.h"
  1672              		.file 7 "/home/ryan/Documents/Github/esos32/include/esos_task.h"
  1673              		.file 8 "/home/ryan/Documents/Github/esos32/include/esos_comm.h"
-ARM GAS  /tmp/ccZdmLSG.s 			page 39
+ARM GAS  /tmp/cc1PRbE5.s 			page 39
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 esos_comm.c
-     /tmp/ccZdmLSG.s:20     .text.__esos_InitCommSystem:0000000000000000 $t
-     /tmp/ccZdmLSG.s:26     .text.__esos_InitCommSystem:0000000000000000 __esos_InitCommSystem
-     /tmp/ccZdmLSG.s:67     .text.__esos_InitCommSystem:0000000000000028 $d
-     /tmp/ccZdmLSG.s:77     .text.__esos_u8_GetMSBHexCharFromUint8:0000000000000000 $t
-     /tmp/ccZdmLSG.s:83     .text.__esos_u8_GetMSBHexCharFromUint8:0000000000000000 __esos_u8_GetMSBHexCharFromUint8
-     /tmp/ccZdmLSG.s:118    .text.__esos_u8_GetLSBHexCharFromUint8:0000000000000000 $t
-     /tmp/ccZdmLSG.s:124    .text.__esos_u8_GetLSBHexCharFromUint8:0000000000000000 __esos_u8_GetLSBHexCharFromUint8
-     /tmp/ccZdmLSG.s:159    .text.__esos_OutChar:0000000000000000 $t
-     /tmp/ccZdmLSG.s:165    .text.__esos_OutChar:0000000000000000 __esos_OutChar
-     /tmp/ccZdmLSG.s:270    .text.__esos_OutChar:000000000000006c $d
-     /tmp/ccZdmLSG.s:276    .text.__esos_OutUint8AsHexString:0000000000000000 $t
-     /tmp/ccZdmLSG.s:282    .text.__esos_OutUint8AsHexString:0000000000000000 __esos_OutUint8AsHexString
-     /tmp/ccZdmLSG.s:412    .text.__esos_OutUint8AsHexString:000000000000008c $d
-     /tmp/ccZdmLSG.s:418    .text.__esos_OutUint8AsDecString:0000000000000000 $t
-     /tmp/ccZdmLSG.s:424    .text.__esos_OutUint8AsDecString:0000000000000000 __esos_OutUint8AsDecString
-     /tmp/ccZdmLSG.s:617    .text.__esos_OutUint8AsDecString:00000000000000f4 $d
-     /tmp/ccZdmLSG.s:627    .text.__esos_OutUint32AsHexString:0000000000000000 $t
-     /tmp/ccZdmLSG.s:633    .text.__esos_OutUint32AsHexString:0000000000000000 __esos_OutUint32AsHexString
-     /tmp/ccZdmLSG.s:830    .text.__esos_OutUint32AsHexString:00000000000000e0 $d
-     /tmp/ccZdmLSG.s:837    .text.__esos_OutCharBuffer:0000000000000000 $t
-     /tmp/ccZdmLSG.s:843    .text.__esos_OutCharBuffer:0000000000000000 __esos_OutCharBuffer
-     /tmp/ccZdmLSG.s:941    .text.__esos_OutCharBuffer:0000000000000068 $d
-     /tmp/ccZdmLSG.s:946    .text.__esos_OutString:0000000000000000 $t
-     /tmp/ccZdmLSG.s:952    .text.__esos_OutString:0000000000000000 __esos_OutString
-     /tmp/ccZdmLSG.s:1068   .text.__esos_OutString:000000000000007c $d
-     /tmp/ccZdmLSG.s:1074   .text.__esos_getBuffer:0000000000000000 $t
-     /tmp/ccZdmLSG.s:1080   .text.__esos_getBuffer:0000000000000000 __esos_getBuffer
-     /tmp/ccZdmLSG.s:1214   .text.__esos_getBuffer:0000000000000088 $d
-     /tmp/ccZdmLSG.s:1222   .text.__esos_getString:0000000000000000 $t
-     /tmp/ccZdmLSG.s:1228   .text.__esos_getString:0000000000000000 __esos_getString
-     /tmp/ccZdmLSG.s:1367   .text.__esos_getString:0000000000000090 $d
-     /tmp/ccZdmLSG.s:1373   .text.__esos_unsafe_PutUint8:0000000000000000 $t
-     /tmp/ccZdmLSG.s:1379   .text.__esos_unsafe_PutUint8:0000000000000000 __esos_unsafe_PutUint8
-     /tmp/ccZdmLSG.s:1417   .text.__esos_unsafe_PutUint8:000000000000001c $d
-     /tmp/ccZdmLSG.s:1422   .text.__esos_unsafe_PutString:0000000000000000 $t
-     /tmp/ccZdmLSG.s:1428   .text.__esos_unsafe_PutString:0000000000000000 __esos_unsafe_PutString
-     /tmp/ccZdmLSG.s:1481   .text.__esos_unsafe_PutString:0000000000000024 $d
-     /tmp/ccZdmLSG.s:1486   .text.__esos_unsafe_GetUint8:0000000000000000 $t
-     /tmp/ccZdmLSG.s:1492   .text.__esos_unsafe_GetUint8:0000000000000000 __esos_unsafe_GetUint8
-     /tmp/ccZdmLSG.s:1522   .text.__esos_unsafe_GetUint8:0000000000000014 $d
-     /tmp/ccZdmLSG.s:1566   .bss.__stChildTaskRx:0000000000000000 __stChildTaskRx
-     /tmp/ccZdmLSG.s:1572   .bss.__stChildTaskTx:0000000000000000 __stChildTaskTx
-     /tmp/ccZdmLSG.s:1553   .bss.__pst_CB_Rx:0000000000000000 __pst_CB_Rx
-     /tmp/ccZdmLSG.s:1560   .bss.__pst_CB_Tx:0000000000000000 __pst_CB_Tx
-     /tmp/ccZdmLSG.s:1579   .bss.__st_CB_Rx:0000000000000000 __st_CB_Rx
-     /tmp/ccZdmLSG.s:1586   .bss.__st_CB_Tx:0000000000000000 __st_CB_Tx
-     /tmp/ccZdmLSG.s:1539   .bss.__esos_comm_rx_buff:0000000000000000 __esos_comm_rx_buff
-     /tmp/ccZdmLSG.s:1546   .bss.__esos_comm_tx_buff:0000000000000000 __esos_comm_tx_buff
-     /tmp/ccZdmLSG.s:1535   .bss.__esos_comm_rx_buff:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1542   .bss.__esos_comm_tx_buff:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1549   .bss.__pst_CB_Rx:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1556   .bss.__pst_CB_Tx:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1563   .bss.__stChildTaskRx:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1569   .bss.__stChildTaskTx:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1575   .bss.__st_CB_Rx:0000000000000000 $d
-ARM GAS  /tmp/ccZdmLSG.s 			page 40
+     /tmp/cc1PRbE5.s:20     .text.__esos_InitCommSystem:0000000000000000 $t
+     /tmp/cc1PRbE5.s:26     .text.__esos_InitCommSystem:0000000000000000 __esos_InitCommSystem
+     /tmp/cc1PRbE5.s:67     .text.__esos_InitCommSystem:0000000000000028 $d
+     /tmp/cc1PRbE5.s:77     .text.__esos_u8_GetMSBHexCharFromUint8:0000000000000000 $t
+     /tmp/cc1PRbE5.s:83     .text.__esos_u8_GetMSBHexCharFromUint8:0000000000000000 __esos_u8_GetMSBHexCharFromUint8
+     /tmp/cc1PRbE5.s:118    .text.__esos_u8_GetLSBHexCharFromUint8:0000000000000000 $t
+     /tmp/cc1PRbE5.s:124    .text.__esos_u8_GetLSBHexCharFromUint8:0000000000000000 __esos_u8_GetLSBHexCharFromUint8
+     /tmp/cc1PRbE5.s:159    .text.__esos_OutChar:0000000000000000 $t
+     /tmp/cc1PRbE5.s:165    .text.__esos_OutChar:0000000000000000 __esos_OutChar
+     /tmp/cc1PRbE5.s:270    .text.__esos_OutChar:000000000000006c $d
+     /tmp/cc1PRbE5.s:276    .text.__esos_OutUint8AsHexString:0000000000000000 $t
+     /tmp/cc1PRbE5.s:282    .text.__esos_OutUint8AsHexString:0000000000000000 __esos_OutUint8AsHexString
+     /tmp/cc1PRbE5.s:412    .text.__esos_OutUint8AsHexString:000000000000008c $d
+     /tmp/cc1PRbE5.s:418    .text.__esos_OutUint8AsDecString:0000000000000000 $t
+     /tmp/cc1PRbE5.s:424    .text.__esos_OutUint8AsDecString:0000000000000000 __esos_OutUint8AsDecString
+     /tmp/cc1PRbE5.s:617    .text.__esos_OutUint8AsDecString:00000000000000f4 $d
+     /tmp/cc1PRbE5.s:627    .text.__esos_OutUint32AsHexString:0000000000000000 $t
+     /tmp/cc1PRbE5.s:633    .text.__esos_OutUint32AsHexString:0000000000000000 __esos_OutUint32AsHexString
+     /tmp/cc1PRbE5.s:830    .text.__esos_OutUint32AsHexString:00000000000000e0 $d
+     /tmp/cc1PRbE5.s:837    .text.__esos_OutCharBuffer:0000000000000000 $t
+     /tmp/cc1PRbE5.s:843    .text.__esos_OutCharBuffer:0000000000000000 __esos_OutCharBuffer
+     /tmp/cc1PRbE5.s:941    .text.__esos_OutCharBuffer:0000000000000068 $d
+     /tmp/cc1PRbE5.s:946    .text.__esos_OutString:0000000000000000 $t
+     /tmp/cc1PRbE5.s:952    .text.__esos_OutString:0000000000000000 __esos_OutString
+     /tmp/cc1PRbE5.s:1068   .text.__esos_OutString:000000000000007c $d
+     /tmp/cc1PRbE5.s:1074   .text.__esos_getBuffer:0000000000000000 $t
+     /tmp/cc1PRbE5.s:1080   .text.__esos_getBuffer:0000000000000000 __esos_getBuffer
+     /tmp/cc1PRbE5.s:1214   .text.__esos_getBuffer:0000000000000088 $d
+     /tmp/cc1PRbE5.s:1222   .text.__esos_getString:0000000000000000 $t
+     /tmp/cc1PRbE5.s:1228   .text.__esos_getString:0000000000000000 __esos_getString
+     /tmp/cc1PRbE5.s:1367   .text.__esos_getString:0000000000000090 $d
+     /tmp/cc1PRbE5.s:1373   .text.__esos_unsafe_PutUint8:0000000000000000 $t
+     /tmp/cc1PRbE5.s:1379   .text.__esos_unsafe_PutUint8:0000000000000000 __esos_unsafe_PutUint8
+     /tmp/cc1PRbE5.s:1417   .text.__esos_unsafe_PutUint8:000000000000001c $d
+     /tmp/cc1PRbE5.s:1422   .text.__esos_unsafe_PutString:0000000000000000 $t
+     /tmp/cc1PRbE5.s:1428   .text.__esos_unsafe_PutString:0000000000000000 __esos_unsafe_PutString
+     /tmp/cc1PRbE5.s:1481   .text.__esos_unsafe_PutString:0000000000000024 $d
+     /tmp/cc1PRbE5.s:1486   .text.__esos_unsafe_GetUint8:0000000000000000 $t
+     /tmp/cc1PRbE5.s:1492   .text.__esos_unsafe_GetUint8:0000000000000000 __esos_unsafe_GetUint8
+     /tmp/cc1PRbE5.s:1522   .text.__esos_unsafe_GetUint8:0000000000000014 $d
+     /tmp/cc1PRbE5.s:1566   .bss.__stChildTaskRx:0000000000000000 __stChildTaskRx
+     /tmp/cc1PRbE5.s:1572   .bss.__stChildTaskTx:0000000000000000 __stChildTaskTx
+     /tmp/cc1PRbE5.s:1553   .bss.__pst_CB_Rx:0000000000000000 __pst_CB_Rx
+     /tmp/cc1PRbE5.s:1560   .bss.__pst_CB_Tx:0000000000000000 __pst_CB_Tx
+     /tmp/cc1PRbE5.s:1579   .bss.__st_CB_Rx:0000000000000000 __st_CB_Rx
+     /tmp/cc1PRbE5.s:1586   .bss.__st_CB_Tx:0000000000000000 __st_CB_Tx
+     /tmp/cc1PRbE5.s:1539   .bss.__esos_comm_rx_buff:0000000000000000 __esos_comm_rx_buff
+     /tmp/cc1PRbE5.s:1546   .bss.__esos_comm_tx_buff:0000000000000000 __esos_comm_tx_buff
+     /tmp/cc1PRbE5.s:1535   .bss.__esos_comm_rx_buff:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1542   .bss.__esos_comm_tx_buff:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1549   .bss.__pst_CB_Rx:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1556   .bss.__pst_CB_Tx:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1563   .bss.__stChildTaskRx:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1569   .bss.__stChildTaskTx:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1575   .bss.__st_CB_Rx:0000000000000000 $d
+ARM GAS  /tmp/cc1PRbE5.s 			page 40
 
 
-     /tmp/ccZdmLSG.s:1582   .bss.__st_CB_Tx:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1589   .bss.au8_String.10:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1593   .bss.au8_String.10:0000000000000000 au8_String.10
-     /tmp/ccZdmLSG.s:1596   .bss.au8_String.6:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1600   .bss.au8_String.6:0000000000000000 au8_String.6
-     /tmp/ccZdmLSG.s:1603   .bss.au8_String.8:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1607   .bss.au8_String.8:0000000000000000 au8_String.8
-     /tmp/ccZdmLSG.s:1610   .bss.pau8_LocalPtr.2:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1614   .bss.pau8_LocalPtr.2:0000000000000000 pau8_LocalPtr.2
-     /tmp/ccZdmLSG.s:1617   .bss.psz_local.4:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1621   .bss.psz_local.4:0000000000000000 psz_local.4
-     /tmp/ccZdmLSG.s:1627   .bss.u8_LocalSize.3:0000000000000000 u8_LocalSize.3
-     /tmp/ccZdmLSG.s:1628   .bss.u8_LocalSize.3:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1633   .bss.u8_c.5:0000000000000000 u8_c.5
-     /tmp/ccZdmLSG.s:1634   .bss.u8_c.5:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1639   .bss.u8_c.7:0000000000000000 u8_c.7
-     /tmp/ccZdmLSG.s:1640   .bss.u8_c.7:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1645   .bss.u8_digit.9:0000000000000000 u8_digit.9
-     /tmp/ccZdmLSG.s:1646   .bss.u8_digit.9:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1651   .bss.u8_i.0:0000000000000000 u8_i.0
-     /tmp/ccZdmLSG.s:1652   .bss.u8_i.0:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1657   .bss.u8_i.1:0000000000000000 u8_i.1
-     /tmp/ccZdmLSG.s:1658   .bss.u8_i.1:0000000000000000 $d
-     /tmp/ccZdmLSG.s:1663   .bss.u8_localChar.11:0000000000000000 u8_localChar.11
-     /tmp/ccZdmLSG.s:1664   .bss.u8_localChar.11:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1582   .bss.__st_CB_Tx:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1589   .bss.au8_String.10:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1593   .bss.au8_String.10:0000000000000000 au8_String.10
+     /tmp/cc1PRbE5.s:1596   .bss.au8_String.6:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1600   .bss.au8_String.6:0000000000000000 au8_String.6
+     /tmp/cc1PRbE5.s:1603   .bss.au8_String.8:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1607   .bss.au8_String.8:0000000000000000 au8_String.8
+     /tmp/cc1PRbE5.s:1610   .bss.pau8_LocalPtr.2:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1614   .bss.pau8_LocalPtr.2:0000000000000000 pau8_LocalPtr.2
+     /tmp/cc1PRbE5.s:1617   .bss.psz_local.4:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1621   .bss.psz_local.4:0000000000000000 psz_local.4
+     /tmp/cc1PRbE5.s:1627   .bss.u8_LocalSize.3:0000000000000000 u8_LocalSize.3
+     /tmp/cc1PRbE5.s:1628   .bss.u8_LocalSize.3:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1633   .bss.u8_c.5:0000000000000000 u8_c.5
+     /tmp/cc1PRbE5.s:1634   .bss.u8_c.5:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1639   .bss.u8_c.7:0000000000000000 u8_c.7
+     /tmp/cc1PRbE5.s:1640   .bss.u8_c.7:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1645   .bss.u8_digit.9:0000000000000000 u8_digit.9
+     /tmp/cc1PRbE5.s:1646   .bss.u8_digit.9:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1651   .bss.u8_i.0:0000000000000000 u8_i.0
+     /tmp/cc1PRbE5.s:1652   .bss.u8_i.0:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1657   .bss.u8_i.1:0000000000000000 u8_i.1
+     /tmp/cc1PRbE5.s:1658   .bss.u8_i.1:0000000000000000 $d
+     /tmp/cc1PRbE5.s:1663   .bss.u8_localChar.11:0000000000000000 u8_localChar.11
+     /tmp/cc1PRbE5.s:1664   .bss.u8_localChar.11:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __esos_CB_Init

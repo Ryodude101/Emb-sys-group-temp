@@ -1,4 +1,4 @@
-build/m4_timer_uart_app.o: src/m4_timer_uart_app.c \
+build/m4_app.o: src/m4_app.c \
  /home/ryan/Documents/Github/esos32/include/esos.h \
  /home/ryan/Documents/Github/esos32/include/all_generic.h \
  /home/ryan/Documents/Github/esos32/include/esos_utils.h \

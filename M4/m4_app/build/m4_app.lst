@@ -1,0 +1,2284 @@
+ARM GAS  /tmp/ccqLurVR.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"m4_app.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.TOGGLE_LD2,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	TOGGLE_LD2:
+  26              	.LFB5:
+  27              		.file 1 "src/embsysS20.h"
+   1:src/embsysS20.h **** // HINT for TASK #2 -- FALL 2022
+   2:src/embsysS20.h **** 
+   3:src/embsysS20.h **** #ifndef EMBSYSS20_H
+   4:src/embsysS20.h **** #define EMBSYSS20_H
+   5:src/embsysS20.h **** 
+   6:src/embsysS20.h **** #ifdef __cplusplus
+   7:src/embsysS20.h **** extern "C" {
+   8:src/embsysS20.h **** #endif
+   9:src/embsysS20.h **** 
+  10:src/embsysS20.h **** //************** I N C L U D E S *****************
+  11:src/embsysS20.h **** 
+  12:src/embsysS20.h **** #include <errno.h>
+  13:src/embsysS20.h **** #include <stdio.h>
+  14:src/embsysS20.h **** #include <unistd.h>
+  15:src/embsysS20.h **** #include "embsysS20.h"
+  16:src/embsysS20.h **** #include <libopencm3/stm32/rcc.h>
+  17:src/embsysS20.h **** #include <libopencm3/stm32/gpio.h>
+  18:src/embsysS20.h **** #include <libopencm3/cm3/nvic.h>
+  19:src/embsysS20.h **** #include <libopencm3/stm32/exti.h>
+  20:src/embsysS20.h **** #include <libopencm3/stm32/flash.h>
+  21:src/embsysS20.h **** #include <libopencm3/stm32/timer.h>
+  22:src/embsysS20.h **** #include <string.h>
+  23:src/embsysS20.h **** #include <stdlib.h>
+  24:src/embsysS20.h **** #include <stdbool.h>
+  25:src/embsysS20.h **** 
+  26:src/embsysS20.h **** 
+  27:src/embsysS20.h **** //************** G L O B A L S *****************
+  28:src/embsysS20.h **** 
+  29:src/embsysS20.h **** #define LD2_Pin GPIO5 // Connected to PA5
+  30:src/embsysS20.h **** #define LD2_Port GPIOA
+  31:src/embsysS20.h **** #define B1_Pin GPIO13 // Connected to PC13
+ARM GAS  /tmp/ccqLurVR.s 			page 2
+
+
+  32:src/embsysS20.h **** #define B1_Port GPIOC
+  33:src/embsysS20.h **** 
+  34:src/embsysS20.h **** 
+  35:src/embsysS20.h **** //********* S U P P O R T     F U N C T I O N S *****************
+  36:src/embsysS20.h **** 
+  37:src/embsysS20.h **** static void TURN_ON_LD2(void){
+  38:src/embsysS20.h **** 	gpio_set(LD2_Port, LD2_Pin);
+  39:src/embsysS20.h **** }
+  40:src/embsysS20.h **** 
+  41:src/embsysS20.h **** static void TURN_OFF_LD2(void){
+  42:src/embsysS20.h **** 	gpio_clear(LD2_Port, LD2_Pin);
+  43:src/embsysS20.h **** }
+  44:src/embsysS20.h **** 
+  45:src/embsysS20.h **** static void TOGGLE_LD2(void){
+  28              		.loc 1 45 29 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  46:src/embsysS20.h **** 	gpio_toggle(LD2_Port, LD2_Pin);
+  37              		.loc 1 46 2 view .LVU1
+  38 0002 2021     		movs	r1, #32
+  39 0004 4FF09040 		mov	r0, #1207959552
+  40 0008 FFF7FEFF 		bl	gpio_toggle
+  41              	.LVL0:
+  47:src/embsysS20.h **** }
+  42              		.loc 1 47 1 is_stmt 0 view .LVU2
+  43 000c 08BD     		pop	{r3, pc}
+  44              		.cfi_endproc
+  45              	.LFE5:
+  47              		.section	.text.IS_B1_RELEASED,"ax",%progbits
+  48              		.align	1
+  49              		.syntax unified
+  50              		.thumb
+  51              		.thumb_func
+  53              	IS_B1_RELEASED:
+  54              	.LFB8:
+  48:src/embsysS20.h **** 
+  49:src/embsysS20.h **** static bool IS_LD2_SET(void){
+  50:src/embsysS20.h **** 	if (gpio_get(LD2_Port, LD2_Pin) == 1)
+  51:src/embsysS20.h **** 		return true;
+  52:src/embsysS20.h **** 	else
+  53:src/embsysS20.h **** 		return false;
+  54:src/embsysS20.h **** }
+  55:src/embsysS20.h **** 
+  56:src/embsysS20.h **** static bool IS_LD2_RESET(void){
+  57:src/embsysS20.h **** 	if (gpio_get(LD2_Port, LD2_Pin) == 0)
+  58:src/embsysS20.h **** 		return true;
+  59:src/embsysS20.h **** 	else
+  60:src/embsysS20.h **** 		return false;
+  61:src/embsysS20.h **** }
+  62:src/embsysS20.h **** 
+  63:src/embsysS20.h **** static bool IS_B1_RELEASED(void){
+ARM GAS  /tmp/ccqLurVR.s 			page 3
+
+
+  55              		.loc 1 63 33 is_stmt 1 view -0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59 0000 08B5     		push	{r3, lr}
+  60              	.LCFI1:
+  61              		.cfi_def_cfa_offset 8
+  62              		.cfi_offset 3, -8
+  63              		.cfi_offset 14, -4
+  64:src/embsysS20.h **** 	if (gpio_get(B1_Port, B1_Pin) > 0)
+  64              		.loc 1 64 2 view .LVU4
+  65              		.loc 1 64 6 is_stmt 0 view .LVU5
+  66 0002 4FF40051 		mov	r1, #8192
+  67 0006 0448     		ldr	r0, .L7
+  68 0008 FFF7FEFF 		bl	gpio_get
+  69              	.LVL1:
+  70              		.loc 1 64 5 view .LVU6
+  71 000c 08B1     		cbz	r0, .L5
+  65:src/embsysS20.h **** 		return true;
+  72              		.loc 1 65 10 view .LVU7
+  73 000e 0120     		movs	r0, #1
+  74              	.L4:
+  66:src/embsysS20.h **** 	else
+  67:src/embsysS20.h **** 		return false;
+  68:src/embsysS20.h **** }
+  75              		.loc 1 68 1 view .LVU8
+  76 0010 08BD     		pop	{r3, pc}
+  77              	.L5:
+  67:src/embsysS20.h **** }
+  78              		.loc 1 67 10 view .LVU9
+  79 0012 0020     		movs	r0, #0
+  80 0014 FCE7     		b	.L4
+  81              	.L8:
+  82 0016 00BF     		.align	2
+  83              	.L7:
+  84 0018 00080048 		.word	1207961600
+  85              		.cfi_endproc
+  86              	.LFE8:
+  88              		.section	.text.flash_LED,"ax",%progbits
+  89              		.align	1
+  90              		.global	flash_LED
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  95              	flash_LED:
+  96              	.LVL2:
+  97              	.LFB10:
+  98              		.file 2 "src/m4_app.c"
+   1:src/m4_app.c  **** /*
+   2:src/m4_app.c  ****  * "Copyright (c) 2019 J. W. Bruce ("AUTHOR(S)")"
+   3:src/m4_app.c  ****  * All rights reserved.
+   4:src/m4_app.c  ****  * (J. W. Bruce, jwbruce_AT_tntech.edu, Tennessee Tech University)
+   5:src/m4_app.c  ****  *
+   6:src/m4_app.c  ****  * Permission to use, copy, modify, and distribute this software and its
+   7:src/m4_app.c  ****  * documentation for any purpose, without fee, and without written agreement is
+   8:src/m4_app.c  ****  * hereby granted, provided that the above copyright notice, the following
+   9:src/m4_app.c  ****  * two paragraphs and the authors appear in all copies of this software.
+ARM GAS  /tmp/ccqLurVR.s 			page 4
+
+
+  10:src/m4_app.c  ****  *
+  11:src/m4_app.c  ****  * IN NO EVENT SHALL THE "AUTHORS" BE LIABLE TO ANY PARTY FOR
+  12:src/m4_app.c  ****  * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
+  13:src/m4_app.c  ****  * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE "AUTHORS"
+  14:src/m4_app.c  ****  * HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  15:src/m4_app.c  ****  *
+  16:src/m4_app.c  ****  * THE "AUTHORS" SPECIFICALLY DISCLAIMS ANY WARRANTIES,
+  17:src/m4_app.c  ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+  18:src/m4_app.c  ****  * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
+  19:src/m4_app.c  ****  * ON AN "AS IS" BASIS, AND THE "AUTHORS" HAS NO OBLIGATION TO
+  20:src/m4_app.c  ****  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
+  21:src/m4_app.c  ****  *
+  22:src/m4_app.c  ****  * Please maintain this header in its entirety when copying/modifying
+  23:src/m4_app.c  ****  * these files.
+  24:src/m4_app.c  ****  *
+  25:src/m4_app.c  ****  *
+  26:src/m4_app.c  ****  */
+  27:src/m4_app.c  **** 
+  28:src/m4_app.c  **** // #define ESOS_USE_IRQS
+  29:src/m4_app.c  **** 
+  30:src/m4_app.c  **** // INCLUDEs go here  (First include the main esos.h file)
+  31:src/m4_app.c  **** //      After that, the user can include what they need
+  32:src/m4_app.c  **** #include    "esos.h"
+  33:src/m4_app.c  **** #include  "embsysS20.h"
+  34:src/m4_app.c  **** #ifdef __linux
+  35:src/m4_app.c  **** #include    "esos_pc.h"
+  36:src/m4_app.c  **** #include    "esos_pc_stdio.h"
+  37:src/m4_app.c  **** // INCLUDE these so our printf and other PC hacks work
+  38:src/m4_app.c  **** #include <stdio.h>
+  39:src/m4_app.c  **** #include <sys/select.h>
+  40:src/m4_app.c  **** #include <termios.h>
+  41:src/m4_app.c  **** #include <unistd.h>
+  42:src/m4_app.c  **** #include <stdlib>
+  43:src/m4_app.c  **** #else
+  44:src/m4_app.c  **** #include    "esos_stm32l4.h"
+  45:src/m4_app.c  **** #include    "esos_stm32l4_rs232.h"
+  46:src/m4_app.c  **** #endif
+  47:src/m4_app.c  **** 
+  48:src/m4_app.c  **** // Defines
+  49:src/m4_app.c  **** #define DECODE_FLASH 62 // Half of 0.125 s period for decoding flash rounded down to avoid floats
+  50:src/m4_app.c  **** #define ENCODE_FLASH 250 // Half of 0.5 s period for encoding flash. Used for default encode period
+  51:src/m4_app.c  **** 
+  52:src/m4_app.c  **** void __user_init_hw( void );
+  53:src/m4_app.c  **** 
+  54:src/m4_app.c  **** 
+  55:src/m4_app.c  **** // GLOBALs go here
+  56:src/m4_app.c  **** static uint16_t u16_encode_periodHalf = ENCODE_FLASH; // Global encode period variable to be change
+  57:src/m4_app.c  **** 
+  58:src/m4_app.c  **** #ifdef _linux
+  59:src/m4_app.c  **** #endif
+  60:src/m4_app.c  **** 
+  61:src/m4_app.c  **** ESOS_USER_TASK( flash_LED ) 
+  62:src/m4_app.c  **** {
+  99              		.loc 2 62 1 is_stmt 1 view -0
+ 100              		.cfi_startproc
+ 101              		@ args = 0, pretend = 0, frame = 0
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccqLurVR.s 			page 5
+
+
+ 103              		.loc 2 62 1 is_stmt 0 view .LVU11
+ 104 0000 38B5     		push	{r3, r4, r5, lr}
+ 105              	.LCFI2:
+ 106              		.cfi_def_cfa_offset 16
+ 107              		.cfi_offset 3, -16
+ 108              		.cfi_offset 4, -12
+ 109              		.cfi_offset 5, -8
+ 110              		.cfi_offset 14, -4
+ 111 0002 0446     		mov	r4, r0
+  63:src/m4_app.c  **** 	ESOS_TASK_BEGIN(); // Start flash_LED
+ 112              		.loc 2 63 2 is_stmt 1 view .LVU12
+ 113 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 114 0006 63F07F03 		orn	r3, r3, #127
+ 115 000a 8370     		strb	r3, [r0, #2]
+ 116              		.loc 2 63 2 view .LVU13
+ 117 000c 0388     		ldrh	r3, [r0]
+ 118 000e 452B     		cmp	r3, #69
+ 119 0010 22D0     		beq	.L10
+ 120 0012 492B     		cmp	r3, #73
+ 121 0014 36D0     		beq	.L11
+ 122 0016 93B1     		cbz	r3, .L18
+  64:src/m4_app.c  **** 	while (TRUE) 
+  65:src/m4_app.c  **** 	{
+  66:src/m4_app.c  **** 		TOGGLE_LD2();
+  67:src/m4_app.c  **** 		if (IS_B1_RELEASED())
+  68:src/m4_app.c  **** 		{
+  69:src/m4_app.c  **** 			ESOS_TASK_WAIT_TICKS( u16_encode_periodHalf );
+  70:src/m4_app.c  **** 		}
+  71:src/m4_app.c  **** 		else
+  72:src/m4_app.c  **** 		{ 
+  73:src/m4_app.c  **** 			ESOS_TASK_WAIT_TICKS( DECODE_FLASH );
+  74:src/m4_app.c  **** 		}
+  75:src/m4_app.c  **** 
+  76:src/m4_app.c  **** 	} // endof while(TRUE)
+  77:src/m4_app.c  **** 	ESOS_TASK_END();
+ 123              		.loc 2 77 2 view .LVU14
+ 124              		.loc 2 77 2 view .LVU15
+ 125 0018 0823     		movs	r3, #8
+ 126 001a 8370     		strb	r3, [r0, #2]
+ 127              		.loc 2 77 2 view .LVU16
+ 128 001c 0023     		movs	r3, #0
+ 129 001e 0380     		strh	r3, [r0]	@ movhi
+ 130              		.loc 2 77 2 view .LVU17
+ 131              		.loc 2 77 2 view .LVU18
+ 132              		.loc 2 77 2 view .LVU19
+ 133 0020 0325     		movs	r5, #3
+ 134              	.LVL3:
+ 135              	.L15:
+ 136              		.loc 2 77 17 discriminator 1 view .LVU20
+  78:src/m4_app.c  **** } // end flash_LED() 
+ 137              		.loc 2 78 1 is_stmt 0 discriminator 1 view .LVU21
+ 138 0022 2846     		mov	r0, r5
+ 139 0024 38BD     		pop	{r3, r4, r5, pc}
+ 140              	.LVL4:
+ 141              	.L23:
+  69:src/m4_app.c  **** 		}
+ 142              		.loc 2 69 4 is_stmt 1 discriminator 2 view .LVU22
+ARM GAS  /tmp/ccqLurVR.s 			page 6
+
+
+ 143 0026 0423     		movs	r3, #4
+ 144 0028 A370     		strb	r3, [r4, #2]
+  69:src/m4_app.c  **** 		}
+ 145              		.loc 2 69 4 discriminator 2 view .LVU23
+ 146 002a 0325     		movs	r5, #3
+ 147 002c F9E7     		b	.L15
+ 148              	.L16:
+  69:src/m4_app.c  **** 		}
+ 149              		.loc 2 69 4 discriminator 5 view .LVU24
+ 150 002e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 151 0030 43F00103 		orr	r3, r3, #1
+ 152 0034 A370     		strb	r3, [r4, #2]
+ 153              	.L17:
+  69:src/m4_app.c  **** 		}
+ 154              		.loc 2 69 4 discriminator 7 view .LVU25
+ 155 0036 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 156 0038 13F0010F 		tst	r3, #1
+ 157 003c F1D1     		bne	.L15
+ 158              	.L18:
+  63:src/m4_app.c  **** 	while (TRUE) 
+ 159              		.loc 2 63 19 discriminator 1 view .LVU26
+  64:src/m4_app.c  **** 	{
+ 160              		.loc 2 64 2 discriminator 1 view .LVU27
+  66:src/m4_app.c  **** 		if (IS_B1_RELEASED())
+ 161              		.loc 2 66 3 discriminator 1 view .LVU28
+ 162 003e FFF7FEFF 		bl	TOGGLE_LD2
+ 163              	.LVL5:
+  67:src/m4_app.c  **** 		{
+ 164              		.loc 2 67 3 discriminator 1 view .LVU29
+  67:src/m4_app.c  **** 		{
+ 165              		.loc 2 67 7 is_stmt 0 discriminator 1 view .LVU30
+ 166 0042 FFF7FEFF 		bl	IS_B1_RELEASED
+ 167              	.LVL6:
+  67:src/m4_app.c  **** 		{
+ 168              		.loc 2 67 6 discriminator 1 view .LVU31
+ 169 0046 B0B1     		cbz	r0, .L13
+  69:src/m4_app.c  **** 		}
+ 170              		.loc 2 69 4 is_stmt 1 view .LVU32
+  69:src/m4_app.c  **** 		}
+ 171              		.loc 2 69 4 view .LVU33
+ 172 0048 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 173              	.LVL7:
+ 174 004c A060     		str	r0, [r4, #8]
+  69:src/m4_app.c  **** 		}
+ 175              		.loc 2 69 4 view .LVU34
+ 176 004e 1B4B     		ldr	r3, .L25
+ 177 0050 1B88     		ldrh	r3, [r3]
+ 178 0052 E360     		str	r3, [r4, #12]
+  69:src/m4_app.c  **** 		}
+ 179              		.loc 2 69 4 view .LVU35
+  69:src/m4_app.c  **** 		}
+ 180              		.loc 2 69 4 view .LVU36
+ 181 0054 4523     		movs	r3, #69
+ 182 0056 2380     		strh	r3, [r4]	@ movhi
+ 183              	.L10:
+  69:src/m4_app.c  **** 		}
+ 184              		.loc 2 69 4 discriminator 1 view .LVU37
+ARM GAS  /tmp/ccqLurVR.s 			page 7
+
+
+  69:src/m4_app.c  **** 		}
+ 185              		.loc 2 69 4 discriminator 1 view .LVU38
+ 186 0058 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 187 005a 15F00405 		ands	r5, r5, #4
+ 188 005e E2D1     		bne	.L23
+  69:src/m4_app.c  **** 		}
+ 189              		.loc 2 69 4 discriminator 3 view .LVU39
+ 190 0060 E168     		ldr	r1, [r4, #12]
+ 191 0062 A068     		ldr	r0, [r4, #8]
+ 192 0064 FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 193              	.LVL8:
+ 194 0068 0028     		cmp	r0, #0
+ 195 006a E0D0     		beq	.L16
+  69:src/m4_app.c  **** 		}
+ 196              		.loc 2 69 4 discriminator 4 view .LVU40
+ 197 006c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 198 006e 23F00103 		bic	r3, r3, #1
+ 199 0072 A370     		strb	r3, [r4, #2]
+ 200 0074 DFE7     		b	.L17
+ 201              	.L13:
+  73:src/m4_app.c  **** 		}
+ 202              		.loc 2 73 4 view .LVU41
+  73:src/m4_app.c  **** 		}
+ 203              		.loc 2 73 4 view .LVU42
+ 204 0076 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 205              	.LVL9:
+ 206 007a A060     		str	r0, [r4, #8]
+  73:src/m4_app.c  **** 		}
+ 207              		.loc 2 73 4 view .LVU43
+ 208 007c 3E23     		movs	r3, #62
+ 209 007e E360     		str	r3, [r4, #12]
+  73:src/m4_app.c  **** 		}
+ 210              		.loc 2 73 4 view .LVU44
+  73:src/m4_app.c  **** 		}
+ 211              		.loc 2 73 4 view .LVU45
+ 212 0080 4923     		movs	r3, #73
+ 213 0082 2380     		strh	r3, [r4]	@ movhi
+ 214              	.L11:
+  73:src/m4_app.c  **** 		}
+ 215              		.loc 2 73 4 discriminator 1 view .LVU46
+  73:src/m4_app.c  **** 		}
+ 216              		.loc 2 73 4 discriminator 1 view .LVU47
+ 217 0084 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 218 0086 15F00405 		ands	r5, r5, #4
+ 219 008a 0DD1     		bne	.L24
+  73:src/m4_app.c  **** 		}
+ 220              		.loc 2 73 4 discriminator 3 view .LVU48
+ 221 008c E168     		ldr	r1, [r4, #12]
+ 222 008e A068     		ldr	r0, [r4, #8]
+ 223 0090 FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 224              	.LVL10:
+ 225 0094 60B1     		cbz	r0, .L20
+  73:src/m4_app.c  **** 		}
+ 226              		.loc 2 73 4 discriminator 4 view .LVU49
+ 227 0096 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 228 0098 23F00103 		bic	r3, r3, #1
+ 229 009c A370     		strb	r3, [r4, #2]
+ARM GAS  /tmp/ccqLurVR.s 			page 8
+
+
+ 230              	.L21:
+  73:src/m4_app.c  **** 		}
+ 231              		.loc 2 73 4 discriminator 7 view .LVU50
+ 232 009e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 233 00a0 13F0010F 		tst	r3, #1
+ 234 00a4 CBD0     		beq	.L18
+ 235 00a6 BCE7     		b	.L15
+ 236              	.L24:
+  73:src/m4_app.c  **** 		}
+ 237              		.loc 2 73 4 discriminator 2 view .LVU51
+ 238 00a8 0423     		movs	r3, #4
+ 239 00aa A370     		strb	r3, [r4, #2]
+  73:src/m4_app.c  **** 		}
+ 240              		.loc 2 73 4 discriminator 2 view .LVU52
+ 241 00ac 0325     		movs	r5, #3
+ 242 00ae B8E7     		b	.L15
+ 243              	.L20:
+  73:src/m4_app.c  **** 		}
+ 244              		.loc 2 73 4 discriminator 5 view .LVU53
+ 245 00b0 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 246 00b2 43F00103 		orr	r3, r3, #1
+ 247 00b6 A370     		strb	r3, [r4, #2]
+ 248 00b8 F1E7     		b	.L21
+ 249              	.L26:
+ 250 00ba 00BF     		.align	2
+ 251              	.L25:
+ 252 00bc 00000000 		.word	.LANCHOR0
+ 253              		.cfi_endproc
+ 254              	.LFE10:
+ 256              		.section	.text.IS_B1_PRESSED,"ax",%progbits
+ 257              		.align	1
+ 258              		.syntax unified
+ 259              		.thumb
+ 260              		.thumb_func
+ 262              	IS_B1_PRESSED:
+ 263              	.LFB9:
+  69:src/embsysS20.h **** 
+  70:src/embsysS20.h **** static bool IS_B1_PRESSED(void){
+ 264              		.loc 1 70 32 view -0
+ 265              		.cfi_startproc
+ 266              		@ args = 0, pretend = 0, frame = 0
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268 0000 08B5     		push	{r3, lr}
+ 269              	.LCFI3:
+ 270              		.cfi_def_cfa_offset 8
+ 271              		.cfi_offset 3, -8
+ 272              		.cfi_offset 14, -4
+  71:src/embsysS20.h **** 	if (!IS_B1_RELEASED())
+ 273              		.loc 1 71 2 view .LVU55
+ 274              		.loc 1 71 7 is_stmt 0 view .LVU56
+ 275 0002 FFF7FEFF 		bl	IS_B1_RELEASED
+ 276              	.LVL11:
+ 277              		.loc 1 71 5 view .LVU57
+ 278 0006 08B9     		cbnz	r0, .L29
+  72:src/embsysS20.h **** 		return true;
+ 279              		.loc 1 72 10 view .LVU58
+ 280 0008 0120     		movs	r0, #1
+ARM GAS  /tmp/ccqLurVR.s 			page 9
+
+
+ 281              	.L28:
+  73:src/embsysS20.h **** 	else
+  74:src/embsysS20.h **** 		return false;
+  75:src/embsysS20.h **** }
+ 282              		.loc 1 75 1 view .LVU59
+ 283 000a 08BD     		pop	{r3, pc}
+ 284              	.L29:
+  74:src/embsysS20.h **** }
+ 285              		.loc 1 74 10 view .LVU60
+ 286 000c 0020     		movs	r0, #0
+ 287 000e FCE7     		b	.L28
+ 288              		.cfi_endproc
+ 289              	.LFE9:
+ 291              		.section	.text.usart_comms,"ax",%progbits
+ 292              		.align	1
+ 293              		.global	usart_comms
+ 294              		.syntax unified
+ 295              		.thumb
+ 296              		.thumb_func
+ 298              	usart_comms:
+ 299              	.LVL12:
+ 300              	.LFB11:
+  79:src/m4_app.c  **** 
+  80:src/m4_app.c  **** ESOS_USER_TASK( usart_comms )
+  81:src/m4_app.c  **** {
+ 301              		.loc 2 81 1 is_stmt 1 view -0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305              		.loc 2 81 1 is_stmt 0 view .LVU62
+ 306 0000 70B5     		push	{r4, r5, r6, lr}
+ 307              	.LCFI4:
+ 308              		.cfi_def_cfa_offset 16
+ 309              		.cfi_offset 4, -16
+ 310              		.cfi_offset 5, -12
+ 311              		.cfi_offset 6, -8
+ 312              		.cfi_offset 14, -4
+ 313 0002 0446     		mov	r4, r0
+  82:src/m4_app.c  **** 	// Variable declarations
+  83:src/m4_app.c  **** 	static uint8_t u8_incoming; // Holds UART input/output character
+ 314              		.loc 2 83 2 is_stmt 1 view .LVU63
+  84:src/m4_app.c  **** 	static uint8_t au8_key[] = {'T', 'E', 'N', 'N', 'E', 'S', 'S', 'E', 'E', 'T', 'E', 'C', 'H'}; // A
+ 315              		.loc 2 84 2 view .LVU64
+  85:src/m4_app.c  **** 	static uint8_t u8_countEncode = 0; // Encode function's position in Vigenere key
+ 316              		.loc 2 85 2 view .LVU65
+  86:src/m4_app.c  **** 	static uint8_t u8_countDecode = 0; // Decode's position in key
+ 317              		.loc 2 86 2 view .LVU66
+  87:src/m4_app.c  **** 	static uint8_t u8_exclamCount = 0; // Counter for exclamation commands !!!L and !!!S####
+ 318              		.loc 2 87 2 view .LVU67
+  88:src/m4_app.c  **** 	static bool b_changeFlag = FALSE; // Flag for if period is being changed
+ 319              		.loc 2 88 2 view .LVU68
+  89:src/m4_app.c  **** 	static uint8_t u8_digitCount = 0; // Counter for digit position when changing led flash period
+ 320              		.loc 2 89 2 view .LVU69
+  90:src/m4_app.c  **** 	static uint16_t u16_changePeriod = 0; // Holds new period's value
+ 321              		.loc 2 90 2 view .LVU70
+  91:src/m4_app.c  **** 	static bool b_skipPrint = FALSE; // Flag to skip standard output printing
+ 322              		.loc 2 91 2 view .LVU71
+ARM GAS  /tmp/ccqLurVR.s 			page 10
+
+
+  92:src/m4_app.c  **** 	static char ac_charArr[10]; // Character array to cycle through for outputting period during !!!L 
+ 323              		.loc 2 92 2 view .LVU72
+  93:src/m4_app.c  **** 	static uint8_t u8_charCount = 0; // Counter for position in charArr[]
+ 324              		.loc 2 93 2 view .LVU73
+  94:src/m4_app.c  **** 	static bool b_changeFlagSkip = FALSE; // Flag for instances where period change function needs to 
+ 325              		.loc 2 94 2 view .LVU74
+  95:src/m4_app.c  **** 	
+  96:src/m4_app.c  **** 	ESOS_TASK_BEGIN(); // Beginning of usart_comms
+ 326              		.loc 2 96 2 view .LVU75
+ 327 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 328 0006 63F07F03 		orn	r3, r3, #127
+ 329 000a 8370     		strb	r3, [r0, #2]
+ 330              		.loc 2 96 2 view .LVU76
+ 331 000c 0388     		ldrh	r3, [r0]
+ 332 000e A62B     		cmp	r3, #166
+ 333 0010 00F28680 		bhi	.L32
+ 334 0014 932B     		cmp	r3, #147
+ 335 0016 19D3     		bcc	.L96
+ 336 0018 933B     		subs	r3, r3, #147
+ 337 001a 132B     		cmp	r3, #19
+ 338 001c 00F29282 		bhi	.L37
+ 339 0020 DFE813F0 		tbh	[pc, r3, lsl #1]
+ 340              	.L39:
+ 341 0024 F700     		.2byte	(.L44-.L39)/2
+ 342 0026 1201     		.2byte	(.L43-.L39)/2
+ 343 0028 9002     		.2byte	(.L37-.L39)/2
+ 344 002a 9002     		.2byte	(.L37-.L39)/2
+ 345 002c 9002     		.2byte	(.L37-.L39)/2
+ 346 002e 9002     		.2byte	(.L37-.L39)/2
+ 347 0030 9002     		.2byte	(.L37-.L39)/2
+ 348 0032 4901     		.2byte	(.L42-.L39)/2
+ 349 0034 9002     		.2byte	(.L37-.L39)/2
+ 350 0036 9002     		.2byte	(.L37-.L39)/2
+ 351 0038 9002     		.2byte	(.L37-.L39)/2
+ 352 003a 9002     		.2byte	(.L37-.L39)/2
+ 353 003c 9002     		.2byte	(.L37-.L39)/2
+ 354 003e 9002     		.2byte	(.L37-.L39)/2
+ 355 0040 9002     		.2byte	(.L37-.L39)/2
+ 356 0042 9002     		.2byte	(.L37-.L39)/2
+ 357 0044 9002     		.2byte	(.L37-.L39)/2
+ 358 0046 8F01     		.2byte	(.L41-.L39)/2
+ 359 0048 AC01     		.2byte	(.L40-.L39)/2
+ 360 004a C401     		.2byte	(.L38-.L39)/2
+ 361              		.p2align 1
+ 362              	.L96:
+ 363 004c 642B     		cmp	r3, #100
+ 364 004e 4BD0     		beq	.L34
+ 365 0050 652B     		cmp	r3, #101
+ 366 0052 44D1     		bne	.L97
+ 367              	.LVL13:
+ 368              	.L35:
+  97:src/m4_app.c  **** 	while (TRUE) {
+  98:src/m4_app.c  **** 	
+  99:src/m4_app.c  **** 	// ESOS UART comms uses 57.6k/8/N/1
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_AVAILABLE_IN_COMM();
+ 101:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 369              		.loc 2 101 3 discriminator 1 view .LVU77
+ARM GAS  /tmp/ccqLurVR.s 			page 11
+
+
+ 370              		.loc 2 101 3 discriminator 1 view .LVU78
+ 371 0054 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 372 0056 15F00405 		ands	r5, r5, #4
+ 373 005a 40F08B80 		bne	.L98
+ 374              		.loc 2 101 3 discriminator 3 view .LVU79
+ 375 005e 0122     		movs	r2, #1
+ 376 0060 A749     		ldr	r1, .L114
+ 377 0062 A848     		ldr	r0, .L114+4
+ 378 0064 FFF7FEFF 		bl	__esos_getBuffer
+ 379              	.LVL14:
+ 380 0068 0228     		cmp	r0, #2
+ 381 006a 40F28780 		bls	.L52
+ 382              		.loc 2 101 3 discriminator 4 view .LVU80
+ 383 006e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 384 0070 23F00103 		bic	r3, r3, #1
+ 385 0074 A370     		strb	r3, [r4, #2]
+ 386              	.L53:
+ 387              		.loc 2 101 3 discriminator 7 view .LVU81
+ 388 0076 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 389 0078 13F0010F 		tst	r3, #1
+ 390 007c 40F06782 		bne	.L48
+ 391              		.loc 2 101 3 discriminator 9 view .LVU82
+ 392              		.loc 2 101 3 discriminator 9 view .LVU83
+ 102:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 393              		.loc 2 102 3 discriminator 9 view .LVU84
+ 394 0080 A14A     		ldr	r2, .L114+8
+ 395 0082 1368     		ldr	r3, [r2]
+ 396 0084 23F00803 		bic	r3, r3, #8
+ 397 0088 1360     		str	r3, [r2]
+ 103:src/m4_app.c  **** 		
+ 104:src/m4_app.c  **** 		if(u8_countEncode > 12) //reset encode position in key when at the end
+ 398              		.loc 2 104 3 discriminator 9 view .LVU85
+ 399              		.loc 2 104 21 is_stmt 0 discriminator 9 view .LVU86
+ 400 008a A04B     		ldr	r3, .L114+12
+ 401 008c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 402              		.loc 2 104 5 discriminator 9 view .LVU87
+ 403 008e 0C2B     		cmp	r3, #12
+ 404 0090 02D9     		bls	.L54
+ 105:src/m4_app.c  **** 		{
+ 106:src/m4_app.c  **** 			u8_countEncode = 0;
+ 405              		.loc 2 106 4 is_stmt 1 view .LVU88
+ 406              		.loc 2 106 19 is_stmt 0 view .LVU89
+ 407 0092 9E4B     		ldr	r3, .L114+12
+ 408 0094 0022     		movs	r2, #0
+ 409 0096 1A70     		strb	r2, [r3]
+ 410              	.L54:
+ 107:src/m4_app.c  **** 		}
+ 108:src/m4_app.c  **** 		
+ 109:src/m4_app.c  **** 		if(u8_countDecode > 12) //reset decode position in key when at the end
+ 411              		.loc 2 109 3 is_stmt 1 view .LVU90
+ 412              		.loc 2 109 21 is_stmt 0 view .LVU91
+ 413 0098 9D4B     		ldr	r3, .L114+16
+ 414 009a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 415              		.loc 2 109 5 view .LVU92
+ 416 009c 0C2B     		cmp	r3, #12
+ 417 009e 02D9     		bls	.L55
+ 110:src/m4_app.c  **** 		{
+ARM GAS  /tmp/ccqLurVR.s 			page 12
+
+
+ 111:src/m4_app.c  **** 			u8_countDecode = 0;
+ 418              		.loc 2 111 4 is_stmt 1 view .LVU93
+ 419              		.loc 2 111 19 is_stmt 0 view .LVU94
+ 420 00a0 9B4B     		ldr	r3, .L114+16
+ 421 00a2 0022     		movs	r2, #0
+ 422 00a4 1A70     		strb	r2, [r3]
+ 423              	.L55:
+ 112:src/m4_app.c  **** 		}
+ 113:src/m4_app.c  **** 		
+ 114:src/m4_app.c  **** 		if (u8_incoming >= 'a' && u8_incoming <='z') //If incoming is a letter
+ 424              		.loc 2 114 3 is_stmt 1 view .LVU95
+ 425              		.loc 2 114 26 is_stmt 0 view .LVU96
+ 426 00a6 964B     		ldr	r3, .L114
+ 427 00a8 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 428 00aa A2F16103 		sub	r3, r2, #97
+ 429 00ae DBB2     		uxtb	r3, r3
+ 430              		.loc 2 114 6 view .LVU97
+ 431 00b0 192B     		cmp	r3, #25
+ 432 00b2 68D9     		bls	.L99
+ 433              	.L56:
+ 115:src/m4_app.c  **** 		{
+ 116:src/m4_app.c  **** 			u8_incoming = u8_incoming - 'a' + 'A'; //convert to capital
+ 117:src/m4_app.c  **** 			
+ 118:src/m4_app.c  **** 			if(IS_B1_RELEASED()) //encoding mode -- works!
+ 119:src/m4_app.c  **** 			{
+ 120:src/m4_app.c  **** 				//add key character to letter
+ 121:src/m4_app.c  **** 				u8_incoming = ((((u8_incoming - 'A') + (au8_key[u8_countEncode] - 'A')) % 26) + 'A');
+ 122:src/m4_app.c  **** 				//increment count
+ 123:src/m4_app.c  **** 				u8_countEncode++;
+ 124:src/m4_app.c  **** 			}
+ 125:src/m4_app.c  **** 			
+ 126:src/m4_app.c  **** 			else //decoding mode -- works!
+ 127:src/m4_app.c  **** 			{
+ 128:src/m4_app.c  **** 				//subtract key character from letter
+ 129:src/m4_app.c  **** 				u8_incoming = (((u8_incoming - au8_key[u8_countDecode]) + 26) % 26) + 'A';
+ 130:src/m4_app.c  **** 				//increment count
+ 131:src/m4_app.c  **** 				u8_countDecode++;
+ 132:src/m4_app.c  **** 			}
+ 133:src/m4_app.c  **** 		}
+ 134:src/m4_app.c  **** 		
+ 135:src/m4_app.c  **** 		if(u8_incoming == '!') //if incoming is an exclamation
+ 434              		.loc 2 135 3 is_stmt 1 view .LVU98
+ 435              		.loc 2 135 18 is_stmt 0 view .LVU99
+ 436 00b4 924B     		ldr	r3, .L114
+ 437 00b6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 438              		.loc 2 135 5 view .LVU100
+ 439 00b8 212B     		cmp	r3, #33
+ 440 00ba 00F09780 		beq	.L100
+ 136:src/m4_app.c  **** 		{
+ 137:src/m4_app.c  **** 			u8_exclamCount++;
+ 138:src/m4_app.c  **** 		}
+ 139:src/m4_app.c  **** 		
+ 140:src/m4_app.c  **** 		//report period !!!L
+ 141:src/m4_app.c  **** 		else if((u8_exclamCount >= 3) && ((u8_incoming == 'L')))
+ 441              		.loc 2 141 8 is_stmt 1 view .LVU101
+ 442              		.loc 2 141 27 is_stmt 0 view .LVU102
+ 443 00be 954A     		ldr	r2, .L114+20
+ARM GAS  /tmp/ccqLurVR.s 			page 13
+
+
+ 444 00c0 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 445              		.loc 2 141 10 view .LVU103
+ 446 00c2 022A     		cmp	r2, #2
+ 447 00c4 02D9     		bls	.L60
+ 448              		.loc 2 141 33 discriminator 1 view .LVU104
+ 449 00c6 4C2B     		cmp	r3, #76
+ 450 00c8 00F09580 		beq	.L101
+ 451              	.L60:
+ 142:src/m4_app.c  **** 		{
+ 143:src/m4_app.c  **** 			if(IS_B1_RELEASED()) // Outputs encode period is B! is not pressed
+ 144:src/m4_app.c  **** 			{
+ 145:src/m4_app.c  **** 				itoa((u16_encode_periodHalf * 2), ac_charArr, 10); // Converts current period to array
+ 146:src/m4_app.c  **** 				
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 148:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 149:src/m4_app.c  **** 				
+ 150:src/m4_app.c  **** 				u8_charCount =0;
+ 151:src/m4_app.c  **** 				
+ 152:src/m4_app.c  **** 				while(ac_charArr[u8_charCount] != '\0') // Cycles through ac_charArr to output period value
+ 153:src/m4_app.c  **** 				{
+ 154:src/m4_app.c  **** 					ESOS_TASK_WAIT_ON_SEND_UINT8( ac_charArr[u8_charCount] );
+ 155:src/m4_app.c  **** 					u8_charCount++;
+ 156:src/m4_app.c  **** 				}
+ 157:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 158:src/m4_app.c  **** 			}
+ 159:src/m4_app.c  **** 			
+ 160:src/m4_app.c  **** 			else if(IS_B1_PRESSED()) // Outputs decode period if B1 is pressed
+ 161:src/m4_app.c  **** 			{
+ 162:src/m4_app.c  **** 				u8_incoming = (DECODE_FLASH * 2);
+ 163:src/m4_app.c  **** 				
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 166:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 167:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 168:src/m4_app.c  **** 			}
+ 169:src/m4_app.c  **** 			
+ 170:src/m4_app.c  **** 			b_skipPrint = TRUE; // Skips standard character print
+ 171:src/m4_app.c  **** 			u8_exclamCount = 0; // Resets exclamation count
+ 172:src/m4_app.c  **** 		}
+ 173:src/m4_app.c  **** 		
+ 174:src/m4_app.c  **** 		//change period !!!S####
+ 175:src/m4_app.c  **** 		else if((u8_exclamCount >= 3) && (u8_incoming == 'S'))
+ 452              		.loc 2 175 8 is_stmt 1 view .LVU105
+ 453              		.loc 2 175 10 is_stmt 0 view .LVU106
+ 454 00cc 022A     		cmp	r2, #2
+ 455 00ce 02D9     		bls	.L83
+ 456              		.loc 2 175 33 discriminator 1 view .LVU107
+ 457 00d0 532B     		cmp	r3, #83
+ 458 00d2 00F0E281 		beq	.L102
+ 459              	.L83:
+ 176:src/m4_app.c  **** 		{
+ 177:src/m4_app.c  **** 			b_changeFlag = TRUE;
+ 178:src/m4_app.c  **** 			b_changeFlagSkip = TRUE;
+ 179:src/m4_app.c  **** 			u16_changePeriod = 0;
+ 180:src/m4_app.c  **** 			u8_exclamCount = 0;
+ 181:src/m4_app.c  **** 		}
+ 182:src/m4_app.c  **** 
+ARM GAS  /tmp/ccqLurVR.s 			page 14
+
+
+ 183:src/m4_app.c  **** 		else
+ 184:src/m4_app.c  **** 			u8_exclamCount = 0;
+ 460              		.loc 2 184 4 is_stmt 1 view .LVU108
+ 461              		.loc 2 184 19 is_stmt 0 view .LVU109
+ 462 00d6 8F4B     		ldr	r3, .L114+20
+ 463 00d8 0022     		movs	r2, #0
+ 464 00da 1A70     		strb	r2, [r3]
+ 465 00dc 85E1     		b	.L59
+ 466              	.LVL15:
+ 467              	.L97:
+  96:src/m4_app.c  **** 	while (TRUE) {
+ 468              		.loc 2 96 2 view .LVU110
+ 469 00de 002B     		cmp	r3, #0
+ 470 00e0 40F03082 		bne	.L37
+ 471              	.LVL16:
+ 472              	.L36:
+  96:src/m4_app.c  **** 	while (TRUE) {
+ 473              		.loc 2 96 19 is_stmt 1 discriminator 1 view .LVU111
+  97:src/m4_app.c  **** 	
+ 474              		.loc 2 97 2 discriminator 1 view .LVU112
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 475              		.loc 2 100 3 discriminator 1 view .LVU113
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 476              		.loc 2 100 3 discriminator 1 view .LVU114
+ 477 00e4 6423     		movs	r3, #100
+ 478 00e6 2380     		strh	r3, [r4]	@ movhi
+ 479              	.L34:
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 480              		.loc 2 100 3 discriminator 1 view .LVU115
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 481              		.loc 2 100 3 discriminator 1 view .LVU116
+ 482 00e8 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 483 00ea 13F00405 		ands	r5, r3, #4
+ 484 00ee 39D1     		bne	.L103
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 485              		.loc 2 100 3 discriminator 3 view .LVU117
+ 486 00f0 854A     		ldr	r2, .L114+8
+ 487 00f2 1268     		ldr	r2, [r2]
+ 488 00f4 12F0080F 		tst	r2, #8
+ 489 00f8 38D1     		bne	.L49
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 490              		.loc 2 100 3 discriminator 4 view .LVU118
+ 491 00fa 23F00103 		bic	r3, r3, #1
+ 492 00fe A370     		strb	r3, [r4, #2]
+ 493              	.L50:
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 494              		.loc 2 100 3 discriminator 7 view .LVU119
+ 495 0100 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 496 0102 13F0010F 		tst	r3, #1
+ 497 0106 40F02282 		bne	.L48
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 498              		.loc 2 100 3 discriminator 9 view .LVU120
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 499              		.loc 2 100 3 discriminator 9 view .LVU121
+ 500 010a 7F4A     		ldr	r2, .L114+8
+ 501 010c 1368     		ldr	r3, [r2]
+ 502 010e 43F00803 		orr	r3, r3, #8
+ARM GAS  /tmp/ccqLurVR.s 			page 15
+
+
+ 503 0112 1360     		str	r3, [r2]
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 504              		.loc 2 101 3 discriminator 9 view .LVU122
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 505              		.loc 2 101 3 discriminator 9 view .LVU123
+ 506 0114 7B4B     		ldr	r3, .L114+4
+ 507 0116 0022     		movs	r2, #0
+ 508 0118 1A80     		strh	r2, [r3]	@ movhi
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 509              		.loc 2 101 3 discriminator 9 view .LVU124
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 510              		.loc 2 101 3 discriminator 9 view .LVU125
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 511              		.loc 2 101 3 discriminator 9 view .LVU126
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 512              		.loc 2 101 3 discriminator 9 view .LVU127
+ 513 011a 6523     		movs	r3, #101
+ 514 011c 2380     		strh	r3, [r4]	@ movhi
+ 515 011e 99E7     		b	.L35
+ 516              	.LVL17:
+ 517              	.L32:
+  96:src/m4_app.c  **** 	while (TRUE) {
+ 518              		.loc 2 96 2 is_stmt 0 view .LVU128
+ 519 0120 E02B     		cmp	r3, #224
+ 520 0122 00F08581 		beq	.L45
+ 521 0126 E12B     		cmp	r3, #225
+ 522 0128 40F00C82 		bne	.L37
+ 523              	.LVL18:
+ 524              	.L46:
+ 185:src/m4_app.c  **** 		
+ 186:src/m4_app.c  **** 		if(b_changeFlag && !b_changeFlagSkip)
+ 187:src/m4_app.c  **** 		{	
+ 188:src/m4_app.c  **** 			//if #---
+ 189:src/m4_app.c  **** 			if(u8_digitCount == 0)
+ 190:src/m4_app.c  **** 			{
+ 191:src/m4_app.c  **** 				++u8_digitCount;
+ 192:src/m4_app.c  **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 1000);
+ 193:src/m4_app.c  **** 			}
+ 194:src/m4_app.c  **** 
+ 195:src/m4_app.c  **** 			//if -#--
+ 196:src/m4_app.c  **** 			else if(u8_digitCount == 1)
+ 197:src/m4_app.c  **** 			{
+ 198:src/m4_app.c  **** 				++u8_digitCount;
+ 199:src/m4_app.c  **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 100);
+ 200:src/m4_app.c  **** 			}
+ 201:src/m4_app.c  **** 
+ 202:src/m4_app.c  **** 			//if --#-
+ 203:src/m4_app.c  **** 			else if(u8_digitCount == 2)
+ 204:src/m4_app.c  **** 			{
+ 205:src/m4_app.c  **** 				++u8_digitCount;
+ 206:src/m4_app.c  **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 10);
+ 207:src/m4_app.c  **** 			}
+ 208:src/m4_app.c  **** 
+ 209:src/m4_app.c  **** 			//if ---#
+ 210:src/m4_app.c  **** 			else if(u8_digitCount == 3)
+ 211:src/m4_app.c  **** 			{
+ 212:src/m4_app.c  **** 				u16_changePeriod = u16_changePeriod + (u8_incoming - '0');
+ARM GAS  /tmp/ccqLurVR.s 			page 16
+
+
+ 213:src/m4_app.c  **** 				u16_encode_periodHalf = u16_changePeriod / 2;
+ 214:src/m4_app.c  **** 				
+ 215:src/m4_app.c  **** 				b_changeFlag = FALSE;
+ 216:src/m4_app.c  **** 				u8_digitCount = 0;
+ 217:src/m4_app.c  **** 			}
+ 218:src/m4_app.c  **** 		}
+ 219:src/m4_app.c  **** 		
+ 220:src/m4_app.c  **** 		b_changeFlagSkip = FALSE;
+ 221:src/m4_app.c  **** 
+ 222:src/m4_app.c  **** 		if(!b_skipPrint) // Standard print if b_skipPrint is low
+ 223:src/m4_app.c  **** 		{
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
+ 225:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 525              		.loc 2 225 4 is_stmt 1 discriminator 1 view .LVU129
+ 526              		.loc 2 225 4 discriminator 1 view .LVU130
+ 527 012c A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 528 012e 15F00405 		ands	r5, r5, #4
+ 529 0132 40F0FA81 		bne	.L104
+ 530              		.loc 2 225 4 discriminator 3 view .LVU131
+ 531 0136 724B     		ldr	r3, .L114
+ 532 0138 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 533 013a 7748     		ldr	r0, .L114+24
+ 534 013c FFF7FEFF 		bl	__esos_OutChar
+ 535              	.LVL19:
+ 536 0140 0228     		cmp	r0, #2
+ 537 0142 40F2F681 		bls	.L93
+ 538              		.loc 2 225 4 discriminator 4 view .LVU132
+ 539 0146 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 540 0148 23F00103 		bic	r3, r3, #1
+ 541 014c A370     		strb	r3, [r4, #2]
+ 542              	.L94:
+ 543              		.loc 2 225 4 discriminator 7 view .LVU133
+ 544 014e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 545 0150 13F0010F 		tst	r3, #1
+ 546 0154 40F0FB81 		bne	.L48
+ 547              		.loc 2 225 4 discriminator 9 view .LVU134
+ 548              		.loc 2 225 4 discriminator 9 view .LVU135
+ 226:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 549              		.loc 2 226 4 discriminator 9 view .LVU136
+ 550 0158 6B4A     		ldr	r2, .L114+8
+ 551 015a 1368     		ldr	r3, [r2]
+ 552 015c 23F00403 		bic	r3, r3, #4
+ 553 0160 1360     		str	r3, [r2]
+ 554 0162 BFE7     		b	.L36
+ 555              	.L103:
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 556              		.loc 2 100 3 discriminator 2 view .LVU137
+ 557 0164 0423     		movs	r3, #4
+ 558 0166 A370     		strb	r3, [r4, #2]
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 559              		.loc 2 100 3 discriminator 2 view .LVU138
+ 560 0168 0325     		movs	r5, #3
+ 561 016a F0E1     		b	.L48
+ 562              	.L49:
+ 100:src/m4_app.c  **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 563              		.loc 2 100 3 discriminator 5 view .LVU139
+ 564 016c 43F00103 		orr	r3, r3, #1
+ARM GAS  /tmp/ccqLurVR.s 			page 17
+
+
+ 565 0170 A370     		strb	r3, [r4, #2]
+ 566 0172 C5E7     		b	.L50
+ 567              	.L98:
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 568              		.loc 2 101 3 discriminator 2 view .LVU140
+ 569 0174 0423     		movs	r3, #4
+ 570 0176 A370     		strb	r3, [r4, #2]
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 571              		.loc 2 101 3 discriminator 2 view .LVU141
+ 572 0178 0325     		movs	r5, #3
+ 573 017a E8E1     		b	.L48
+ 574              	.L52:
+ 101:src/m4_app.c  **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 575              		.loc 2 101 3 discriminator 5 view .LVU142
+ 576 017c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 577 017e 43F00103 		orr	r3, r3, #1
+ 578 0182 A370     		strb	r3, [r4, #2]
+ 579 0184 77E7     		b	.L53
+ 580              	.L99:
+ 116:src/m4_app.c  **** 			
+ 581              		.loc 2 116 4 view .LVU143
+ 116:src/m4_app.c  **** 			
+ 582              		.loc 2 116 36 is_stmt 0 view .LVU144
+ 583 0186 203A     		subs	r2, r2, #32
+ 116:src/m4_app.c  **** 			
+ 584              		.loc 2 116 16 view .LVU145
+ 585 0188 5D4B     		ldr	r3, .L114
+ 586 018a 1A70     		strb	r2, [r3]
+ 118:src/m4_app.c  **** 			{
+ 587              		.loc 2 118 4 is_stmt 1 view .LVU146
+ 118:src/m4_app.c  **** 			{
+ 588              		.loc 2 118 7 is_stmt 0 view .LVU147
+ 589 018c FFF7FEFF 		bl	IS_B1_RELEASED
+ 590              	.LVL20:
+ 118:src/m4_app.c  **** 			{
+ 591              		.loc 2 118 6 view .LVU148
+ 592 0190 B0B1     		cbz	r0, .L57
+ 121:src/m4_app.c  **** 				//increment count
+ 593              		.loc 2 121 5 is_stmt 1 view .LVU149
+ 121:src/m4_app.c  **** 				//increment count
+ 594              		.loc 2 121 35 is_stmt 0 view .LVU150
+ 595 0192 5B4E     		ldr	r6, .L114
+ 596 0194 3278     		ldrb	r2, [r6]	@ zero_extendqisi2
+ 597 0196 413A     		subs	r2, r2, #65
+ 121:src/m4_app.c  **** 				//increment count
+ 598              		.loc 2 121 52 view .LVU151
+ 599 0198 5C4D     		ldr	r5, .L114+12
+ 600 019a 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 601 019c 5F4B     		ldr	r3, .L114+28
+ 602 019e 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
+ 121:src/m4_app.c  **** 				//increment count
+ 603              		.loc 2 121 69 view .LVU152
+ 604 01a0 413B     		subs	r3, r3, #65
+ 121:src/m4_app.c  **** 				//increment count
+ 605              		.loc 2 121 42 view .LVU153
+ 606 01a2 1A44     		add	r2, r2, r3
+ 121:src/m4_app.c  **** 				//increment count
+ARM GAS  /tmp/ccqLurVR.s 			page 18
+
+
+ 607              		.loc 2 121 77 view .LVU154
+ 608 01a4 5E48     		ldr	r0, .L114+32
+ 609 01a6 80FB0230 		smull	r3, r0, r0, r2
+ 610 01aa D317     		asrs	r3, r2, #31
+ 611 01ac C3EBE003 		rsb	r3, r3, r0, asr #3
+ 612 01b0 1A20     		movs	r0, #26
+ 613 01b2 00FB1323 		mls	r3, r0, r3, r2
+ 121:src/m4_app.c  **** 				//increment count
+ 614              		.loc 2 121 83 view .LVU155
+ 615 01b6 4133     		adds	r3, r3, #65
+ 121:src/m4_app.c  **** 				//increment count
+ 616              		.loc 2 121 17 view .LVU156
+ 617 01b8 3370     		strb	r3, [r6]
+ 123:src/m4_app.c  **** 			}
+ 618              		.loc 2 123 5 is_stmt 1 view .LVU157
+ 123:src/m4_app.c  **** 			}
+ 619              		.loc 2 123 19 is_stmt 0 view .LVU158
+ 620 01ba 0131     		adds	r1, r1, #1
+ 621 01bc 2970     		strb	r1, [r5]
+ 622 01be 79E7     		b	.L56
+ 623              	.L57:
+ 129:src/m4_app.c  **** 				//increment count
+ 624              		.loc 2 129 5 is_stmt 1 view .LVU159
+ 129:src/m4_app.c  **** 				//increment count
+ 625              		.loc 2 129 43 is_stmt 0 view .LVU160
+ 626 01c0 534D     		ldr	r5, .L114+16
+ 627 01c2 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 628 01c4 554B     		ldr	r3, .L114+28
+ 629 01c6 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
+ 129:src/m4_app.c  **** 				//increment count
+ 630              		.loc 2 129 34 view .LVU161
+ 631 01c8 4D4E     		ldr	r6, .L114
+ 632 01ca 3278     		ldrb	r2, [r6]	@ zero_extendqisi2
+ 633 01cc D21A     		subs	r2, r2, r3
+ 129:src/m4_app.c  **** 				//increment count
+ 634              		.loc 2 129 61 view .LVU162
+ 635 01ce 1A32     		adds	r2, r2, #26
+ 129:src/m4_app.c  **** 				//increment count
+ 636              		.loc 2 129 67 view .LVU163
+ 637 01d0 5348     		ldr	r0, .L114+32
+ 638 01d2 80FB0230 		smull	r3, r0, r0, r2
+ 639 01d6 D317     		asrs	r3, r2, #31
+ 640 01d8 C3EBE003 		rsb	r3, r3, r0, asr #3
+ 641 01dc 1A20     		movs	r0, #26
+ 642 01de 00FB1323 		mls	r3, r0, r3, r2
+ 129:src/m4_app.c  **** 				//increment count
+ 643              		.loc 2 129 73 view .LVU164
+ 644 01e2 4133     		adds	r3, r3, #65
+ 129:src/m4_app.c  **** 				//increment count
+ 645              		.loc 2 129 17 view .LVU165
+ 646 01e4 3370     		strb	r3, [r6]
+ 131:src/m4_app.c  **** 			}
+ 647              		.loc 2 131 5 is_stmt 1 view .LVU166
+ 131:src/m4_app.c  **** 			}
+ 648              		.loc 2 131 19 is_stmt 0 view .LVU167
+ 649 01e6 0131     		adds	r1, r1, #1
+ 650 01e8 2970     		strb	r1, [r5]
+ARM GAS  /tmp/ccqLurVR.s 			page 19
+
+
+ 651 01ea 63E7     		b	.L56
+ 652              	.L100:
+ 137:src/m4_app.c  **** 		}
+ 653              		.loc 2 137 4 is_stmt 1 view .LVU168
+ 137:src/m4_app.c  **** 		}
+ 654              		.loc 2 137 18 is_stmt 0 view .LVU169
+ 655 01ec 494A     		ldr	r2, .L114+20
+ 656 01ee 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 657 01f0 0133     		adds	r3, r3, #1
+ 658 01f2 1370     		strb	r3, [r2]
+ 659 01f4 F9E0     		b	.L59
+ 660              	.L101:
+ 143:src/m4_app.c  **** 			{
+ 661              		.loc 2 143 4 is_stmt 1 view .LVU170
+ 143:src/m4_app.c  **** 			{
+ 662              		.loc 2 143 7 is_stmt 0 view .LVU171
+ 663 01f6 FFF7FEFF 		bl	IS_B1_RELEASED
+ 664              	.LVL21:
+ 143:src/m4_app.c  **** 			{
+ 665              		.loc 2 143 6 view .LVU172
+ 666 01fa 0028     		cmp	r0, #0
+ 667 01fc 00F09880 		beq	.L61
+ 145:src/m4_app.c  **** 				
+ 668              		.loc 2 145 5 is_stmt 1 view .LVU173
+ 669 0200 484B     		ldr	r3, .L114+36
+ 670 0202 1888     		ldrh	r0, [r3]
+ 671 0204 0A22     		movs	r2, #10
+ 672 0206 4849     		ldr	r1, .L114+40
+ 673 0208 4000     		lsls	r0, r0, #1
+ 674 020a FFF7FEFF 		bl	itoa
+ 675              	.LVL22:
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 676              		.loc 2 147 5 view .LVU174
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 677              		.loc 2 147 5 view .LVU175
+ 678 020e 9323     		movs	r3, #147
+ 679 0210 2380     		strh	r3, [r4]	@ movhi
+ 680              	.L44:
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 681              		.loc 2 147 5 discriminator 1 view .LVU176
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 682              		.loc 2 147 5 discriminator 1 view .LVU177
+ 683 0212 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 684 0214 13F00405 		ands	r5, r3, #4
+ 685 0218 37D1     		bne	.L105
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 686              		.loc 2 147 5 discriminator 3 view .LVU178
+ 687 021a 3B4A     		ldr	r2, .L114+8
+ 688 021c 1268     		ldr	r2, [r2]
+ 689 021e 12F0040F 		tst	r2, #4
+ 690 0222 36D1     		bne	.L63
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 691              		.loc 2 147 5 discriminator 4 view .LVU179
+ 692 0224 23F00103 		bic	r3, r3, #1
+ 693 0228 A370     		strb	r3, [r4, #2]
+ 694              	.L64:
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ARM GAS  /tmp/ccqLurVR.s 			page 20
+
+
+ 695              		.loc 2 147 5 discriminator 7 view .LVU180
+ 696 022a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 697 022c 13F0010F 		tst	r3, #1
+ 698 0230 40F08D81 		bne	.L48
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 699              		.loc 2 147 5 discriminator 9 view .LVU181
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 700              		.loc 2 147 5 discriminator 9 view .LVU182
+ 701 0234 344A     		ldr	r2, .L114+8
+ 702 0236 1368     		ldr	r3, [r2]
+ 703 0238 43F00403 		orr	r3, r3, #4
+ 704 023c 1360     		str	r3, [r2]
+ 148:src/m4_app.c  **** 				
+ 705              		.loc 2 148 5 discriminator 9 view .LVU183
+ 148:src/m4_app.c  **** 				
+ 706              		.loc 2 148 5 discriminator 9 view .LVU184
+ 707 023e 364B     		ldr	r3, .L114+24
+ 708 0240 0022     		movs	r2, #0
+ 709 0242 1A80     		strh	r2, [r3]	@ movhi
+ 148:src/m4_app.c  **** 				
+ 710              		.loc 2 148 5 discriminator 9 view .LVU185
+ 148:src/m4_app.c  **** 				
+ 711              		.loc 2 148 5 discriminator 9 view .LVU186
+ 148:src/m4_app.c  **** 				
+ 712              		.loc 2 148 5 discriminator 9 view .LVU187
+ 148:src/m4_app.c  **** 				
+ 713              		.loc 2 148 5 discriminator 9 view .LVU188
+ 714 0244 9423     		movs	r3, #148
+ 715 0246 2380     		strh	r3, [r4]	@ movhi
+ 716              	.L43:
+ 148:src/m4_app.c  **** 				
+ 717              		.loc 2 148 5 discriminator 1 view .LVU189
+ 148:src/m4_app.c  **** 				
+ 718              		.loc 2 148 5 discriminator 1 view .LVU190
+ 719 0248 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 720 024a 15F00405 		ands	r5, r5, #4
+ 721 024e 24D1     		bne	.L106
+ 148:src/m4_app.c  **** 				
+ 722              		.loc 2 148 5 discriminator 3 view .LVU191
+ 723 0250 4C21     		movs	r1, #76
+ 724 0252 3148     		ldr	r0, .L114+24
+ 725 0254 FFF7FEFF 		bl	__esos_OutChar
+ 726              	.LVL23:
+ 727 0258 0228     		cmp	r0, #2
+ 728 025a 22D9     		bls	.L66
+ 148:src/m4_app.c  **** 				
+ 729              		.loc 2 148 5 discriminator 4 view .LVU192
+ 730 025c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 731 025e 23F00103 		bic	r3, r3, #1
+ 732 0262 A370     		strb	r3, [r4, #2]
+ 733              	.L67:
+ 148:src/m4_app.c  **** 				
+ 734              		.loc 2 148 5 discriminator 7 view .LVU193
+ 735 0264 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 736 0266 13F0010F 		tst	r3, #1
+ 737 026a 40F07081 		bne	.L48
+ 148:src/m4_app.c  **** 				
+ARM GAS  /tmp/ccqLurVR.s 			page 21
+
+
+ 738              		.loc 2 148 5 discriminator 9 view .LVU194
+ 148:src/m4_app.c  **** 				
+ 739              		.loc 2 148 5 discriminator 9 view .LVU195
+ 150:src/m4_app.c  **** 				
+ 740              		.loc 2 150 5 discriminator 9 view .LVU196
+ 150:src/m4_app.c  **** 				
+ 741              		.loc 2 150 18 is_stmt 0 discriminator 9 view .LVU197
+ 742 026e 2F4B     		ldr	r3, .L114+44
+ 743 0270 0022     		movs	r2, #0
+ 744 0272 1A70     		strb	r2, [r3]
+ 152:src/m4_app.c  **** 				{
+ 745              		.loc 2 152 5 is_stmt 1 discriminator 9 view .LVU198
+ 746              	.L68:
+ 152:src/m4_app.c  **** 				{
+ 747              		.loc 2 152 10 view .LVU199
+ 152:src/m4_app.c  **** 				{
+ 748              		.loc 2 152 21 is_stmt 0 view .LVU200
+ 749 0274 2D4B     		ldr	r3, .L114+44
+ 750 0276 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 751 0278 2B4A     		ldr	r2, .L114+40
+ 752 027a D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 152:src/m4_app.c  **** 				{
+ 753              		.loc 2 152 10 view .LVU201
+ 754 027c B3B9     		cbnz	r3, .L72
+ 157:src/m4_app.c  **** 			}
+ 755              		.loc 2 157 5 is_stmt 1 view .LVU202
+ 756 027e 224A     		ldr	r2, .L114+8
+ 757 0280 1368     		ldr	r3, [r2]
+ 758 0282 23F00403 		bic	r3, r3, #4
+ 759 0286 1360     		str	r3, [r2]
+ 760 0288 A9E0     		b	.L73
+ 761              	.L105:
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 762              		.loc 2 147 5 discriminator 2 view .LVU203
+ 763 028a 0423     		movs	r3, #4
+ 764 028c A370     		strb	r3, [r4, #2]
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 765              		.loc 2 147 5 discriminator 2 view .LVU204
+ 766 028e 0325     		movs	r5, #3
+ 767 0290 5DE1     		b	.L48
+ 768              	.L63:
+ 147:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 769              		.loc 2 147 5 discriminator 5 view .LVU205
+ 770 0292 43F00103 		orr	r3, r3, #1
+ 771 0296 A370     		strb	r3, [r4, #2]
+ 772 0298 C7E7     		b	.L64
+ 773              	.L106:
+ 148:src/m4_app.c  **** 				
+ 774              		.loc 2 148 5 discriminator 2 view .LVU206
+ 775 029a 0423     		movs	r3, #4
+ 776 029c A370     		strb	r3, [r4, #2]
+ 148:src/m4_app.c  **** 				
+ 777              		.loc 2 148 5 discriminator 2 view .LVU207
+ 778 029e 0325     		movs	r5, #3
+ 779 02a0 55E1     		b	.L48
+ 780              	.L66:
+ 148:src/m4_app.c  **** 				
+ARM GAS  /tmp/ccqLurVR.s 			page 22
+
+
+ 781              		.loc 2 148 5 discriminator 5 view .LVU208
+ 782 02a2 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 783 02a4 43F00103 		orr	r3, r3, #1
+ 784 02a8 A370     		strb	r3, [r4, #2]
+ 785 02aa DBE7     		b	.L67
+ 786              	.L72:
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 787              		.loc 2 154 6 view .LVU209
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 788              		.loc 2 154 6 view .LVU210
+ 789 02ac 1A4B     		ldr	r3, .L114+24
+ 790 02ae 0022     		movs	r2, #0
+ 791 02b0 1A80     		strh	r2, [r3]	@ movhi
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 792              		.loc 2 154 6 view .LVU211
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 793              		.loc 2 154 6 view .LVU212
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 794              		.loc 2 154 6 view .LVU213
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 795              		.loc 2 154 6 view .LVU214
+ 796 02b2 9A23     		movs	r3, #154
+ 797 02b4 2380     		strh	r3, [r4]	@ movhi
+ 798              	.L42:
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 799              		.loc 2 154 6 discriminator 1 view .LVU215
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 800              		.loc 2 154 6 discriminator 1 view .LVU216
+ 801 02b6 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 802 02b8 15F00405 		ands	r5, r5, #4
+ 803 02bc 16D1     		bne	.L107
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 804              		.loc 2 154 6 discriminator 3 view .LVU217
+ 805 02be 1B4B     		ldr	r3, .L114+44
+ 806 02c0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 807 02c2 194A     		ldr	r2, .L114+40
+ 808 02c4 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+ 809 02c6 1448     		ldr	r0, .L114+24
+ 810 02c8 FFF7FEFF 		bl	__esos_OutChar
+ 811              	.LVL24:
+ 812 02cc 0228     		cmp	r0, #2
+ 813 02ce 11D9     		bls	.L70
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 814              		.loc 2 154 6 discriminator 4 view .LVU218
+ 815 02d0 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 816 02d2 23F00103 		bic	r3, r3, #1
+ 817 02d6 A370     		strb	r3, [r4, #2]
+ 818              	.L71:
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 819              		.loc 2 154 6 discriminator 7 view .LVU219
+ 820 02d8 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 821 02da 13F0010F 		tst	r3, #1
+ 822 02de 40F03681 		bne	.L48
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 823              		.loc 2 154 6 discriminator 9 view .LVU220
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 824              		.loc 2 154 6 discriminator 9 view .LVU221
+ARM GAS  /tmp/ccqLurVR.s 			page 23
+
+
+ 155:src/m4_app.c  **** 				}
+ 825              		.loc 2 155 6 discriminator 9 view .LVU222
+ 155:src/m4_app.c  **** 				}
+ 826              		.loc 2 155 18 is_stmt 0 discriminator 9 view .LVU223
+ 827 02e2 124A     		ldr	r2, .L114+44
+ 828 02e4 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 829 02e6 0133     		adds	r3, r3, #1
+ 830 02e8 1370     		strb	r3, [r2]
+ 831 02ea C3E7     		b	.L68
+ 832              	.L107:
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 833              		.loc 2 154 6 is_stmt 1 discriminator 2 view .LVU224
+ 834 02ec 0423     		movs	r3, #4
+ 835 02ee A370     		strb	r3, [r4, #2]
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 836              		.loc 2 154 6 discriminator 2 view .LVU225
+ 837 02f0 0325     		movs	r5, #3
+ 838 02f2 2CE1     		b	.L48
+ 839              	.L70:
+ 154:src/m4_app.c  **** 					u8_charCount++;
+ 840              		.loc 2 154 6 discriminator 5 view .LVU226
+ 841 02f4 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 842 02f6 43F00103 		orr	r3, r3, #1
+ 843 02fa A370     		strb	r3, [r4, #2]
+ 844 02fc ECE7     		b	.L71
+ 845              	.L115:
+ 846 02fe 00BF     		.align	2
+ 847              	.L114:
+ 848 0300 00000000 		.word	.LANCHOR1
+ 849 0304 00000000 		.word	__stChildTaskRx
+ 850 0308 00000000 		.word	__esos_u32SystemFlags
+ 851 030c 00000000 		.word	.LANCHOR2
+ 852 0310 00000000 		.word	.LANCHOR3
+ 853 0314 00000000 		.word	.LANCHOR5
+ 854 0318 00000000 		.word	__stChildTaskTx
+ 855 031c 00000000 		.word	.LANCHOR4
+ 856 0320 4FECC44E 		.word	1321528399
+ 857 0324 00000000 		.word	.LANCHOR0
+ 858 0328 00000000 		.word	.LANCHOR6
+ 859 032c 00000000 		.word	.LANCHOR7
+ 860              	.L61:
+ 160:src/m4_app.c  **** 			{
+ 861              		.loc 2 160 9 view .LVU227
+ 160:src/m4_app.c  **** 			{
+ 862              		.loc 2 160 12 is_stmt 0 view .LVU228
+ 863 0330 FFF7FEFF 		bl	IS_B1_PRESSED
+ 864              	.LVL25:
+ 160:src/m4_app.c  **** 			{
+ 865              		.loc 2 160 11 view .LVU229
+ 866 0334 0028     		cmp	r0, #0
+ 867 0336 52D0     		beq	.L73
+ 162:src/m4_app.c  **** 				
+ 868              		.loc 2 162 5 is_stmt 1 view .LVU230
+ 162:src/m4_app.c  **** 				
+ 869              		.loc 2 162 17 is_stmt 0 view .LVU231
+ 870 0338 864B     		ldr	r3, .L116
+ 871 033a 7C22     		movs	r2, #124
+ARM GAS  /tmp/ccqLurVR.s 			page 24
+
+
+ 872 033c 1A70     		strb	r2, [r3]
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 873              		.loc 2 164 5 is_stmt 1 view .LVU232
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 874              		.loc 2 164 5 view .LVU233
+ 875 033e A423     		movs	r3, #164
+ 876 0340 2380     		strh	r3, [r4]	@ movhi
+ 877              	.L41:
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 878              		.loc 2 164 5 discriminator 1 view .LVU234
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 879              		.loc 2 164 5 discriminator 1 view .LVU235
+ 880 0342 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 881 0344 13F00405 		ands	r5, r3, #4
+ 882 0348 40F08D80 		bne	.L108
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 883              		.loc 2 164 5 discriminator 3 view .LVU236
+ 884 034c 824A     		ldr	r2, .L116+4
+ 885 034e 1268     		ldr	r2, [r2]
+ 886 0350 12F0040F 		tst	r2, #4
+ 887 0354 40F08B80 		bne	.L75
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 888              		.loc 2 164 5 discriminator 4 view .LVU237
+ 889 0358 23F00103 		bic	r3, r3, #1
+ 890 035c A370     		strb	r3, [r4, #2]
+ 891              	.L76:
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 892              		.loc 2 164 5 discriminator 7 view .LVU238
+ 893 035e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 894 0360 13F0010F 		tst	r3, #1
+ 895 0364 40F0F380 		bne	.L48
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 896              		.loc 2 164 5 discriminator 9 view .LVU239
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 897              		.loc 2 164 5 discriminator 9 view .LVU240
+ 898 0368 7B4A     		ldr	r2, .L116+4
+ 899 036a 1368     		ldr	r3, [r2]
+ 900 036c 43F00403 		orr	r3, r3, #4
+ 901 0370 1360     		str	r3, [r2]
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 902              		.loc 2 165 5 discriminator 9 view .LVU241
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 903              		.loc 2 165 5 discriminator 9 view .LVU242
+ 904 0372 7A4B     		ldr	r3, .L116+8
+ 905 0374 0022     		movs	r2, #0
+ 906 0376 1A80     		strh	r2, [r3]	@ movhi
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 907              		.loc 2 165 5 discriminator 9 view .LVU243
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 908              		.loc 2 165 5 discriminator 9 view .LVU244
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 909              		.loc 2 165 5 discriminator 9 view .LVU245
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 910              		.loc 2 165 5 discriminator 9 view .LVU246
+ 911 0378 A523     		movs	r3, #165
+ 912 037a 2380     		strh	r3, [r4]	@ movhi
+ 913              	.L40:
+ARM GAS  /tmp/ccqLurVR.s 			page 25
+
+
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 914              		.loc 2 165 5 discriminator 1 view .LVU247
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 915              		.loc 2 165 5 discriminator 1 view .LVU248
+ 916 037c A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 917 037e 15F00405 		ands	r5, r5, #4
+ 918 0382 78D1     		bne	.L109
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 919              		.loc 2 165 5 discriminator 3 view .LVU249
+ 920 0384 4C21     		movs	r1, #76
+ 921 0386 7548     		ldr	r0, .L116+8
+ 922 0388 FFF7FEFF 		bl	__esos_OutChar
+ 923              	.LVL26:
+ 924 038c 0228     		cmp	r0, #2
+ 925 038e 76D9     		bls	.L78
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 926              		.loc 2 165 5 discriminator 4 view .LVU250
+ 927 0390 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 928 0392 23F00103 		bic	r3, r3, #1
+ 929 0396 A370     		strb	r3, [r4, #2]
+ 930              	.L79:
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 931              		.loc 2 165 5 discriminator 7 view .LVU251
+ 932 0398 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 933 039a 13F0010F 		tst	r3, #1
+ 934 039e 40F0D680 		bne	.L48
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 935              		.loc 2 165 5 discriminator 9 view .LVU252
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 936              		.loc 2 165 5 discriminator 9 view .LVU253
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 937              		.loc 2 166 5 discriminator 9 view .LVU254
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 938              		.loc 2 166 5 discriminator 9 view .LVU255
+ 939 03a2 6E4B     		ldr	r3, .L116+8
+ 940 03a4 0022     		movs	r2, #0
+ 941 03a6 1A80     		strh	r2, [r3]	@ movhi
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 942              		.loc 2 166 5 discriminator 9 view .LVU256
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 943              		.loc 2 166 5 discriminator 9 view .LVU257
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 944              		.loc 2 166 5 discriminator 9 view .LVU258
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 945              		.loc 2 166 5 discriminator 9 view .LVU259
+ 946 03a8 A623     		movs	r3, #166
+ 947 03aa 2380     		strh	r3, [r4]	@ movhi
+ 948              	.L38:
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 949              		.loc 2 166 5 discriminator 1 view .LVU260
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 950              		.loc 2 166 5 discriminator 1 view .LVU261
+ 951 03ac A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 952 03ae 15F00405 		ands	r5, r5, #4
+ 953 03b2 69D1     		bne	.L110
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 954              		.loc 2 166 5 discriminator 3 view .LVU262
+ARM GAS  /tmp/ccqLurVR.s 			page 26
+
+
+ 955 03b4 674B     		ldr	r3, .L116
+ 956 03b6 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 957 03b8 6848     		ldr	r0, .L116+8
+ 958 03ba FFF7FEFF 		bl	__esos_OutUint8AsDecString
+ 959              	.LVL27:
+ 960 03be 0228     		cmp	r0, #2
+ 961 03c0 66D9     		bls	.L81
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 962              		.loc 2 166 5 discriminator 4 view .LVU263
+ 963 03c2 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 964 03c4 23F00103 		bic	r3, r3, #1
+ 965 03c8 A370     		strb	r3, [r4, #2]
+ 966              	.L82:
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 967              		.loc 2 166 5 discriminator 7 view .LVU264
+ 968 03ca A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 969 03cc 13F0010F 		tst	r3, #1
+ 970 03d0 40F0BD80 		bne	.L48
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 971              		.loc 2 166 5 discriminator 9 view .LVU265
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 972              		.loc 2 166 5 discriminator 9 view .LVU266
+ 167:src/m4_app.c  **** 			}
+ 973              		.loc 2 167 5 discriminator 9 view .LVU267
+ 974 03d4 604A     		ldr	r2, .L116+4
+ 975 03d6 1368     		ldr	r3, [r2]
+ 976 03d8 23F00403 		bic	r3, r3, #4
+ 977 03dc 1360     		str	r3, [r2]
+ 978              	.L73:
+ 170:src/m4_app.c  **** 			u8_exclamCount = 0; // Resets exclamation count
+ 979              		.loc 2 170 4 view .LVU268
+ 170:src/m4_app.c  **** 			u8_exclamCount = 0; // Resets exclamation count
+ 980              		.loc 2 170 16 is_stmt 0 view .LVU269
+ 981 03de 604B     		ldr	r3, .L116+12
+ 982 03e0 0122     		movs	r2, #1
+ 983 03e2 1A70     		strb	r2, [r3]
+ 171:src/m4_app.c  **** 		}
+ 984              		.loc 2 171 4 is_stmt 1 view .LVU270
+ 171:src/m4_app.c  **** 		}
+ 985              		.loc 2 171 19 is_stmt 0 view .LVU271
+ 986 03e4 5F4B     		ldr	r3, .L116+16
+ 987 03e6 0022     		movs	r2, #0
+ 988 03e8 1A70     		strb	r2, [r3]
+ 989              	.L59:
+ 186:src/m4_app.c  **** 		{	
+ 990              		.loc 2 186 3 is_stmt 1 view .LVU272
+ 186:src/m4_app.c  **** 		{	
+ 991              		.loc 2 186 6 is_stmt 0 view .LVU273
+ 992 03ea 5F4B     		ldr	r3, .L116+20
+ 993 03ec 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 186:src/m4_app.c  **** 		{	
+ 994              		.loc 2 186 5 view .LVU274
+ 995 03ee ABB1     		cbz	r3, .L84
+ 186:src/m4_app.c  **** 		{	
+ 996              		.loc 2 186 22 discriminator 1 view .LVU275
+ 997 03f0 5E4B     		ldr	r3, .L116+24
+ 998 03f2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  /tmp/ccqLurVR.s 			page 27
+
+
+ 186:src/m4_app.c  **** 		{	
+ 999              		.loc 2 186 19 discriminator 1 view .LVU276
+ 1000 03f4 93B9     		cbnz	r3, .L84
+ 189:src/m4_app.c  **** 			{
+ 1001              		.loc 2 189 4 is_stmt 1 view .LVU277
+ 189:src/m4_app.c  **** 			{
+ 1002              		.loc 2 189 21 is_stmt 0 view .LVU278
+ 1003 03f6 5E4B     		ldr	r3, .L116+28
+ 1004 03f8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 189:src/m4_app.c  **** 			{
+ 1005              		.loc 2 189 6 view .LVU279
+ 1006 03fa 002B     		cmp	r3, #0
+ 1007 03fc 58D1     		bne	.L85
+ 191:src/m4_app.c  **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 1000);
+ 1008              		.loc 2 191 5 is_stmt 1 view .LVU280
+ 1009 03fe 0133     		adds	r3, r3, #1
+ 1010 0400 5B4A     		ldr	r2, .L116+28
+ 1011 0402 1370     		strb	r3, [r2]
+ 192:src/m4_app.c  **** 			}
+ 1012              		.loc 2 192 5 view .LVU281
+ 192:src/m4_app.c  **** 			}
+ 1013              		.loc 2 192 57 is_stmt 0 view .LVU282
+ 1014 0404 534B     		ldr	r3, .L116
+ 1015 0406 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1016 0408 303B     		subs	r3, r3, #48
+ 192:src/m4_app.c  **** 			}
+ 1017              		.loc 2 192 41 view .LVU283
+ 1018 040a C3EB4312 		rsb	r2, r3, r3, lsl #5
+ 1019 040e 03EB8203 		add	r3, r3, r2, lsl #2
+ 1020 0412 5849     		ldr	r1, .L116+32
+ 1021 0414 0A88     		ldrh	r2, [r1]
+ 1022 0416 02EBC303 		add	r3, r2, r3, lsl #3
+ 192:src/m4_app.c  **** 			}
+ 1023              		.loc 2 192 22 view .LVU284
+ 1024 041a 0B80     		strh	r3, [r1]	@ movhi
+ 1025              	.L84:
+ 220:src/m4_app.c  **** 
+ 1026              		.loc 2 220 3 is_stmt 1 view .LVU285
+ 220:src/m4_app.c  **** 
+ 1027              		.loc 2 220 20 is_stmt 0 view .LVU286
+ 1028 041c 534B     		ldr	r3, .L116+24
+ 1029 041e 0022     		movs	r2, #0
+ 1030 0420 1A70     		strb	r2, [r3]
+ 222:src/m4_app.c  **** 		{
+ 1031              		.loc 2 222 3 is_stmt 1 view .LVU287
+ 222:src/m4_app.c  **** 		{
+ 1032              		.loc 2 222 6 is_stmt 0 view .LVU288
+ 1033 0422 4F4B     		ldr	r3, .L116+12
+ 1034 0424 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 222:src/m4_app.c  **** 		{
+ 1035              		.loc 2 222 5 view .LVU289
+ 1036 0426 002B     		cmp	r3, #0
+ 1037 0428 40F08880 		bne	.L88
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1038              		.loc 2 224 4 is_stmt 1 view .LVU290
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1039              		.loc 2 224 4 view .LVU291
+ARM GAS  /tmp/ccqLurVR.s 			page 28
+
+
+ 1040 042c E023     		movs	r3, #224
+ 1041 042e 2380     		strh	r3, [r4]	@ movhi
+ 1042              	.L45:
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1043              		.loc 2 224 4 discriminator 1 view .LVU292
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1044              		.loc 2 224 4 discriminator 1 view .LVU293
+ 1045 0430 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1046 0432 13F00405 		ands	r5, r3, #4
+ 1047 0436 70D1     		bne	.L111
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1048              		.loc 2 224 4 discriminator 3 view .LVU294
+ 1049 0438 474A     		ldr	r2, .L116+4
+ 1050 043a 1268     		ldr	r2, [r2]
+ 1051 043c 12F0040F 		tst	r2, #4
+ 1052 0440 6FD1     		bne	.L90
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1053              		.loc 2 224 4 discriminator 4 view .LVU295
+ 1054 0442 23F00103 		bic	r3, r3, #1
+ 1055 0446 A370     		strb	r3, [r4, #2]
+ 1056              	.L91:
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1057              		.loc 2 224 4 discriminator 7 view .LVU296
+ 1058 0448 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1059 044a 13F0010F 		tst	r3, #1
+ 1060 044e 7ED1     		bne	.L48
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1061              		.loc 2 224 4 discriminator 9 view .LVU297
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1062              		.loc 2 224 4 discriminator 9 view .LVU298
+ 1063 0450 414A     		ldr	r2, .L116+4
+ 1064 0452 1368     		ldr	r3, [r2]
+ 1065 0454 43F00403 		orr	r3, r3, #4
+ 1066 0458 1360     		str	r3, [r2]
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1067              		.loc 2 225 4 discriminator 9 view .LVU299
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1068              		.loc 2 225 4 discriminator 9 view .LVU300
+ 1069 045a 404B     		ldr	r3, .L116+8
+ 1070 045c 0022     		movs	r2, #0
+ 1071 045e 1A80     		strh	r2, [r3]	@ movhi
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1072              		.loc 2 225 4 discriminator 9 view .LVU301
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1073              		.loc 2 225 4 discriminator 9 view .LVU302
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1074              		.loc 2 225 4 discriminator 9 view .LVU303
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1075              		.loc 2 225 4 discriminator 9 view .LVU304
+ 1076 0460 E123     		movs	r3, #225
+ 1077 0462 2380     		strh	r3, [r4]	@ movhi
+ 1078 0464 62E6     		b	.L46
+ 1079              	.L108:
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 1080              		.loc 2 164 5 discriminator 2 view .LVU305
+ 1081 0466 0423     		movs	r3, #4
+ 1082 0468 A370     		strb	r3, [r4, #2]
+ARM GAS  /tmp/ccqLurVR.s 			page 29
+
+
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 1083              		.loc 2 164 5 discriminator 2 view .LVU306
+ 1084 046a 0325     		movs	r5, #3
+ 1085 046c 6FE0     		b	.L48
+ 1086              	.L75:
+ 164:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 1087              		.loc 2 164 5 discriminator 5 view .LVU307
+ 1088 046e 43F00103 		orr	r3, r3, #1
+ 1089 0472 A370     		strb	r3, [r4, #2]
+ 1090 0474 73E7     		b	.L76
+ 1091              	.L109:
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 1092              		.loc 2 165 5 discriminator 2 view .LVU308
+ 1093 0476 0423     		movs	r3, #4
+ 1094 0478 A370     		strb	r3, [r4, #2]
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 1095              		.loc 2 165 5 discriminator 2 view .LVU309
+ 1096 047a 0325     		movs	r5, #3
+ 1097 047c 67E0     		b	.L48
+ 1098              	.L78:
+ 165:src/m4_app.c  **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 1099              		.loc 2 165 5 discriminator 5 view .LVU310
+ 1100 047e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1101 0480 43F00103 		orr	r3, r3, #1
+ 1102 0484 A370     		strb	r3, [r4, #2]
+ 1103 0486 87E7     		b	.L79
+ 1104              	.L110:
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1105              		.loc 2 166 5 discriminator 2 view .LVU311
+ 1106 0488 0423     		movs	r3, #4
+ 1107 048a A370     		strb	r3, [r4, #2]
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1108              		.loc 2 166 5 discriminator 2 view .LVU312
+ 1109 048c 0325     		movs	r5, #3
+ 1110 048e 5EE0     		b	.L48
+ 1111              	.L81:
+ 166:src/m4_app.c  **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1112              		.loc 2 166 5 discriminator 5 view .LVU313
+ 1113 0490 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1114 0492 43F00103 		orr	r3, r3, #1
+ 1115 0496 A370     		strb	r3, [r4, #2]
+ 1116 0498 97E7     		b	.L82
+ 1117              	.L102:
+ 177:src/m4_app.c  **** 			b_changeFlagSkip = TRUE;
+ 1118              		.loc 2 177 4 view .LVU314
+ 177:src/m4_app.c  **** 			b_changeFlagSkip = TRUE;
+ 1119              		.loc 2 177 17 is_stmt 0 view .LVU315
+ 1120 049a 0123     		movs	r3, #1
+ 1121 049c 324A     		ldr	r2, .L116+20
+ 1122 049e 1370     		strb	r3, [r2]
+ 178:src/m4_app.c  **** 			u16_changePeriod = 0;
+ 1123              		.loc 2 178 4 is_stmt 1 view .LVU316
+ 178:src/m4_app.c  **** 			u16_changePeriod = 0;
+ 1124              		.loc 2 178 21 is_stmt 0 view .LVU317
+ 1125 04a0 324A     		ldr	r2, .L116+24
+ 1126 04a2 1370     		strb	r3, [r2]
+ 179:src/m4_app.c  **** 			u8_exclamCount = 0;
+ARM GAS  /tmp/ccqLurVR.s 			page 30
+
+
+ 1127              		.loc 2 179 4 is_stmt 1 view .LVU318
+ 179:src/m4_app.c  **** 			u8_exclamCount = 0;
+ 1128              		.loc 2 179 21 is_stmt 0 view .LVU319
+ 1129 04a4 0023     		movs	r3, #0
+ 1130 04a6 334A     		ldr	r2, .L116+32
+ 1131 04a8 1380     		strh	r3, [r2]	@ movhi
+ 180:src/m4_app.c  **** 		}
+ 1132              		.loc 2 180 4 is_stmt 1 view .LVU320
+ 180:src/m4_app.c  **** 		}
+ 1133              		.loc 2 180 19 is_stmt 0 view .LVU321
+ 1134 04aa 2E4A     		ldr	r2, .L116+16
+ 1135 04ac 1370     		strb	r3, [r2]
+ 1136 04ae 9CE7     		b	.L59
+ 1137              	.L85:
+ 196:src/m4_app.c  **** 			{
+ 1138              		.loc 2 196 9 is_stmt 1 view .LVU322
+ 196:src/m4_app.c  **** 			{
+ 1139              		.loc 2 196 11 is_stmt 0 view .LVU323
+ 1140 04b0 012B     		cmp	r3, #1
+ 1141 04b2 14D0     		beq	.L112
+ 203:src/m4_app.c  **** 			{
+ 1142              		.loc 2 203 9 is_stmt 1 view .LVU324
+ 203:src/m4_app.c  **** 			{
+ 1143              		.loc 2 203 11 is_stmt 0 view .LVU325
+ 1144 04b4 022B     		cmp	r3, #2
+ 1145 04b6 22D0     		beq	.L113
+ 210:src/m4_app.c  **** 			{
+ 1146              		.loc 2 210 9 is_stmt 1 view .LVU326
+ 210:src/m4_app.c  **** 			{
+ 1147              		.loc 2 210 11 is_stmt 0 view .LVU327
+ 1148 04b8 032B     		cmp	r3, #3
+ 1149 04ba AFD1     		bne	.L84
+ 212:src/m4_app.c  **** 				u16_encode_periodHalf = u16_changePeriod / 2;
+ 1150              		.loc 2 212 5 is_stmt 1 view .LVU328
+ 212:src/m4_app.c  **** 				u16_encode_periodHalf = u16_changePeriod / 2;
+ 1151              		.loc 2 212 41 is_stmt 0 view .LVU329
+ 1152 04bc 254B     		ldr	r3, .L116
+ 1153 04be 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1154 04c0 2C4A     		ldr	r2, .L116+32
+ 1155 04c2 1188     		ldrh	r1, [r2]
+ 1156 04c4 0B44     		add	r3, r3, r1
+ 1157 04c6 303B     		subs	r3, r3, #48
+ 1158 04c8 9BB2     		uxth	r3, r3
+ 212:src/m4_app.c  **** 				u16_encode_periodHalf = u16_changePeriod / 2;
+ 1159              		.loc 2 212 22 view .LVU330
+ 1160 04ca 1380     		strh	r3, [r2]	@ movhi
+ 213:src/m4_app.c  **** 				
+ 1161              		.loc 2 213 5 is_stmt 1 view .LVU331
+ 213:src/m4_app.c  **** 				
+ 1162              		.loc 2 213 27 is_stmt 0 view .LVU332
+ 1163 04cc 5B08     		lsrs	r3, r3, #1
+ 1164 04ce 2A4A     		ldr	r2, .L116+36
+ 1165 04d0 1380     		strh	r3, [r2]	@ movhi
+ 215:src/m4_app.c  **** 				u8_digitCount = 0;
+ 1166              		.loc 2 215 5 is_stmt 1 view .LVU333
+ 215:src/m4_app.c  **** 				u8_digitCount = 0;
+ 1167              		.loc 2 215 18 is_stmt 0 view .LVU334
+ARM GAS  /tmp/ccqLurVR.s 			page 31
+
+
+ 1168 04d2 0023     		movs	r3, #0
+ 1169 04d4 244A     		ldr	r2, .L116+20
+ 1170 04d6 1370     		strb	r3, [r2]
+ 216:src/m4_app.c  **** 			}
+ 1171              		.loc 2 216 5 is_stmt 1 view .LVU335
+ 216:src/m4_app.c  **** 			}
+ 1172              		.loc 2 216 19 is_stmt 0 view .LVU336
+ 1173 04d8 254A     		ldr	r2, .L116+28
+ 1174 04da 1370     		strb	r3, [r2]
+ 1175 04dc 9EE7     		b	.L84
+ 1176              	.L112:
+ 198:src/m4_app.c  **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 100);
+ 1177              		.loc 2 198 5 is_stmt 1 view .LVU337
+ 1178 04de 0133     		adds	r3, r3, #1
+ 1179 04e0 234A     		ldr	r2, .L116+28
+ 1180 04e2 1370     		strb	r3, [r2]
+ 199:src/m4_app.c  **** 			}
+ 1181              		.loc 2 199 5 view .LVU338
+ 199:src/m4_app.c  **** 			}
+ 1182              		.loc 2 199 57 is_stmt 0 view .LVU339
+ 1183 04e4 1B4B     		ldr	r3, .L116
+ 1184 04e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1185 04e8 303B     		subs	r3, r3, #48
+ 199:src/m4_app.c  **** 			}
+ 1186              		.loc 2 199 41 view .LVU340
+ 1187 04ea 03EB8303 		add	r3, r3, r3, lsl #2
+ 1188 04ee 03EB8303 		add	r3, r3, r3, lsl #2
+ 1189 04f2 2049     		ldr	r1, .L116+32
+ 1190 04f4 0A88     		ldrh	r2, [r1]
+ 1191 04f6 02EB8303 		add	r3, r2, r3, lsl #2
+ 199:src/m4_app.c  **** 			}
+ 1192              		.loc 2 199 22 view .LVU341
+ 1193 04fa 0B80     		strh	r3, [r1]	@ movhi
+ 1194 04fc 8EE7     		b	.L84
+ 1195              	.L113:
+ 205:src/m4_app.c  **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 10);
+ 1196              		.loc 2 205 5 is_stmt 1 view .LVU342
+ 1197 04fe 0133     		adds	r3, r3, #1
+ 1198 0500 1B4A     		ldr	r2, .L116+28
+ 1199 0502 1370     		strb	r3, [r2]
+ 206:src/m4_app.c  **** 			}
+ 1200              		.loc 2 206 5 view .LVU343
+ 206:src/m4_app.c  **** 			}
+ 1201              		.loc 2 206 57 is_stmt 0 view .LVU344
+ 1202 0504 134B     		ldr	r3, .L116
+ 1203 0506 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1204 0508 303B     		subs	r3, r3, #48
+ 206:src/m4_app.c  **** 			}
+ 1205              		.loc 2 206 41 view .LVU345
+ 1206 050a 03EB8303 		add	r3, r3, r3, lsl #2
+ 1207 050e 1949     		ldr	r1, .L116+32
+ 1208 0510 0A88     		ldrh	r2, [r1]
+ 1209 0512 02EB4303 		add	r3, r2, r3, lsl #1
+ 206:src/m4_app.c  **** 			}
+ 1210              		.loc 2 206 22 view .LVU346
+ 1211 0516 0B80     		strh	r3, [r1]	@ movhi
+ 1212 0518 80E7     		b	.L84
+ARM GAS  /tmp/ccqLurVR.s 			page 32
+
+
+ 1213              	.L111:
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1214              		.loc 2 224 4 is_stmt 1 discriminator 2 view .LVU347
+ 1215 051a 0423     		movs	r3, #4
+ 1216 051c A370     		strb	r3, [r4, #2]
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1217              		.loc 2 224 4 discriminator 2 view .LVU348
+ 1218 051e 0325     		movs	r5, #3
+ 1219 0520 15E0     		b	.L48
+ 1220              	.L90:
+ 224:src/m4_app.c  **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1221              		.loc 2 224 4 discriminator 5 view .LVU349
+ 1222 0522 43F00103 		orr	r3, r3, #1
+ 1223 0526 A370     		strb	r3, [r4, #2]
+ 1224 0528 8EE7     		b	.L91
+ 1225              	.L104:
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1226              		.loc 2 225 4 discriminator 2 view .LVU350
+ 1227 052a 0423     		movs	r3, #4
+ 1228 052c A370     		strb	r3, [r4, #2]
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1229              		.loc 2 225 4 discriminator 2 view .LVU351
+ 1230 052e 0325     		movs	r5, #3
+ 1231 0530 0DE0     		b	.L48
+ 1232              	.L93:
+ 225:src/m4_app.c  **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1233              		.loc 2 225 4 discriminator 5 view .LVU352
+ 1234 0532 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1235 0534 43F00103 		orr	r3, r3, #1
+ 1236 0538 A370     		strb	r3, [r4, #2]
+ 1237 053a 08E6     		b	.L94
+ 1238              	.L88:
+ 227:src/m4_app.c  **** 		}
+ 228:src/m4_app.c  **** 		
+ 229:src/m4_app.c  **** 		else // Resets b_skipPrint
+ 230:src/m4_app.c  **** 		{
+ 231:src/m4_app.c  **** 			b_skipPrint = FALSE;
+ 1239              		.loc 2 231 4 view .LVU353
+ 1240              		.loc 2 231 16 is_stmt 0 view .LVU354
+ 1241 053c 084B     		ldr	r3, .L116+12
+ 1242 053e 0022     		movs	r2, #0
+ 1243 0540 1A70     		strb	r2, [r3]
+ 1244 0542 CFE5     		b	.L36
+ 1245              	.LVL28:
+ 1246              	.L37:
+ 232:src/m4_app.c  **** 		}
+ 233:src/m4_app.c  **** 		
+ 234:src/m4_app.c  **** 		} // endof while(TRUE)
+ 235:src/m4_app.c  **** 	ESOS_TASK_END();
+ 1247              		.loc 2 235 2 is_stmt 1 view .LVU355
+ 1248              		.loc 2 235 2 view .LVU356
+ 1249 0544 0823     		movs	r3, #8
+ 1250 0546 A370     		strb	r3, [r4, #2]
+ 1251              		.loc 2 235 2 view .LVU357
+ 1252 0548 0023     		movs	r3, #0
+ 1253 054a 2380     		strh	r3, [r4]	@ movhi
+ 1254              		.loc 2 235 2 view .LVU358
+ARM GAS  /tmp/ccqLurVR.s 			page 33
+
+
+ 1255              		.loc 2 235 2 view .LVU359
+ 1256              		.loc 2 235 2 view .LVU360
+ 1257 054c 0325     		movs	r5, #3
+ 1258              	.LVL29:
+ 1259              	.L48:
+ 1260              		.loc 2 235 17 discriminator 1 view .LVU361
+ 236:src/m4_app.c  **** } // end usart_comms()
+ 1261              		.loc 2 236 1 is_stmt 0 discriminator 1 view .LVU362
+ 1262 054e 2846     		mov	r0, r5
+ 1263 0550 70BD     		pop	{r4, r5, r6, pc}
+ 1264              	.LVL30:
+ 1265              	.L117:
+ 1266              		.loc 2 236 1 discriminator 1 view .LVU363
+ 1267 0552 00BF     		.align	2
+ 1268              	.L116:
+ 1269 0554 00000000 		.word	.LANCHOR1
+ 1270 0558 00000000 		.word	__esos_u32SystemFlags
+ 1271 055c 00000000 		.word	__stChildTaskTx
+ 1272 0560 00000000 		.word	.LANCHOR8
+ 1273 0564 00000000 		.word	.LANCHOR5
+ 1274 0568 00000000 		.word	.LANCHOR9
+ 1275 056c 00000000 		.word	.LANCHOR10
+ 1276 0570 00000000 		.word	.LANCHOR12
+ 1277 0574 00000000 		.word	.LANCHOR11
+ 1278 0578 00000000 		.word	.LANCHOR0
+ 1279              		.cfi_endproc
+ 1280              	.LFE11:
+ 1282              		.section	.text.__user_init_hw,"ax",%progbits
+ 1283              		.align	1
+ 1284              		.global	__user_init_hw
+ 1285              		.syntax unified
+ 1286              		.thumb
+ 1287              		.thumb_func
+ 1289              	__user_init_hw:
+ 1290              	.LFB12:
+ 237:src/m4_app.c  **** 
+ 238:src/m4_app.c  **** /************************************************************************
+ 239:src/m4_app.c  ****  * User supplied functions
+ 240:src/m4_app.c  ****  ************************************************************************
+ 241:src/m4_app.c  ****  */
+ 242:src/m4_app.c  **** void __user_init_hw(void) {
+ 1291              		.loc 2 242 27 is_stmt 1 view -0
+ 1292              		.cfi_startproc
+ 1293              		@ args = 0, pretend = 0, frame = 0
+ 1294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1295 0000 08B5     		push	{r3, lr}
+ 1296              	.LCFI5:
+ 1297              		.cfi_def_cfa_offset 8
+ 1298              		.cfi_offset 3, -8
+ 1299              		.cfi_offset 14, -4
+ 243:src/m4_app.c  ****   /* GPIO Ports Clock Enable */
+ 244:src/m4_app.c  ****   rcc_periph_clock_enable(GPIOA);
+ 1300              		.loc 2 244 3 view .LVU365
+ 1301 0002 0020     		movs	r0, #0
+ 1302 0004 FFF7FEFF 		bl	rcc_periph_clock_enable
+ 1303              	.LVL31:
+ 245:src/m4_app.c  ****   rcc_periph_clock_enable(GPIOC);
+ARM GAS  /tmp/ccqLurVR.s 			page 34
+
+
+ 1304              		.loc 2 245 3 view .LVU366
+ 1305 0008 4FF40060 		mov	r0, #2048
+ 1306 000c FFF7FEFF 		bl	rcc_periph_clock_enable
+ 1307              	.LVL32:
+ 246:src/m4_app.c  **** 
+ 247:src/m4_app.c  ****   /*Configure GPIO pin : PC13 */
+ 248:src/m4_app.c  ****   gpio_mode_setup(B1_Port, GPIO_MODE_INPUT, GPIO_PUPD_NONE, B1_Pin);
+ 1308              		.loc 2 248 3 view .LVU367
+ 1309 0010 4FF40053 		mov	r3, #8192
+ 1310 0014 0022     		movs	r2, #0
+ 1311 0016 1146     		mov	r1, r2
+ 1312 0018 0548     		ldr	r0, .L120
+ 1313 001a FFF7FEFF 		bl	gpio_mode_setup
+ 1314              	.LVL33:
+ 249:src/m4_app.c  **** 
+ 250:src/m4_app.c  ****   /*Configure GPIO pin : LED2_Pin */
+ 251:src/m4_app.c  ****   gpio_mode_setup(LD2_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LD2_Pin);
+ 1315              		.loc 2 251 3 view .LVU368
+ 1316 001e 2023     		movs	r3, #32
+ 1317 0020 0022     		movs	r2, #0
+ 1318 0022 0121     		movs	r1, #1
+ 1319 0024 4FF09040 		mov	r0, #1207959552
+ 1320 0028 FFF7FEFF 		bl	gpio_mode_setup
+ 1321              	.LVL34:
+ 252:src/m4_app.c  **** 
+ 253:src/m4_app.c  **** }
+ 1322              		.loc 2 253 1 is_stmt 0 view .LVU369
+ 1323 002c 08BD     		pop	{r3, pc}
+ 1324              	.L121:
+ 1325 002e 00BF     		.align	2
+ 1326              	.L120:
+ 1327 0030 00080048 		.word	1207961600
+ 1328              		.cfi_endproc
+ 1329              	.LFE12:
+ 1331              		.section	.rodata.user_init.str1.4,"aMS",%progbits,1
+ 1332              		.align	2
+ 1333              	.LC0:
+ 1334 0000 0A737263 		.ascii	"\012src/m4_app.c, built on Mar 23 2022 at 10:49:27\012"
+ 1334      2F6D345F 
+ 1334      6170702E 
+ 1334      632C2062 
+ 1334      75696C74 
+ 1335 0030 00       		.ascii	"\000"
+ 1336              		.section	.text.user_init,"ax",%progbits
+ 1337              		.align	1
+ 1338              		.global	user_init
+ 1339              		.syntax unified
+ 1340              		.thumb
+ 1341              		.thumb_func
+ 1343              	user_init:
+ 1344              	.LFB13:
+ 254:src/m4_app.c  **** 
+ 255:src/m4_app.c  **** 
+ 256:src/m4_app.c  **** 
+ 257:src/m4_app.c  **** /******************************************************************************
+ 258:src/m4_app.c  ****  * Function:        void user_init(void)
+ 259:src/m4_app.c  ****  *
+ARM GAS  /tmp/ccqLurVR.s 			page 35
+
+
+ 260:src/m4_app.c  ****  * PreCondition:    None
+ 261:src/m4_app.c  ****  *
+ 262:src/m4_app.c  ****  * Input:           None
+ 263:src/m4_app.c  ****  *
+ 264:src/m4_app.c  ****  * Output:          None
+ 265:src/m4_app.c  ****  *
+ 266:src/m4_app.c  ****  * Side Effects:    None
+ 267:src/m4_app.c  ****  *
+ 268:src/m4_app.c  ****  * Overview:        user_init is a centralized initialization routine where
+ 269:src/m4_app.c  ****  *                  the user can setup their application.   It is called
+ 270:src/m4_app.c  ****  *                  automagically by ES_OS during the operating system
+ 271:src/m4_app.c  ****  *                  initialization.
+ 272:src/m4_app.c  ****  *
+ 273:src/m4_app.c  ****  * Note:            The user should set up any state machines and init
+ 274:src/m4_app.c  ****  *                  all application variables.  They can also turn on
+ 275:src/m4_app.c  ****  *                  any needed peripherals here.
+ 276:src/m4_app.c  ****  *
+ 277:src/m4_app.c  ****  *                  The user SHALL NOT mess with the interrupt hardware
+ 278:src/m4_app.c  ****  *                  directly!!!  The ES_OS must be aware of the interrupts
+ 279:src/m4_app.c  ****  *                  and provides osXXXXXXX functions for the user to use.
+ 280:src/m4_app.c  ****  *                  Using these ES_OS-provided functions, the user may
+ 281:src/m4_app.c  ****  *                  (and probably should) initialize, register, and enable
+ 282:src/m4_app.c  ****  *                  interrupts in this routine.
+ 283:src/m4_app.c  ****  *
+ 284:src/m4_app.c  ****  *                  Furthermore, the user should register AT LEAST one
+ 285:src/m4_app.c  ****  *                  user application task here (via esos_RegisterTask) or
+ 286:src/m4_app.c  ****  *                  the ES_OS scheduler will have nothing to schedule
+ 287:src/m4_app.c  ****  *                  to run when this function returns.
+ 288:src/m4_app.c  ****  *
+ 289:src/m4_app.c  ****  *****************************************************************************/
+ 290:src/m4_app.c  **** void user_init(void) {
+ 1345              		.loc 2 290 22 is_stmt 1 view -0
+ 1346              		.cfi_startproc
+ 1347              		@ args = 0, pretend = 0, frame = 0
+ 1348              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1349 0000 08B5     		push	{r3, lr}
+ 1350              	.LCFI6:
+ 1351              		.cfi_def_cfa_offset 8
+ 1352              		.cfi_offset 3, -8
+ 1353              		.cfi_offset 14, -4
+ 291:src/m4_app.c  **** 
+ 292:src/m4_app.c  ****   // setup our software structures here
+ 293:src/m4_app.c  ****   
+ 294:src/m4_app.c  ****   // call our function to setup the hardware we like it.
+ 295:src/m4_app.c  ****   __user_init_hw();
+ 1354              		.loc 2 295 3 view .LVU371
+ 1355 0002 FFF7FEFF 		bl	__user_init_hw
+ 1356              	.LVL35:
+ 296:src/m4_app.c  **** 
+ 297:src/m4_app.c  ****   // Drive the UART directly.....  to print the HELLO_MSG
+ 298:src/m4_app.c  ****   __esos_unsafe_PutString( HELLO_MSG );
+ 1357              		.loc 2 298 3 view .LVU372
+ 1358 0006 0548     		ldr	r0, .L124
+ 1359 0008 FFF7FEFF 		bl	__esos_unsafe_PutString
+ 1360              	.LVL36:
+ 299:src/m4_app.c  **** 
+ 300:src/m4_app.c  ****   /*
+ARM GAS  /tmp/ccqLurVR.s 			page 36
+
+
+ 301:src/m4_app.c  ****    * Now, let's get down and dirty with ESOS and our user tasks
+ 302:src/m4_app.c  ****    *
+ 303:src/m4_app.c  ****    *   Once tasks are registered, they will start executing in
+ 304:src/m4_app.c  ****    *   the ESOS scheduler.
+ 305:src/m4_app.c  ****    */
+ 306:src/m4_app.c  ****   esos_RegisterTask( flash_LED );
+ 1361              		.loc 2 306 3 view .LVU373
+ 1362 000c 0448     		ldr	r0, .L124+4
+ 1363 000e FFF7FEFF 		bl	esos_RegisterTask
+ 1364              	.LVL37:
+ 307:src/m4_app.c  ****   esos_RegisterTask( usart_comms );
+ 1365              		.loc 2 307 3 view .LVU374
+ 1366 0012 0448     		ldr	r0, .L124+8
+ 1367 0014 FFF7FEFF 		bl	esos_RegisterTask
+ 1368              	.LVL38:
+ 308:src/m4_app.c  **** 
+ 309:src/m4_app.c  **** } // end user_init()
+ 1369              		.loc 2 309 1 is_stmt 0 view .LVU375
+ 1370 0018 08BD     		pop	{r3, pc}
+ 1371              	.L125:
+ 1372 001a 00BF     		.align	2
+ 1373              	.L124:
+ 1374 001c 00000000 		.word	.LC0
+ 1375 0020 00000000 		.word	flash_LED
+ 1376 0024 00000000 		.word	usart_comms
+ 1377              		.cfi_endproc
+ 1378              	.LFE13:
+ 1380              		.section	.bss.ac_charArr.6,"aw",%nobits
+ 1381              		.align	2
+ 1382              		.set	.LANCHOR6,. + 0
+ 1385              	ac_charArr.6:
+ 1386 0000 00000000 		.space	10
+ 1386      00000000 
+ 1386      0000
+ 1387              		.section	.bss.b_changeFlag.3,"aw",%nobits
+ 1388              		.set	.LANCHOR9,. + 0
+ 1391              	b_changeFlag.3:
+ 1392 0000 00       		.space	1
+ 1393              		.section	.bss.b_changeFlagSkip.2,"aw",%nobits
+ 1394              		.set	.LANCHOR10,. + 0
+ 1397              	b_changeFlagSkip.2:
+ 1398 0000 00       		.space	1
+ 1399              		.section	.bss.b_skipPrint.4,"aw",%nobits
+ 1400              		.set	.LANCHOR8,. + 0
+ 1403              	b_skipPrint.4:
+ 1404 0000 00       		.space	1
+ 1405              		.section	.bss.u16_changePeriod.1,"aw",%nobits
+ 1406              		.align	1
+ 1407              		.set	.LANCHOR11,. + 0
+ 1410              	u16_changePeriod.1:
+ 1411 0000 0000     		.space	2
+ 1412              		.section	.bss.u8_charCount.5,"aw",%nobits
+ 1413              		.set	.LANCHOR7,. + 0
+ 1416              	u8_charCount.5:
+ 1417 0000 00       		.space	1
+ 1418              		.section	.bss.u8_countDecode.9,"aw",%nobits
+ 1419              		.set	.LANCHOR3,. + 0
+ARM GAS  /tmp/ccqLurVR.s 			page 37
+
+
+ 1422              	u8_countDecode.9:
+ 1423 0000 00       		.space	1
+ 1424              		.section	.bss.u8_countEncode.10,"aw",%nobits
+ 1425              		.set	.LANCHOR2,. + 0
+ 1428              	u8_countEncode.10:
+ 1429 0000 00       		.space	1
+ 1430              		.section	.bss.u8_digitCount.0,"aw",%nobits
+ 1431              		.set	.LANCHOR12,. + 0
+ 1434              	u8_digitCount.0:
+ 1435 0000 00       		.space	1
+ 1436              		.section	.bss.u8_exclamCount.7,"aw",%nobits
+ 1437              		.set	.LANCHOR5,. + 0
+ 1440              	u8_exclamCount.7:
+ 1441 0000 00       		.space	1
+ 1442              		.section	.bss.u8_incoming.11,"aw",%nobits
+ 1443              		.set	.LANCHOR1,. + 0
+ 1446              	u8_incoming.11:
+ 1447 0000 00       		.space	1
+ 1448              		.section	.data.u16_encode_periodHalf,"aw"
+ 1449              		.align	1
+ 1450              		.set	.LANCHOR0,. + 0
+ 1453              	u16_encode_periodHalf:
+ 1454 0000 FA00     		.short	250
+ 1455              		.section	.rodata.au8_key.8,"a"
+ 1456              		.align	2
+ 1457              		.set	.LANCHOR4,. + 0
+ 1460              	au8_key.8:
+ 1461 0000 54454E4E 		.ascii	"TENNESSEETECH"
+ 1461      45535345 
+ 1461      45544543 
+ 1461      48
+ 1462              		.text
+ 1463              	.Letext0:
+ 1464              		.file 3 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 1465              		.file 4 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 1466              		.file 5 "/home/ryan/Documents/Github/esos32/include/lc-switch.h"
+ 1467              		.file 6 "/home/ryan/Documents/Github/esos32/include/esos_cb.h"
+ 1468              		.file 7 "/home/ryan/Documents/Github/esos32/include/esos_mail.h"
+ 1469              		.file 8 "/home/ryan/Documents/Github/esos32/include/esos_task.h"
+ 1470              		.file 9 "/home/ryan/Documents/Github/esos32/include/esos_comm.h"
+ 1471              		.file 10 "/home/ryan/Documents/Github/esos32/include/esos.h"
+ 1472              		.file 11 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 1473              		.file 12 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 1474              		.file 13 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eab
+ 1475              		.file 14 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 1476              		.file 15 "/home/ryan/Documents/Github/esos32/include/all_generic.h"
+ARM GAS  /tmp/ccqLurVR.s 			page 38
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 m4_app.c
+     /tmp/ccqLurVR.s:20     .text.TOGGLE_LD2:0000000000000000 $t
+     /tmp/ccqLurVR.s:25     .text.TOGGLE_LD2:0000000000000000 TOGGLE_LD2
+     /tmp/ccqLurVR.s:48     .text.IS_B1_RELEASED:0000000000000000 $t
+     /tmp/ccqLurVR.s:53     .text.IS_B1_RELEASED:0000000000000000 IS_B1_RELEASED
+     /tmp/ccqLurVR.s:84     .text.IS_B1_RELEASED:0000000000000018 $d
+     /tmp/ccqLurVR.s:89     .text.flash_LED:0000000000000000 $t
+     /tmp/ccqLurVR.s:95     .text.flash_LED:0000000000000000 flash_LED
+     /tmp/ccqLurVR.s:252    .text.flash_LED:00000000000000bc $d
+     /tmp/ccqLurVR.s:257    .text.IS_B1_PRESSED:0000000000000000 $t
+     /tmp/ccqLurVR.s:262    .text.IS_B1_PRESSED:0000000000000000 IS_B1_PRESSED
+     /tmp/ccqLurVR.s:292    .text.usart_comms:0000000000000000 $t
+     /tmp/ccqLurVR.s:298    .text.usart_comms:0000000000000000 usart_comms
+     /tmp/ccqLurVR.s:341    .text.usart_comms:0000000000000024 $d
+     /tmp/ccqLurVR.s:361    .text.usart_comms:000000000000004c $t
+     /tmp/ccqLurVR.s:848    .text.usart_comms:0000000000000300 $d
+     /tmp/ccqLurVR.s:863    .text.usart_comms:0000000000000330 $t
+     /tmp/ccqLurVR.s:1269   .text.usart_comms:0000000000000554 $d
+     /tmp/ccqLurVR.s:1283   .text.__user_init_hw:0000000000000000 $t
+     /tmp/ccqLurVR.s:1289   .text.__user_init_hw:0000000000000000 __user_init_hw
+     /tmp/ccqLurVR.s:1327   .text.__user_init_hw:0000000000000030 $d
+     /tmp/ccqLurVR.s:1332   .rodata.user_init.str1.4:0000000000000000 $d
+     /tmp/ccqLurVR.s:1337   .text.user_init:0000000000000000 $t
+     /tmp/ccqLurVR.s:1343   .text.user_init:0000000000000000 user_init
+     /tmp/ccqLurVR.s:1374   .text.user_init:000000000000001c $d
+     /tmp/ccqLurVR.s:1381   .bss.ac_charArr.6:0000000000000000 $d
+     /tmp/ccqLurVR.s:1385   .bss.ac_charArr.6:0000000000000000 ac_charArr.6
+     /tmp/ccqLurVR.s:1391   .bss.b_changeFlag.3:0000000000000000 b_changeFlag.3
+     /tmp/ccqLurVR.s:1392   .bss.b_changeFlag.3:0000000000000000 $d
+     /tmp/ccqLurVR.s:1397   .bss.b_changeFlagSkip.2:0000000000000000 b_changeFlagSkip.2
+     /tmp/ccqLurVR.s:1398   .bss.b_changeFlagSkip.2:0000000000000000 $d
+     /tmp/ccqLurVR.s:1403   .bss.b_skipPrint.4:0000000000000000 b_skipPrint.4
+     /tmp/ccqLurVR.s:1404   .bss.b_skipPrint.4:0000000000000000 $d
+     /tmp/ccqLurVR.s:1406   .bss.u16_changePeriod.1:0000000000000000 $d
+     /tmp/ccqLurVR.s:1410   .bss.u16_changePeriod.1:0000000000000000 u16_changePeriod.1
+     /tmp/ccqLurVR.s:1416   .bss.u8_charCount.5:0000000000000000 u8_charCount.5
+     /tmp/ccqLurVR.s:1417   .bss.u8_charCount.5:0000000000000000 $d
+     /tmp/ccqLurVR.s:1422   .bss.u8_countDecode.9:0000000000000000 u8_countDecode.9
+     /tmp/ccqLurVR.s:1423   .bss.u8_countDecode.9:0000000000000000 $d
+     /tmp/ccqLurVR.s:1428   .bss.u8_countEncode.10:0000000000000000 u8_countEncode.10
+     /tmp/ccqLurVR.s:1429   .bss.u8_countEncode.10:0000000000000000 $d
+     /tmp/ccqLurVR.s:1434   .bss.u8_digitCount.0:0000000000000000 u8_digitCount.0
+     /tmp/ccqLurVR.s:1435   .bss.u8_digitCount.0:0000000000000000 $d
+     /tmp/ccqLurVR.s:1440   .bss.u8_exclamCount.7:0000000000000000 u8_exclamCount.7
+     /tmp/ccqLurVR.s:1441   .bss.u8_exclamCount.7:0000000000000000 $d
+     /tmp/ccqLurVR.s:1446   .bss.u8_incoming.11:0000000000000000 u8_incoming.11
+     /tmp/ccqLurVR.s:1447   .bss.u8_incoming.11:0000000000000000 $d
+     /tmp/ccqLurVR.s:1449   .data.u16_encode_periodHalf:0000000000000000 $d
+     /tmp/ccqLurVR.s:1453   .data.u16_encode_periodHalf:0000000000000000 u16_encode_periodHalf
+     /tmp/ccqLurVR.s:1456   .rodata.au8_key.8:0000000000000000 $d
+     /tmp/ccqLurVR.s:1460   .rodata.au8_key.8:0000000000000000 au8_key.8
+
+UNDEFINED SYMBOLS
+gpio_toggle
+gpio_get
+__esos_hw_GetSystemTickCount
+ARM GAS  /tmp/ccqLurVR.s 			page 39
+
+
+__esos_hasTickDurationPassed
+__esos_getBuffer
+__esos_OutChar
+itoa
+__stChildTaskRx
+__esos_u32SystemFlags
+__stChildTaskTx
+__esos_OutUint8AsDecString
+rcc_periph_clock_enable
+gpio_mode_setup
+__esos_unsafe_PutString
+esos_RegisterTask

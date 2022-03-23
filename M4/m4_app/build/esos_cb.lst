@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cciq0jpI.s 			page 1
+ARM GAS  /tmp/ccS5g8G5.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -28,76 +28,76 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
   26              	__esos_CB_Init:
   27              	.LVL0:
   28              	.LFB0:
-  29              		.file 1 "/home/callie/esos32/src/esos_cb.c"
-   1:/home/callie/esos32/src/esos_cb.c **** /*
-   2:/home/callie/esos32/src/esos_cb.c ****  * "Copyright (c) 2019 J. W. Bruce ("AUTHOR(S)")"
-   3:/home/callie/esos32/src/esos_cb.c ****  * All rights reserved.
-   4:/home/callie/esos32/src/esos_cb.c ****  * (J. W. Bruce, jwbruce_AT_tntech.edu, Tennessee Tech University)
-   5:/home/callie/esos32/src/esos_cb.c ****  *
-   6:/home/callie/esos32/src/esos_cb.c ****  * Permission to use, copy, modify, and distribute this software and its
-   7:/home/callie/esos32/src/esos_cb.c ****  * documentation for any purpose, without fee, and without written agreement is
-   8:/home/callie/esos32/src/esos_cb.c ****  * hereby granted, provided that the above copyright notice, the following
-   9:/home/callie/esos32/src/esos_cb.c ****  * two paragraphs and the authors appear in all copies of this software.
-  10:/home/callie/esos32/src/esos_cb.c ****  *
-  11:/home/callie/esos32/src/esos_cb.c ****  * IN NO EVENT SHALL THE "AUTHORS" BE LIABLE TO ANY PARTY FOR
-  12:/home/callie/esos32/src/esos_cb.c ****  * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
-  13:/home/callie/esos32/src/esos_cb.c ****  * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE "AUTHORS"
-  14:/home/callie/esos32/src/esos_cb.c ****  * HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  15:/home/callie/esos32/src/esos_cb.c ****  *
-  16:/home/callie/esos32/src/esos_cb.c ****  * THE "AUTHORS" SPECIFICALLY DISCLAIMS ANY WARRANTIES,
-  17:/home/callie/esos32/src/esos_cb.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
-  18:/home/callie/esos32/src/esos_cb.c ****  * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
-  19:/home/callie/esos32/src/esos_cb.c ****  * ON AN "AS IS" BASIS, AND THE "AUTHORS" HAS NO OBLIGATION TO
-  20:/home/callie/esos32/src/esos_cb.c ****  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
-  21:/home/callie/esos32/src/esos_cb.c ****  *
-  22:/home/callie/esos32/src/esos_cb.c ****  * Please maintain this header in its entirety when copying/modifying
-  23:/home/callie/esos32/src/esos_cb.c ****  * these files.
-  24:/home/callie/esos32/src/esos_cb.c ****  *
-  25:/home/callie/esos32/src/esos_cb.c ****  *
-  26:/home/callie/esos32/src/esos_cb.c ****  */
-  27:/home/callie/esos32/src/esos_cb.c **** 
-  28:/home/callie/esos32/src/esos_cb.c **** /** \file
-  29:/home/callie/esos32/src/esos_cb.c ****  * \brief Circular buffer routines for ESOS32
-ARM GAS  /tmp/cciq0jpI.s 			page 2
+  29              		.file 1 "/home/ryan/Documents/Github/esos32/src/esos_cb.c"
+   1:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /*
+   2:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * "Copyright (c) 2019 J. W. Bruce ("AUTHOR(S)")"
+   3:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * All rights reserved.
+   4:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * (J. W. Bruce, jwbruce_AT_tntech.edu, Tennessee Tech University)
+   5:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
+   6:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * Permission to use, copy, modify, and distribute this software and its
+   7:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * documentation for any purpose, without fee, and without written agreement is
+   8:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * hereby granted, provided that the above copyright notice, the following
+   9:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * two paragraphs and the authors appear in all copies of this software.
+  10:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
+  11:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * IN NO EVENT SHALL THE "AUTHORS" BE LIABLE TO ANY PARTY FOR
+  12:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
+  13:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE "AUTHORS"
+  14:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  15:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
+  16:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * THE "AUTHORS" SPECIFICALLY DISCLAIMS ANY WARRANTIES,
+  17:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+  18:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
+  19:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * ON AN "AS IS" BASIS, AND THE "AUTHORS" HAS NO OBLIGATION TO
+  20:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
+  21:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
+  22:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * Please maintain this header in its entirety when copying/modifying
+  23:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * these files.
+  24:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
+  25:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
+  26:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  */
+  27:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  28:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /** \file
+  29:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  * \brief Circular buffer routines for ESOS32
+ARM GAS  /tmp/ccS5g8G5.s 			page 2
 
 
-  30:/home/callie/esos32/src/esos_cb.c ****  *
-  31:/home/callie/esos32/src/esos_cb.c ****  */
-  32:/home/callie/esos32/src/esos_cb.c **** 
-  33:/home/callie/esos32/src/esos_cb.c **** 
-  34:/home/callie/esos32/src/esos_cb.c **** #include    "esos.h"
-  35:/home/callie/esos32/src/esos_cb.c **** #include    "esos_cb.h"
-  36:/home/callie/esos32/src/esos_cb.c **** 
-  37:/home/callie/esos32/src/esos_cb.c **** // ******** G L O B A L S ***************
-  38:/home/callie/esos32/src/esos_cb.c **** 
-  39:/home/callie/esos32/src/esos_cb.c **** /****************************************************************
-  40:/home/callie/esos32/src/esos_cb.c **** ** F U N C T I O N S
-  41:/home/callie/esos32/src/esos_cb.c **** ****************************************************************/
-  42:/home/callie/esos32/src/esos_cb.c **** void __esos_CB_Init(CBUFFER* pst_CBuffer, uint8_t* pau8_ptr, uint16_t u16_Len) {
+  30:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  *
+  31:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****  */
+  32:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  33:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  34:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** #include    "esos.h"
+  35:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** #include    "esos_cb.h"
+  36:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  37:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** // ******** G L O B A L S ***************
+  38:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  39:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /****************************************************************
+  40:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** ** F U N C T I O N S
+  41:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** ****************************************************************/
+  42:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_Init(CBUFFER* pst_CBuffer, uint8_t* pau8_ptr, uint16_t u16_Len) {
   30              		.loc 1 42 80 view -0
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
   34              		@ link register save eliminated.
-  43:/home/callie/esos32/src/esos_cb.c ****   // setup (or reset) the circular buffer descriptors
-  44:/home/callie/esos32/src/esos_cb.c ****   pst_CBuffer->u16_Start = 0;
+  43:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   // setup (or reset) the circular buffer descriptors
+  44:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   pst_CBuffer->u16_Start = 0;
   35              		.loc 1 44 3 view .LVU1
   36              		.loc 1 44 26 is_stmt 0 view .LVU2
   37 0000 0023     		movs	r3, #0
   38 0002 4380     		strh	r3, [r0, #2]	@ movhi
-  45:/home/callie/esos32/src/esos_cb.c ****   pst_CBuffer->u16_Count = 0;
+  45:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   pst_CBuffer->u16_Count = 0;
   39              		.loc 1 45 3 is_stmt 1 view .LVU3
   40              		.loc 1 45 26 is_stmt 0 view .LVU4
   41 0004 8380     		strh	r3, [r0, #4]	@ movhi
-  46:/home/callie/esos32/src/esos_cb.c ****   pst_CBuffer->u16_Length = u16_Len;
+  46:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   pst_CBuffer->u16_Length = u16_Len;
   42              		.loc 1 46 3 is_stmt 1 view .LVU5
   43              		.loc 1 46 27 is_stmt 0 view .LVU6
   44 0006 0280     		strh	r2, [r0]	@ movhi
-  47:/home/callie/esos32/src/esos_cb.c ****   pst_CBuffer->pau8_Data = pau8_ptr;
+  47:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   pst_CBuffer->pau8_Data = pau8_ptr;
   45              		.loc 1 47 3 is_stmt 1 view .LVU7
   46              		.loc 1 47 26 is_stmt 0 view .LVU8
   47 0008 8160     		str	r1, [r0, #8]
-  48:/home/callie/esos32/src/esos_cb.c **** } // endof __esos_CB_Init()
+  48:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // endof __esos_CB_Init()
   48              		.loc 1 48 1 view .LVU9
   49 000a 7047     		bx	lr
   50              		.cfi_endproc
@@ -111,65 +111,65 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
   60              	__esos_CB_WriteUINT8:
   61              	.LVL1:
   62              	.LFB1:
-  49:/home/callie/esos32/src/esos_cb.c **** 
-  50:/home/callie/esos32/src/esos_cb.c **** 
-  51:/home/callie/esos32/src/esos_cb.c **** /******************************************
-  52:/home/callie/esos32/src/esos_cb.c **** *** LOCAL HELPER MACROS
-  53:/home/callie/esos32/src/esos_cb.c **** ******************************************/
-  54:/home/callie/esos32/src/esos_cb.c **** #define __WRITE_CB_UINT8(pstB,u8x,u16e)                                       \
-  55:/home/callie/esos32/src/esos_cb.c ****   do {                                                                        \
-ARM GAS  /tmp/cciq0jpI.s 			page 3
+  49:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  50:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  51:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /******************************************
+  52:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** *** LOCAL HELPER MACROS
+  53:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** ******************************************/
+  54:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** #define __WRITE_CB_UINT8(pstB,u8x,u16e)                                       \
+  55:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   do {                                                                        \
+ARM GAS  /tmp/ccS5g8G5.s 			page 3
 
 
-  56:/home/callie/esos32/src/esos_cb.c ****     if ((pstB)->u16_Count < (pstB)->u16_Length) {                             \
-  57:/home/callie/esos32/src/esos_cb.c ****       (u16e) = ((pstB)->u16_Start + (pstB)->u16_Count) % (pstB)->u16_Length;  \
-  58:/home/callie/esos32/src/esos_cb.c ****       (pstB)->pau8_Data[(u16e)] = (u8x);                                      \
-  59:/home/callie/esos32/src/esos_cb.c ****       ++(pstB)->u16_Count;                                                    \
-  60:/home/callie/esos32/src/esos_cb.c ****     }                                                                         \
-  61:/home/callie/esos32/src/esos_cb.c ****   }while(0)
-  62:/home/callie/esos32/src/esos_cb.c **** 
-  63:/home/callie/esos32/src/esos_cb.c **** #define __OVERWRITE_CB_UINT8(pstB,u8x,u16e)                                   \
-  64:/home/callie/esos32/src/esos_cb.c ****   do {                                                                        \
-  65:/home/callie/esos32/src/esos_cb.c ****     (u16e) = ((pstB)->u16_Start + (pstB)->u16_Count) % (pstB)->u16_Length;    \
-  66:/home/callie/esos32/src/esos_cb.c ****     (pstB)->pau8_Data[(u16e)] = (u8x);                                        \
-  67:/home/callie/esos32/src/esos_cb.c ****     if ((pstB)->u16_Count == (pstB)->u16_Length)                              \
-  68:/home/callie/esos32/src/esos_cb.c ****       (pstB)->u16_Start = ((pstB)->u16_Start + 1) % (pstB)->u16_Length;       \
-  69:/home/callie/esos32/src/esos_cb.c ****     else                                                                      \
-  70:/home/callie/esos32/src/esos_cb.c ****       ++(pstB)->u16_Count;                                                    \
-  71:/home/callie/esos32/src/esos_cb.c ****   }while(0)
-  72:/home/callie/esos32/src/esos_cb.c **** 
-  73:/home/callie/esos32/src/esos_cb.c **** #define __READ_CB_UINT8(pstB,u8x)                                             \
-  74:/home/callie/esos32/src/esos_cb.c ****   do {                                                                        \
-  75:/home/callie/esos32/src/esos_cb.c ****     (u8x) = (pstB)->pau8_Data[(pstB)->u16_Start];                             \
-  76:/home/callie/esos32/src/esos_cb.c ****     (pstB)->u16_Start = ((pstB)->u16_Start + 1) % (pstB)->u16_Length;         \
-  77:/home/callie/esos32/src/esos_cb.c ****     --(pstB)->u16_Count;                                                      \
-  78:/home/callie/esos32/src/esos_cb.c ****   } while(0)
-  79:/home/callie/esos32/src/esos_cb.c **** 
-  80:/home/callie/esos32/src/esos_cb.c **** 
-  81:/home/callie/esos32/src/esos_cb.c **** /***************************************************************
-  82:/home/callie/esos32/src/esos_cb.c **** **** WRITERs
-  83:/home/callie/esos32/src/esos_cb.c **** ***************************************************************/
-  84:/home/callie/esos32/src/esos_cb.c **** 
-  85:/home/callie/esos32/src/esos_cb.c **** /**
-  86:/home/callie/esos32/src/esos_cb.c **** * Writes byte data to a circular buffer
-  87:/home/callie/esos32/src/esos_cb.c **** *
-  88:/home/callie/esos32/src/esos_cb.c **** * \param pst_CBuffer  pointer to structure (CBUFFER) describing the circular buffer
-  89:/home/callie/esos32/src/esos_cb.c **** * \param u8_x     data to write to the circular buffer
-  90:/home/callie/esos32/src/esos_cb.c **** * \note This function <em>ASSUMES</em> that there is ample free
-  91:/home/callie/esos32/src/esos_cb.c **** * space available in specified circular buffer.
-  92:/home/callie/esos32/src/esos_cb.c **** *
-  93:/home/callie/esos32/src/esos_cb.c **** * \hideinitializer
-  94:/home/callie/esos32/src/esos_cb.c **** */
-  95:/home/callie/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT8(CBUFFER* pst_CBuffer, uint8_t u8_x ) {
+  56:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     if ((pstB)->u16_Count < (pstB)->u16_Length) {                             \
+  57:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****       (u16e) = ((pstB)->u16_Start + (pstB)->u16_Count) % (pstB)->u16_Length;  \
+  58:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****       (pstB)->pau8_Data[(u16e)] = (u8x);                                      \
+  59:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****       ++(pstB)->u16_Count;                                                    \
+  60:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     }                                                                         \
+  61:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   }while(0)
+  62:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  63:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** #define __OVERWRITE_CB_UINT8(pstB,u8x,u16e)                                   \
+  64:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   do {                                                                        \
+  65:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     (u16e) = ((pstB)->u16_Start + (pstB)->u16_Count) % (pstB)->u16_Length;    \
+  66:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     (pstB)->pau8_Data[(u16e)] = (u8x);                                        \
+  67:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     if ((pstB)->u16_Count == (pstB)->u16_Length)                              \
+  68:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****       (pstB)->u16_Start = ((pstB)->u16_Start + 1) % (pstB)->u16_Length;       \
+  69:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     else                                                                      \
+  70:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****       ++(pstB)->u16_Count;                                                    \
+  71:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   }while(0)
+  72:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  73:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** #define __READ_CB_UINT8(pstB,u8x)                                             \
+  74:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   do {                                                                        \
+  75:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     (u8x) = (pstB)->pau8_Data[(pstB)->u16_Start];                             \
+  76:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     (pstB)->u16_Start = ((pstB)->u16_Start + 1) % (pstB)->u16_Length;         \
+  77:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     --(pstB)->u16_Count;                                                      \
+  78:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   } while(0)
+  79:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  80:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  81:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /***************************************************************
+  82:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** **** WRITERs
+  83:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** ***************************************************************/
+  84:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  85:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /**
+  86:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** * Writes byte data to a circular buffer
+  87:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** *
+  88:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** * \param pst_CBuffer  pointer to structure (CBUFFER) describing the circular buffer
+  89:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** * \param u8_x     data to write to the circular buffer
+  90:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** * \note This function <em>ASSUMES</em> that there is ample free
+  91:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** * space available in specified circular buffer.
+  92:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** *
+  93:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** * \hideinitializer
+  94:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** */
+  95:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT8(CBUFFER* pst_CBuffer, uint8_t u8_x ) {
   63              		.loc 1 95 64 is_stmt 1 view -0
   64              		.cfi_startproc
   65              		@ args = 0, pretend = 0, frame = 0
   66              		@ frame_needed = 0, uses_anonymous_args = 0
   67              		@ link register save eliminated.
-  96:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_end;
+  96:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_end;
   68              		.loc 1 96 3 view .LVU11
-  97:/home/callie/esos32/src/esos_cb.c **** 
-  98:/home/callie/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_x,u16_end);
+  97:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+  98:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_x,u16_end);
   69              		.loc 1 98 3 view .LVU12
   70              		.loc 1 98 3 view .LVU13
   71 0000 8388     		ldrh	r3, [r0, #4]
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
   74 0008 0BD2     		bcs	.L2
   75              		.loc 1 98 3 discriminator 1 view .LVU14
   76 000a 4288     		ldrh	r2, [r0, #2]
-ARM GAS  /tmp/cciq0jpI.s 			page 4
+ARM GAS  /tmp/ccS5g8G5.s 			page 4
 
 
   77 000c 1344     		add	r3, r3, r2
@@ -198,7 +198,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
   91 0020 8380     		strh	r3, [r0, #4]	@ movhi
   92              		.loc 1 98 3 is_stmt 1 discriminator 1 view .LVU19
   93              	.L2:
-  99:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT8()
+  99:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT8()
   94              		.loc 1 99 1 is_stmt 0 view .LVU20
   95 0022 7047     		bx	lr
   96              		.cfi_endproc
@@ -212,17 +212,17 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  106              	__esos_CB_OverwriteUINT8:
  107              	.LVL4:
  108              	.LFB2:
- 100:/home/callie/esos32/src/esos_cb.c **** 
- 101:/home/callie/esos32/src/esos_cb.c **** void __esos_CB_OverwriteUINT8(CBUFFER* pst_CBuffer, uint8_t u8_x ) {
+ 100:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 101:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_OverwriteUINT8(CBUFFER* pst_CBuffer, uint8_t u8_x ) {
  109              		.loc 1 101 68 is_stmt 1 view -0
  110              		.cfi_startproc
  111              		@ args = 0, pretend = 0, frame = 0
  112              		@ frame_needed = 0, uses_anonymous_args = 0
  113              		@ link register save eliminated.
- 102:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_end;
+ 102:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_end;
  114              		.loc 1 102 3 view .LVU22
- 103:/home/callie/esos32/src/esos_cb.c **** 
- 104:/home/callie/esos32/src/esos_cb.c ****   __OVERWRITE_CB_UINT8(pst_CBuffer,u8_x,u16_end);
+ 103:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 104:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __OVERWRITE_CB_UINT8(pst_CBuffer,u8_x,u16_end);
  115              		.loc 1 104 3 view .LVU23
  116              		.loc 1 104 3 view .LVU24
  117 0000 4388     		ldrh	r3, [r0, #2]
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  127              		.loc 1 104 3 is_stmt 0 view .LVU26
  128 0014 D154     		strb	r1, [r2, r3]
  129              		.loc 1 104 3 is_stmt 1 view .LVU27
-ARM GAS  /tmp/cciq0jpI.s 			page 5
+ARM GAS  /tmp/ccS5g8G5.s 			page 5
 
 
  130 0016 8388     		ldrh	r3, [r0, #4]
@@ -251,21 +251,21 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  137 001e 0133     		adds	r3, r3, #1
  138 0020 8380     		strh	r3, [r0, #4]	@ movhi
  139              		.loc 1 104 3 discriminator 2 view .LVU30
- 105:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
+ 105:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
  140              		.loc 1 105 1 is_stmt 0 discriminator 2 view .LVU31
  141 0022 7047     		bx	lr
  142              	.L7:
- 104:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
+ 104:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
  143              		.loc 1 104 3 is_stmt 1 discriminator 1 view .LVU32
  144 0024 4388     		ldrh	r3, [r0, #2]
  145 0026 0133     		adds	r3, r3, #1
  146 0028 93FBF2F1 		sdiv	r1, r3, r2
  147              	.LVL7:
- 104:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
+ 104:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
  148              		.loc 1 104 3 is_stmt 0 discriminator 1 view .LVU33
  149 002c 02FB1133 		mls	r3, r2, r1, r3
  150 0030 4380     		strh	r3, [r0, #2]	@ movhi
- 104:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
+ 104:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_OverwriteUINT8()
  151              		.loc 1 104 3 discriminator 1 view .LVU34
  152 0032 7047     		bx	lr
  153              		.cfi_endproc
@@ -279,8 +279,8 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  163              	__esos_CB_WriteUINT16:
  164              	.LVL8:
  165              	.LFB3:
- 106:/home/callie/esos32/src/esos_cb.c **** 
- 107:/home/callie/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT16(CBUFFER* pst_CBuffer, uint16_t u16_x ) {
+ 106:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 107:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT16(CBUFFER* pst_CBuffer, uint16_t u16_x ) {
  166              		.loc 1 107 67 is_stmt 1 view -0
  167              		.cfi_startproc
  168              		@ args = 0, pretend = 0, frame = 0
@@ -290,18 +290,18 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  172              	.LCFI0:
  173              		.cfi_def_cfa_offset 4
  174              		.cfi_offset 14, -4
- 108:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_end;
+ 108:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_end;
  175              		.loc 1 108 3 is_stmt 1 view .LVU37
- 109:/home/callie/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
+ 109:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
  176              		.loc 1 109 3 view .LVU38
- 110:/home/callie/esos32/src/esos_cb.c **** 
- 111:/home/callie/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) u16_x & 0xFF;
+ 110:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 111:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) u16_x & 0xFF;
  177              		.loc 1 111 3 view .LVU39
  178              	.LVL9:
-ARM GAS  /tmp/cciq0jpI.s 			page 6
+ARM GAS  /tmp/ccS5g8G5.s 			page 6
 
 
- 112:/home/callie/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
+ 112:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
  179              		.loc 1 112 3 view .LVU40
  180              		.loc 1 112 3 view .LVU41
  181 0002 8388     		ldrh	r3, [r0, #4]
@@ -328,12 +328,12 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  202 0028 8380     		strh	r3, [r0, #4]	@ movhi
  203              	.L9:
  204              		.loc 1 112 3 is_stmt 1 discriminator 3 view .LVU47
- 113:/home/callie/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u16_x>>8);
+ 113:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u16_x>>8);
  205              		.loc 1 113 3 discriminator 3 view .LVU48
  206              		.loc 1 113 11 is_stmt 0 discriminator 3 view .LVU49
  207 002a 090A     		lsrs	r1, r1, #8
  208              	.LVL12:
- 114:/home/callie/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
+ 114:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
  209              		.loc 1 114 3 is_stmt 1 discriminator 3 view .LVU50
  210              		.loc 1 114 3 discriminator 3 view .LVU51
  211 002c 8388     		ldrh	r3, [r0, #4]
@@ -358,11 +358,11 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  230 004a 0133     		adds	r3, r3, #1
  231 004c 8380     		strh	r3, [r0, #4]	@ movhi
  232              		.loc 1 114 3 is_stmt 1 discriminator 1 view .LVU57
-ARM GAS  /tmp/cciq0jpI.s 			page 7
+ARM GAS  /tmp/ccS5g8G5.s 			page 7
 
 
  233              	.L8:
- 115:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT16()
+ 115:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT16()
  234              		.loc 1 115 1 is_stmt 0 view .LVU58
  235 004e 5DF804FB 		ldr	pc, [sp], #4
  236              		.cfi_endproc
@@ -376,8 +376,8 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  246              	__esos_CB_WriteUINT32:
  247              	.LVL15:
  248              	.LFB4:
- 116:/home/callie/esos32/src/esos_cb.c **** 
- 117:/home/callie/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT32(CBUFFER* pst_CBuffer, uint32_t u32_x ) {
+ 116:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 117:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT32(CBUFFER* pst_CBuffer, uint32_t u32_x ) {
  249              		.loc 1 117 67 is_stmt 1 view -0
  250              		.cfi_startproc
  251              		@ args = 0, pretend = 0, frame = 0
@@ -387,15 +387,15 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  255              	.LCFI1:
  256              		.cfi_def_cfa_offset 4
  257              		.cfi_offset 14, -4
- 118:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_end;
+ 118:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_end;
  258              		.loc 1 118 3 is_stmt 1 view .LVU61
- 119:/home/callie/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
+ 119:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
  259              		.loc 1 119 3 view .LVU62
- 120:/home/callie/esos32/src/esos_cb.c **** 
- 121:/home/callie/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) u32_x & 0xFF;
+ 120:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 121:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) u32_x & 0xFF;
  260              		.loc 1 121 3 view .LVU63
  261              	.LVL16:
- 122:/home/callie/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
+ 122:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
  262              		.loc 1 122 3 view .LVU64
  263              		.loc 1 122 3 view .LVU65
  264 0002 8388     		ldrh	r3, [r0, #4]
@@ -418,19 +418,19 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  281 0024 8388     		ldrh	r3, [r0, #4]
  282              	.LVL18:
  283              		.loc 1 122 3 is_stmt 0 discriminator 1 view .LVU70
-ARM GAS  /tmp/cciq0jpI.s 			page 8
+ARM GAS  /tmp/ccS5g8G5.s 			page 8
 
 
  284 0026 0133     		adds	r3, r3, #1
  285 0028 8380     		strh	r3, [r0, #4]	@ movhi
  286              	.L13:
  287              		.loc 1 122 3 is_stmt 1 discriminator 3 view .LVU71
- 123:/home/callie/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u32_x>>8);
+ 123:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u32_x>>8);
  288              		.loc 1 123 3 discriminator 3 view .LVU72
  289              		.loc 1 123 11 is_stmt 0 discriminator 3 view .LVU73
  290 002a C1F3072E 		ubfx	lr, r1, #8, #8
  291              	.LVL19:
- 124:/home/callie/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
+ 124:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
  292              		.loc 1 124 3 is_stmt 1 discriminator 3 view .LVU74
  293              		.loc 1 124 3 discriminator 3 view .LVU75
  294 002e 8388     		ldrh	r3, [r0, #4]
@@ -456,12 +456,12 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  314 0050 8380     		strh	r3, [r0, #4]	@ movhi
  315              	.L14:
  316              		.loc 1 124 3 is_stmt 1 discriminator 3 view .LVU81
- 125:/home/callie/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u32_x>>16);
+ 125:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u32_x>>16);
  317              		.loc 1 125 3 discriminator 3 view .LVU82
  318              		.loc 1 125 11 is_stmt 0 discriminator 3 view .LVU83
  319 0052 C1F3074E 		ubfx	lr, r1, #16, #8
  320              	.LVL22:
- 126:/home/callie/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
+ 126:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
  321              		.loc 1 126 3 is_stmt 1 discriminator 3 view .LVU84
  322              		.loc 1 126 3 discriminator 3 view .LVU85
  323 0056 8388     		ldrh	r3, [r0, #4]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  334 006c 8268     		ldr	r2, [r0, #8]
  335 006e 9BB2     		uxth	r3, r3
  336              		.loc 1 126 3 is_stmt 0 discriminator 1 view .LVU88
-ARM GAS  /tmp/cciq0jpI.s 			page 9
+ARM GAS  /tmp/ccS5g8G5.s 			page 9
 
 
  337 0070 02F803E0 		strb	lr, [r2, r3]
@@ -490,12 +490,12 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  343 0078 8380     		strh	r3, [r0, #4]	@ movhi
  344              	.L15:
  345              		.loc 1 126 3 is_stmt 1 discriminator 3 view .LVU91
- 127:/home/callie/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u32_x>>24);
+ 127:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u8_temp = (uint8_t) (u32_x>>24);
  346              		.loc 1 127 3 discriminator 3 view .LVU92
  347              		.loc 1 127 11 is_stmt 0 discriminator 3 view .LVU93
  348 007a 090E     		lsrs	r1, r1, #24
  349              	.LVL25:
- 128:/home/callie/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
+ 128:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __WRITE_CB_UINT8(pst_CBuffer,u8_temp,u16_end);
  350              		.loc 1 128 3 is_stmt 1 discriminator 3 view .LVU94
  351              		.loc 1 128 3 discriminator 3 view .LVU95
  352 007c 8388     		ldrh	r3, [r0, #4]
@@ -521,7 +521,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  372 009c 8380     		strh	r3, [r0, #4]	@ movhi
  373              		.loc 1 128 3 is_stmt 1 discriminator 1 view .LVU101
  374              	.L12:
- 129:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT32()
+ 129:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT32()
  375              		.loc 1 129 1 is_stmt 0 view .LVU102
  376 009e 5DF804FB 		ldr	pc, [sp], #4
  377              		.cfi_endproc
@@ -535,19 +535,19 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  387              	__esos_CB_WriteUINT8Buffer:
  388              	.LVL28:
  389              	.LFB5:
- 130:/home/callie/esos32/src/esos_cb.c **** 
- 131:/home/callie/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT8Buffer(CBUFFER* pst_CBuffer, uint8_t* pu8_x, uint16_t u16_size ) {
+ 130:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 131:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_WriteUINT8Buffer(CBUFFER* pst_CBuffer, uint8_t* pu8_x, uint16_t u16_size ) {
  390              		.loc 1 131 91 is_stmt 1 view -0
-ARM GAS  /tmp/cciq0jpI.s 			page 10
+ARM GAS  /tmp/ccS5g8G5.s 			page 10
 
 
  391              		.cfi_startproc
  392              		@ args = 0, pretend = 0, frame = 0
  393              		@ frame_needed = 0, uses_anonymous_args = 0
- 132:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_i, u16_end;
+ 132:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_i, u16_end;
  394              		.loc 1 132 3 view .LVU104
- 133:/home/callie/esos32/src/esos_cb.c **** 
- 134:/home/callie/esos32/src/esos_cb.c ****   for (u16_i=0; u16_i<u16_size; u16_i++) {
+ 133:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 134:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   for (u16_i=0; u16_i<u16_size; u16_i++) {
  395              		.loc 1 134 3 view .LVU105
  396              		.loc 1 134 13 is_stmt 0 view .LVU106
  397 0000 0023     		movs	r3, #0
@@ -556,7 +556,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  400              		.loc 1 134 3 is_stmt 0 view .LVU108
  401 0002 9342     		cmp	r3, r2
  402 0004 1DD2     		bcs	.L25
- 131:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_i, u16_end;
+ 131:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_i, u16_end;
  403              		.loc 1 131 91 view .LVU109
  404 0006 10B5     		push	{r4, lr}
  405              	.LCFI2:
@@ -565,21 +565,21 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  408              		.cfi_offset 14, -4
  409 0008 03E0     		b	.L21
  410              	.L20:
- 135:/home/callie/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
+ 135:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
  411              		.loc 1 135 5 is_stmt 1 discriminator 3 view .LVU110
- 134:/home/callie/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
+ 134:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
  412              		.loc 1 134 33 discriminator 3 view .LVU111
- 134:/home/callie/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
+ 134:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
  413              		.loc 1 134 38 is_stmt 0 discriminator 3 view .LVU112
  414 000a 0133     		adds	r3, r3, #1
  415              	.LVL30:
- 134:/home/callie/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
+ 134:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
  416              		.loc 1 134 38 discriminator 3 view .LVU113
  417 000c 9BB2     		uxth	r3, r3
  418              	.LVL31:
- 134:/home/callie/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
+ 134:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
  419              		.loc 1 134 17 is_stmt 1 discriminator 3 view .LVU114
- 134:/home/callie/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
+ 134:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __WRITE_CB_UINT8(pst_CBuffer, pu8_x[u16_i], u16_end);
  420              		.loc 1 134 3 is_stmt 0 discriminator 3 view .LVU115
  421 000e 9342     		cmp	r3, r2
  422 0010 16D2     		bcs	.L26
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  435              	.LVL32:
  436              		.loc 1 135 5 discriminator 1 view .LVU119
  437 002a 8468     		ldr	r4, [r0, #8]
-ARM GAS  /tmp/cciq0jpI.s 			page 11
+ARM GAS  /tmp/ccS5g8G5.s 			page 11
 
 
  438 002c 1FFA8CFC 		uxth	ip, ip
@@ -612,8 +612,8 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  446 003e E4E7     		b	.L20
  447              	.LVL33:
  448              	.L26:
- 136:/home/callie/esos32/src/esos_cb.c ****   }
- 137:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT8Buffer()
+ 136:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   }
+ 137:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_WriteUINT8Buffer()
  449              		.loc 1 137 1 is_stmt 0 view .LVU122
  450 0040 10BD     		pop	{r4, pc}
  451              	.L25:
@@ -634,11 +634,11 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  468              	__esos_CB_ReadUINT8:
  469              	.LVL34:
  470              	.LFB6:
- 138:/home/callie/esos32/src/esos_cb.c **** 
- 139:/home/callie/esos32/src/esos_cb.c **** /***************************************************************
- 140:/home/callie/esos32/src/esos_cb.c **** **** READERs
- 141:/home/callie/esos32/src/esos_cb.c **** ***************************************************************/
- 142:/home/callie/esos32/src/esos_cb.c **** uint8_t __esos_CB_ReadUINT8(CBUFFER* pst_CBuffer ) {
+ 138:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 139:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** /***************************************************************
+ 140:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** **** READERs
+ 141:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** ***************************************************************/
+ 142:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** uint8_t __esos_CB_ReadUINT8(CBUFFER* pst_CBuffer ) {
  471              		.loc 1 142 52 is_stmt 1 view -0
  472              		.cfi_startproc
  473              		@ args = 0, pretend = 0, frame = 0
@@ -646,10 +646,10 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  475              		@ link register save eliminated.
  476              		.loc 1 142 52 is_stmt 0 view .LVU125
  477 0000 0346     		mov	r3, r0
- 143:/home/callie/esos32/src/esos_cb.c ****   uint8_t     u8_retval;
+ 143:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint8_t     u8_retval;
  478              		.loc 1 143 3 is_stmt 1 view .LVU126
- 144:/home/callie/esos32/src/esos_cb.c **** 
- 145:/home/callie/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_retval);
+ 144:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 145:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_retval);
  479              		.loc 1 145 3 view .LVU127
  480              		.loc 1 145 3 view .LVU128
  481 0002 8168     		ldr	r1, [r0, #8]
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  484              	.LVL35:
  485              		.loc 1 145 3 view .LVU129
  486 0008 0132     		adds	r2, r2, #1
-ARM GAS  /tmp/cciq0jpI.s 			page 12
+ARM GAS  /tmp/ccS5g8G5.s 			page 12
 
 
  487 000a 1988     		ldrh	r1, [r3]
@@ -670,9 +670,9 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  493 0018 013A     		subs	r2, r2, #1
  494 001a 9A80     		strh	r2, [r3, #4]	@ movhi
  495              		.loc 1 145 3 view .LVU131
- 146:/home/callie/esos32/src/esos_cb.c ****   return(u8_retval);
+ 146:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   return(u8_retval);
  496              		.loc 1 146 3 view .LVU132
- 147:/home/callie/esos32/src/esos_cb.c **** } // __esos_CB_ReadUINT8()
+ 147:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // __esos_CB_ReadUINT8()
  497              		.loc 1 147 1 is_stmt 0 view .LVU133
  498 001c 7047     		bx	lr
  499              		.cfi_endproc
@@ -686,8 +686,8 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  509              	__esos_CB_ReadUINT16:
  510              	.LVL36:
  511              	.LFB7:
- 148:/home/callie/esos32/src/esos_cb.c **** 
- 149:/home/callie/esos32/src/esos_cb.c **** uint16_t __esos_CB_ReadUINT16(CBUFFER* pst_CBuffer ) {
+ 148:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 149:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** uint16_t __esos_CB_ReadUINT16(CBUFFER* pst_CBuffer ) {
  512              		.loc 1 149 54 is_stmt 1 view -0
  513              		.cfi_startproc
  514              		@ args = 0, pretend = 0, frame = 0
@@ -698,12 +698,12 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  519              		.cfi_def_cfa_offset 8
  520              		.cfi_offset 4, -8
  521              		.cfi_offset 14, -4
- 150:/home/callie/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
+ 150:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
  522              		.loc 1 150 3 is_stmt 1 view .LVU136
- 151:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_retval;
+ 151:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_retval;
  523              		.loc 1 151 3 view .LVU137
- 152:/home/callie/esos32/src/esos_cb.c **** 
- 153:/home/callie/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
+ 152:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 153:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
  524              		.loc 1 153 3 view .LVU138
  525              		.loc 1 153 3 view .LVU139
  526 0002 8468     		ldr	r4, [r0, #8]
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  535 0016 9BB2     		uxth	r3, r3
  536 0018 4380     		strh	r3, [r0, #2]	@ movhi
  537              		.loc 1 153 3 view .LVU141
-ARM GAS  /tmp/cciq0jpI.s 			page 13
+ARM GAS  /tmp/ccS5g8G5.s 			page 13
 
 
  538 001a 8288     		ldrh	r2, [r0, #4]
@@ -726,10 +726,10 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  540 001e 92B2     		uxth	r2, r2
  541 0020 8280     		strh	r2, [r0, #4]	@ movhi
  542              		.loc 1 153 3 view .LVU142
- 154:/home/callie/esos32/src/esos_cb.c ****   u16_retval = (uint16_t) u8_temp;
+ 154:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u16_retval = (uint16_t) u8_temp;
  543              		.loc 1 154 3 view .LVU143
  544              	.LVL38:
- 155:/home/callie/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
+ 155:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
  545              		.loc 1 155 3 view .LVU144
  546              		.loc 1 155 3 view .LVU145
  547 0022 E45C     		ldrb	r4, [r4, r3]	@ zero_extendqisi2
@@ -743,14 +743,14 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  555 0030 013A     		subs	r2, r2, #1
  556 0032 8280     		strh	r2, [r0, #4]	@ movhi
  557              		.loc 1 155 3 view .LVU148
- 156:/home/callie/esos32/src/esos_cb.c ****   u16_retval += ((uint16_t) u8_temp)<<8;
+ 156:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u16_retval += ((uint16_t) u8_temp)<<8;
  558              		.loc 1 156 3 view .LVU149
  559              		.loc 1 156 14 is_stmt 0 view .LVU150
  560 0034 0CEB0420 		add	r0, ip, r4, lsl #8
  561              	.LVL40:
- 157:/home/callie/esos32/src/esos_cb.c ****   return (u16_retval);
+ 157:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   return (u16_retval);
  562              		.loc 1 157 3 is_stmt 1 view .LVU151
- 158:/home/callie/esos32/src/esos_cb.c **** } // __esos_CB_ReadUINT16()
+ 158:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // __esos_CB_ReadUINT16()
  563              		.loc 1 158 1 is_stmt 0 view .LVU152
  564 0038 80B2     		uxth	r0, r0
  565              		.loc 1 158 1 view .LVU153
@@ -767,8 +767,8 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  578              	__esos_CB_ReadUINT32:
  579              	.LVL41:
  580              	.LFB8:
- 159:/home/callie/esos32/src/esos_cb.c **** 
- 160:/home/callie/esos32/src/esos_cb.c **** uint32_t __esos_CB_ReadUINT32(CBUFFER* pst_CBuffer ) {
+ 159:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 160:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** uint32_t __esos_CB_ReadUINT32(CBUFFER* pst_CBuffer ) {
  581              		.loc 1 160 54 is_stmt 1 view -0
  582              		.cfi_startproc
  583              		@ args = 0, pretend = 0, frame = 0
@@ -778,17 +778,17 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  587              	.LCFI5:
  588              		.cfi_def_cfa_offset 12
  589              		.cfi_offset 4, -12
-ARM GAS  /tmp/cciq0jpI.s 			page 14
+ARM GAS  /tmp/ccS5g8G5.s 			page 14
 
 
  590              		.cfi_offset 5, -8
  591              		.cfi_offset 14, -4
- 161:/home/callie/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
+ 161:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint8_t     u8_temp;
  592              		.loc 1 161 3 is_stmt 1 view .LVU157
- 162:/home/callie/esos32/src/esos_cb.c ****   uint32_t    u32_retval;
+ 162:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint32_t    u32_retval;
  593              		.loc 1 162 3 view .LVU158
- 163:/home/callie/esos32/src/esos_cb.c **** 
- 164:/home/callie/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
+ 163:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 164:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
  594              		.loc 1 164 3 view .LVU159
  595              		.loc 1 164 3 view .LVU160
  596 0002 8468     		ldr	r4, [r0, #8]
@@ -808,10 +808,10 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  610 001e 92B2     		uxth	r2, r2
  611 0020 8280     		strh	r2, [r0, #4]	@ movhi
  612              		.loc 1 164 3 view .LVU163
- 165:/home/callie/esos32/src/esos_cb.c ****   u32_retval = (uint32_t) u8_temp;
+ 165:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u32_retval = (uint32_t) u8_temp;
  613              		.loc 1 165 3 view .LVU164
  614              	.LVL43:
- 166:/home/callie/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
+ 166:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
  615              		.loc 1 166 3 view .LVU165
  616              		.loc 1 166 3 view .LVU166
  617 0022 E55C     		ldrb	r5, [r4, r3]	@ zero_extendqisi2
@@ -827,18 +827,18 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  627 0034 92B2     		uxth	r2, r2
  628 0036 8280     		strh	r2, [r0, #4]	@ movhi
  629              		.loc 1 166 3 view .LVU169
- 167:/home/callie/esos32/src/esos_cb.c ****   u32_retval += (((uint32_t) u8_temp)<<8);
+ 167:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u32_retval += (((uint32_t) u8_temp)<<8);
  630              		.loc 1 167 3 view .LVU170
  631              		.loc 1 167 14 is_stmt 0 view .LVU171
  632 0038 0CEB052C 		add	ip, ip, r5, lsl #8
  633              	.LVL45:
- 168:/home/callie/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
+ 168:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
  634              		.loc 1 168 3 is_stmt 1 view .LVU172
  635              		.loc 1 168 3 view .LVU173
  636 003c 14F803E0 		ldrb	lr, [r4, r3]	@ zero_extendqisi2
  637              	.LVL46:
  638              		.loc 1 168 3 view .LVU174
-ARM GAS  /tmp/cciq0jpI.s 			page 15
+ARM GAS  /tmp/ccS5g8G5.s 			page 15
 
 
  639 0040 0133     		adds	r3, r3, #1
@@ -851,12 +851,12 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  646 0050 92B2     		uxth	r2, r2
  647 0052 8280     		strh	r2, [r0, #4]	@ movhi
  648              		.loc 1 168 3 view .LVU176
- 169:/home/callie/esos32/src/esos_cb.c ****   u32_retval += (((uint32_t) u8_temp)<<16);
+ 169:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u32_retval += (((uint32_t) u8_temp)<<16);
  649              		.loc 1 169 3 view .LVU177
  650              		.loc 1 169 14 is_stmt 0 view .LVU178
  651 0054 0CEB0E4C 		add	ip, ip, lr, lsl #16
  652              	.LVL47:
- 170:/home/callie/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
+ 170:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   __READ_CB_UINT8(pst_CBuffer, u8_temp);
  653              		.loc 1 170 3 is_stmt 1 view .LVU179
  654              		.loc 1 170 3 view .LVU180
  655 0058 E45C     		ldrb	r4, [r4, r3]	@ zero_extendqisi2
@@ -870,12 +870,12 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  663 0066 013A     		subs	r2, r2, #1
  664 0068 8280     		strh	r2, [r0, #4]	@ movhi
  665              		.loc 1 170 3 view .LVU183
- 171:/home/callie/esos32/src/esos_cb.c ****   u32_retval += (((uint32_t) u8_temp)<<24);
+ 171:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   u32_retval += (((uint32_t) u8_temp)<<24);
  666              		.loc 1 171 3 view .LVU184
  667              	.LVL49:
- 172:/home/callie/esos32/src/esos_cb.c ****   return (u32_retval);
+ 172:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   return (u32_retval);
  668              		.loc 1 172 3 view .LVU185
- 173:/home/callie/esos32/src/esos_cb.c **** } // __esos_CB_ReadUINT32()
+ 173:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // __esos_CB_ReadUINT32()
  669              		.loc 1 173 1 is_stmt 0 view .LVU186
  670 006a 0CEB0460 		add	r0, ip, r4, lsl #24
  671              	.LVL50:
@@ -893,20 +893,20 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  685              	__esos_CB_ReadUINT8Buffer:
  686              	.LVL51:
  687              	.LFB9:
- 174:/home/callie/esos32/src/esos_cb.c **** 
- 175:/home/callie/esos32/src/esos_cb.c **** 
- 176:/home/callie/esos32/src/esos_cb.c **** void __esos_CB_ReadUINT8Buffer(CBUFFER* pst_CBuffer, uint8_t* pu8_x, uint16_t u16_size ) {
+ 174:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 175:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 176:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** void __esos_CB_ReadUINT8Buffer(CBUFFER* pst_CBuffer, uint8_t* pu8_x, uint16_t u16_size ) {
  688              		.loc 1 176 90 is_stmt 1 view -0
  689              		.cfi_startproc
-ARM GAS  /tmp/cciq0jpI.s 			page 16
+ARM GAS  /tmp/ccS5g8G5.s 			page 16
 
 
  690              		@ args = 0, pretend = 0, frame = 0
  691              		@ frame_needed = 0, uses_anonymous_args = 0
- 177:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_i;
+ 177:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_i;
  692              		.loc 1 177 3 view .LVU190
- 178:/home/callie/esos32/src/esos_cb.c **** 
- 179:/home/callie/esos32/src/esos_cb.c ****   for (u16_i=0; u16_i<u16_size; u16_i++) {
+ 178:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** 
+ 179:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   for (u16_i=0; u16_i<u16_size; u16_i++) {
  693              		.loc 1 179 3 view .LVU191
  694              		.loc 1 179 13 is_stmt 0 view .LVU192
  695 0000 4FF0000C 		mov	ip, #0
@@ -915,7 +915,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  698              		.loc 1 179 3 is_stmt 0 view .LVU194
  699 0004 9445     		cmp	ip, r2
  700 0006 18D2     		bcs	.L38
- 176:/home/callie/esos32/src/esos_cb.c ****   uint16_t    u16_i;
+ 176:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   uint16_t    u16_i;
  701              		.loc 1 176 90 view .LVU195
  702 0008 10B5     		push	{r4, lr}
  703              	.LCFI6:
@@ -923,7 +923,7 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  705              		.cfi_offset 4, -8
  706              		.cfi_offset 14, -4
  707              	.L34:
- 180:/home/callie/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
+ 180:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
  708              		.loc 1 180 5 is_stmt 1 discriminator 3 view .LVU196
  709              		.loc 1 180 5 discriminator 3 view .LVU197
  710 000a 8468     		ldr	r4, [r0, #8]
@@ -942,27 +942,27 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  723 0028 013B     		subs	r3, r3, #1
  724 002a 8380     		strh	r3, [r0, #4]	@ movhi
  725              		.loc 1 180 5 discriminator 3 view .LVU200
- 179:/home/callie/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
+ 179:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
  726              		.loc 1 179 33 discriminator 3 view .LVU201
- 179:/home/callie/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
+ 179:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
  727              		.loc 1 179 38 is_stmt 0 discriminator 3 view .LVU202
  728 002c 0CF1010C 		add	ip, ip, #1
  729              	.LVL53:
- 179:/home/callie/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
+ 179:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
  730              		.loc 1 179 38 discriminator 3 view .LVU203
  731 0030 1FFA8CFC 		uxth	ip, ip
  732              	.LVL54:
- 179:/home/callie/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
+ 179:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
  733              		.loc 1 179 17 is_stmt 1 discriminator 3 view .LVU204
- 179:/home/callie/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
+ 179:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****     __READ_CB_UINT8(pst_CBuffer, pu8_x[u16_i]);
  734              		.loc 1 179 3 is_stmt 0 discriminator 3 view .LVU205
  735 0034 9445     		cmp	ip, r2
  736 0036 E8D3     		bcc	.L34
-ARM GAS  /tmp/cciq0jpI.s 			page 17
+ARM GAS  /tmp/ccS5g8G5.s 			page 17
 
 
- 181:/home/callie/esos32/src/esos_cb.c ****   }
- 182:/home/callie/esos32/src/esos_cb.c **** } // end __esos_CB_ReadUINT8Buffer()
+ 181:/home/ryan/Documents/Github/esos32/src/esos_cb.c ****   }
+ 182:/home/ryan/Documents/Github/esos32/src/esos_cb.c **** } // end __esos_CB_ReadUINT8Buffer()
  737              		.loc 1 182 1 view .LVU206
  738 0038 10BD     		pop	{r4, pc}
  739              	.L38:
@@ -976,33 +976,33 @@ ARM GAS  /tmp/cciq0jpI.s 			page 1
  747              	.LFE9:
  749              		.text
  750              	.Letext0:
- 751              		.file 2 "/home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_defa
- 752              		.file 3 "/home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h
- 753              		.file 4 "/home/callie/esos32/include/esos_cb.h"
-ARM GAS  /tmp/cciq0jpI.s 			page 18
+ 751              		.file 2 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 752              		.file 3 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 753              		.file 4 "/home/ryan/Documents/Github/esos32/include/esos_cb.h"
+ARM GAS  /tmp/ccS5g8G5.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 esos_cb.c
-     /tmp/cciq0jpI.s:20     .text.__esos_CB_Init:0000000000000000 $t
-     /tmp/cciq0jpI.s:26     .text.__esos_CB_Init:0000000000000000 __esos_CB_Init
-     /tmp/cciq0jpI.s:54     .text.__esos_CB_WriteUINT8:0000000000000000 $t
-     /tmp/cciq0jpI.s:60     .text.__esos_CB_WriteUINT8:0000000000000000 __esos_CB_WriteUINT8
-     /tmp/cciq0jpI.s:100    .text.__esos_CB_OverwriteUINT8:0000000000000000 $t
-     /tmp/cciq0jpI.s:106    .text.__esos_CB_OverwriteUINT8:0000000000000000 __esos_CB_OverwriteUINT8
-     /tmp/cciq0jpI.s:157    .text.__esos_CB_WriteUINT16:0000000000000000 $t
-     /tmp/cciq0jpI.s:163    .text.__esos_CB_WriteUINT16:0000000000000000 __esos_CB_WriteUINT16
-     /tmp/cciq0jpI.s:240    .text.__esos_CB_WriteUINT32:0000000000000000 $t
-     /tmp/cciq0jpI.s:246    .text.__esos_CB_WriteUINT32:0000000000000000 __esos_CB_WriteUINT32
-     /tmp/cciq0jpI.s:381    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 $t
-     /tmp/cciq0jpI.s:387    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 __esos_CB_WriteUINT8Buffer
-     /tmp/cciq0jpI.s:462    .text.__esos_CB_ReadUINT8:0000000000000000 $t
-     /tmp/cciq0jpI.s:468    .text.__esos_CB_ReadUINT8:0000000000000000 __esos_CB_ReadUINT8
-     /tmp/cciq0jpI.s:503    .text.__esos_CB_ReadUINT16:0000000000000000 $t
-     /tmp/cciq0jpI.s:509    .text.__esos_CB_ReadUINT16:0000000000000000 __esos_CB_ReadUINT16
-     /tmp/cciq0jpI.s:572    .text.__esos_CB_ReadUINT32:0000000000000000 $t
-     /tmp/cciq0jpI.s:578    .text.__esos_CB_ReadUINT32:0000000000000000 __esos_CB_ReadUINT32
-     /tmp/cciq0jpI.s:679    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 $t
-     /tmp/cciq0jpI.s:685    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 __esos_CB_ReadUINT8Buffer
+     /tmp/ccS5g8G5.s:20     .text.__esos_CB_Init:0000000000000000 $t
+     /tmp/ccS5g8G5.s:26     .text.__esos_CB_Init:0000000000000000 __esos_CB_Init
+     /tmp/ccS5g8G5.s:54     .text.__esos_CB_WriteUINT8:0000000000000000 $t
+     /tmp/ccS5g8G5.s:60     .text.__esos_CB_WriteUINT8:0000000000000000 __esos_CB_WriteUINT8
+     /tmp/ccS5g8G5.s:100    .text.__esos_CB_OverwriteUINT8:0000000000000000 $t
+     /tmp/ccS5g8G5.s:106    .text.__esos_CB_OverwriteUINT8:0000000000000000 __esos_CB_OverwriteUINT8
+     /tmp/ccS5g8G5.s:157    .text.__esos_CB_WriteUINT16:0000000000000000 $t
+     /tmp/ccS5g8G5.s:163    .text.__esos_CB_WriteUINT16:0000000000000000 __esos_CB_WriteUINT16
+     /tmp/ccS5g8G5.s:240    .text.__esos_CB_WriteUINT32:0000000000000000 $t
+     /tmp/ccS5g8G5.s:246    .text.__esos_CB_WriteUINT32:0000000000000000 __esos_CB_WriteUINT32
+     /tmp/ccS5g8G5.s:381    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 $t
+     /tmp/ccS5g8G5.s:387    .text.__esos_CB_WriteUINT8Buffer:0000000000000000 __esos_CB_WriteUINT8Buffer
+     /tmp/ccS5g8G5.s:462    .text.__esos_CB_ReadUINT8:0000000000000000 $t
+     /tmp/ccS5g8G5.s:468    .text.__esos_CB_ReadUINT8:0000000000000000 __esos_CB_ReadUINT8
+     /tmp/ccS5g8G5.s:503    .text.__esos_CB_ReadUINT16:0000000000000000 $t
+     /tmp/ccS5g8G5.s:509    .text.__esos_CB_ReadUINT16:0000000000000000 __esos_CB_ReadUINT16
+     /tmp/ccS5g8G5.s:572    .text.__esos_CB_ReadUINT32:0000000000000000 $t
+     /tmp/ccS5g8G5.s:578    .text.__esos_CB_ReadUINT32:0000000000000000 __esos_CB_ReadUINT32
+     /tmp/ccS5g8G5.s:679    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 $t
+     /tmp/ccS5g8G5.s:685    .text.__esos_CB_ReadUINT8Buffer:0000000000000000 __esos_CB_ReadUINT8Buffer
 
 NO UNDEFINED SYMBOLS

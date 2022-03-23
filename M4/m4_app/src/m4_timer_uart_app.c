@@ -54,7 +54,7 @@ void __user_init_hw( void );
 
 
 // GLOBALs go here
-static uint16_t u16_encode_periodHalf;
+static uint16_t u16_encode_periodHalf = ENCODE_FLASH;
 //  Generally, the user-created semaphores will be defined/allocated here
 //static uint8_t psz_CRNL[3]= {0x0D, 0x0A, 0};
 
@@ -65,7 +65,6 @@ static uint16_t u16_encode_periodHalf;
 
 ESOS_USER_TASK( flash_LED ) 
 {
-	u16_encode_periodHalf = ENCODE_FLASH;
 	ESOS_TASK_BEGIN();
 	while (TRUE) 
 	{
@@ -96,6 +95,8 @@ ESOS_USER_TASK( usart_comms )
 	static bool b_skipPrint = FALSE;
 	static char ac_charArr[10];
 	static uint8_t u8_charCount = 0;
+	static bool b_changeFlagSkip = FALSE;
+	static bool b_exclamSkip = FALSE;
 	
 	
 	ESOS_TASK_BEGIN();
@@ -143,12 +144,11 @@ ESOS_USER_TASK( usart_comms )
 		}
 		
 		//report period !!!L
-		if((u8_exclamCount == 3) && ((u8_incoming == 'L')))
+		else if((u8_exclamCount >= 3) && ((u8_incoming == 'L')))
 		{
 			if(IS_B1_RELEASED())
 			{
-				u16_encode_periodHalf *= 2;
-				itoa(u16_encode_periodHalf, ac_charArr, 10);
+				itoa((u16_encode_periodHalf * 2), ac_charArr, 10);
 				
 				ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
@@ -158,9 +158,9 @@ ESOS_USER_TASK( usart_comms )
 				while(ac_charArr[u8_charCount] != '\0')
 				{
 					ESOS_TASK_WAIT_ON_SEND_UINT8( ac_charArr[u8_charCount] );
-					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
 					u8_charCount++;
 				}
+				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
 			}
 			
 			else if(IS_B1_PRESSED())
@@ -178,53 +178,53 @@ ESOS_USER_TASK( usart_comms )
 		}
 		
 		//change period !!!S####
-		else if((u8_exclamCount == 3) && (u8_incoming == 'S'))
+		else if((u8_exclamCount >= 3) && (u8_incoming == 'S'))
 		{
 			b_changeFlag = TRUE;
+			b_changeFlagSkip = TRUE;
 			u16_changePeriod = 0;
+			u8_exclamCount = 0;
 		}
+
+		else
+			u8_exclamCount = 0;
 		
-		
-		if(b_changeFlag)
-		{
-			++u8_digitCount;
-			
+		if(b_changeFlag && !b_changeFlagSkip)
+		{	
 			//if #---
-			if(u8_digitCount == 1)
+			if(u8_digitCount == 0)
 			{
+				++u8_digitCount;
 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 1000);
 			}
-			
+
 			//if -#--
+			else if(u8_digitCount == 1)
+			{
+				++u8_digitCount;
+				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 100);
+			}
+
+			//if --#-
 			else if(u8_digitCount == 2)
 			{
-				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0')* 100);
-			}
-			
-			
-			//if --#-
-			else if(u8_digitCount == 3)
-			{
+				++u8_digitCount;
 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 10);
 			}
-			
+
 			//if ---#
-			else if(u8_digitCount == 4)
+			else if(u8_digitCount == 3)
 			{
 				u16_changePeriod = u16_changePeriod + (u8_incoming - '0');
-				
-				ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
-				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u16_changePeriod );
-				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
 				u16_encode_periodHalf = u16_changePeriod / 2;
 				
 				b_changeFlag = FALSE;
 				u8_digitCount = 0;
 			}
-			
-			u8_exclamCount = 0;
 		}
 		
+		b_changeFlagSkip = FALSE;
+
 		if(!b_skipPrint)
 		{
 			ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();

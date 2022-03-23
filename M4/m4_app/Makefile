@@ -1,6 +1,6 @@
-##########################################################################################################################
+############################################
 # Makefile    J.W.Bruce (C) 2020
-##########################################################################################################################
+############################################
 
 
 ########################################
@@ -21,13 +21,9 @@ else
     endif
 endif
 
-
-
 ######################################
 # target
 ######################################
-all: $(TARGET)
-
 TARGET = m4_timer_uart_app
 
 ######################################
@@ -43,17 +39,17 @@ OPT = -Og
 #######################################
 # Build path
 BUILD_DIR = build
-# ESOS base path
-ESOS_DIR = /home/jwbruce/GITs/esos32
-# CM3 base path
 ifdef CPATH
   CM3_DIR = /home/tyler/Documents/Github/libopencm3
   GCC_PATH = /home/tyler/gcc-arm-none-eabi-10.3-2021.10/bin
+  ESOS_DIR = /home/tyler/Documents/Github/esos32
 else
-  # Your paths here
-  ESOS_DIR = /home/callie/esos32
-  CM3_DIR = /home/callie/libopencm3
-  GCC_PATH = /home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/bin
+# ESOS base path
+ESOS_DIR = /home/ryan/Documents/Github/esos32
+# CM3 base path
+CM3_DIR = /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3
+ # GCC Path
+GCC_PATH = /home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi-10.3-2021.10/bin
 endif
 
 
@@ -121,9 +117,7 @@ C_DEFS =  \
 -DSTM32L452xx  					\
 -DHARDWARE_PLATFORM=NUCLEO64	\
 -DESOS_USE_SERIAL_PORT			\
--D__PTB_APOLLO_BOARD
 
-# FOR THE APOLLO BOARD  -D__PTB_APOLLO_BOARD
 
 # AS includes
 AS_INCLUDES = 
@@ -154,7 +148,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = ld.stm32.basic
+LDSCRIPT = Dependencies/ld.stm32.basic
 
 # libraries
 LIBS = -lc -lm -lnosys -lopencm3_stm32l4
@@ -174,7 +168,6 @@ vpath %.c $(sort $(dir $(C_SOURCES)))
 # list of ASM program objects
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
-
 
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
@@ -200,7 +193,6 @@ $(BUILD_DIR):
 #######################################
 clean:
 	-$(MAKECLEANCMD) $(MAKECLEANFLAGS) $(BUILD_DIR)
-  
   
 #######################################
 # dependencies

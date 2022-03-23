@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccIJtQZY.s 			page 1
+ARM GAS  /tmp/ccyXqcsa.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
   29:src/embsysS20.h **** #define LD2_Pin GPIO5 // Connected to PA5
   30:src/embsysS20.h **** #define LD2_Port GPIOA
   31:src/embsysS20.h **** #define B1_Pin GPIO13 // Connected to PC13
-ARM GAS  /tmp/ccIJtQZY.s 			page 2
+ARM GAS  /tmp/ccyXqcsa.s 			page 2
 
 
   32:src/embsysS20.h **** #define B1_Port GPIOC
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
   61:src/embsysS20.h **** }
   62:src/embsysS20.h **** 
   63:src/embsysS20.h **** static bool IS_B1_RELEASED(void){
-ARM GAS  /tmp/ccIJtQZY.s 			page 3
+ARM GAS  /tmp/ccyXqcsa.s 			page 3
 
 
   55              		.loc 1 63 33 is_stmt 1 view -0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
    7:src/m4_timer_uart_app.c ****  * documentation for any purpose, without fee, and without written agreement is
    8:src/m4_timer_uart_app.c ****  * hereby granted, provided that the above copyright notice, the following
    9:src/m4_timer_uart_app.c ****  * two paragraphs and the authors appear in all copies of this software.
-ARM GAS  /tmp/ccIJtQZY.s 			page 4
+ARM GAS  /tmp/ccyXqcsa.s 			page 4
 
 
   10:src/m4_timer_uart_app.c ****  *
@@ -228,7 +228,7 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
   54:src/m4_timer_uart_app.c **** 
   55:src/m4_timer_uart_app.c **** 
   56:src/m4_timer_uart_app.c **** // GLOBALs go here
-  57:src/m4_timer_uart_app.c **** static uint16_t u16_encode_periodHalf;
+  57:src/m4_timer_uart_app.c **** static uint16_t u16_encode_periodHalf = ENCODE_FLASH;
   58:src/m4_timer_uart_app.c **** //  Generally, the user-created semaphores will be defined/allocated here
   59:src/m4_timer_uart_app.c **** //static uint8_t psz_CRNL[3]= {0x0D, 0x0A, 0};
   60:src/m4_timer_uart_app.c **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
   64:src/m4_timer_uart_app.c **** #endif
   65:src/m4_timer_uart_app.c **** 
   66:src/m4_timer_uart_app.c **** ESOS_USER_TASK( flash_LED ) 
-ARM GAS  /tmp/ccIJtQZY.s 			page 5
+ARM GAS  /tmp/ccyXqcsa.s 			page 5
 
 
   67:src/m4_timer_uart_app.c **** {
@@ -255,554 +255,491 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
  109              		.cfi_offset 5, -8
  110              		.cfi_offset 14, -4
  111 0002 0446     		mov	r4, r0
-  68:src/m4_timer_uart_app.c **** 	u16_encode_periodHalf = ENCODE_FLASH;
+  68:src/m4_timer_uart_app.c **** 	ESOS_TASK_BEGIN();
  112              		.loc 2 68 2 is_stmt 1 view .LVU12
- 113              		.loc 2 68 24 is_stmt 0 view .LVU13
- 114 0004 2E4B     		ldr	r3, .L25
- 115 0006 FA22     		movs	r2, #250
- 116 0008 1A80     		strh	r2, [r3]	@ movhi
-  69:src/m4_timer_uart_app.c **** 	ESOS_TASK_BEGIN();
- 117              		.loc 2 69 2 is_stmt 1 view .LVU14
- 118 000a 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
- 119 000c 63F07F03 		orn	r3, r3, #127
- 120 0010 8370     		strb	r3, [r0, #2]
- 121              		.loc 2 69 2 view .LVU15
- 122 0012 0388     		ldrh	r3, [r0]
- 123 0014 4B2B     		cmp	r3, #75
- 124 0016 22D0     		beq	.L10
- 125 0018 4F2B     		cmp	r3, #79
- 126 001a 36D0     		beq	.L11
- 127 001c 93B1     		cbz	r3, .L18
-  70:src/m4_timer_uart_app.c **** 	while (TRUE) 
-  71:src/m4_timer_uart_app.c **** 	{
-  72:src/m4_timer_uart_app.c **** 		TOGGLE_LD2();
-  73:src/m4_timer_uart_app.c **** 		if (IS_B1_RELEASED())
-  74:src/m4_timer_uart_app.c **** 		{
-  75:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_TICKS( u16_encode_periodHalf );
-  76:src/m4_timer_uart_app.c **** 		}
-  77:src/m4_timer_uart_app.c **** 		else
-  78:src/m4_timer_uart_app.c **** 		{ 
-  79:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_TICKS( DECODE_FLASH );
-  80:src/m4_timer_uart_app.c **** 		}
-  81:src/m4_timer_uart_app.c **** 
-  82:src/m4_timer_uart_app.c **** 	} // endof while(TRUE)
-  83:src/m4_timer_uart_app.c **** 	ESOS_TASK_END();
- 128              		.loc 2 83 2 view .LVU16
- 129              		.loc 2 83 2 view .LVU17
- 130 001e 0823     		movs	r3, #8
- 131 0020 8370     		strb	r3, [r0, #2]
- 132              		.loc 2 83 2 view .LVU18
- 133 0022 0023     		movs	r3, #0
- 134 0024 0380     		strh	r3, [r0]	@ movhi
- 135              		.loc 2 83 2 view .LVU19
- 136              		.loc 2 83 2 view .LVU20
- 137              		.loc 2 83 2 view .LVU21
- 138 0026 0325     		movs	r5, #3
-ARM GAS  /tmp/ccIJtQZY.s 			page 6
-
-
- 139              	.LVL3:
- 140              	.L15:
- 141              		.loc 2 83 17 discriminator 1 view .LVU22
-  84:src/m4_timer_uart_app.c **** } // end flash_LED() 
- 142              		.loc 2 84 1 is_stmt 0 discriminator 1 view .LVU23
- 143 0028 2846     		mov	r0, r5
- 144 002a 38BD     		pop	{r3, r4, r5, pc}
- 145              	.LVL4:
- 146              	.L23:
-  75:src/m4_timer_uart_app.c **** 		}
- 147              		.loc 2 75 4 is_stmt 1 discriminator 2 view .LVU24
- 148 002c 0423     		movs	r3, #4
- 149 002e A370     		strb	r3, [r4, #2]
-  75:src/m4_timer_uart_app.c **** 		}
- 150              		.loc 2 75 4 discriminator 2 view .LVU25
- 151 0030 0325     		movs	r5, #3
- 152 0032 F9E7     		b	.L15
- 153              	.L16:
-  75:src/m4_timer_uart_app.c **** 		}
- 154              		.loc 2 75 4 discriminator 5 view .LVU26
- 155 0034 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 156 0036 43F00103 		orr	r3, r3, #1
- 157 003a A370     		strb	r3, [r4, #2]
- 158              	.L17:
-  75:src/m4_timer_uart_app.c **** 		}
- 159              		.loc 2 75 4 discriminator 7 view .LVU27
- 160 003c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 161 003e 13F0010F 		tst	r3, #1
- 162 0042 F1D1     		bne	.L15
- 163              	.L18:
+ 113 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 114 0006 63F07F03 		orn	r3, r3, #127
+ 115 000a 8370     		strb	r3, [r0, #2]
+ 116              		.loc 2 68 2 view .LVU13
+ 117 000c 0388     		ldrh	r3, [r0]
+ 118 000e 4A2B     		cmp	r3, #74
+ 119 0010 22D0     		beq	.L10
+ 120 0012 4E2B     		cmp	r3, #78
+ 121 0014 36D0     		beq	.L11
+ 122 0016 93B1     		cbz	r3, .L18
   69:src/m4_timer_uart_app.c **** 	while (TRUE) 
- 164              		.loc 2 69 19 discriminator 1 view .LVU28
   70:src/m4_timer_uart_app.c **** 	{
- 165              		.loc 2 70 2 discriminator 1 view .LVU29
+  71:src/m4_timer_uart_app.c **** 		TOGGLE_LD2();
   72:src/m4_timer_uart_app.c **** 		if (IS_B1_RELEASED())
- 166              		.loc 2 72 3 discriminator 1 view .LVU30
- 167 0044 FFF7FEFF 		bl	TOGGLE_LD2
- 168              	.LVL5:
   73:src/m4_timer_uart_app.c **** 		{
- 169              		.loc 2 73 3 discriminator 1 view .LVU31
-  73:src/m4_timer_uart_app.c **** 		{
- 170              		.loc 2 73 7 is_stmt 0 discriminator 1 view .LVU32
- 171 0048 FFF7FEFF 		bl	IS_B1_RELEASED
- 172              	.LVL6:
-  73:src/m4_timer_uart_app.c **** 		{
- 173              		.loc 2 73 6 discriminator 1 view .LVU33
- 174 004c B0B1     		cbz	r0, .L13
+  74:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_TICKS( u16_encode_periodHalf );
   75:src/m4_timer_uart_app.c **** 		}
- 175              		.loc 2 75 4 is_stmt 1 view .LVU34
-  75:src/m4_timer_uart_app.c **** 		}
- 176              		.loc 2 75 4 view .LVU35
- 177 004e FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
- 178              	.LVL7:
- 179 0052 A060     		str	r0, [r4, #8]
-  75:src/m4_timer_uart_app.c **** 		}
- 180              		.loc 2 75 4 view .LVU36
- 181 0054 1A4B     		ldr	r3, .L25
-ARM GAS  /tmp/ccIJtQZY.s 			page 7
+  76:src/m4_timer_uart_app.c **** 		else
+  77:src/m4_timer_uart_app.c **** 		{ 
+  78:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_TICKS( DECODE_FLASH );
+  79:src/m4_timer_uart_app.c **** 		}
+  80:src/m4_timer_uart_app.c **** 
+  81:src/m4_timer_uart_app.c **** 	} // endof while(TRUE)
+  82:src/m4_timer_uart_app.c **** 	ESOS_TASK_END();
+ 123              		.loc 2 82 2 view .LVU14
+ 124              		.loc 2 82 2 view .LVU15
+ 125 0018 0823     		movs	r3, #8
+ 126 001a 8370     		strb	r3, [r0, #2]
+ 127              		.loc 2 82 2 view .LVU16
+ 128 001c 0023     		movs	r3, #0
+ 129 001e 0380     		strh	r3, [r0]	@ movhi
+ 130              		.loc 2 82 2 view .LVU17
+ 131              		.loc 2 82 2 view .LVU18
+ 132              		.loc 2 82 2 view .LVU19
+ 133 0020 0325     		movs	r5, #3
+ 134              	.LVL3:
+ 135              	.L15:
+ 136              		.loc 2 82 17 discriminator 1 view .LVU20
+  83:src/m4_timer_uart_app.c **** } // end flash_LED() 
+ 137              		.loc 2 83 1 is_stmt 0 discriminator 1 view .LVU21
+ 138 0022 2846     		mov	r0, r5
+ARM GAS  /tmp/ccyXqcsa.s 			page 6
 
 
- 182 0056 1B88     		ldrh	r3, [r3]
- 183 0058 E360     		str	r3, [r4, #12]
-  75:src/m4_timer_uart_app.c **** 		}
- 184              		.loc 2 75 4 view .LVU37
-  75:src/m4_timer_uart_app.c **** 		}
- 185              		.loc 2 75 4 view .LVU38
- 186 005a 4B23     		movs	r3, #75
- 187 005c 2380     		strh	r3, [r4]	@ movhi
- 188              	.L10:
-  75:src/m4_timer_uart_app.c **** 		}
- 189              		.loc 2 75 4 discriminator 1 view .LVU39
-  75:src/m4_timer_uart_app.c **** 		}
- 190              		.loc 2 75 4 discriminator 1 view .LVU40
- 191 005e A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 192 0060 15F00405 		ands	r5, r5, #4
- 193 0064 E2D1     		bne	.L23
-  75:src/m4_timer_uart_app.c **** 		}
- 194              		.loc 2 75 4 discriminator 3 view .LVU41
- 195 0066 E168     		ldr	r1, [r4, #12]
- 196 0068 A068     		ldr	r0, [r4, #8]
- 197 006a FFF7FEFF 		bl	__esos_hasTickDurationPassed
- 198              	.LVL8:
- 199 006e 0028     		cmp	r0, #0
- 200 0070 E0D0     		beq	.L16
-  75:src/m4_timer_uart_app.c **** 		}
- 201              		.loc 2 75 4 discriminator 4 view .LVU42
- 202 0072 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 203 0074 23F00103 		bic	r3, r3, #1
- 204 0078 A370     		strb	r3, [r4, #2]
- 205 007a DFE7     		b	.L17
- 206              	.L13:
-  79:src/m4_timer_uart_app.c **** 		}
- 207              		.loc 2 79 4 view .LVU43
-  79:src/m4_timer_uart_app.c **** 		}
- 208              		.loc 2 79 4 view .LVU44
- 209 007c FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
- 210              	.LVL9:
- 211 0080 A060     		str	r0, [r4, #8]
-  79:src/m4_timer_uart_app.c **** 		}
- 212              		.loc 2 79 4 view .LVU45
- 213 0082 3E23     		movs	r3, #62
- 214 0084 E360     		str	r3, [r4, #12]
-  79:src/m4_timer_uart_app.c **** 		}
- 215              		.loc 2 79 4 view .LVU46
-  79:src/m4_timer_uart_app.c **** 		}
- 216              		.loc 2 79 4 view .LVU47
- 217 0086 4F23     		movs	r3, #79
- 218 0088 2380     		strh	r3, [r4]	@ movhi
- 219              	.L11:
-  79:src/m4_timer_uart_app.c **** 		}
- 220              		.loc 2 79 4 discriminator 1 view .LVU48
-  79:src/m4_timer_uart_app.c **** 		}
- 221              		.loc 2 79 4 discriminator 1 view .LVU49
- 222 008a A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 223 008c 15F00405 		ands	r5, r5, #4
- 224 0090 0DD1     		bne	.L24
-  79:src/m4_timer_uart_app.c **** 		}
-ARM GAS  /tmp/ccIJtQZY.s 			page 8
+ 139 0024 38BD     		pop	{r3, r4, r5, pc}
+ 140              	.LVL4:
+ 141              	.L23:
+  74:src/m4_timer_uart_app.c **** 		}
+ 142              		.loc 2 74 4 is_stmt 1 discriminator 2 view .LVU22
+ 143 0026 0423     		movs	r3, #4
+ 144 0028 A370     		strb	r3, [r4, #2]
+  74:src/m4_timer_uart_app.c **** 		}
+ 145              		.loc 2 74 4 discriminator 2 view .LVU23
+ 146 002a 0325     		movs	r5, #3
+ 147 002c F9E7     		b	.L15
+ 148              	.L16:
+  74:src/m4_timer_uart_app.c **** 		}
+ 149              		.loc 2 74 4 discriminator 5 view .LVU24
+ 150 002e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 151 0030 43F00103 		orr	r3, r3, #1
+ 152 0034 A370     		strb	r3, [r4, #2]
+ 153              	.L17:
+  74:src/m4_timer_uart_app.c **** 		}
+ 154              		.loc 2 74 4 discriminator 7 view .LVU25
+ 155 0036 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 156 0038 13F0010F 		tst	r3, #1
+ 157 003c F1D1     		bne	.L15
+ 158              	.L18:
+  68:src/m4_timer_uart_app.c **** 	while (TRUE) 
+ 159              		.loc 2 68 19 discriminator 1 view .LVU26
+  69:src/m4_timer_uart_app.c **** 	{
+ 160              		.loc 2 69 2 discriminator 1 view .LVU27
+  71:src/m4_timer_uart_app.c **** 		if (IS_B1_RELEASED())
+ 161              		.loc 2 71 3 discriminator 1 view .LVU28
+ 162 003e FFF7FEFF 		bl	TOGGLE_LD2
+ 163              	.LVL5:
+  72:src/m4_timer_uart_app.c **** 		{
+ 164              		.loc 2 72 3 discriminator 1 view .LVU29
+  72:src/m4_timer_uart_app.c **** 		{
+ 165              		.loc 2 72 7 is_stmt 0 discriminator 1 view .LVU30
+ 166 0042 FFF7FEFF 		bl	IS_B1_RELEASED
+ 167              	.LVL6:
+  72:src/m4_timer_uart_app.c **** 		{
+ 168              		.loc 2 72 6 discriminator 1 view .LVU31
+ 169 0046 B0B1     		cbz	r0, .L13
+  74:src/m4_timer_uart_app.c **** 		}
+ 170              		.loc 2 74 4 is_stmt 1 view .LVU32
+  74:src/m4_timer_uart_app.c **** 		}
+ 171              		.loc 2 74 4 view .LVU33
+ 172 0048 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 173              	.LVL7:
+ 174 004c A060     		str	r0, [r4, #8]
+  74:src/m4_timer_uart_app.c **** 		}
+ 175              		.loc 2 74 4 view .LVU34
+ 176 004e 1B4B     		ldr	r3, .L25
+ 177 0050 1B88     		ldrh	r3, [r3]
+ 178 0052 E360     		str	r3, [r4, #12]
+  74:src/m4_timer_uart_app.c **** 		}
+ 179              		.loc 2 74 4 view .LVU35
+  74:src/m4_timer_uart_app.c **** 		}
+ 180              		.loc 2 74 4 view .LVU36
+ARM GAS  /tmp/ccyXqcsa.s 			page 7
 
 
- 225              		.loc 2 79 4 discriminator 3 view .LVU50
- 226 0092 E168     		ldr	r1, [r4, #12]
- 227 0094 A068     		ldr	r0, [r4, #8]
- 228 0096 FFF7FEFF 		bl	__esos_hasTickDurationPassed
- 229              	.LVL10:
- 230 009a 60B1     		cbz	r0, .L20
-  79:src/m4_timer_uart_app.c **** 		}
- 231              		.loc 2 79 4 discriminator 4 view .LVU51
- 232 009c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 233 009e 23F00103 		bic	r3, r3, #1
- 234 00a2 A370     		strb	r3, [r4, #2]
- 235              	.L21:
-  79:src/m4_timer_uart_app.c **** 		}
- 236              		.loc 2 79 4 discriminator 7 view .LVU52
- 237 00a4 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 238 00a6 13F0010F 		tst	r3, #1
- 239 00aa CBD0     		beq	.L18
- 240 00ac BCE7     		b	.L15
- 241              	.L24:
-  79:src/m4_timer_uart_app.c **** 		}
- 242              		.loc 2 79 4 discriminator 2 view .LVU53
- 243 00ae 0423     		movs	r3, #4
- 244 00b0 A370     		strb	r3, [r4, #2]
-  79:src/m4_timer_uart_app.c **** 		}
- 245              		.loc 2 79 4 discriminator 2 view .LVU54
- 246 00b2 0325     		movs	r5, #3
- 247 00b4 B8E7     		b	.L15
- 248              	.L20:
-  79:src/m4_timer_uart_app.c **** 		}
- 249              		.loc 2 79 4 discriminator 5 view .LVU55
- 250 00b6 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 251 00b8 43F00103 		orr	r3, r3, #1
- 252 00bc A370     		strb	r3, [r4, #2]
- 253 00be F1E7     		b	.L21
- 254              	.L26:
- 255              		.align	2
- 256              	.L25:
- 257 00c0 00000000 		.word	.LANCHOR0
- 258              		.cfi_endproc
- 259              	.LFE10:
- 261              		.section	.text.IS_B1_PRESSED,"ax",%progbits
- 262              		.align	1
- 263              		.syntax unified
- 264              		.thumb
- 265              		.thumb_func
- 267              	IS_B1_PRESSED:
- 268              	.LFB9:
+ 181 0054 4A23     		movs	r3, #74
+ 182 0056 2380     		strh	r3, [r4]	@ movhi
+ 183              	.L10:
+  74:src/m4_timer_uart_app.c **** 		}
+ 184              		.loc 2 74 4 discriminator 1 view .LVU37
+  74:src/m4_timer_uart_app.c **** 		}
+ 185              		.loc 2 74 4 discriminator 1 view .LVU38
+ 186 0058 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 187 005a 15F00405 		ands	r5, r5, #4
+ 188 005e E2D1     		bne	.L23
+  74:src/m4_timer_uart_app.c **** 		}
+ 189              		.loc 2 74 4 discriminator 3 view .LVU39
+ 190 0060 E168     		ldr	r1, [r4, #12]
+ 191 0062 A068     		ldr	r0, [r4, #8]
+ 192 0064 FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 193              	.LVL8:
+ 194 0068 0028     		cmp	r0, #0
+ 195 006a E0D0     		beq	.L16
+  74:src/m4_timer_uart_app.c **** 		}
+ 196              		.loc 2 74 4 discriminator 4 view .LVU40
+ 197 006c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 198 006e 23F00103 		bic	r3, r3, #1
+ 199 0072 A370     		strb	r3, [r4, #2]
+ 200 0074 DFE7     		b	.L17
+ 201              	.L13:
+  78:src/m4_timer_uart_app.c **** 		}
+ 202              		.loc 2 78 4 view .LVU41
+  78:src/m4_timer_uart_app.c **** 		}
+ 203              		.loc 2 78 4 view .LVU42
+ 204 0076 FFF7FEFF 		bl	__esos_hw_GetSystemTickCount
+ 205              	.LVL9:
+ 206 007a A060     		str	r0, [r4, #8]
+  78:src/m4_timer_uart_app.c **** 		}
+ 207              		.loc 2 78 4 view .LVU43
+ 208 007c 3E23     		movs	r3, #62
+ 209 007e E360     		str	r3, [r4, #12]
+  78:src/m4_timer_uart_app.c **** 		}
+ 210              		.loc 2 78 4 view .LVU44
+  78:src/m4_timer_uart_app.c **** 		}
+ 211              		.loc 2 78 4 view .LVU45
+ 212 0080 4E23     		movs	r3, #78
+ 213 0082 2380     		strh	r3, [r4]	@ movhi
+ 214              	.L11:
+  78:src/m4_timer_uart_app.c **** 		}
+ 215              		.loc 2 78 4 discriminator 1 view .LVU46
+  78:src/m4_timer_uart_app.c **** 		}
+ 216              		.loc 2 78 4 discriminator 1 view .LVU47
+ 217 0084 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 218 0086 15F00405 		ands	r5, r5, #4
+ 219 008a 0DD1     		bne	.L24
+  78:src/m4_timer_uart_app.c **** 		}
+ 220              		.loc 2 78 4 discriminator 3 view .LVU48
+ 221 008c E168     		ldr	r1, [r4, #12]
+ 222 008e A068     		ldr	r0, [r4, #8]
+ 223 0090 FFF7FEFF 		bl	__esos_hasTickDurationPassed
+ 224              	.LVL10:
+ 225 0094 60B1     		cbz	r0, .L20
+ARM GAS  /tmp/ccyXqcsa.s 			page 8
+
+
+  78:src/m4_timer_uart_app.c **** 		}
+ 226              		.loc 2 78 4 discriminator 4 view .LVU49
+ 227 0096 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 228 0098 23F00103 		bic	r3, r3, #1
+ 229 009c A370     		strb	r3, [r4, #2]
+ 230              	.L21:
+  78:src/m4_timer_uart_app.c **** 		}
+ 231              		.loc 2 78 4 discriminator 7 view .LVU50
+ 232 009e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 233 00a0 13F0010F 		tst	r3, #1
+ 234 00a4 CBD0     		beq	.L18
+ 235 00a6 BCE7     		b	.L15
+ 236              	.L24:
+  78:src/m4_timer_uart_app.c **** 		}
+ 237              		.loc 2 78 4 discriminator 2 view .LVU51
+ 238 00a8 0423     		movs	r3, #4
+ 239 00aa A370     		strb	r3, [r4, #2]
+  78:src/m4_timer_uart_app.c **** 		}
+ 240              		.loc 2 78 4 discriminator 2 view .LVU52
+ 241 00ac 0325     		movs	r5, #3
+ 242 00ae B8E7     		b	.L15
+ 243              	.L20:
+  78:src/m4_timer_uart_app.c **** 		}
+ 244              		.loc 2 78 4 discriminator 5 view .LVU53
+ 245 00b0 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 246 00b2 43F00103 		orr	r3, r3, #1
+ 247 00b6 A370     		strb	r3, [r4, #2]
+ 248 00b8 F1E7     		b	.L21
+ 249              	.L26:
+ 250 00ba 00BF     		.align	2
+ 251              	.L25:
+ 252 00bc 00000000 		.word	.LANCHOR0
+ 253              		.cfi_endproc
+ 254              	.LFE10:
+ 256              		.section	.text.IS_B1_PRESSED,"ax",%progbits
+ 257              		.align	1
+ 258              		.syntax unified
+ 259              		.thumb
+ 260              		.thumb_func
+ 262              	IS_B1_PRESSED:
+ 263              	.LFB9:
   69:src/embsysS20.h **** 
   70:src/embsysS20.h **** static bool IS_B1_PRESSED(void){
- 269              		.loc 1 70 32 view -0
- 270              		.cfi_startproc
- 271              		@ args = 0, pretend = 0, frame = 0
- 272              		@ frame_needed = 0, uses_anonymous_args = 0
- 273 0000 08B5     		push	{r3, lr}
- 274              	.LCFI3:
- 275              		.cfi_def_cfa_offset 8
- 276              		.cfi_offset 3, -8
-ARM GAS  /tmp/ccIJtQZY.s 			page 9
-
-
- 277              		.cfi_offset 14, -4
+ 264              		.loc 1 70 32 view -0
+ 265              		.cfi_startproc
+ 266              		@ args = 0, pretend = 0, frame = 0
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268 0000 08B5     		push	{r3, lr}
+ 269              	.LCFI3:
+ 270              		.cfi_def_cfa_offset 8
+ 271              		.cfi_offset 3, -8
+ 272              		.cfi_offset 14, -4
   71:src/embsysS20.h **** 	if (!IS_B1_RELEASED())
- 278              		.loc 1 71 2 view .LVU57
- 279              		.loc 1 71 7 is_stmt 0 view .LVU58
- 280 0002 FFF7FEFF 		bl	IS_B1_RELEASED
- 281              	.LVL11:
- 282              		.loc 1 71 5 view .LVU59
- 283 0006 08B9     		cbnz	r0, .L29
+ 273              		.loc 1 71 2 view .LVU55
+ 274              		.loc 1 71 7 is_stmt 0 view .LVU56
+ 275 0002 FFF7FEFF 		bl	IS_B1_RELEASED
+ 276              	.LVL11:
+ARM GAS  /tmp/ccyXqcsa.s 			page 9
+
+
+ 277              		.loc 1 71 5 view .LVU57
+ 278 0006 08B9     		cbnz	r0, .L29
   72:src/embsysS20.h **** 		return true;
- 284              		.loc 1 72 10 view .LVU60
- 285 0008 0120     		movs	r0, #1
- 286              	.L28:
+ 279              		.loc 1 72 10 view .LVU58
+ 280 0008 0120     		movs	r0, #1
+ 281              	.L28:
   73:src/embsysS20.h **** 	else
   74:src/embsysS20.h **** 		return false;
   75:src/embsysS20.h **** }
- 287              		.loc 1 75 1 view .LVU61
- 288 000a 08BD     		pop	{r3, pc}
- 289              	.L29:
+ 282              		.loc 1 75 1 view .LVU59
+ 283 000a 08BD     		pop	{r3, pc}
+ 284              	.L29:
   74:src/embsysS20.h **** }
- 290              		.loc 1 74 10 view .LVU62
- 291 000c 0020     		movs	r0, #0
- 292 000e FCE7     		b	.L28
- 293              		.cfi_endproc
- 294              	.LFE9:
- 296              		.section	.text.usart_comms,"ax",%progbits
- 297              		.align	1
- 298              		.global	usart_comms
- 299              		.syntax unified
- 300              		.thumb
- 301              		.thumb_func
- 303              	usart_comms:
- 304              	.LVL12:
- 305              	.LFB11:
-  85:src/m4_timer_uart_app.c **** 
-  86:src/m4_timer_uart_app.c **** ESOS_USER_TASK( usart_comms )
-  87:src/m4_timer_uart_app.c **** {
- 306              		.loc 2 87 1 is_stmt 1 view -0
- 307              		.cfi_startproc
- 308              		@ args = 0, pretend = 0, frame = 0
- 309              		@ frame_needed = 0, uses_anonymous_args = 0
- 310              		.loc 2 87 1 is_stmt 0 view .LVU64
- 311 0000 70B5     		push	{r4, r5, r6, lr}
- 312              	.LCFI4:
- 313              		.cfi_def_cfa_offset 16
- 314              		.cfi_offset 4, -16
- 315              		.cfi_offset 5, -12
- 316              		.cfi_offset 6, -8
- 317              		.cfi_offset 14, -4
- 318 0002 0446     		mov	r4, r0
-  88:src/m4_timer_uart_app.c **** 	static uint8_t u8_incoming;
- 319              		.loc 2 88 2 is_stmt 1 view .LVU65
-  89:src/m4_timer_uart_app.c **** 	static uint8_t au8_key[] = {'T', 'E', 'N', 'N', 'E', 'S', 'S', 'E', 'E', 'T', 'E', 'C', 'H'};
- 320              		.loc 2 89 2 view .LVU66
-  90:src/m4_timer_uart_app.c **** 	static uint8_t u8_countEncode = 0;
- 321              		.loc 2 90 2 view .LVU67
-  91:src/m4_timer_uart_app.c **** 	static uint8_t u8_countDecode = 0;
- 322              		.loc 2 91 2 view .LVU68
-ARM GAS  /tmp/ccIJtQZY.s 			page 10
+ 285              		.loc 1 74 10 view .LVU60
+ 286 000c 0020     		movs	r0, #0
+ 287 000e FCE7     		b	.L28
+ 288              		.cfi_endproc
+ 289              	.LFE9:
+ 291              		.section	.text.usart_comms,"ax",%progbits
+ 292              		.align	1
+ 293              		.global	usart_comms
+ 294              		.syntax unified
+ 295              		.thumb
+ 296              		.thumb_func
+ 298              	usart_comms:
+ 299              	.LVL12:
+ 300              	.LFB11:
+  84:src/m4_timer_uart_app.c **** 
+  85:src/m4_timer_uart_app.c **** ESOS_USER_TASK( usart_comms )
+  86:src/m4_timer_uart_app.c **** {
+ 301              		.loc 2 86 1 is_stmt 1 view -0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305              		.loc 2 86 1 is_stmt 0 view .LVU62
+ 306 0000 70B5     		push	{r4, r5, r6, lr}
+ 307              	.LCFI4:
+ 308              		.cfi_def_cfa_offset 16
+ 309              		.cfi_offset 4, -16
+ 310              		.cfi_offset 5, -12
+ 311              		.cfi_offset 6, -8
+ 312              		.cfi_offset 14, -4
+ 313 0002 0446     		mov	r4, r0
+  87:src/m4_timer_uart_app.c **** 	static uint8_t u8_incoming;
+ 314              		.loc 2 87 2 is_stmt 1 view .LVU63
+  88:src/m4_timer_uart_app.c **** 	static uint8_t au8_key[] = {'T', 'E', 'N', 'N', 'E', 'S', 'S', 'E', 'E', 'T', 'E', 'C', 'H'};
+ 315              		.loc 2 88 2 view .LVU64
+  89:src/m4_timer_uart_app.c **** 	static uint8_t u8_countEncode = 0;
+ 316              		.loc 2 89 2 view .LVU65
+  90:src/m4_timer_uart_app.c **** 	static uint8_t u8_countDecode = 0;
+ 317              		.loc 2 90 2 view .LVU66
+  91:src/m4_timer_uart_app.c **** 	static uint8_t u8_exclamCount = 0;
+ 318              		.loc 2 91 2 view .LVU67
+  92:src/m4_timer_uart_app.c **** 	static bool b_changeFlag = FALSE;
+ 319              		.loc 2 92 2 view .LVU68
+  93:src/m4_timer_uart_app.c **** 	static uint8_t u8_digitCount = 0;
+ 320              		.loc 2 93 2 view .LVU69
+ARM GAS  /tmp/ccyXqcsa.s 			page 10
 
 
-  92:src/m4_timer_uart_app.c **** 	static uint8_t u8_exclamCount = 0;
- 323              		.loc 2 92 2 view .LVU69
-  93:src/m4_timer_uart_app.c **** 	static bool b_changeFlag = FALSE;
- 324              		.loc 2 93 2 view .LVU70
-  94:src/m4_timer_uart_app.c **** 	static uint8_t u8_digitCount = 0;
- 325              		.loc 2 94 2 view .LVU71
-  95:src/m4_timer_uart_app.c **** 	static uint16_t u16_changePeriod = 0;
- 326              		.loc 2 95 2 view .LVU72
-  96:src/m4_timer_uart_app.c **** 	static bool b_skipPrint = FALSE;
- 327              		.loc 2 96 2 view .LVU73
-  97:src/m4_timer_uart_app.c **** 	static char ac_charArr[10];
- 328              		.loc 2 97 2 view .LVU74
-  98:src/m4_timer_uart_app.c **** 	static uint8_t u8_charCount = 0;
- 329              		.loc 2 98 2 view .LVU75
-  99:src/m4_timer_uart_app.c **** 	
+  94:src/m4_timer_uart_app.c **** 	static uint16_t u16_changePeriod = 0;
+ 321              		.loc 2 94 2 view .LVU70
+  95:src/m4_timer_uart_app.c **** 	static bool b_skipPrint = FALSE;
+ 322              		.loc 2 95 2 view .LVU71
+  96:src/m4_timer_uart_app.c **** 	static char ac_charArr[10];
+ 323              		.loc 2 96 2 view .LVU72
+  97:src/m4_timer_uart_app.c **** 	static uint8_t u8_charCount = 0;
+ 324              		.loc 2 97 2 view .LVU73
+  98:src/m4_timer_uart_app.c **** 	static bool b_changeFlagSkip = FALSE;
+ 325              		.loc 2 98 2 view .LVU74
+  99:src/m4_timer_uart_app.c **** 	static bool b_exclamSkip = FALSE;
+ 326              		.loc 2 99 2 view .LVU75
  100:src/m4_timer_uart_app.c **** 	
- 101:src/m4_timer_uart_app.c **** 	ESOS_TASK_BEGIN();
- 330              		.loc 2 101 2 view .LVU76
- 331 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
- 332 0006 63F07F03 		orn	r3, r3, #127
- 333 000a 8370     		strb	r3, [r0, #2]
- 334              		.loc 2 101 2 view .LVU77
- 335 000c 0388     		ldrh	r3, [r0]
- 336 000e E72B     		cmp	r3, #231
- 337 0010 00F22683 		bhi	.L32
- 338 0014 992B     		cmp	r3, #153
- 339 0016 54D3     		bcc	.L103
- 340 0018 993B     		subs	r3, r3, #153
- 341 001a 4E2B     		cmp	r3, #78
- 342 001c 00F22083 		bhi	.L32
- 343 0020 DFE813F0 		tbh	[pc, r3, lsl #1]
- 344              	.L38:
- 345 0024 1201     		.2byte	(.L47-.L38)/2
- 346 0026 2D01     		.2byte	(.L46-.L38)/2
- 347 0028 1E03     		.2byte	(.L32-.L38)/2
- 348 002a 1E03     		.2byte	(.L32-.L38)/2
- 349 002c 1E03     		.2byte	(.L32-.L38)/2
- 350 002e 1E03     		.2byte	(.L32-.L38)/2
- 351 0030 1E03     		.2byte	(.L32-.L38)/2
- 352 0032 4F01     		.2byte	(.L45-.L38)/2
- 353 0034 1E03     		.2byte	(.L32-.L38)/2
- 354 0036 1E03     		.2byte	(.L32-.L38)/2
- 355 0038 1E03     		.2byte	(.L32-.L38)/2
- 356 003a 1E03     		.2byte	(.L32-.L38)/2
- 357 003c 1E03     		.2byte	(.L32-.L38)/2
- 358 003e 1E03     		.2byte	(.L32-.L38)/2
- 359 0040 1E03     		.2byte	(.L32-.L38)/2
- 360 0042 1E03     		.2byte	(.L32-.L38)/2
- 361 0044 1E03     		.2byte	(.L32-.L38)/2
- 362 0046 AF01     		.2byte	(.L44-.L38)/2
- 363 0048 CC01     		.2byte	(.L43-.L38)/2
- 364 004a E601     		.2byte	(.L42-.L38)/2
- 365 004c 1E03     		.2byte	(.L32-.L38)/2
- 366 004e 1E03     		.2byte	(.L32-.L38)/2
- 367 0050 1E03     		.2byte	(.L32-.L38)/2
- 368 0052 1E03     		.2byte	(.L32-.L38)/2
- 369 0054 1E03     		.2byte	(.L32-.L38)/2
-ARM GAS  /tmp/ccIJtQZY.s 			page 11
+ 101:src/m4_timer_uart_app.c **** 	
+ 102:src/m4_timer_uart_app.c **** 	ESOS_TASK_BEGIN();
+ 327              		.loc 2 102 2 view .LVU76
+ 328 0004 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 329 0006 63F07F03 		orn	r3, r3, #127
+ 330 000a 8370     		strb	r3, [r0, #2]
+ 331              		.loc 2 102 2 view .LVU77
+ 332 000c 0388     		ldrh	r3, [r0]
+ 333 000e AC2B     		cmp	r3, #172
+ 334 0010 00F28680 		bhi	.L32
+ 335 0014 992B     		cmp	r3, #153
+ 336 0016 19D3     		bcc	.L96
+ 337 0018 993B     		subs	r3, r3, #153
+ 338 001a 132B     		cmp	r3, #19
+ 339 001c 00F29282 		bhi	.L37
+ 340 0020 DFE813F0 		tbh	[pc, r3, lsl #1]
+ 341              	.L39:
+ 342 0024 F700     		.2byte	(.L44-.L39)/2
+ 343 0026 1201     		.2byte	(.L43-.L39)/2
+ 344 0028 9002     		.2byte	(.L37-.L39)/2
+ 345 002a 9002     		.2byte	(.L37-.L39)/2
+ 346 002c 9002     		.2byte	(.L37-.L39)/2
+ 347 002e 9002     		.2byte	(.L37-.L39)/2
+ 348 0030 9002     		.2byte	(.L37-.L39)/2
+ 349 0032 4901     		.2byte	(.L42-.L39)/2
+ 350 0034 9002     		.2byte	(.L37-.L39)/2
+ 351 0036 9002     		.2byte	(.L37-.L39)/2
+ 352 0038 9002     		.2byte	(.L37-.L39)/2
+ 353 003a 9002     		.2byte	(.L37-.L39)/2
+ 354 003c 9002     		.2byte	(.L37-.L39)/2
+ 355 003e 9002     		.2byte	(.L37-.L39)/2
+ 356 0040 9002     		.2byte	(.L37-.L39)/2
+ 357 0042 9002     		.2byte	(.L37-.L39)/2
+ 358 0044 9002     		.2byte	(.L37-.L39)/2
+ 359 0046 8F01     		.2byte	(.L41-.L39)/2
+ 360 0048 AC01     		.2byte	(.L40-.L39)/2
+ 361 004a C401     		.2byte	(.L38-.L39)/2
+ 362              		.p2align 1
+ 363              	.L96:
+ 364 004c 6A2B     		cmp	r3, #106
+ 365 004e 4BD0     		beq	.L34
+ 366 0050 6B2B     		cmp	r3, #107
+ 367 0052 44D1     		bne	.L97
+ 368              	.LVL13:
+ARM GAS  /tmp/ccyXqcsa.s 			page 11
 
 
- 370 0056 1E03     		.2byte	(.L32-.L38)/2
- 371 0058 1E03     		.2byte	(.L32-.L38)/2
- 372 005a 1E03     		.2byte	(.L32-.L38)/2
- 373 005c 1E03     		.2byte	(.L32-.L38)/2
- 374 005e 1E03     		.2byte	(.L32-.L38)/2
- 375 0060 1E03     		.2byte	(.L32-.L38)/2
- 376 0062 1E03     		.2byte	(.L32-.L38)/2
- 377 0064 1E03     		.2byte	(.L32-.L38)/2
- 378 0066 1E03     		.2byte	(.L32-.L38)/2
- 379 0068 1E03     		.2byte	(.L32-.L38)/2
- 380 006a 1E03     		.2byte	(.L32-.L38)/2
- 381 006c 1E03     		.2byte	(.L32-.L38)/2
- 382 006e 1E03     		.2byte	(.L32-.L38)/2
- 383 0070 1E03     		.2byte	(.L32-.L38)/2
- 384 0072 1E03     		.2byte	(.L32-.L38)/2
- 385 0074 1E03     		.2byte	(.L32-.L38)/2
- 386 0076 1E03     		.2byte	(.L32-.L38)/2
- 387 0078 1E03     		.2byte	(.L32-.L38)/2
- 388 007a 1E03     		.2byte	(.L32-.L38)/2
- 389 007c 1E03     		.2byte	(.L32-.L38)/2
- 390 007e 1E03     		.2byte	(.L32-.L38)/2
- 391 0080 1E03     		.2byte	(.L32-.L38)/2
- 392 0082 1E03     		.2byte	(.L32-.L38)/2
- 393 0084 1E03     		.2byte	(.L32-.L38)/2
- 394 0086 1E03     		.2byte	(.L32-.L38)/2
- 395 0088 1E03     		.2byte	(.L32-.L38)/2
- 396 008a 1E03     		.2byte	(.L32-.L38)/2
- 397 008c 1E03     		.2byte	(.L32-.L38)/2
- 398 008e 1E03     		.2byte	(.L32-.L38)/2
- 399 0090 1E03     		.2byte	(.L32-.L38)/2
- 400 0092 1E03     		.2byte	(.L32-.L38)/2
- 401 0094 1E03     		.2byte	(.L32-.L38)/2
- 402 0096 1E03     		.2byte	(.L32-.L38)/2
- 403 0098 1E03     		.2byte	(.L32-.L38)/2
- 404 009a 1E03     		.2byte	(.L32-.L38)/2
- 405 009c 1E03     		.2byte	(.L32-.L38)/2
- 406 009e 1E03     		.2byte	(.L32-.L38)/2
- 407 00a0 1E03     		.2byte	(.L32-.L38)/2
- 408 00a2 2402     		.2byte	(.L41-.L38)/2
- 409 00a4 4102     		.2byte	(.L40-.L38)/2
- 410 00a6 1E03     		.2byte	(.L32-.L38)/2
- 411 00a8 1E03     		.2byte	(.L32-.L38)/2
- 412 00aa 1E03     		.2byte	(.L32-.L38)/2
- 413 00ac 1E03     		.2byte	(.L32-.L38)/2
- 414 00ae 1E03     		.2byte	(.L32-.L38)/2
- 415 00b0 1E03     		.2byte	(.L32-.L38)/2
- 416 00b2 1E03     		.2byte	(.L32-.L38)/2
- 417 00b4 1E03     		.2byte	(.L32-.L38)/2
- 418 00b6 1E03     		.2byte	(.L32-.L38)/2
- 419 00b8 1E03     		.2byte	(.L32-.L38)/2
- 420 00ba 1E03     		.2byte	(.L32-.L38)/2
- 421 00bc 1E03     		.2byte	(.L32-.L38)/2
- 422 00be 7002     		.2byte	(.L39-.L38)/2
- 423 00c0 8C02     		.2byte	(.L37-.L38)/2
- 424              		.p2align 1
- 425              	.L103:
- 426 00c2 692B     		cmp	r3, #105
-ARM GAS  /tmp/ccIJtQZY.s 			page 12
+ 369              	.L35:
+ 103:src/m4_timer_uart_app.c **** 	while (TRUE) {
+ 104:src/m4_timer_uart_app.c **** 	
+ 105:src/m4_timer_uart_app.c **** 	// ESOS UART comms uses 57.6k/8/N/1
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_AVAILABLE_IN_COMM();
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 370              		.loc 2 107 3 discriminator 1 view .LVU78
+ 371              		.loc 2 107 3 discriminator 1 view .LVU79
+ 372 0054 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 373 0056 15F00405 		ands	r5, r5, #4
+ 374 005a 40F08B80 		bne	.L98
+ 375              		.loc 2 107 3 discriminator 3 view .LVU80
+ 376 005e 0122     		movs	r2, #1
+ 377 0060 A749     		ldr	r1, .L114
+ 378 0062 A848     		ldr	r0, .L114+4
+ 379 0064 FFF7FEFF 		bl	__esos_getBuffer
+ 380              	.LVL14:
+ 381 0068 0228     		cmp	r0, #2
+ 382 006a 40F28780 		bls	.L52
+ 383              		.loc 2 107 3 discriminator 4 view .LVU81
+ 384 006e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 385 0070 23F00103 		bic	r3, r3, #1
+ 386 0074 A370     		strb	r3, [r4, #2]
+ 387              	.L53:
+ 388              		.loc 2 107 3 discriminator 7 view .LVU82
+ 389 0076 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 390 0078 13F0010F 		tst	r3, #1
+ 391 007c 40F06782 		bne	.L48
+ 392              		.loc 2 107 3 discriminator 9 view .LVU83
+ 393              		.loc 2 107 3 discriminator 9 view .LVU84
+ 108:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 394              		.loc 2 108 3 discriminator 9 view .LVU85
+ 395 0080 A14A     		ldr	r2, .L114+8
+ 396 0082 1368     		ldr	r3, [r2]
+ 397 0084 23F00803 		bic	r3, r3, #8
+ 398 0088 1360     		str	r3, [r2]
+ 109:src/m4_timer_uart_app.c **** 		
+ 110:src/m4_timer_uart_app.c **** 		if(u8_countEncode > 12) //reset encode position in key when at the end
+ 399              		.loc 2 110 3 discriminator 9 view .LVU86
+ 400              		.loc 2 110 21 is_stmt 0 discriminator 9 view .LVU87
+ 401 008a A04B     		ldr	r3, .L114+12
+ 402 008c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 403              		.loc 2 110 5 discriminator 9 view .LVU88
+ 404 008e 0C2B     		cmp	r3, #12
+ 405 0090 02D9     		bls	.L54
+ 111:src/m4_timer_uart_app.c **** 		{
+ 112:src/m4_timer_uart_app.c **** 			u8_countEncode = 0;
+ 406              		.loc 2 112 4 is_stmt 1 view .LVU89
+ 407              		.loc 2 112 19 is_stmt 0 view .LVU90
+ 408 0092 9E4B     		ldr	r3, .L114+12
+ 409 0094 0022     		movs	r2, #0
+ 410 0096 1A70     		strb	r2, [r3]
+ 411              	.L54:
+ 113:src/m4_timer_uart_app.c **** 		}
+ 114:src/m4_timer_uart_app.c **** 		
+ 115:src/m4_timer_uart_app.c **** 		if(u8_countDecode > 12) //reset decode position in key when at the end
+ 412              		.loc 2 115 3 is_stmt 1 view .LVU91
+ARM GAS  /tmp/ccyXqcsa.s 			page 12
 
 
- 427 00c4 49D0     		beq	.L34
- 428 00c6 6A2B     		cmp	r3, #106
- 429 00c8 42D1     		bne	.L104
- 430              	.LVL13:
- 431              	.L35:
- 102:src/m4_timer_uart_app.c **** 	while (TRUE) {
- 103:src/m4_timer_uart_app.c **** 	
- 104:src/m4_timer_uart_app.c **** 	// ESOS UART comms uses 57.6k/8/N/1
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_AVAILABLE_IN_COMM();
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 432              		.loc 2 106 3 discriminator 1 view .LVU78
- 433              		.loc 2 106 3 discriminator 1 view .LVU79
- 434 00ca A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 435 00cc 15F00405 		ands	r5, r5, #4
- 436 00d0 67D1     		bne	.L105
- 437              		.loc 2 106 3 discriminator 3 view .LVU80
- 438 00d2 0122     		movs	r2, #1
- 439 00d4 9849     		ldr	r1, .L123
- 440 00d6 9948     		ldr	r0, .L123+4
- 441 00d8 FFF7FEFF 		bl	__esos_getBuffer
- 442              	.LVL14:
- 443 00dc 0228     		cmp	r0, #2
- 444 00de 64D9     		bls	.L53
- 445              		.loc 2 106 3 discriminator 4 view .LVU81
- 446 00e0 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 447 00e2 23F00103 		bic	r3, r3, #1
- 448 00e6 A370     		strb	r3, [r4, #2]
- 449              	.L54:
- 450              		.loc 2 106 3 discriminator 7 view .LVU82
- 451 00e8 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 452 00ea 13F0010F 		tst	r3, #1
- 453 00ee 40F0BC82 		bne	.L49
- 454              		.loc 2 106 3 discriminator 9 view .LVU83
- 455              		.loc 2 106 3 discriminator 9 view .LVU84
- 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 456              		.loc 2 107 3 discriminator 9 view .LVU85
- 457 00f2 934A     		ldr	r2, .L123+8
- 458 00f4 1368     		ldr	r3, [r2]
- 459 00f6 23F00803 		bic	r3, r3, #8
- 460 00fa 1360     		str	r3, [r2]
- 108:src/m4_timer_uart_app.c **** 		
- 109:src/m4_timer_uart_app.c **** 		if(u8_countEncode > 12) //reset encode position in key when at the end
- 461              		.loc 2 109 3 discriminator 9 view .LVU86
- 462              		.loc 2 109 21 is_stmt 0 discriminator 9 view .LVU87
- 463 00fc 914B     		ldr	r3, .L123+12
- 464 00fe 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 465              		.loc 2 109 5 discriminator 9 view .LVU88
- 466 0100 0C2B     		cmp	r3, #12
- 467 0102 02D9     		bls	.L55
- 110:src/m4_timer_uart_app.c **** 		{
- 111:src/m4_timer_uart_app.c **** 			u8_countEncode = 0;
- 468              		.loc 2 111 4 is_stmt 1 view .LVU89
- 469              		.loc 2 111 19 is_stmt 0 view .LVU90
- 470 0104 8F4B     		ldr	r3, .L123+12
- 471 0106 0022     		movs	r2, #0
- 472 0108 1A70     		strb	r2, [r3]
- 473              	.L55:
-ARM GAS  /tmp/ccIJtQZY.s 			page 13
+ 413              		.loc 2 115 21 is_stmt 0 view .LVU92
+ 414 0098 9D4B     		ldr	r3, .L114+16
+ 415 009a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 416              		.loc 2 115 5 view .LVU93
+ 417 009c 0C2B     		cmp	r3, #12
+ 418 009e 02D9     		bls	.L55
+ 116:src/m4_timer_uart_app.c **** 		{
+ 117:src/m4_timer_uart_app.c **** 			u8_countDecode = 0;
+ 419              		.loc 2 117 4 is_stmt 1 view .LVU94
+ 420              		.loc 2 117 19 is_stmt 0 view .LVU95
+ 421 00a0 9B4B     		ldr	r3, .L114+16
+ 422 00a2 0022     		movs	r2, #0
+ 423 00a4 1A70     		strb	r2, [r3]
+ 424              	.L55:
+ 118:src/m4_timer_uart_app.c **** 		}
+ 119:src/m4_timer_uart_app.c **** 		
+ 120:src/m4_timer_uart_app.c **** 		if (u8_incoming >= 'a' && u8_incoming <='z') //If incoming is a letter
+ 425              		.loc 2 120 3 is_stmt 1 view .LVU96
+ 426              		.loc 2 120 26 is_stmt 0 view .LVU97
+ 427 00a6 964B     		ldr	r3, .L114
+ 428 00a8 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 429 00aa A2F16103 		sub	r3, r2, #97
+ 430 00ae DBB2     		uxtb	r3, r3
+ 431              		.loc 2 120 6 view .LVU98
+ 432 00b0 192B     		cmp	r3, #25
+ 433 00b2 68D9     		bls	.L99
+ 434              	.L56:
+ 121:src/m4_timer_uart_app.c **** 		{
+ 122:src/m4_timer_uart_app.c **** 			u8_incoming = u8_incoming - 'a' + 'A'; //convert to capital
+ 123:src/m4_timer_uart_app.c **** 			
+ 124:src/m4_timer_uart_app.c **** 			if(IS_B1_RELEASED()) //encoding mode -- works!
+ 125:src/m4_timer_uart_app.c **** 			{
+ 126:src/m4_timer_uart_app.c **** 				//add key character to letter
+ 127:src/m4_timer_uart_app.c **** 				u8_incoming = ((((u8_incoming - 'A') + (au8_key[u8_countEncode] - 'A')) % 26) + 'A');
+ 128:src/m4_timer_uart_app.c **** 				//increment count
+ 129:src/m4_timer_uart_app.c **** 				u8_countEncode++;
+ 130:src/m4_timer_uart_app.c **** 			}
+ 131:src/m4_timer_uart_app.c **** 			
+ 132:src/m4_timer_uart_app.c **** 			else //decoding mode -- works!
+ 133:src/m4_timer_uart_app.c **** 			{
+ 134:src/m4_timer_uart_app.c **** 				//subtract key character from letter
+ 135:src/m4_timer_uart_app.c **** 				u8_incoming = (((u8_incoming - au8_key[u8_countDecode]) + 26) % 26) + 'A';
+ 136:src/m4_timer_uart_app.c **** 				//increment count
+ 137:src/m4_timer_uart_app.c **** 				u8_countDecode++;
+ 138:src/m4_timer_uart_app.c **** 			}
+ 139:src/m4_timer_uart_app.c **** 		}
+ 140:src/m4_timer_uart_app.c **** 		
+ 141:src/m4_timer_uart_app.c **** 		if(u8_incoming == '!') //if incoming is an exclamation
+ 435              		.loc 2 141 3 is_stmt 1 view .LVU99
+ 436              		.loc 2 141 18 is_stmt 0 view .LVU100
+ 437 00b4 924B     		ldr	r3, .L114
+ 438 00b6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 439              		.loc 2 141 5 view .LVU101
+ 440 00b8 212B     		cmp	r3, #33
+ 441 00ba 00F09780 		beq	.L100
+ 142:src/m4_timer_uart_app.c **** 		{
+ 143:src/m4_timer_uart_app.c **** 			u8_exclamCount++;
+ARM GAS  /tmp/ccyXqcsa.s 			page 13
 
 
- 112:src/m4_timer_uart_app.c **** 		}
- 113:src/m4_timer_uart_app.c **** 		
- 114:src/m4_timer_uart_app.c **** 		if(u8_countDecode > 12) //reset decode position in key when at the end
- 474              		.loc 2 114 3 is_stmt 1 view .LVU91
- 475              		.loc 2 114 21 is_stmt 0 view .LVU92
- 476 010a 8F4B     		ldr	r3, .L123+16
- 477 010c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 478              		.loc 2 114 5 view .LVU93
- 479 010e 0C2B     		cmp	r3, #12
- 480 0110 02D9     		bls	.L56
- 115:src/m4_timer_uart_app.c **** 		{
- 116:src/m4_timer_uart_app.c **** 			u8_countDecode = 0;
- 481              		.loc 2 116 4 is_stmt 1 view .LVU94
- 482              		.loc 2 116 19 is_stmt 0 view .LVU95
- 483 0112 8D4B     		ldr	r3, .L123+16
- 484 0114 0022     		movs	r2, #0
- 485 0116 1A70     		strb	r2, [r3]
- 486              	.L56:
- 117:src/m4_timer_uart_app.c **** 		}
- 118:src/m4_timer_uart_app.c **** 		
- 119:src/m4_timer_uart_app.c **** 		if (u8_incoming >= 'a' && u8_incoming <='z') //If incoming is a letter
- 487              		.loc 2 119 3 is_stmt 1 view .LVU96
- 488              		.loc 2 119 26 is_stmt 0 view .LVU97
- 489 0118 874B     		ldr	r3, .L123
- 490 011a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 491 011c A2F16103 		sub	r3, r2, #97
- 492 0120 DBB2     		uxtb	r3, r3
- 493              		.loc 2 119 6 view .LVU98
- 494 0122 192B     		cmp	r3, #25
- 495 0124 46D9     		bls	.L106
- 496              	.L57:
- 120:src/m4_timer_uart_app.c **** 		{
- 121:src/m4_timer_uart_app.c **** 			u8_incoming = u8_incoming - 'a' + 'A'; //convert to capital
- 122:src/m4_timer_uart_app.c **** 			
- 123:src/m4_timer_uart_app.c **** 			if(IS_B1_RELEASED()) //encoding mode -- works!
- 124:src/m4_timer_uart_app.c **** 			{
- 125:src/m4_timer_uart_app.c **** 				//add key character to letter
- 126:src/m4_timer_uart_app.c **** 				u8_incoming = ((((u8_incoming - 'A') + (au8_key[u8_countEncode] - 'A')) % 26) + 'A');
- 127:src/m4_timer_uart_app.c **** 				//increment count
- 128:src/m4_timer_uart_app.c **** 				u8_countEncode++;
- 129:src/m4_timer_uart_app.c **** 			}
- 130:src/m4_timer_uart_app.c **** 			
- 131:src/m4_timer_uart_app.c **** 			else //decoding mode -- works!
- 132:src/m4_timer_uart_app.c **** 			{
- 133:src/m4_timer_uart_app.c **** 				//subtract key character from letter
- 134:src/m4_timer_uart_app.c **** 				u8_incoming = (((u8_incoming - au8_key[u8_countDecode]) + 26) % 26) + 'A';
- 135:src/m4_timer_uart_app.c **** 				//increment count
- 136:src/m4_timer_uart_app.c **** 				u8_countDecode++;
- 137:src/m4_timer_uart_app.c **** 			}
- 138:src/m4_timer_uart_app.c **** 		}
- 139:src/m4_timer_uart_app.c **** 		
- 140:src/m4_timer_uart_app.c **** 		if(u8_incoming == '!') //if incoming is an exclamation
- 497              		.loc 2 140 3 is_stmt 1 view .LVU99
- 498              		.loc 2 140 18 is_stmt 0 view .LVU100
- 499 0126 844B     		ldr	r3, .L123
- 500 0128 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 501              		.loc 2 140 5 view .LVU101
-ARM GAS  /tmp/ccIJtQZY.s 			page 14
-
-
- 502 012a 212A     		cmp	r2, #33
- 503 012c 75D0     		beq	.L107
- 504              	.L59:
- 141:src/m4_timer_uart_app.c **** 		{
- 142:src/m4_timer_uart_app.c **** 			u8_exclamCount++;
- 143:src/m4_timer_uart_app.c **** 		}
- 144:src/m4_timer_uart_app.c **** 		
- 145:src/m4_timer_uart_app.c **** 		//report period !!!L
- 146:src/m4_timer_uart_app.c **** 		if((u8_exclamCount == 3) && ((u8_incoming == 'L')))
- 505              		.loc 2 146 3 is_stmt 1 view .LVU102
- 506              		.loc 2 146 22 is_stmt 0 view .LVU103
- 507 012e 874B     		ldr	r3, .L123+20
- 508 0130 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 509              		.loc 2 146 5 view .LVU104
- 510 0132 032B     		cmp	r3, #3
- 511 0134 76D0     		beq	.L108
- 512              	.L60:
- 147:src/m4_timer_uart_app.c **** 		{
- 148:src/m4_timer_uart_app.c **** 			if(IS_B1_RELEASED())
- 149:src/m4_timer_uart_app.c **** 			{
- 150:src/m4_timer_uart_app.c **** 				u16_encode_periodHalf *= 2;
- 151:src/m4_timer_uart_app.c **** 				itoa(u16_encode_periodHalf, ac_charArr, 10);
+ 144:src/m4_timer_uart_app.c **** 		}
+ 145:src/m4_timer_uart_app.c **** 		
+ 146:src/m4_timer_uart_app.c **** 		//report period !!!L
+ 147:src/m4_timer_uart_app.c **** 		else if((u8_exclamCount >= 3) && ((u8_incoming == 'L')))
+ 442              		.loc 2 147 8 is_stmt 1 view .LVU102
+ 443              		.loc 2 147 27 is_stmt 0 view .LVU103
+ 444 00be 954A     		ldr	r2, .L114+20
+ 445 00c0 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 446              		.loc 2 147 10 view .LVU104
+ 447 00c2 022A     		cmp	r2, #2
+ 448 00c4 02D9     		bls	.L60
+ 449              		.loc 2 147 33 discriminator 1 view .LVU105
+ 450 00c6 4C2B     		cmp	r3, #76
+ 451 00c8 00F09580 		beq	.L101
+ 452              	.L60:
+ 148:src/m4_timer_uart_app.c **** 		{
+ 149:src/m4_timer_uart_app.c **** 			if(IS_B1_RELEASED())
+ 150:src/m4_timer_uart_app.c **** 			{
+ 151:src/m4_timer_uart_app.c **** 				itoa((u16_encode_periodHalf * 2), ac_charArr, 10);
  152:src/m4_timer_uart_app.c **** 				
  153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
  154:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
@@ -812,9 +749,9 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
  158:src/m4_timer_uart_app.c **** 				while(ac_charArr[u8_charCount] != '\0')
  159:src/m4_timer_uart_app.c **** 				{
  160:src/m4_timer_uart_app.c **** 					ESOS_TASK_WAIT_ON_SEND_UINT8( ac_charArr[u8_charCount] );
- 161:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 162:src/m4_timer_uart_app.c **** 					u8_charCount++;
- 163:src/m4_timer_uart_app.c **** 				}
+ 161:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 162:src/m4_timer_uart_app.c **** 				}
+ 163:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
  164:src/m4_timer_uart_app.c **** 			}
  165:src/m4_timer_uart_app.c **** 			
  166:src/m4_timer_uart_app.c **** 			else if(IS_B1_PRESSED())
@@ -832,1305 +769,1281 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
  178:src/m4_timer_uart_app.c **** 		}
  179:src/m4_timer_uart_app.c **** 		
  180:src/m4_timer_uart_app.c **** 		//change period !!!S####
- 181:src/m4_timer_uart_app.c **** 		else if((u8_exclamCount == 3) && (u8_incoming == 'S'))
- 513              		.loc 2 181 8 is_stmt 1 view .LVU105
- 514              		.loc 2 181 10 is_stmt 0 view .LVU106
- 515 0136 032B     		cmp	r3, #3
- 516 0138 40F07B81 		bne	.L83
- 517              		.loc 2 181 33 discriminator 1 view .LVU107
-ARM GAS  /tmp/ccIJtQZY.s 			page 15
+ 181:src/m4_timer_uart_app.c **** 		else if((u8_exclamCount >= 3) && (u8_incoming == 'S'))
+ 453              		.loc 2 181 8 is_stmt 1 view .LVU106
+ 454              		.loc 2 181 10 is_stmt 0 view .LVU107
+ 455 00cc 022A     		cmp	r2, #2
+ 456 00ce 02D9     		bls	.L83
+ 457              		.loc 2 181 33 discriminator 1 view .LVU108
+ 458 00d0 532B     		cmp	r3, #83
+ 459 00d2 00F0E281 		beq	.L102
+ 460              	.L83:
+ARM GAS  /tmp/ccyXqcsa.s 			page 14
 
 
- 518 013c 532A     		cmp	r2, #83
- 519 013e 40F07881 		bne	.L83
  182:src/m4_timer_uart_app.c **** 		{
  183:src/m4_timer_uart_app.c **** 			b_changeFlag = TRUE;
- 520              		.loc 2 183 4 is_stmt 1 view .LVU108
- 521              		.loc 2 183 17 is_stmt 0 view .LVU109
- 522 0142 834B     		ldr	r3, .L123+24
- 523 0144 0122     		movs	r2, #1
- 524 0146 1A70     		strb	r2, [r3]
- 184:src/m4_timer_uart_app.c **** 			u16_changePeriod = 0;
- 525              		.loc 2 184 4 is_stmt 1 view .LVU110
- 526              		.loc 2 184 21 is_stmt 0 view .LVU111
- 527 0148 824B     		ldr	r3, .L123+28
- 528 014a 0022     		movs	r2, #0
- 529 014c 1A80     		strh	r2, [r3]	@ movhi
- 530 014e 70E1     		b	.L83
- 531              	.LVL15:
- 532              	.L104:
- 101:src/m4_timer_uart_app.c **** 	while (TRUE) {
- 533              		.loc 2 101 2 view .LVU112
- 534 0150 002B     		cmp	r3, #0
- 535 0152 40F08582 		bne	.L32
- 536              	.LVL16:
- 537              	.L36:
- 101:src/m4_timer_uart_app.c **** 	while (TRUE) {
- 538              		.loc 2 101 19 is_stmt 1 discriminator 1 view .LVU113
- 102:src/m4_timer_uart_app.c **** 	
- 539              		.loc 2 102 2 discriminator 1 view .LVU114
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 540              		.loc 2 105 3 discriminator 1 view .LVU115
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 541              		.loc 2 105 3 discriminator 1 view .LVU116
- 542 0156 6923     		movs	r3, #105
- 543 0158 2380     		strh	r3, [r4]	@ movhi
- 544              	.L34:
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 545              		.loc 2 105 3 discriminator 1 view .LVU117
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 546              		.loc 2 105 3 discriminator 1 view .LVU118
- 547 015a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 548 015c 13F00405 		ands	r5, r3, #4
- 549 0160 17D1     		bne	.L109
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 550              		.loc 2 105 3 discriminator 3 view .LVU119
- 551 0162 774A     		ldr	r2, .L123+8
- 552 0164 1268     		ldr	r2, [r2]
- 553 0166 12F0080F 		tst	r2, #8
- 554 016a 16D1     		bne	.L50
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 555              		.loc 2 105 3 discriminator 4 view .LVU120
- 556 016c 23F00103 		bic	r3, r3, #1
- 557 0170 A370     		strb	r3, [r4, #2]
- 558              	.L51:
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 559              		.loc 2 105 3 discriminator 7 view .LVU121
- 560 0172 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 561 0174 13F0010F 		tst	r3, #1
-ARM GAS  /tmp/ccIJtQZY.s 			page 16
+ 184:src/m4_timer_uart_app.c **** 			b_changeFlagSkip = TRUE;
+ 185:src/m4_timer_uart_app.c **** 			u16_changePeriod = 0;
+ 186:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
+ 187:src/m4_timer_uart_app.c **** 		}
+ 188:src/m4_timer_uart_app.c **** 
+ 189:src/m4_timer_uart_app.c **** 		else
+ 190:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
+ 461              		.loc 2 190 4 is_stmt 1 view .LVU109
+ 462              		.loc 2 190 19 is_stmt 0 view .LVU110
+ 463 00d6 8F4B     		ldr	r3, .L114+20
+ 464 00d8 0022     		movs	r2, #0
+ 465 00da 1A70     		strb	r2, [r3]
+ 466 00dc 85E1     		b	.L59
+ 467              	.LVL15:
+ 468              	.L97:
+ 102:src/m4_timer_uart_app.c **** 	while (TRUE) {
+ 469              		.loc 2 102 2 view .LVU111
+ 470 00de 002B     		cmp	r3, #0
+ 471 00e0 40F03082 		bne	.L37
+ 472              	.LVL16:
+ 473              	.L36:
+ 102:src/m4_timer_uart_app.c **** 	while (TRUE) {
+ 474              		.loc 2 102 19 is_stmt 1 discriminator 1 view .LVU112
+ 103:src/m4_timer_uart_app.c **** 	
+ 475              		.loc 2 103 2 discriminator 1 view .LVU113
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 476              		.loc 2 106 3 discriminator 1 view .LVU114
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 477              		.loc 2 106 3 discriminator 1 view .LVU115
+ 478 00e4 6A23     		movs	r3, #106
+ 479 00e6 2380     		strh	r3, [r4]	@ movhi
+ 480              	.L34:
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 481              		.loc 2 106 3 discriminator 1 view .LVU116
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 482              		.loc 2 106 3 discriminator 1 view .LVU117
+ 483 00e8 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 484 00ea 13F00405 		ands	r5, r3, #4
+ 485 00ee 39D1     		bne	.L103
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 486              		.loc 2 106 3 discriminator 3 view .LVU118
+ 487 00f0 854A     		ldr	r2, .L114+8
+ 488 00f2 1268     		ldr	r2, [r2]
+ 489 00f4 12F0080F 		tst	r2, #8
+ 490 00f8 38D1     		bne	.L49
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 491              		.loc 2 106 3 discriminator 4 view .LVU119
+ 492 00fa 23F00103 		bic	r3, r3, #1
+ 493 00fe A370     		strb	r3, [r4, #2]
+ 494              	.L50:
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 495              		.loc 2 106 3 discriminator 7 view .LVU120
+ 496 0100 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 497 0102 13F0010F 		tst	r3, #1
+ 498 0106 40F02282 		bne	.L48
+ARM GAS  /tmp/ccyXqcsa.s 			page 15
 
 
- 562 0178 40F07782 		bne	.L49
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 563              		.loc 2 105 3 discriminator 9 view .LVU122
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 564              		.loc 2 105 3 discriminator 9 view .LVU123
- 565 017c 704A     		ldr	r2, .L123+8
- 566 017e 1368     		ldr	r3, [r2]
- 567 0180 43F00803 		orr	r3, r3, #8
- 568 0184 1360     		str	r3, [r2]
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 569              		.loc 2 106 3 discriminator 9 view .LVU124
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 570              		.loc 2 106 3 discriminator 9 view .LVU125
- 571 0186 6D4B     		ldr	r3, .L123+4
- 572 0188 0022     		movs	r2, #0
- 573 018a 1A80     		strh	r2, [r3]	@ movhi
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 574              		.loc 2 106 3 discriminator 9 view .LVU126
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 575              		.loc 2 106 3 discriminator 9 view .LVU127
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 576              		.loc 2 106 3 discriminator 9 view .LVU128
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 577              		.loc 2 106 3 discriminator 9 view .LVU129
- 578 018c 6A23     		movs	r3, #106
- 579 018e 2380     		strh	r3, [r4]	@ movhi
- 580 0190 9BE7     		b	.L35
- 581              	.L109:
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 582              		.loc 2 105 3 discriminator 2 view .LVU130
- 583 0192 0423     		movs	r3, #4
- 584 0194 A370     		strb	r3, [r4, #2]
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 585              		.loc 2 105 3 discriminator 2 view .LVU131
- 586 0196 0325     		movs	r5, #3
- 587 0198 67E2     		b	.L49
- 588              	.L50:
- 105:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
- 589              		.loc 2 105 3 discriminator 5 view .LVU132
- 590 019a 43F00103 		orr	r3, r3, #1
- 591 019e A370     		strb	r3, [r4, #2]
- 592 01a0 E7E7     		b	.L51
- 593              	.L105:
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 594              		.loc 2 106 3 discriminator 2 view .LVU133
- 595 01a2 0423     		movs	r3, #4
- 596 01a4 A370     		strb	r3, [r4, #2]
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 597              		.loc 2 106 3 discriminator 2 view .LVU134
- 598 01a6 0325     		movs	r5, #3
- 599 01a8 5FE2     		b	.L49
- 600              	.L53:
- 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
- 601              		.loc 2 106 3 discriminator 5 view .LVU135
- 602 01aa A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 603 01ac 43F00103 		orr	r3, r3, #1
- 604 01b0 A370     		strb	r3, [r4, #2]
-ARM GAS  /tmp/ccIJtQZY.s 			page 17
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 499              		.loc 2 106 3 discriminator 9 view .LVU121
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 500              		.loc 2 106 3 discriminator 9 view .LVU122
+ 501 010a 7F4A     		ldr	r2, .L114+8
+ 502 010c 1368     		ldr	r3, [r2]
+ 503 010e 43F00803 		orr	r3, r3, #8
+ 504 0112 1360     		str	r3, [r2]
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 505              		.loc 2 107 3 discriminator 9 view .LVU123
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 506              		.loc 2 107 3 discriminator 9 view .LVU124
+ 507 0114 7B4B     		ldr	r3, .L114+4
+ 508 0116 0022     		movs	r2, #0
+ 509 0118 1A80     		strh	r2, [r3]	@ movhi
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 510              		.loc 2 107 3 discriminator 9 view .LVU125
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 511              		.loc 2 107 3 discriminator 9 view .LVU126
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 512              		.loc 2 107 3 discriminator 9 view .LVU127
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 513              		.loc 2 107 3 discriminator 9 view .LVU128
+ 514 011a 6B23     		movs	r3, #107
+ 515 011c 2380     		strh	r3, [r4]	@ movhi
+ 516 011e 99E7     		b	.L35
+ 517              	.LVL17:
+ 518              	.L32:
+ 102:src/m4_timer_uart_app.c **** 	while (TRUE) {
+ 519              		.loc 2 102 2 is_stmt 0 view .LVU129
+ 520 0120 E62B     		cmp	r3, #230
+ 521 0122 00F08581 		beq	.L45
+ 522 0126 E72B     		cmp	r3, #231
+ 523 0128 40F00C82 		bne	.L37
+ 524              	.LVL18:
+ 525              	.L46:
+ 191:src/m4_timer_uart_app.c **** 		
+ 192:src/m4_timer_uart_app.c **** 		if(b_changeFlag && !b_changeFlagSkip)
+ 193:src/m4_timer_uart_app.c **** 		{	
+ 194:src/m4_timer_uart_app.c **** 			//if #---
+ 195:src/m4_timer_uart_app.c **** 			if(u8_digitCount == 0)
+ 196:src/m4_timer_uart_app.c **** 			{
+ 197:src/m4_timer_uart_app.c **** 				++u8_digitCount;
+ 198:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 1000);
+ 199:src/m4_timer_uart_app.c **** 			}
+ 200:src/m4_timer_uart_app.c **** 
+ 201:src/m4_timer_uart_app.c **** 			//if -#--
+ 202:src/m4_timer_uart_app.c **** 			else if(u8_digitCount == 1)
+ 203:src/m4_timer_uart_app.c **** 			{
+ 204:src/m4_timer_uart_app.c **** 				++u8_digitCount;
+ 205:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 100);
+ 206:src/m4_timer_uart_app.c **** 			}
+ 207:src/m4_timer_uart_app.c **** 
+ 208:src/m4_timer_uart_app.c **** 			//if --#-
+ 209:src/m4_timer_uart_app.c **** 			else if(u8_digitCount == 2)
+ 210:src/m4_timer_uart_app.c **** 			{
+ 211:src/m4_timer_uart_app.c **** 				++u8_digitCount;
+ARM GAS  /tmp/ccyXqcsa.s 			page 16
 
 
- 605 01b2 99E7     		b	.L54
- 606              	.L106:
- 121:src/m4_timer_uart_app.c **** 			
- 607              		.loc 2 121 4 view .LVU136
- 121:src/m4_timer_uart_app.c **** 			
- 608              		.loc 2 121 36 is_stmt 0 view .LVU137
- 609 01b4 203A     		subs	r2, r2, #32
- 121:src/m4_timer_uart_app.c **** 			
- 610              		.loc 2 121 16 view .LVU138
- 611 01b6 604B     		ldr	r3, .L123
- 612 01b8 1A70     		strb	r2, [r3]
- 123:src/m4_timer_uart_app.c **** 			{
- 613              		.loc 2 123 4 is_stmt 1 view .LVU139
- 123:src/m4_timer_uart_app.c **** 			{
- 614              		.loc 2 123 7 is_stmt 0 view .LVU140
- 615 01ba FFF7FEFF 		bl	IS_B1_RELEASED
- 616              	.LVL17:
- 123:src/m4_timer_uart_app.c **** 			{
- 617              		.loc 2 123 6 view .LVU141
- 618 01be B0B1     		cbz	r0, .L58
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 619              		.loc 2 126 5 is_stmt 1 view .LVU142
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 620              		.loc 2 126 35 is_stmt 0 view .LVU143
- 621 01c0 5D4E     		ldr	r6, .L123
- 622 01c2 3278     		ldrb	r2, [r6]	@ zero_extendqisi2
- 623 01c4 413A     		subs	r2, r2, #65
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 624              		.loc 2 126 52 view .LVU144
- 625 01c6 5F4D     		ldr	r5, .L123+12
- 626 01c8 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
- 627 01ca 634B     		ldr	r3, .L123+32
- 628 01cc 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 629              		.loc 2 126 69 view .LVU145
- 630 01ce 413B     		subs	r3, r3, #65
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 631              		.loc 2 126 42 view .LVU146
- 632 01d0 1A44     		add	r2, r2, r3
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 633              		.loc 2 126 77 view .LVU147
- 634 01d2 6248     		ldr	r0, .L123+36
- 635 01d4 80FB0230 		smull	r3, r0, r0, r2
- 636 01d8 D317     		asrs	r3, r2, #31
- 637 01da C3EBE003 		rsb	r3, r3, r0, asr #3
- 638 01de 1A20     		movs	r0, #26
- 639 01e0 00FB1323 		mls	r3, r0, r3, r2
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 640              		.loc 2 126 83 view .LVU148
- 641 01e4 4133     		adds	r3, r3, #65
- 126:src/m4_timer_uart_app.c **** 				//increment count
- 642              		.loc 2 126 17 view .LVU149
- 643 01e6 3370     		strb	r3, [r6]
- 128:src/m4_timer_uart_app.c **** 			}
- 644              		.loc 2 128 5 is_stmt 1 view .LVU150
- 128:src/m4_timer_uart_app.c **** 			}
- 645              		.loc 2 128 19 is_stmt 0 view .LVU151
-ARM GAS  /tmp/ccIJtQZY.s 			page 18
-
-
- 646 01e8 0131     		adds	r1, r1, #1
- 647 01ea 2970     		strb	r1, [r5]
- 648 01ec 9BE7     		b	.L57
- 649              	.L58:
- 134:src/m4_timer_uart_app.c **** 				//increment count
- 650              		.loc 2 134 5 is_stmt 1 view .LVU152
- 134:src/m4_timer_uart_app.c **** 				//increment count
- 651              		.loc 2 134 43 is_stmt 0 view .LVU153
- 652 01ee 564D     		ldr	r5, .L123+16
- 653 01f0 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
- 654 01f2 594B     		ldr	r3, .L123+32
- 655 01f4 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
- 134:src/m4_timer_uart_app.c **** 				//increment count
- 656              		.loc 2 134 34 view .LVU154
- 657 01f6 504E     		ldr	r6, .L123
- 658 01f8 3278     		ldrb	r2, [r6]	@ zero_extendqisi2
- 659 01fa D21A     		subs	r2, r2, r3
- 134:src/m4_timer_uart_app.c **** 				//increment count
- 660              		.loc 2 134 61 view .LVU155
- 661 01fc 1A32     		adds	r2, r2, #26
- 134:src/m4_timer_uart_app.c **** 				//increment count
- 662              		.loc 2 134 67 view .LVU156
- 663 01fe 5748     		ldr	r0, .L123+36
- 664 0200 80FB0230 		smull	r3, r0, r0, r2
- 665 0204 D317     		asrs	r3, r2, #31
- 666 0206 C3EBE003 		rsb	r3, r3, r0, asr #3
- 667 020a 1A20     		movs	r0, #26
- 668 020c 00FB1323 		mls	r3, r0, r3, r2
- 134:src/m4_timer_uart_app.c **** 				//increment count
- 669              		.loc 2 134 73 view .LVU157
- 670 0210 4133     		adds	r3, r3, #65
- 134:src/m4_timer_uart_app.c **** 				//increment count
- 671              		.loc 2 134 17 view .LVU158
- 672 0212 3370     		strb	r3, [r6]
- 136:src/m4_timer_uart_app.c **** 			}
- 673              		.loc 2 136 5 is_stmt 1 view .LVU159
- 136:src/m4_timer_uart_app.c **** 			}
- 674              		.loc 2 136 19 is_stmt 0 view .LVU160
- 675 0214 0131     		adds	r1, r1, #1
- 676 0216 2970     		strb	r1, [r5]
- 677 0218 85E7     		b	.L57
- 678              	.L107:
- 142:src/m4_timer_uart_app.c **** 		}
- 679              		.loc 2 142 4 is_stmt 1 view .LVU161
- 142:src/m4_timer_uart_app.c **** 		}
- 680              		.loc 2 142 18 is_stmt 0 view .LVU162
- 681 021a 4C49     		ldr	r1, .L123+20
- 682 021c 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
- 683 021e 0133     		adds	r3, r3, #1
- 684 0220 0B70     		strb	r3, [r1]
- 685 0222 84E7     		b	.L59
- 686              	.L108:
- 146:src/m4_timer_uart_app.c **** 		{
- 687              		.loc 2 146 28 discriminator 1 view .LVU163
- 688 0224 4C2A     		cmp	r2, #76
- 689 0226 86D1     		bne	.L60
- 148:src/m4_timer_uart_app.c **** 			{
-ARM GAS  /tmp/ccIJtQZY.s 			page 19
-
-
- 690              		.loc 2 148 4 is_stmt 1 view .LVU164
- 148:src/m4_timer_uart_app.c **** 			{
- 691              		.loc 2 148 7 is_stmt 0 view .LVU165
- 692 0228 FFF7FEFF 		bl	IS_B1_RELEASED
- 693              	.LVL18:
- 148:src/m4_timer_uart_app.c **** 			{
- 694              		.loc 2 148 6 view .LVU166
- 695 022c 0028     		cmp	r0, #0
- 696 022e 00F09F80 		beq	.L61
- 150:src/m4_timer_uart_app.c **** 				itoa(u16_encode_periodHalf, ac_charArr, 10);
- 697              		.loc 2 150 5 is_stmt 1 view .LVU167
- 150:src/m4_timer_uart_app.c **** 				itoa(u16_encode_periodHalf, ac_charArr, 10);
- 698              		.loc 2 150 27 is_stmt 0 view .LVU168
- 699 0232 4B4B     		ldr	r3, .L123+40
- 700 0234 1888     		ldrh	r0, [r3]
- 701 0236 4000     		lsls	r0, r0, #1
- 702 0238 80B2     		uxth	r0, r0
- 703 023a 1880     		strh	r0, [r3]	@ movhi
- 151:src/m4_timer_uart_app.c **** 				
- 704              		.loc 2 151 5 is_stmt 1 view .LVU169
- 705 023c 0A22     		movs	r2, #10
- 706 023e 4949     		ldr	r1, .L123+44
- 707 0240 FFF7FEFF 		bl	itoa
- 708              	.LVL19:
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 709              		.loc 2 153 5 view .LVU170
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 710              		.loc 2 153 5 view .LVU171
- 711 0244 9923     		movs	r3, #153
- 712 0246 2380     		strh	r3, [r4]	@ movhi
- 713              	.L47:
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 714              		.loc 2 153 5 discriminator 1 view .LVU172
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 715              		.loc 2 153 5 discriminator 1 view .LVU173
- 716 0248 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 717 024a 13F00405 		ands	r5, r3, #4
- 718 024e 58D1     		bne	.L110
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 719              		.loc 2 153 5 discriminator 3 view .LVU174
- 720 0250 3B4A     		ldr	r2, .L123+8
- 721 0252 1268     		ldr	r2, [r2]
- 722 0254 12F0040F 		tst	r2, #4
- 723 0258 57D1     		bne	.L63
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 724              		.loc 2 153 5 discriminator 4 view .LVU175
- 725 025a 23F00103 		bic	r3, r3, #1
- 726 025e A370     		strb	r3, [r4, #2]
- 727              	.L64:
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 728              		.loc 2 153 5 discriminator 7 view .LVU176
- 729 0260 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 730 0262 13F0010F 		tst	r3, #1
- 731 0266 40F00082 		bne	.L49
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 732              		.loc 2 153 5 discriminator 9 view .LVU177
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
-ARM GAS  /tmp/ccIJtQZY.s 			page 20
-
-
- 733              		.loc 2 153 5 discriminator 9 view .LVU178
- 734 026a 354A     		ldr	r2, .L123+8
- 735 026c 1368     		ldr	r3, [r2]
- 736 026e 43F00403 		orr	r3, r3, #4
- 737 0272 1360     		str	r3, [r2]
- 154:src/m4_timer_uart_app.c **** 				
- 738              		.loc 2 154 5 discriminator 9 view .LVU179
- 154:src/m4_timer_uart_app.c **** 				
- 739              		.loc 2 154 5 discriminator 9 view .LVU180
- 740 0274 3C4B     		ldr	r3, .L123+48
- 741 0276 0022     		movs	r2, #0
- 742 0278 1A80     		strh	r2, [r3]	@ movhi
- 154:src/m4_timer_uart_app.c **** 				
- 743              		.loc 2 154 5 discriminator 9 view .LVU181
- 154:src/m4_timer_uart_app.c **** 				
- 744              		.loc 2 154 5 discriminator 9 view .LVU182
- 154:src/m4_timer_uart_app.c **** 				
- 745              		.loc 2 154 5 discriminator 9 view .LVU183
- 154:src/m4_timer_uart_app.c **** 				
- 746              		.loc 2 154 5 discriminator 9 view .LVU184
- 747 027a 9A23     		movs	r3, #154
- 748 027c 2380     		strh	r3, [r4]	@ movhi
- 749              	.L46:
- 154:src/m4_timer_uart_app.c **** 				
- 750              		.loc 2 154 5 discriminator 1 view .LVU185
- 154:src/m4_timer_uart_app.c **** 				
- 751              		.loc 2 154 5 discriminator 1 view .LVU186
- 752 027e A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 753 0280 15F00405 		ands	r5, r5, #4
- 754 0284 45D1     		bne	.L111
- 154:src/m4_timer_uart_app.c **** 				
- 755              		.loc 2 154 5 discriminator 3 view .LVU187
- 756 0286 4C21     		movs	r1, #76
- 757 0288 3748     		ldr	r0, .L123+48
- 758 028a FFF7FEFF 		bl	__esos_OutChar
- 759              	.LVL20:
- 760 028e 0228     		cmp	r0, #2
- 761 0290 43D9     		bls	.L66
- 154:src/m4_timer_uart_app.c **** 				
- 762              		.loc 2 154 5 discriminator 4 view .LVU188
- 763 0292 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 764 0294 23F00103 		bic	r3, r3, #1
- 765 0298 A370     		strb	r3, [r4, #2]
- 766              	.L67:
- 154:src/m4_timer_uart_app.c **** 				
- 767              		.loc 2 154 5 discriminator 7 view .LVU189
- 768 029a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 769 029c 13F0010F 		tst	r3, #1
- 770 02a0 40F0E381 		bne	.L49
- 154:src/m4_timer_uart_app.c **** 				
- 771              		.loc 2 154 5 discriminator 9 view .LVU190
- 154:src/m4_timer_uart_app.c **** 				
- 772              		.loc 2 154 5 discriminator 9 view .LVU191
- 156:src/m4_timer_uart_app.c **** 				
- 773              		.loc 2 156 5 discriminator 9 view .LVU192
- 156:src/m4_timer_uart_app.c **** 				
- 774              		.loc 2 156 18 is_stmt 0 discriminator 9 view .LVU193
-ARM GAS  /tmp/ccIJtQZY.s 			page 21
-
-
- 775 02a4 314B     		ldr	r3, .L123+52
- 776 02a6 0022     		movs	r2, #0
- 777 02a8 1A70     		strb	r2, [r3]
- 158:src/m4_timer_uart_app.c **** 				{
- 778              		.loc 2 158 5 is_stmt 1 discriminator 9 view .LVU194
- 779              	.L68:
- 158:src/m4_timer_uart_app.c **** 				{
- 780              		.loc 2 158 10 view .LVU195
- 158:src/m4_timer_uart_app.c **** 				{
- 781              		.loc 2 158 21 is_stmt 0 view .LVU196
- 782 02aa 304B     		ldr	r3, .L123+52
- 783 02ac 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 784 02ae 2D4A     		ldr	r2, .L123+44
- 785 02b0 D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
- 158:src/m4_timer_uart_app.c **** 				{
- 786              		.loc 2 158 10 view .LVU197
- 787 02b2 002B     		cmp	r3, #0
- 788 02b4 00F0B780 		beq	.L73
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 789              		.loc 2 160 6 is_stmt 1 view .LVU198
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 790              		.loc 2 160 6 view .LVU199
- 791 02b8 2B4B     		ldr	r3, .L123+48
- 792 02ba 0022     		movs	r2, #0
- 793 02bc 1A80     		strh	r2, [r3]	@ movhi
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 794              		.loc 2 160 6 view .LVU200
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 795              		.loc 2 160 6 view .LVU201
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 796              		.loc 2 160 6 view .LVU202
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 797              		.loc 2 160 6 view .LVU203
- 798 02be A023     		movs	r3, #160
- 799 02c0 2380     		strh	r3, [r4]	@ movhi
- 800              	.L45:
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 801              		.loc 2 160 6 discriminator 1 view .LVU204
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 802              		.loc 2 160 6 discriminator 1 view .LVU205
- 803 02c2 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 804 02c4 15F00405 		ands	r5, r5, #4
- 805 02c8 2CD1     		bne	.L112
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 806              		.loc 2 160 6 discriminator 3 view .LVU206
- 807 02ca 284B     		ldr	r3, .L123+52
- 808 02cc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 809 02ce 254A     		ldr	r2, .L123+44
- 810 02d0 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
- 811 02d2 2548     		ldr	r0, .L123+48
- 812 02d4 FFF7FEFF 		bl	__esos_OutChar
- 813              	.LVL21:
- 814 02d8 0228     		cmp	r0, #2
- 815 02da 27D9     		bls	.L70
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 816              		.loc 2 160 6 discriminator 4 view .LVU207
- 817 02dc A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
-ARM GAS  /tmp/ccIJtQZY.s 			page 22
-
-
- 818 02de 23F00103 		bic	r3, r3, #1
- 819 02e2 A370     		strb	r3, [r4, #2]
- 820              	.L71:
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 821              		.loc 2 160 6 discriminator 7 view .LVU208
- 822 02e4 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 823 02e6 13F0010F 		tst	r3, #1
- 824 02ea 40F0BE81 		bne	.L49
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 825              		.loc 2 160 6 discriminator 9 view .LVU209
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 826              		.loc 2 160 6 discriminator 9 view .LVU210
- 161:src/m4_timer_uart_app.c **** 					u8_charCount++;
- 827              		.loc 2 161 6 discriminator 9 view .LVU211
- 828 02ee 144A     		ldr	r2, .L123+8
- 829 02f0 1368     		ldr	r3, [r2]
- 830 02f2 23F00403 		bic	r3, r3, #4
- 831 02f6 1360     		str	r3, [r2]
- 162:src/m4_timer_uart_app.c **** 				}
- 832              		.loc 2 162 6 discriminator 9 view .LVU212
- 162:src/m4_timer_uart_app.c **** 				}
- 833              		.loc 2 162 18 is_stmt 0 discriminator 9 view .LVU213
- 834 02f8 1C4A     		ldr	r2, .L123+52
- 835 02fa 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 836 02fc 0133     		adds	r3, r3, #1
- 837 02fe 1370     		strb	r3, [r2]
- 838 0300 D3E7     		b	.L68
- 839              	.L110:
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 840              		.loc 2 153 5 is_stmt 1 discriminator 2 view .LVU214
- 841 0302 0423     		movs	r3, #4
- 842 0304 A370     		strb	r3, [r4, #2]
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 843              		.loc 2 153 5 discriminator 2 view .LVU215
- 844 0306 0325     		movs	r5, #3
- 845 0308 AFE1     		b	.L49
- 846              	.L63:
- 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 847              		.loc 2 153 5 discriminator 5 view .LVU216
- 848 030a 43F00103 		orr	r3, r3, #1
- 849 030e A370     		strb	r3, [r4, #2]
- 850 0310 A6E7     		b	.L64
- 851              	.L111:
- 154:src/m4_timer_uart_app.c **** 				
- 852              		.loc 2 154 5 discriminator 2 view .LVU217
- 853 0312 0423     		movs	r3, #4
- 854 0314 A370     		strb	r3, [r4, #2]
- 154:src/m4_timer_uart_app.c **** 				
- 855              		.loc 2 154 5 discriminator 2 view .LVU218
- 856 0316 0325     		movs	r5, #3
- 857 0318 A7E1     		b	.L49
- 858              	.L66:
- 154:src/m4_timer_uart_app.c **** 				
- 859              		.loc 2 154 5 discriminator 5 view .LVU219
- 860 031a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 861 031c 43F00103 		orr	r3, r3, #1
- 862 0320 A370     		strb	r3, [r4, #2]
-ARM GAS  /tmp/ccIJtQZY.s 			page 23
-
-
- 863 0322 BAE7     		b	.L67
- 864              	.L112:
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 865              		.loc 2 160 6 discriminator 2 view .LVU220
- 866 0324 0423     		movs	r3, #4
- 867 0326 A370     		strb	r3, [r4, #2]
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 868              		.loc 2 160 6 discriminator 2 view .LVU221
- 869 0328 0325     		movs	r5, #3
- 870 032a 9EE1     		b	.L49
- 871              	.L70:
- 160:src/m4_timer_uart_app.c **** 					ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 872              		.loc 2 160 6 discriminator 5 view .LVU222
- 873 032c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 874 032e 43F00103 		orr	r3, r3, #1
- 875 0332 A370     		strb	r3, [r4, #2]
- 876 0334 D6E7     		b	.L71
- 877              	.L124:
- 878 0336 00BF     		.align	2
- 879              	.L123:
- 880 0338 00000000 		.word	.LANCHOR1
- 881 033c 00000000 		.word	__stChildTaskRx
- 882 0340 00000000 		.word	__esos_u32SystemFlags
- 883 0344 00000000 		.word	.LANCHOR2
- 884 0348 00000000 		.word	.LANCHOR3
- 885 034c 00000000 		.word	.LANCHOR5
- 886 0350 00000000 		.word	.LANCHOR9
- 887 0354 00000000 		.word	.LANCHOR10
- 888 0358 00000000 		.word	.LANCHOR4
- 889 035c 4FECC44E 		.word	1321528399
- 890 0360 00000000 		.word	.LANCHOR0
- 891 0364 00000000 		.word	.LANCHOR6
- 892 0368 00000000 		.word	__stChildTaskTx
- 893 036c 00000000 		.word	.LANCHOR7
- 894              	.L61:
- 166:src/m4_timer_uart_app.c **** 			{
- 895              		.loc 2 166 9 view .LVU223
- 166:src/m4_timer_uart_app.c **** 			{
- 896              		.loc 2 166 12 is_stmt 0 view .LVU224
- 897 0370 FFF7FEFF 		bl	IS_B1_PRESSED
- 898              	.LVL22:
- 166:src/m4_timer_uart_app.c **** 			{
- 899              		.loc 2 166 11 view .LVU225
- 900 0374 0028     		cmp	r0, #0
- 901 0376 56D0     		beq	.L73
- 168:src/m4_timer_uart_app.c **** 				
- 902              		.loc 2 168 5 is_stmt 1 view .LVU226
- 168:src/m4_timer_uart_app.c **** 				
- 903              		.loc 2 168 17 is_stmt 0 view .LVU227
- 904 0378 AE4B     		ldr	r3, .L125
- 905 037a 7C22     		movs	r2, #124
- 906 037c 1A70     		strb	r2, [r3]
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 907              		.loc 2 170 5 is_stmt 1 view .LVU228
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 908              		.loc 2 170 5 view .LVU229
- 909 037e AA23     		movs	r3, #170
-ARM GAS  /tmp/ccIJtQZY.s 			page 24
-
-
- 910 0380 2380     		strh	r3, [r4]	@ movhi
- 911              	.L44:
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 912              		.loc 2 170 5 discriminator 1 view .LVU230
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 913              		.loc 2 170 5 discriminator 1 view .LVU231
- 914 0382 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 915 0384 13F00405 		ands	r5, r3, #4
- 916 0388 40F0F280 		bne	.L113
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 917              		.loc 2 170 5 discriminator 3 view .LVU232
- 918 038c AA4A     		ldr	r2, .L125+4
- 919 038e 1268     		ldr	r2, [r2]
- 920 0390 12F0040F 		tst	r2, #4
- 921 0394 40F0F080 		bne	.L75
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 922              		.loc 2 170 5 discriminator 4 view .LVU233
- 923 0398 23F00103 		bic	r3, r3, #1
- 924 039c A370     		strb	r3, [r4, #2]
- 925              	.L76:
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 926              		.loc 2 170 5 discriminator 7 view .LVU234
- 927 039e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 928 03a0 13F0010F 		tst	r3, #1
- 929 03a4 40F06181 		bne	.L49
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 930              		.loc 2 170 5 discriminator 9 view .LVU235
- 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 931              		.loc 2 170 5 discriminator 9 view .LVU236
- 932 03a8 A34A     		ldr	r2, .L125+4
- 933 03aa 1368     		ldr	r3, [r2]
- 934 03ac 43F00403 		orr	r3, r3, #4
- 935 03b0 1360     		str	r3, [r2]
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 936              		.loc 2 171 5 discriminator 9 view .LVU237
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 937              		.loc 2 171 5 discriminator 9 view .LVU238
- 938 03b2 A24B     		ldr	r3, .L125+8
- 939 03b4 0022     		movs	r2, #0
- 940 03b6 1A80     		strh	r2, [r3]	@ movhi
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 941              		.loc 2 171 5 discriminator 9 view .LVU239
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 942              		.loc 2 171 5 discriminator 9 view .LVU240
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 943              		.loc 2 171 5 discriminator 9 view .LVU241
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 944              		.loc 2 171 5 discriminator 9 view .LVU242
- 945 03b8 AB23     		movs	r3, #171
- 946 03ba 2380     		strh	r3, [r4]	@ movhi
- 947              	.L43:
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 948              		.loc 2 171 5 discriminator 1 view .LVU243
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 949              		.loc 2 171 5 discriminator 1 view .LVU244
- 950 03bc A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 951 03be 15F00405 		ands	r5, r5, #4
-ARM GAS  /tmp/ccIJtQZY.s 			page 25
-
-
- 952 03c2 40F0DD80 		bne	.L114
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 953              		.loc 2 171 5 discriminator 3 view .LVU245
- 954 03c6 4C21     		movs	r1, #76
- 955 03c8 9C48     		ldr	r0, .L125+8
- 956 03ca FFF7FEFF 		bl	__esos_OutChar
- 957              	.LVL23:
- 958 03ce 0228     		cmp	r0, #2
- 959 03d0 40F2DA80 		bls	.L78
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 960              		.loc 2 171 5 discriminator 4 view .LVU246
- 961 03d4 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 962 03d6 23F00103 		bic	r3, r3, #1
- 963 03da A370     		strb	r3, [r4, #2]
- 964              	.L79:
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 965              		.loc 2 171 5 discriminator 7 view .LVU247
- 966 03dc A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 967 03de 13F0010F 		tst	r3, #1
- 968 03e2 40F04281 		bne	.L49
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 969              		.loc 2 171 5 discriminator 9 view .LVU248
- 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 970              		.loc 2 171 5 discriminator 9 view .LVU249
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 971              		.loc 2 172 5 discriminator 9 view .LVU250
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 972              		.loc 2 172 5 discriminator 9 view .LVU251
- 973 03e6 954B     		ldr	r3, .L125+8
- 974 03e8 0022     		movs	r2, #0
- 975 03ea 1A80     		strh	r2, [r3]	@ movhi
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 976              		.loc 2 172 5 discriminator 9 view .LVU252
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 977              		.loc 2 172 5 discriminator 9 view .LVU253
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 978              		.loc 2 172 5 discriminator 9 view .LVU254
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 979              		.loc 2 172 5 discriminator 9 view .LVU255
- 980 03ec AC23     		movs	r3, #172
- 981 03ee 2380     		strh	r3, [r4]	@ movhi
- 982              	.L42:
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 983              		.loc 2 172 5 discriminator 1 view .LVU256
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 984              		.loc 2 172 5 discriminator 1 view .LVU257
- 985 03f0 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 986 03f2 15F00405 		ands	r5, r5, #4
- 987 03f6 40F0CC80 		bne	.L115
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 988              		.loc 2 172 5 discriminator 3 view .LVU258
- 989 03fa 8E4B     		ldr	r3, .L125
- 990 03fc 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
- 991 03fe 8F48     		ldr	r0, .L125+8
- 992 0400 FFF7FEFF 		bl	__esos_OutUint8AsDecString
- 993              	.LVL24:
- 994 0404 0228     		cmp	r0, #2
-ARM GAS  /tmp/ccIJtQZY.s 			page 26
-
-
- 995 0406 40F2C880 		bls	.L81
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 996              		.loc 2 172 5 discriminator 4 view .LVU259
- 997 040a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 998 040c 23F00103 		bic	r3, r3, #1
- 999 0410 A370     		strb	r3, [r4, #2]
- 1000              	.L82:
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1001              		.loc 2 172 5 discriminator 7 view .LVU260
- 1002 0412 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1003 0414 13F0010F 		tst	r3, #1
- 1004 0418 40F02781 		bne	.L49
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1005              		.loc 2 172 5 discriminator 9 view .LVU261
- 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1006              		.loc 2 172 5 discriminator 9 view .LVU262
- 173:src/m4_timer_uart_app.c **** 			}
- 1007              		.loc 2 173 5 discriminator 9 view .LVU263
- 1008 041c 864A     		ldr	r2, .L125+4
- 1009 041e 1368     		ldr	r3, [r2]
- 1010 0420 23F00403 		bic	r3, r3, #4
- 1011 0424 1360     		str	r3, [r2]
- 1012              	.L73:
- 176:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
- 1013              		.loc 2 176 4 view .LVU264
- 176:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
- 1014              		.loc 2 176 16 is_stmt 0 view .LVU265
- 1015 0426 864B     		ldr	r3, .L125+12
- 1016 0428 0122     		movs	r2, #1
- 1017 042a 1A70     		strb	r2, [r3]
- 177:src/m4_timer_uart_app.c **** 		}
- 1018              		.loc 2 177 4 is_stmt 1 view .LVU266
- 177:src/m4_timer_uart_app.c **** 		}
- 1019              		.loc 2 177 19 is_stmt 0 view .LVU267
- 1020 042c 854B     		ldr	r3, .L125+16
- 1021 042e 0022     		movs	r2, #0
- 1022 0430 1A70     		strb	r2, [r3]
- 1023              	.L83:
- 185:src/m4_timer_uart_app.c **** 		}
- 186:src/m4_timer_uart_app.c **** 		
- 187:src/m4_timer_uart_app.c **** 		
- 188:src/m4_timer_uart_app.c **** 		if(b_changeFlag)
- 1024              		.loc 2 188 3 is_stmt 1 view .LVU268
- 1025              		.loc 2 188 6 is_stmt 0 view .LVU269
- 1026 0432 854B     		ldr	r3, .L125+20
- 1027 0434 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1028              		.loc 2 188 5 view .LVU270
- 1029 0436 002B     		cmp	r3, #0
- 1030 0438 5DD0     		beq	.L84
- 189:src/m4_timer_uart_app.c **** 		{
- 190:src/m4_timer_uart_app.c **** 			++u8_digitCount;
- 1031              		.loc 2 190 4 is_stmt 1 view .LVU271
- 1032 043a 844A     		ldr	r2, .L125+24
- 1033 043c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 1034 043e 0133     		adds	r3, r3, #1
- 1035 0440 DBB2     		uxtb	r3, r3
- 1036 0442 1370     		strb	r3, [r2]
-ARM GAS  /tmp/ccIJtQZY.s 			page 27
-
-
- 191:src/m4_timer_uart_app.c **** 			
- 192:src/m4_timer_uart_app.c **** 			//if #---
- 193:src/m4_timer_uart_app.c **** 			if(u8_digitCount == 1)
- 1037              		.loc 2 193 4 view .LVU272
- 1038              		.loc 2 193 6 is_stmt 0 view .LVU273
- 1039 0444 012B     		cmp	r3, #1
- 1040 0446 00F0AD80 		beq	.L116
- 194:src/m4_timer_uart_app.c **** 			{
- 195:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 1000);
- 196:src/m4_timer_uart_app.c **** 			}
- 197:src/m4_timer_uart_app.c **** 			
- 198:src/m4_timer_uart_app.c **** 			//if -#--
- 199:src/m4_timer_uart_app.c **** 			else if(u8_digitCount == 2)
- 1041              		.loc 2 199 9 is_stmt 1 view .LVU274
- 1042              		.loc 2 199 11 is_stmt 0 view .LVU275
- 1043 044a 022B     		cmp	r3, #2
- 1044 044c 00F0B780 		beq	.L117
- 200:src/m4_timer_uart_app.c **** 			{
- 201:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0')* 100);
- 202:src/m4_timer_uart_app.c **** 			}
- 203:src/m4_timer_uart_app.c **** 			
- 204:src/m4_timer_uart_app.c **** 			
- 205:src/m4_timer_uart_app.c **** 			//if --#-
- 206:src/m4_timer_uart_app.c **** 			else if(u8_digitCount == 3)
- 1045              		.loc 2 206 9 is_stmt 1 view .LVU276
- 1046              		.loc 2 206 11 is_stmt 0 view .LVU277
- 1047 0450 032B     		cmp	r3, #3
- 1048 0452 00F0C180 		beq	.L118
- 207:src/m4_timer_uart_app.c **** 			{
- 208:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 10);
- 209:src/m4_timer_uart_app.c **** 			}
- 210:src/m4_timer_uart_app.c **** 			
- 211:src/m4_timer_uart_app.c **** 			//if ---#
- 212:src/m4_timer_uart_app.c **** 			else if(u8_digitCount == 4)
- 1049              		.loc 2 212 9 is_stmt 1 view .LVU278
- 1050              		.loc 2 212 11 is_stmt 0 view .LVU279
- 1051 0456 042B     		cmp	r3, #4
- 1052 0458 4AD1     		bne	.L86
- 213:src/m4_timer_uart_app.c **** 			{
- 214:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + (u8_incoming - '0');
- 1053              		.loc 2 214 5 is_stmt 1 view .LVU280
- 1054              		.loc 2 214 41 is_stmt 0 view .LVU281
- 1055 045a 764B     		ldr	r3, .L125
- 1056 045c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1057 045e 7C4A     		ldr	r2, .L125+28
- 1058 0460 1188     		ldrh	r1, [r2]
- 1059 0462 0B44     		add	r3, r3, r1
- 1060 0464 303B     		subs	r3, r3, #48
- 1061              		.loc 2 214 22 view .LVU282
- 1062 0466 1380     		strh	r3, [r2]	@ movhi
- 215:src/m4_timer_uart_app.c **** 				
- 216:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
- 1063              		.loc 2 216 5 is_stmt 1 view .LVU283
- 1064              		.loc 2 216 5 view .LVU284
- 1065 0468 D823     		movs	r3, #216
- 1066 046a 2380     		strh	r3, [r4]	@ movhi
- 1067              	.L41:
-ARM GAS  /tmp/ccIJtQZY.s 			page 28
-
-
- 1068              		.loc 2 216 5 discriminator 1 view .LVU285
- 1069              		.loc 2 216 5 discriminator 1 view .LVU286
- 1070 046c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1071 046e 13F00405 		ands	r5, r3, #4
- 1072 0472 40F0BC80 		bne	.L119
- 1073              		.loc 2 216 5 discriminator 3 view .LVU287
- 1074 0476 704A     		ldr	r2, .L125+4
- 1075 0478 1268     		ldr	r2, [r2]
- 1076 047a 12F0040F 		tst	r2, #4
- 1077 047e 40F0BA80 		bne	.L90
- 1078              		.loc 2 216 5 discriminator 4 view .LVU288
- 1079 0482 23F00103 		bic	r3, r3, #1
- 1080 0486 A370     		strb	r3, [r4, #2]
- 1081              	.L91:
- 1082              		.loc 2 216 5 discriminator 7 view .LVU289
- 1083 0488 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1084 048a 13F0010F 		tst	r3, #1
- 1085 048e 40F0EC80 		bne	.L49
- 1086              		.loc 2 216 5 discriminator 9 view .LVU290
- 1087              		.loc 2 216 5 discriminator 9 view .LVU291
- 1088 0492 694A     		ldr	r2, .L125+4
- 1089 0494 1368     		ldr	r3, [r2]
- 1090 0496 43F00403 		orr	r3, r3, #4
- 1091 049a 1360     		str	r3, [r2]
- 217:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u16_changePeriod );
- 1092              		.loc 2 217 5 discriminator 9 view .LVU292
- 1093              		.loc 2 217 5 discriminator 9 view .LVU293
- 1094 049c 674B     		ldr	r3, .L125+8
- 1095 049e 0022     		movs	r2, #0
- 1096 04a0 1A80     		strh	r2, [r3]	@ movhi
- 1097              		.loc 2 217 5 discriminator 9 view .LVU294
- 1098              		.loc 2 217 5 discriminator 9 view .LVU295
- 1099              		.loc 2 217 5 discriminator 9 view .LVU296
- 1100              		.loc 2 217 5 discriminator 9 view .LVU297
- 1101 04a2 D923     		movs	r3, #217
- 1102 04a4 2380     		strh	r3, [r4]	@ movhi
- 1103              	.L40:
- 1104              		.loc 2 217 5 discriminator 1 view .LVU298
- 1105              		.loc 2 217 5 discriminator 1 view .LVU299
- 1106 04a6 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 1107 04a8 15F00405 		ands	r5, r5, #4
- 1108 04ac 40F0A780 		bne	.L120
- 1109              		.loc 2 217 5 discriminator 3 view .LVU300
- 1110 04b0 674B     		ldr	r3, .L125+28
- 1111 04b2 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
- 1112 04b4 6148     		ldr	r0, .L125+8
- 1113 04b6 FFF7FEFF 		bl	__esos_OutUint8AsDecString
- 1114              	.LVL25:
- 1115 04ba 0228     		cmp	r0, #2
- 1116 04bc 40F2A380 		bls	.L93
- 1117              		.loc 2 217 5 discriminator 4 view .LVU301
- 1118 04c0 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1119 04c2 23F00103 		bic	r3, r3, #1
- 1120 04c6 A370     		strb	r3, [r4, #2]
- 1121              	.L94:
- 1122              		.loc 2 217 5 discriminator 7 view .LVU302
- 1123 04c8 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
-ARM GAS  /tmp/ccIJtQZY.s 			page 29
-
-
- 1124 04ca 13F0010F 		tst	r3, #1
- 1125 04ce 40F0CC80 		bne	.L49
- 1126              		.loc 2 217 5 discriminator 9 view .LVU303
- 1127              		.loc 2 217 5 discriminator 9 view .LVU304
- 218:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1128              		.loc 2 218 5 discriminator 9 view .LVU305
- 1129 04d2 594A     		ldr	r2, .L125+4
- 1130 04d4 1368     		ldr	r3, [r2]
- 1131 04d6 23F00403 		bic	r3, r3, #4
- 1132 04da 1360     		str	r3, [r2]
+ 212:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 10);
+ 213:src/m4_timer_uart_app.c **** 			}
+ 214:src/m4_timer_uart_app.c **** 
+ 215:src/m4_timer_uart_app.c **** 			//if ---#
+ 216:src/m4_timer_uart_app.c **** 			else if(u8_digitCount == 3)
+ 217:src/m4_timer_uart_app.c **** 			{
+ 218:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + (u8_incoming - '0');
  219:src/m4_timer_uart_app.c **** 				u16_encode_periodHalf = u16_changePeriod / 2;
- 1133              		.loc 2 219 5 discriminator 9 view .LVU306
- 1134              		.loc 2 219 27 is_stmt 0 discriminator 9 view .LVU307
- 1135 04dc 5C4B     		ldr	r3, .L125+28
- 1136 04de 1B88     		ldrh	r3, [r3]
- 1137 04e0 5B08     		lsrs	r3, r3, #1
- 1138 04e2 5C4A     		ldr	r2, .L125+32
- 1139 04e4 1380     		strh	r3, [r2]	@ movhi
  220:src/m4_timer_uart_app.c **** 				
  221:src/m4_timer_uart_app.c **** 				b_changeFlag = FALSE;
- 1140              		.loc 2 221 5 is_stmt 1 discriminator 9 view .LVU308
- 1141              		.loc 2 221 18 is_stmt 0 discriminator 9 view .LVU309
- 1142 04e6 0023     		movs	r3, #0
- 1143 04e8 574A     		ldr	r2, .L125+20
- 1144 04ea 1370     		strb	r3, [r2]
  222:src/m4_timer_uart_app.c **** 				u8_digitCount = 0;
- 1145              		.loc 2 222 5 is_stmt 1 discriminator 9 view .LVU310
- 1146              		.loc 2 222 19 is_stmt 0 discriminator 9 view .LVU311
- 1147 04ec 574A     		ldr	r2, .L125+24
- 1148 04ee 1370     		strb	r3, [r2]
- 1149              	.L86:
  223:src/m4_timer_uart_app.c **** 			}
- 224:src/m4_timer_uart_app.c **** 			
- 225:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
- 1150              		.loc 2 225 4 is_stmt 1 view .LVU312
- 1151              		.loc 2 225 19 is_stmt 0 view .LVU313
- 1152 04f0 544B     		ldr	r3, .L125+16
- 1153 04f2 0022     		movs	r2, #0
- 1154 04f4 1A70     		strb	r2, [r3]
- 1155              	.L84:
- 226:src/m4_timer_uart_app.c **** 		}
- 227:src/m4_timer_uart_app.c **** 		
+ 224:src/m4_timer_uart_app.c **** 		}
+ 225:src/m4_timer_uart_app.c **** 		
+ 226:src/m4_timer_uart_app.c **** 		b_changeFlagSkip = FALSE;
+ 227:src/m4_timer_uart_app.c **** 
  228:src/m4_timer_uart_app.c **** 		if(!b_skipPrint)
- 1156              		.loc 2 228 3 is_stmt 1 view .LVU314
- 1157              		.loc 2 228 6 is_stmt 0 view .LVU315
- 1158 04f6 524B     		ldr	r3, .L125+12
- 1159 04f8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1160              		.loc 2 228 5 view .LVU316
- 1161 04fa 002B     		cmp	r3, #0
- 1162 04fc 40F0AC80 		bne	.L95
  229:src/m4_timer_uart_app.c **** 		{
  230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
- 1163              		.loc 2 230 4 is_stmt 1 view .LVU317
- 1164              		.loc 2 230 4 view .LVU318
- 1165 0500 E623     		movs	r3, #230
- 1166 0502 2380     		strh	r3, [r4]	@ movhi
- 1167              	.L39:
-ARM GAS  /tmp/ccIJtQZY.s 			page 30
-
-
- 1168              		.loc 2 230 4 discriminator 1 view .LVU319
- 1169              		.loc 2 230 4 discriminator 1 view .LVU320
- 1170 0504 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1171 0506 13F00405 		ands	r5, r3, #4
- 1172 050a 40F08180 		bne	.L121
- 1173              		.loc 2 230 4 discriminator 3 view .LVU321
- 1174 050e 4A4A     		ldr	r2, .L125+4
- 1175 0510 1268     		ldr	r2, [r2]
- 1176 0512 12F0040F 		tst	r2, #4
- 1177 0516 7FD1     		bne	.L97
- 1178              		.loc 2 230 4 discriminator 4 view .LVU322
- 1179 0518 23F00103 		bic	r3, r3, #1
- 1180 051c A370     		strb	r3, [r4, #2]
- 1181              	.L98:
- 1182              		.loc 2 230 4 discriminator 7 view .LVU323
- 1183 051e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1184 0520 13F0010F 		tst	r3, #1
- 1185 0524 40F0A180 		bne	.L49
- 1186              		.loc 2 230 4 discriminator 9 view .LVU324
- 1187              		.loc 2 230 4 discriminator 9 view .LVU325
- 1188 0528 434A     		ldr	r2, .L125+4
- 1189 052a 1368     		ldr	r3, [r2]
- 1190 052c 43F00403 		orr	r3, r3, #4
- 1191 0530 1360     		str	r3, [r2]
  231:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
- 1192              		.loc 2 231 4 discriminator 9 view .LVU326
- 1193              		.loc 2 231 4 discriminator 9 view .LVU327
- 1194 0532 424B     		ldr	r3, .L125+8
- 1195 0534 0022     		movs	r2, #0
- 1196 0536 1A80     		strh	r2, [r3]	@ movhi
- 1197              		.loc 2 231 4 discriminator 9 view .LVU328
- 1198              		.loc 2 231 4 discriminator 9 view .LVU329
- 1199              		.loc 2 231 4 discriminator 9 view .LVU330
- 1200              		.loc 2 231 4 discriminator 9 view .LVU331
- 1201 0538 E723     		movs	r3, #231
- 1202 053a 2380     		strh	r3, [r4]	@ movhi
- 1203              	.L37:
- 1204              		.loc 2 231 4 discriminator 1 view .LVU332
- 1205              		.loc 2 231 4 discriminator 1 view .LVU333
- 1206 053c A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
- 1207 053e 15F00405 		ands	r5, r5, #4
- 1208 0542 6DD1     		bne	.L122
- 1209              		.loc 2 231 4 discriminator 3 view .LVU334
- 1210 0544 3B4B     		ldr	r3, .L125
- 1211 0546 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
- 1212 0548 3C48     		ldr	r0, .L125+8
- 1213 054a FFF7FEFF 		bl	__esos_OutChar
- 1214              	.LVL26:
- 1215 054e 0228     		cmp	r0, #2
- 1216 0550 6AD9     		bls	.L100
- 1217              		.loc 2 231 4 discriminator 4 view .LVU335
- 1218 0552 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1219 0554 23F00103 		bic	r3, r3, #1
- 1220 0558 A370     		strb	r3, [r4, #2]
- 1221              	.L101:
- 1222              		.loc 2 231 4 discriminator 7 view .LVU336
- 1223 055a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
-ARM GAS  /tmp/ccIJtQZY.s 			page 31
-
-
- 1224 055c 13F0010F 		tst	r3, #1
- 1225 0560 40F08380 		bne	.L49
- 1226              		.loc 2 231 4 discriminator 9 view .LVU337
- 1227              		.loc 2 231 4 discriminator 9 view .LVU338
+ 526              		.loc 2 231 4 is_stmt 1 discriminator 1 view .LVU130
+ 527              		.loc 2 231 4 discriminator 1 view .LVU131
+ 528 012c A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 529 012e 15F00405 		ands	r5, r5, #4
+ 530 0132 40F0FA81 		bne	.L104
+ 531              		.loc 2 231 4 discriminator 3 view .LVU132
+ 532 0136 724B     		ldr	r3, .L114
+ 533 0138 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 534 013a 7748     		ldr	r0, .L114+24
+ 535 013c FFF7FEFF 		bl	__esos_OutChar
+ 536              	.LVL19:
+ 537 0140 0228     		cmp	r0, #2
+ 538 0142 40F2F681 		bls	.L93
+ 539              		.loc 2 231 4 discriminator 4 view .LVU133
+ 540 0146 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 541 0148 23F00103 		bic	r3, r3, #1
+ 542 014c A370     		strb	r3, [r4, #2]
+ 543              	.L94:
+ 544              		.loc 2 231 4 discriminator 7 view .LVU134
+ 545 014e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 546 0150 13F0010F 		tst	r3, #1
+ 547 0154 40F0FB81 		bne	.L48
+ 548              		.loc 2 231 4 discriminator 9 view .LVU135
+ 549              		.loc 2 231 4 discriminator 9 view .LVU136
  232:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1228              		.loc 2 232 4 discriminator 9 view .LVU339
- 1229 0564 344A     		ldr	r2, .L125+4
- 1230 0566 1368     		ldr	r3, [r2]
- 1231 0568 23F00403 		bic	r3, r3, #4
- 1232 056c 1360     		str	r3, [r2]
- 1233 056e F2E5     		b	.L36
- 1234              	.L113:
+ 550              		.loc 2 232 4 discriminator 9 view .LVU137
+ 551 0158 6B4A     		ldr	r2, .L114+8
+ 552 015a 1368     		ldr	r3, [r2]
+ 553 015c 23F00403 		bic	r3, r3, #4
+ 554 0160 1360     		str	r3, [r2]
+ 555 0162 BFE7     		b	.L36
+ 556              	.L103:
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 557              		.loc 2 106 3 discriminator 2 view .LVU138
+ 558 0164 0423     		movs	r3, #4
+ 559 0166 A370     		strb	r3, [r4, #2]
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ARM GAS  /tmp/ccyXqcsa.s 			page 17
+
+
+ 560              		.loc 2 106 3 discriminator 2 view .LVU139
+ 561 0168 0325     		movs	r5, #3
+ 562 016a F0E1     		b	.L48
+ 563              	.L49:
+ 106:src/m4_timer_uart_app.c **** 		ESOS_TASK_WAIT_ON_GET_UINT8( u8_incoming );
+ 564              		.loc 2 106 3 discriminator 5 view .LVU140
+ 565 016c 43F00103 		orr	r3, r3, #1
+ 566 0170 A370     		strb	r3, [r4, #2]
+ 567 0172 C5E7     		b	.L50
+ 568              	.L98:
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 569              		.loc 2 107 3 discriminator 2 view .LVU141
+ 570 0174 0423     		movs	r3, #4
+ 571 0176 A370     		strb	r3, [r4, #2]
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 572              		.loc 2 107 3 discriminator 2 view .LVU142
+ 573 0178 0325     		movs	r5, #3
+ 574 017a E8E1     		b	.L48
+ 575              	.L52:
+ 107:src/m4_timer_uart_app.c **** 		ESOS_TASK_SIGNAL_AVAILABLE_IN_COMM();
+ 576              		.loc 2 107 3 discriminator 5 view .LVU143
+ 577 017c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 578 017e 43F00103 		orr	r3, r3, #1
+ 579 0182 A370     		strb	r3, [r4, #2]
+ 580 0184 77E7     		b	.L53
+ 581              	.L99:
+ 122:src/m4_timer_uart_app.c **** 			
+ 582              		.loc 2 122 4 view .LVU144
+ 122:src/m4_timer_uart_app.c **** 			
+ 583              		.loc 2 122 36 is_stmt 0 view .LVU145
+ 584 0186 203A     		subs	r2, r2, #32
+ 122:src/m4_timer_uart_app.c **** 			
+ 585              		.loc 2 122 16 view .LVU146
+ 586 0188 5D4B     		ldr	r3, .L114
+ 587 018a 1A70     		strb	r2, [r3]
+ 124:src/m4_timer_uart_app.c **** 			{
+ 588              		.loc 2 124 4 is_stmt 1 view .LVU147
+ 124:src/m4_timer_uart_app.c **** 			{
+ 589              		.loc 2 124 7 is_stmt 0 view .LVU148
+ 590 018c FFF7FEFF 		bl	IS_B1_RELEASED
+ 591              	.LVL20:
+ 124:src/m4_timer_uart_app.c **** 			{
+ 592              		.loc 2 124 6 view .LVU149
+ 593 0190 B0B1     		cbz	r0, .L57
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 594              		.loc 2 127 5 is_stmt 1 view .LVU150
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 595              		.loc 2 127 35 is_stmt 0 view .LVU151
+ 596 0192 5B4E     		ldr	r6, .L114
+ 597 0194 3278     		ldrb	r2, [r6]	@ zero_extendqisi2
+ 598 0196 413A     		subs	r2, r2, #65
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 599              		.loc 2 127 52 view .LVU152
+ 600 0198 5C4D     		ldr	r5, .L114+12
+ 601 019a 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 602 019c 5F4B     		ldr	r3, .L114+28
+ 603 019e 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
+ARM GAS  /tmp/ccyXqcsa.s 			page 18
+
+
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 604              		.loc 2 127 69 view .LVU153
+ 605 01a0 413B     		subs	r3, r3, #65
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 606              		.loc 2 127 42 view .LVU154
+ 607 01a2 1A44     		add	r2, r2, r3
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 608              		.loc 2 127 77 view .LVU155
+ 609 01a4 5E48     		ldr	r0, .L114+32
+ 610 01a6 80FB0230 		smull	r3, r0, r0, r2
+ 611 01aa D317     		asrs	r3, r2, #31
+ 612 01ac C3EBE003 		rsb	r3, r3, r0, asr #3
+ 613 01b0 1A20     		movs	r0, #26
+ 614 01b2 00FB1323 		mls	r3, r0, r3, r2
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 615              		.loc 2 127 83 view .LVU156
+ 616 01b6 4133     		adds	r3, r3, #65
+ 127:src/m4_timer_uart_app.c **** 				//increment count
+ 617              		.loc 2 127 17 view .LVU157
+ 618 01b8 3370     		strb	r3, [r6]
+ 129:src/m4_timer_uart_app.c **** 			}
+ 619              		.loc 2 129 5 is_stmt 1 view .LVU158
+ 129:src/m4_timer_uart_app.c **** 			}
+ 620              		.loc 2 129 19 is_stmt 0 view .LVU159
+ 621 01ba 0131     		adds	r1, r1, #1
+ 622 01bc 2970     		strb	r1, [r5]
+ 623 01be 79E7     		b	.L56
+ 624              	.L57:
+ 135:src/m4_timer_uart_app.c **** 				//increment count
+ 625              		.loc 2 135 5 is_stmt 1 view .LVU160
+ 135:src/m4_timer_uart_app.c **** 				//increment count
+ 626              		.loc 2 135 43 is_stmt 0 view .LVU161
+ 627 01c0 534D     		ldr	r5, .L114+16
+ 628 01c2 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 629 01c4 554B     		ldr	r3, .L114+28
+ 630 01c6 5B5C     		ldrb	r3, [r3, r1]	@ zero_extendqisi2
+ 135:src/m4_timer_uart_app.c **** 				//increment count
+ 631              		.loc 2 135 34 view .LVU162
+ 632 01c8 4D4E     		ldr	r6, .L114
+ 633 01ca 3278     		ldrb	r2, [r6]	@ zero_extendqisi2
+ 634 01cc D21A     		subs	r2, r2, r3
+ 135:src/m4_timer_uart_app.c **** 				//increment count
+ 635              		.loc 2 135 61 view .LVU163
+ 636 01ce 1A32     		adds	r2, r2, #26
+ 135:src/m4_timer_uart_app.c **** 				//increment count
+ 637              		.loc 2 135 67 view .LVU164
+ 638 01d0 5348     		ldr	r0, .L114+32
+ 639 01d2 80FB0230 		smull	r3, r0, r0, r2
+ 640 01d6 D317     		asrs	r3, r2, #31
+ 641 01d8 C3EBE003 		rsb	r3, r3, r0, asr #3
+ 642 01dc 1A20     		movs	r0, #26
+ 643 01de 00FB1323 		mls	r3, r0, r3, r2
+ 135:src/m4_timer_uart_app.c **** 				//increment count
+ 644              		.loc 2 135 73 view .LVU165
+ 645 01e2 4133     		adds	r3, r3, #65
+ 135:src/m4_timer_uart_app.c **** 				//increment count
+ 646              		.loc 2 135 17 view .LVU166
+ARM GAS  /tmp/ccyXqcsa.s 			page 19
+
+
+ 647 01e4 3370     		strb	r3, [r6]
+ 137:src/m4_timer_uart_app.c **** 			}
+ 648              		.loc 2 137 5 is_stmt 1 view .LVU167
+ 137:src/m4_timer_uart_app.c **** 			}
+ 649              		.loc 2 137 19 is_stmt 0 view .LVU168
+ 650 01e6 0131     		adds	r1, r1, #1
+ 651 01e8 2970     		strb	r1, [r5]
+ 652 01ea 63E7     		b	.L56
+ 653              	.L100:
+ 143:src/m4_timer_uart_app.c **** 		}
+ 654              		.loc 2 143 4 is_stmt 1 view .LVU169
+ 143:src/m4_timer_uart_app.c **** 		}
+ 655              		.loc 2 143 18 is_stmt 0 view .LVU170
+ 656 01ec 494A     		ldr	r2, .L114+20
+ 657 01ee 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 658 01f0 0133     		adds	r3, r3, #1
+ 659 01f2 1370     		strb	r3, [r2]
+ 660 01f4 F9E0     		b	.L59
+ 661              	.L101:
+ 149:src/m4_timer_uart_app.c **** 			{
+ 662              		.loc 2 149 4 is_stmt 1 view .LVU171
+ 149:src/m4_timer_uart_app.c **** 			{
+ 663              		.loc 2 149 7 is_stmt 0 view .LVU172
+ 664 01f6 FFF7FEFF 		bl	IS_B1_RELEASED
+ 665              	.LVL21:
+ 149:src/m4_timer_uart_app.c **** 			{
+ 666              		.loc 2 149 6 view .LVU173
+ 667 01fa 0028     		cmp	r0, #0
+ 668 01fc 00F09880 		beq	.L61
+ 151:src/m4_timer_uart_app.c **** 				
+ 669              		.loc 2 151 5 is_stmt 1 view .LVU174
+ 670 0200 484B     		ldr	r3, .L114+36
+ 671 0202 1888     		ldrh	r0, [r3]
+ 672 0204 0A22     		movs	r2, #10
+ 673 0206 4849     		ldr	r1, .L114+40
+ 674 0208 4000     		lsls	r0, r0, #1
+ 675 020a FFF7FEFF 		bl	itoa
+ 676              	.LVL22:
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 677              		.loc 2 153 5 view .LVU175
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 678              		.loc 2 153 5 view .LVU176
+ 679 020e 9923     		movs	r3, #153
+ 680 0210 2380     		strh	r3, [r4]	@ movhi
+ 681              	.L44:
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 682              		.loc 2 153 5 discriminator 1 view .LVU177
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 683              		.loc 2 153 5 discriminator 1 view .LVU178
+ 684 0212 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 685 0214 13F00405 		ands	r5, r3, #4
+ 686 0218 37D1     		bne	.L105
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 687              		.loc 2 153 5 discriminator 3 view .LVU179
+ 688 021a 3B4A     		ldr	r2, .L114+8
+ 689 021c 1268     		ldr	r2, [r2]
+ 690 021e 12F0040F 		tst	r2, #4
+ARM GAS  /tmp/ccyXqcsa.s 			page 20
+
+
+ 691 0222 36D1     		bne	.L63
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 692              		.loc 2 153 5 discriminator 4 view .LVU180
+ 693 0224 23F00103 		bic	r3, r3, #1
+ 694 0228 A370     		strb	r3, [r4, #2]
+ 695              	.L64:
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 696              		.loc 2 153 5 discriminator 7 view .LVU181
+ 697 022a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 698 022c 13F0010F 		tst	r3, #1
+ 699 0230 40F08D81 		bne	.L48
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 700              		.loc 2 153 5 discriminator 9 view .LVU182
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 701              		.loc 2 153 5 discriminator 9 view .LVU183
+ 702 0234 344A     		ldr	r2, .L114+8
+ 703 0236 1368     		ldr	r3, [r2]
+ 704 0238 43F00403 		orr	r3, r3, #4
+ 705 023c 1360     		str	r3, [r2]
+ 154:src/m4_timer_uart_app.c **** 				
+ 706              		.loc 2 154 5 discriminator 9 view .LVU184
+ 154:src/m4_timer_uart_app.c **** 				
+ 707              		.loc 2 154 5 discriminator 9 view .LVU185
+ 708 023e 364B     		ldr	r3, .L114+24
+ 709 0240 0022     		movs	r2, #0
+ 710 0242 1A80     		strh	r2, [r3]	@ movhi
+ 154:src/m4_timer_uart_app.c **** 				
+ 711              		.loc 2 154 5 discriminator 9 view .LVU186
+ 154:src/m4_timer_uart_app.c **** 				
+ 712              		.loc 2 154 5 discriminator 9 view .LVU187
+ 154:src/m4_timer_uart_app.c **** 				
+ 713              		.loc 2 154 5 discriminator 9 view .LVU188
+ 154:src/m4_timer_uart_app.c **** 				
+ 714              		.loc 2 154 5 discriminator 9 view .LVU189
+ 715 0244 9A23     		movs	r3, #154
+ 716 0246 2380     		strh	r3, [r4]	@ movhi
+ 717              	.L43:
+ 154:src/m4_timer_uart_app.c **** 				
+ 718              		.loc 2 154 5 discriminator 1 view .LVU190
+ 154:src/m4_timer_uart_app.c **** 				
+ 719              		.loc 2 154 5 discriminator 1 view .LVU191
+ 720 0248 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 721 024a 15F00405 		ands	r5, r5, #4
+ 722 024e 24D1     		bne	.L106
+ 154:src/m4_timer_uart_app.c **** 				
+ 723              		.loc 2 154 5 discriminator 3 view .LVU192
+ 724 0250 4C21     		movs	r1, #76
+ 725 0252 3148     		ldr	r0, .L114+24
+ 726 0254 FFF7FEFF 		bl	__esos_OutChar
+ 727              	.LVL23:
+ 728 0258 0228     		cmp	r0, #2
+ 729 025a 22D9     		bls	.L66
+ 154:src/m4_timer_uart_app.c **** 				
+ 730              		.loc 2 154 5 discriminator 4 view .LVU193
+ 731 025c A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 732 025e 23F00103 		bic	r3, r3, #1
+ 733 0262 A370     		strb	r3, [r4, #2]
+ARM GAS  /tmp/ccyXqcsa.s 			page 21
+
+
+ 734              	.L67:
+ 154:src/m4_timer_uart_app.c **** 				
+ 735              		.loc 2 154 5 discriminator 7 view .LVU194
+ 736 0264 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 737 0266 13F0010F 		tst	r3, #1
+ 738 026a 40F07081 		bne	.L48
+ 154:src/m4_timer_uart_app.c **** 				
+ 739              		.loc 2 154 5 discriminator 9 view .LVU195
+ 154:src/m4_timer_uart_app.c **** 				
+ 740              		.loc 2 154 5 discriminator 9 view .LVU196
+ 156:src/m4_timer_uart_app.c **** 				
+ 741              		.loc 2 156 5 discriminator 9 view .LVU197
+ 156:src/m4_timer_uart_app.c **** 				
+ 742              		.loc 2 156 18 is_stmt 0 discriminator 9 view .LVU198
+ 743 026e 2F4B     		ldr	r3, .L114+44
+ 744 0270 0022     		movs	r2, #0
+ 745 0272 1A70     		strb	r2, [r3]
+ 158:src/m4_timer_uart_app.c **** 				{
+ 746              		.loc 2 158 5 is_stmt 1 discriminator 9 view .LVU199
+ 747              	.L68:
+ 158:src/m4_timer_uart_app.c **** 				{
+ 748              		.loc 2 158 10 view .LVU200
+ 158:src/m4_timer_uart_app.c **** 				{
+ 749              		.loc 2 158 21 is_stmt 0 view .LVU201
+ 750 0274 2D4B     		ldr	r3, .L114+44
+ 751 0276 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 752 0278 2B4A     		ldr	r2, .L114+40
+ 753 027a D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 158:src/m4_timer_uart_app.c **** 				{
+ 754              		.loc 2 158 10 view .LVU202
+ 755 027c B3B9     		cbnz	r3, .L72
+ 163:src/m4_timer_uart_app.c **** 			}
+ 756              		.loc 2 163 5 is_stmt 1 view .LVU203
+ 757 027e 224A     		ldr	r2, .L114+8
+ 758 0280 1368     		ldr	r3, [r2]
+ 759 0282 23F00403 		bic	r3, r3, #4
+ 760 0286 1360     		str	r3, [r2]
+ 761 0288 A9E0     		b	.L73
+ 762              	.L105:
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 763              		.loc 2 153 5 discriminator 2 view .LVU204
+ 764 028a 0423     		movs	r3, #4
+ 765 028c A370     		strb	r3, [r4, #2]
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 766              		.loc 2 153 5 discriminator 2 view .LVU205
+ 767 028e 0325     		movs	r5, #3
+ 768 0290 5DE1     		b	.L48
+ 769              	.L63:
+ 153:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 770              		.loc 2 153 5 discriminator 5 view .LVU206
+ 771 0292 43F00103 		orr	r3, r3, #1
+ 772 0296 A370     		strb	r3, [r4, #2]
+ 773 0298 C7E7     		b	.L64
+ 774              	.L106:
+ 154:src/m4_timer_uart_app.c **** 				
+ 775              		.loc 2 154 5 discriminator 2 view .LVU207
+ 776 029a 0423     		movs	r3, #4
+ARM GAS  /tmp/ccyXqcsa.s 			page 22
+
+
+ 777 029c A370     		strb	r3, [r4, #2]
+ 154:src/m4_timer_uart_app.c **** 				
+ 778              		.loc 2 154 5 discriminator 2 view .LVU208
+ 779 029e 0325     		movs	r5, #3
+ 780 02a0 55E1     		b	.L48
+ 781              	.L66:
+ 154:src/m4_timer_uart_app.c **** 				
+ 782              		.loc 2 154 5 discriminator 5 view .LVU209
+ 783 02a2 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 784 02a4 43F00103 		orr	r3, r3, #1
+ 785 02a8 A370     		strb	r3, [r4, #2]
+ 786 02aa DBE7     		b	.L67
+ 787              	.L72:
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 788              		.loc 2 160 6 view .LVU210
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 789              		.loc 2 160 6 view .LVU211
+ 790 02ac 1A4B     		ldr	r3, .L114+24
+ 791 02ae 0022     		movs	r2, #0
+ 792 02b0 1A80     		strh	r2, [r3]	@ movhi
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 793              		.loc 2 160 6 view .LVU212
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 794              		.loc 2 160 6 view .LVU213
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 795              		.loc 2 160 6 view .LVU214
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 796              		.loc 2 160 6 view .LVU215
+ 797 02b2 A023     		movs	r3, #160
+ 798 02b4 2380     		strh	r3, [r4]	@ movhi
+ 799              	.L42:
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 800              		.loc 2 160 6 discriminator 1 view .LVU216
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 801              		.loc 2 160 6 discriminator 1 view .LVU217
+ 802 02b6 A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 803 02b8 15F00405 		ands	r5, r5, #4
+ 804 02bc 16D1     		bne	.L107
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 805              		.loc 2 160 6 discriminator 3 view .LVU218
+ 806 02be 1B4B     		ldr	r3, .L114+44
+ 807 02c0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 808 02c2 194A     		ldr	r2, .L114+40
+ 809 02c4 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+ 810 02c6 1448     		ldr	r0, .L114+24
+ 811 02c8 FFF7FEFF 		bl	__esos_OutChar
+ 812              	.LVL24:
+ 813 02cc 0228     		cmp	r0, #2
+ 814 02ce 11D9     		bls	.L70
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 815              		.loc 2 160 6 discriminator 4 view .LVU219
+ 816 02d0 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 817 02d2 23F00103 		bic	r3, r3, #1
+ 818 02d6 A370     		strb	r3, [r4, #2]
+ 819              	.L71:
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 820              		.loc 2 160 6 discriminator 7 view .LVU220
+ARM GAS  /tmp/ccyXqcsa.s 			page 23
+
+
+ 821 02d8 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 822 02da 13F0010F 		tst	r3, #1
+ 823 02de 40F03681 		bne	.L48
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 824              		.loc 2 160 6 discriminator 9 view .LVU221
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 825              		.loc 2 160 6 discriminator 9 view .LVU222
+ 161:src/m4_timer_uart_app.c **** 				}
+ 826              		.loc 2 161 6 discriminator 9 view .LVU223
+ 161:src/m4_timer_uart_app.c **** 				}
+ 827              		.loc 2 161 18 is_stmt 0 discriminator 9 view .LVU224
+ 828 02e2 124A     		ldr	r2, .L114+44
+ 829 02e4 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 830 02e6 0133     		adds	r3, r3, #1
+ 831 02e8 1370     		strb	r3, [r2]
+ 832 02ea C3E7     		b	.L68
+ 833              	.L107:
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 834              		.loc 2 160 6 is_stmt 1 discriminator 2 view .LVU225
+ 835 02ec 0423     		movs	r3, #4
+ 836 02ee A370     		strb	r3, [r4, #2]
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 837              		.loc 2 160 6 discriminator 2 view .LVU226
+ 838 02f0 0325     		movs	r5, #3
+ 839 02f2 2CE1     		b	.L48
+ 840              	.L70:
+ 160:src/m4_timer_uart_app.c **** 					u8_charCount++;
+ 841              		.loc 2 160 6 discriminator 5 view .LVU227
+ 842 02f4 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 843 02f6 43F00103 		orr	r3, r3, #1
+ 844 02fa A370     		strb	r3, [r4, #2]
+ 845 02fc ECE7     		b	.L71
+ 846              	.L115:
+ 847 02fe 00BF     		.align	2
+ 848              	.L114:
+ 849 0300 00000000 		.word	.LANCHOR1
+ 850 0304 00000000 		.word	__stChildTaskRx
+ 851 0308 00000000 		.word	__esos_u32SystemFlags
+ 852 030c 00000000 		.word	.LANCHOR2
+ 853 0310 00000000 		.word	.LANCHOR3
+ 854 0314 00000000 		.word	.LANCHOR5
+ 855 0318 00000000 		.word	__stChildTaskTx
+ 856 031c 00000000 		.word	.LANCHOR4
+ 857 0320 4FECC44E 		.word	1321528399
+ 858 0324 00000000 		.word	.LANCHOR0
+ 859 0328 00000000 		.word	.LANCHOR6
+ 860 032c 00000000 		.word	.LANCHOR7
+ 861              	.L61:
+ 166:src/m4_timer_uart_app.c **** 			{
+ 862              		.loc 2 166 9 view .LVU228
+ 166:src/m4_timer_uart_app.c **** 			{
+ 863              		.loc 2 166 12 is_stmt 0 view .LVU229
+ 864 0330 FFF7FEFF 		bl	IS_B1_PRESSED
+ 865              	.LVL25:
+ 166:src/m4_timer_uart_app.c **** 			{
+ 866              		.loc 2 166 11 view .LVU230
+ 867 0334 0028     		cmp	r0, #0
+ARM GAS  /tmp/ccyXqcsa.s 			page 24
+
+
+ 868 0336 52D0     		beq	.L73
+ 168:src/m4_timer_uart_app.c **** 				
+ 869              		.loc 2 168 5 is_stmt 1 view .LVU231
+ 168:src/m4_timer_uart_app.c **** 				
+ 870              		.loc 2 168 17 is_stmt 0 view .LVU232
+ 871 0338 864B     		ldr	r3, .L116
+ 872 033a 7C22     		movs	r2, #124
+ 873 033c 1A70     		strb	r2, [r3]
  170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 1235              		.loc 2 170 5 discriminator 2 view .LVU340
- 1236 0570 0423     		movs	r3, #4
- 1237 0572 A370     		strb	r3, [r4, #2]
+ 874              		.loc 2 170 5 is_stmt 1 view .LVU233
  170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 1238              		.loc 2 170 5 discriminator 2 view .LVU341
- 1239 0574 0325     		movs	r5, #3
- 1240 0576 78E0     		b	.L49
- 1241              	.L75:
+ 875              		.loc 2 170 5 view .LVU234
+ 876 033e AA23     		movs	r3, #170
+ 877 0340 2380     		strh	r3, [r4]	@ movhi
+ 878              	.L41:
  170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
- 1242              		.loc 2 170 5 discriminator 5 view .LVU342
- 1243 0578 43F00103 		orr	r3, r3, #1
- 1244 057c A370     		strb	r3, [r4, #2]
- 1245 057e 0EE7     		b	.L76
- 1246              	.L114:
+ 879              		.loc 2 170 5 discriminator 1 view .LVU235
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 880              		.loc 2 170 5 discriminator 1 view .LVU236
+ 881 0342 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 882 0344 13F00405 		ands	r5, r3, #4
+ 883 0348 40F08D80 		bne	.L108
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 884              		.loc 2 170 5 discriminator 3 view .LVU237
+ 885 034c 824A     		ldr	r2, .L116+4
+ 886 034e 1268     		ldr	r2, [r2]
+ 887 0350 12F0040F 		tst	r2, #4
+ 888 0354 40F08B80 		bne	.L75
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 889              		.loc 2 170 5 discriminator 4 view .LVU238
+ 890 0358 23F00103 		bic	r3, r3, #1
+ 891 035c A370     		strb	r3, [r4, #2]
+ 892              	.L76:
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 893              		.loc 2 170 5 discriminator 7 view .LVU239
+ 894 035e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 895 0360 13F0010F 		tst	r3, #1
+ 896 0364 40F0F380 		bne	.L48
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 897              		.loc 2 170 5 discriminator 9 view .LVU240
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 898              		.loc 2 170 5 discriminator 9 view .LVU241
+ 899 0368 7B4A     		ldr	r2, .L116+4
+ 900 036a 1368     		ldr	r3, [r2]
+ 901 036c 43F00403 		orr	r3, r3, #4
+ 902 0370 1360     		str	r3, [r2]
  171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 1247              		.loc 2 171 5 discriminator 2 view .LVU343
- 1248 0580 0423     		movs	r3, #4
- 1249 0582 A370     		strb	r3, [r4, #2]
+ 903              		.loc 2 171 5 discriminator 9 view .LVU242
  171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 1250              		.loc 2 171 5 discriminator 2 view .LVU344
- 1251 0584 0325     		movs	r5, #3
- 1252 0586 70E0     		b	.L49
- 1253              	.L78:
+ 904              		.loc 2 171 5 discriminator 9 view .LVU243
+ 905 0372 7A4B     		ldr	r3, .L116+8
+ 906 0374 0022     		movs	r2, #0
+ 907 0376 1A80     		strh	r2, [r3]	@ movhi
  171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
- 1254              		.loc 2 171 5 discriminator 5 view .LVU345
- 1255 0588 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1256 058a 43F00103 		orr	r3, r3, #1
- 1257 058e A370     		strb	r3, [r4, #2]
- 1258 0590 24E7     		b	.L79
- 1259              	.L115:
+ 908              		.loc 2 171 5 discriminator 9 view .LVU244
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 909              		.loc 2 171 5 discriminator 9 view .LVU245
+ARM GAS  /tmp/ccyXqcsa.s 			page 25
+
+
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 910              		.loc 2 171 5 discriminator 9 view .LVU246
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 911              		.loc 2 171 5 discriminator 9 view .LVU247
+ 912 0378 AB23     		movs	r3, #171
+ 913 037a 2380     		strh	r3, [r4]	@ movhi
+ 914              	.L40:
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 915              		.loc 2 171 5 discriminator 1 view .LVU248
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 916              		.loc 2 171 5 discriminator 1 view .LVU249
+ 917 037c A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 918 037e 15F00405 		ands	r5, r5, #4
+ 919 0382 78D1     		bne	.L109
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 920              		.loc 2 171 5 discriminator 3 view .LVU250
+ 921 0384 4C21     		movs	r1, #76
+ 922 0386 7548     		ldr	r0, .L116+8
+ 923 0388 FFF7FEFF 		bl	__esos_OutChar
+ 924              	.LVL26:
+ 925 038c 0228     		cmp	r0, #2
+ 926 038e 76D9     		bls	.L78
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 927              		.loc 2 171 5 discriminator 4 view .LVU251
+ 928 0390 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 929 0392 23F00103 		bic	r3, r3, #1
+ 930 0396 A370     		strb	r3, [r4, #2]
+ 931              	.L79:
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 932              		.loc 2 171 5 discriminator 7 view .LVU252
+ 933 0398 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 934 039a 13F0010F 		tst	r3, #1
+ 935 039e 40F0D680 		bne	.L48
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 936              		.loc 2 171 5 discriminator 9 view .LVU253
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 937              		.loc 2 171 5 discriminator 9 view .LVU254
  172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1260              		.loc 2 172 5 discriminator 2 view .LVU346
- 1261 0592 0423     		movs	r3, #4
- 1262 0594 A370     		strb	r3, [r4, #2]
+ 938              		.loc 2 172 5 discriminator 9 view .LVU255
  172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1263              		.loc 2 172 5 discriminator 2 view .LVU347
- 1264 0596 0325     		movs	r5, #3
- 1265 0598 67E0     		b	.L49
- 1266              	.L81:
+ 939              		.loc 2 172 5 discriminator 9 view .LVU256
+ 940 03a2 6E4B     		ldr	r3, .L116+8
+ 941 03a4 0022     		movs	r2, #0
+ 942 03a6 1A80     		strh	r2, [r3]	@ movhi
  172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1267              		.loc 2 172 5 discriminator 5 view .LVU348
- 1268 059a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1269 059c 43F00103 		orr	r3, r3, #1
- 1270 05a0 A370     		strb	r3, [r4, #2]
-ARM GAS  /tmp/ccIJtQZY.s 			page 32
+ 943              		.loc 2 172 5 discriminator 9 view .LVU257
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 944              		.loc 2 172 5 discriminator 9 view .LVU258
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 945              		.loc 2 172 5 discriminator 9 view .LVU259
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 946              		.loc 2 172 5 discriminator 9 view .LVU260
+ 947 03a8 AC23     		movs	r3, #172
+ 948 03aa 2380     		strh	r3, [r4]	@ movhi
+ 949              	.L38:
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 950              		.loc 2 172 5 discriminator 1 view .LVU261
+ARM GAS  /tmp/ccyXqcsa.s 			page 26
 
 
- 1271 05a2 36E7     		b	.L82
- 1272              	.L116:
- 195:src/m4_timer_uart_app.c **** 			}
- 1273              		.loc 2 195 5 view .LVU349
- 195:src/m4_timer_uart_app.c **** 			}
- 1274              		.loc 2 195 57 is_stmt 0 view .LVU350
- 1275 05a4 234B     		ldr	r3, .L125
- 1276 05a6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1277 05a8 303B     		subs	r3, r3, #48
- 195:src/m4_timer_uart_app.c **** 			}
- 1278              		.loc 2 195 41 view .LVU351
- 1279 05aa C3EB4312 		rsb	r2, r3, r3, lsl #5
- 1280 05ae 03EB8203 		add	r3, r3, r2, lsl #2
- 1281 05b2 2749     		ldr	r1, .L125+28
- 1282 05b4 0A88     		ldrh	r2, [r1]
- 1283 05b6 02EBC303 		add	r3, r2, r3, lsl #3
- 195:src/m4_timer_uart_app.c **** 			}
- 1284              		.loc 2 195 22 view .LVU352
- 1285 05ba 0B80     		strh	r3, [r1]	@ movhi
- 1286 05bc 98E7     		b	.L86
- 1287              	.L117:
- 201:src/m4_timer_uart_app.c **** 			}
- 1288              		.loc 2 201 5 is_stmt 1 view .LVU353
- 201:src/m4_timer_uart_app.c **** 			}
- 1289              		.loc 2 201 57 is_stmt 0 view .LVU354
- 1290 05be 1D4B     		ldr	r3, .L125
- 1291 05c0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1292 05c2 303B     		subs	r3, r3, #48
- 201:src/m4_timer_uart_app.c **** 			}
- 1293              		.loc 2 201 41 view .LVU355
- 1294 05c4 03EB8303 		add	r3, r3, r3, lsl #2
- 1295 05c8 03EB8303 		add	r3, r3, r3, lsl #2
- 1296 05cc 2049     		ldr	r1, .L125+28
- 1297 05ce 0A88     		ldrh	r2, [r1]
- 1298 05d0 02EB8303 		add	r3, r2, r3, lsl #2
- 201:src/m4_timer_uart_app.c **** 			}
- 1299              		.loc 2 201 22 view .LVU356
- 1300 05d4 0B80     		strh	r3, [r1]	@ movhi
- 1301 05d6 8BE7     		b	.L86
- 1302              	.L118:
- 208:src/m4_timer_uart_app.c **** 			}
- 1303              		.loc 2 208 5 is_stmt 1 view .LVU357
- 208:src/m4_timer_uart_app.c **** 			}
- 1304              		.loc 2 208 57 is_stmt 0 view .LVU358
- 1305 05d8 164B     		ldr	r3, .L125
- 1306 05da 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1307 05dc 303B     		subs	r3, r3, #48
- 208:src/m4_timer_uart_app.c **** 			}
- 1308              		.loc 2 208 41 view .LVU359
- 1309 05de 03EB8303 		add	r3, r3, r3, lsl #2
- 1310 05e2 1B49     		ldr	r1, .L125+28
- 1311 05e4 0A88     		ldrh	r2, [r1]
- 1312 05e6 02EB4303 		add	r3, r2, r3, lsl #1
- 208:src/m4_timer_uart_app.c **** 			}
- 1313              		.loc 2 208 22 view .LVU360
- 1314 05ea 0B80     		strh	r3, [r1]	@ movhi
- 1315 05ec 80E7     		b	.L86
-ARM GAS  /tmp/ccIJtQZY.s 			page 33
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 951              		.loc 2 172 5 discriminator 1 view .LVU262
+ 952 03ac A578     		ldrb	r5, [r4, #2]	@ zero_extendqisi2
+ 953 03ae 15F00405 		ands	r5, r5, #4
+ 954 03b2 69D1     		bne	.L110
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 955              		.loc 2 172 5 discriminator 3 view .LVU263
+ 956 03b4 674B     		ldr	r3, .L116
+ 957 03b6 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 958 03b8 6848     		ldr	r0, .L116+8
+ 959 03ba FFF7FEFF 		bl	__esos_OutUint8AsDecString
+ 960              	.LVL27:
+ 961 03be 0228     		cmp	r0, #2
+ 962 03c0 66D9     		bls	.L81
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 963              		.loc 2 172 5 discriminator 4 view .LVU264
+ 964 03c2 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 965 03c4 23F00103 		bic	r3, r3, #1
+ 966 03c8 A370     		strb	r3, [r4, #2]
+ 967              	.L82:
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 968              		.loc 2 172 5 discriminator 7 view .LVU265
+ 969 03ca A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 970 03cc 13F0010F 		tst	r3, #1
+ 971 03d0 40F0BD80 		bne	.L48
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 972              		.loc 2 172 5 discriminator 9 view .LVU266
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 973              		.loc 2 172 5 discriminator 9 view .LVU267
+ 173:src/m4_timer_uart_app.c **** 			}
+ 974              		.loc 2 173 5 discriminator 9 view .LVU268
+ 975 03d4 604A     		ldr	r2, .L116+4
+ 976 03d6 1368     		ldr	r3, [r2]
+ 977 03d8 23F00403 		bic	r3, r3, #4
+ 978 03dc 1360     		str	r3, [r2]
+ 979              	.L73:
+ 176:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
+ 980              		.loc 2 176 4 view .LVU269
+ 176:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
+ 981              		.loc 2 176 16 is_stmt 0 view .LVU270
+ 982 03de 604B     		ldr	r3, .L116+12
+ 983 03e0 0122     		movs	r2, #1
+ 984 03e2 1A70     		strb	r2, [r3]
+ 177:src/m4_timer_uart_app.c **** 		}
+ 985              		.loc 2 177 4 is_stmt 1 view .LVU271
+ 177:src/m4_timer_uart_app.c **** 		}
+ 986              		.loc 2 177 19 is_stmt 0 view .LVU272
+ 987 03e4 5F4B     		ldr	r3, .L116+16
+ 988 03e6 0022     		movs	r2, #0
+ 989 03e8 1A70     		strb	r2, [r3]
+ 990              	.L59:
+ 192:src/m4_timer_uart_app.c **** 		{	
+ 991              		.loc 2 192 3 is_stmt 1 view .LVU273
+ 192:src/m4_timer_uart_app.c **** 		{	
+ 992              		.loc 2 192 6 is_stmt 0 view .LVU274
+ 993 03ea 5F4B     		ldr	r3, .L116+20
+ 994 03ec 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  /tmp/ccyXqcsa.s 			page 27
 
 
- 1316              	.L119:
- 216:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u16_changePeriod );
- 1317              		.loc 2 216 5 is_stmt 1 discriminator 2 view .LVU361
- 1318 05ee 0423     		movs	r3, #4
- 1319 05f0 A370     		strb	r3, [r4, #2]
- 216:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u16_changePeriod );
- 1320              		.loc 2 216 5 discriminator 2 view .LVU362
- 1321 05f2 0325     		movs	r5, #3
- 1322 05f4 39E0     		b	.L49
- 1323              	.L90:
- 216:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u16_changePeriod );
- 1324              		.loc 2 216 5 discriminator 5 view .LVU363
- 1325 05f6 43F00103 		orr	r3, r3, #1
- 1326 05fa A370     		strb	r3, [r4, #2]
- 1327 05fc 44E7     		b	.L91
- 1328              	.L120:
- 217:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1329              		.loc 2 217 5 discriminator 2 view .LVU364
- 1330 05fe 0423     		movs	r3, #4
- 1331 0600 A370     		strb	r3, [r4, #2]
- 217:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1332              		.loc 2 217 5 discriminator 2 view .LVU365
- 1333 0602 0325     		movs	r5, #3
- 1334 0604 31E0     		b	.L49
- 1335              	.L93:
- 217:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1336              		.loc 2 217 5 discriminator 5 view .LVU366
- 1337 0606 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1338 0608 43F00103 		orr	r3, r3, #1
- 1339 060c A370     		strb	r3, [r4, #2]
- 1340 060e 5BE7     		b	.L94
- 1341              	.L121:
+ 192:src/m4_timer_uart_app.c **** 		{	
+ 995              		.loc 2 192 5 view .LVU275
+ 996 03ee ABB1     		cbz	r3, .L84
+ 192:src/m4_timer_uart_app.c **** 		{	
+ 997              		.loc 2 192 22 discriminator 1 view .LVU276
+ 998 03f0 5E4B     		ldr	r3, .L116+24
+ 999 03f2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 192:src/m4_timer_uart_app.c **** 		{	
+ 1000              		.loc 2 192 19 discriminator 1 view .LVU277
+ 1001 03f4 93B9     		cbnz	r3, .L84
+ 195:src/m4_timer_uart_app.c **** 			{
+ 1002              		.loc 2 195 4 is_stmt 1 view .LVU278
+ 195:src/m4_timer_uart_app.c **** 			{
+ 1003              		.loc 2 195 21 is_stmt 0 view .LVU279
+ 1004 03f6 5E4B     		ldr	r3, .L116+28
+ 1005 03f8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 195:src/m4_timer_uart_app.c **** 			{
+ 1006              		.loc 2 195 6 view .LVU280
+ 1007 03fa 002B     		cmp	r3, #0
+ 1008 03fc 58D1     		bne	.L85
+ 197:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 1000);
+ 1009              		.loc 2 197 5 is_stmt 1 view .LVU281
+ 1010 03fe 0133     		adds	r3, r3, #1
+ 1011 0400 5B4A     		ldr	r2, .L116+28
+ 1012 0402 1370     		strb	r3, [r2]
+ 198:src/m4_timer_uart_app.c **** 			}
+ 1013              		.loc 2 198 5 view .LVU282
+ 198:src/m4_timer_uart_app.c **** 			}
+ 1014              		.loc 2 198 57 is_stmt 0 view .LVU283
+ 1015 0404 534B     		ldr	r3, .L116
+ 1016 0406 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1017 0408 303B     		subs	r3, r3, #48
+ 198:src/m4_timer_uart_app.c **** 			}
+ 1018              		.loc 2 198 41 view .LVU284
+ 1019 040a C3EB4312 		rsb	r2, r3, r3, lsl #5
+ 1020 040e 03EB8203 		add	r3, r3, r2, lsl #2
+ 1021 0412 5849     		ldr	r1, .L116+32
+ 1022 0414 0A88     		ldrh	r2, [r1]
+ 1023 0416 02EBC303 		add	r3, r2, r3, lsl #3
+ 198:src/m4_timer_uart_app.c **** 			}
+ 1024              		.loc 2 198 22 view .LVU285
+ 1025 041a 0B80     		strh	r3, [r1]	@ movhi
+ 1026              	.L84:
+ 226:src/m4_timer_uart_app.c **** 
+ 1027              		.loc 2 226 3 is_stmt 1 view .LVU286
+ 226:src/m4_timer_uart_app.c **** 
+ 1028              		.loc 2 226 20 is_stmt 0 view .LVU287
+ 1029 041c 534B     		ldr	r3, .L116+24
+ 1030 041e 0022     		movs	r2, #0
+ 1031 0420 1A70     		strb	r2, [r3]
+ 228:src/m4_timer_uart_app.c **** 		{
+ 1032              		.loc 2 228 3 is_stmt 1 view .LVU288
+ 228:src/m4_timer_uart_app.c **** 		{
+ 1033              		.loc 2 228 6 is_stmt 0 view .LVU289
+ 1034 0422 4F4B     		ldr	r3, .L116+12
+ 1035 0424 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 228:src/m4_timer_uart_app.c **** 		{
+ARM GAS  /tmp/ccyXqcsa.s 			page 28
+
+
+ 1036              		.loc 2 228 5 view .LVU290
+ 1037 0426 002B     		cmp	r3, #0
+ 1038 0428 40F08880 		bne	.L88
  230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
- 1342              		.loc 2 230 4 discriminator 2 view .LVU367
- 1343 0610 0423     		movs	r3, #4
- 1344 0612 A370     		strb	r3, [r4, #2]
+ 1039              		.loc 2 230 4 is_stmt 1 view .LVU291
  230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
- 1345              		.loc 2 230 4 discriminator 2 view .LVU368
- 1346 0614 0325     		movs	r5, #3
- 1347 0616 28E0     		b	.L49
- 1348              	.L97:
+ 1040              		.loc 2 230 4 view .LVU292
+ 1041 042c E623     		movs	r3, #230
+ 1042 042e 2380     		strh	r3, [r4]	@ movhi
+ 1043              	.L45:
  230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
- 1349              		.loc 2 230 4 discriminator 5 view .LVU369
- 1350 0618 43F00103 		orr	r3, r3, #1
- 1351 061c A370     		strb	r3, [r4, #2]
- 1352 061e 7EE7     		b	.L98
- 1353              	.L122:
+ 1044              		.loc 2 230 4 discriminator 1 view .LVU293
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1045              		.loc 2 230 4 discriminator 1 view .LVU294
+ 1046 0430 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1047 0432 13F00405 		ands	r5, r3, #4
+ 1048 0436 70D1     		bne	.L111
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1049              		.loc 2 230 4 discriminator 3 view .LVU295
+ 1050 0438 474A     		ldr	r2, .L116+4
+ 1051 043a 1268     		ldr	r2, [r2]
+ 1052 043c 12F0040F 		tst	r2, #4
+ 1053 0440 6FD1     		bne	.L90
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1054              		.loc 2 230 4 discriminator 4 view .LVU296
+ 1055 0442 23F00103 		bic	r3, r3, #1
+ 1056 0446 A370     		strb	r3, [r4, #2]
+ 1057              	.L91:
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1058              		.loc 2 230 4 discriminator 7 view .LVU297
+ 1059 0448 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1060 044a 13F0010F 		tst	r3, #1
+ 1061 044e 7ED1     		bne	.L48
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1062              		.loc 2 230 4 discriminator 9 view .LVU298
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1063              		.loc 2 230 4 discriminator 9 view .LVU299
+ 1064 0450 414A     		ldr	r2, .L116+4
+ 1065 0452 1368     		ldr	r3, [r2]
+ 1066 0454 43F00403 		orr	r3, r3, #4
+ 1067 0458 1360     		str	r3, [r2]
  231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1354              		.loc 2 231 4 discriminator 2 view .LVU370
- 1355 0620 0423     		movs	r3, #4
- 1356 0622 A370     		strb	r3, [r4, #2]
+ 1068              		.loc 2 231 4 discriminator 9 view .LVU300
  231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
- 1357              		.loc 2 231 4 discriminator 2 view .LVU371
- 1358 0624 0325     		movs	r5, #3
- 1359 0626 20E0     		b	.L49
- 1360              	.L100:
+ 1069              		.loc 2 231 4 discriminator 9 view .LVU301
+ 1070 045a 404B     		ldr	r3, .L116+8
+ 1071 045c 0022     		movs	r2, #0
+ 1072 045e 1A80     		strh	r2, [r3]	@ movhi
  231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
-ARM GAS  /tmp/ccIJtQZY.s 			page 34
+ 1073              		.loc 2 231 4 discriminator 9 view .LVU302
+ 231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1074              		.loc 2 231 4 discriminator 9 view .LVU303
+ 231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1075              		.loc 2 231 4 discriminator 9 view .LVU304
+ 231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1076              		.loc 2 231 4 discriminator 9 view .LVU305
+ 1077 0460 E723     		movs	r3, #231
+ARM GAS  /tmp/ccyXqcsa.s 			page 29
 
 
- 1361              		.loc 2 231 4 discriminator 5 view .LVU372
- 1362 0628 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
- 1363 062a 43F00103 		orr	r3, r3, #1
- 1364 062e A370     		strb	r3, [r4, #2]
- 1365 0630 93E7     		b	.L101
- 1366              	.L126:
- 1367 0632 00BF     		.align	2
- 1368              	.L125:
- 1369 0634 00000000 		.word	.LANCHOR1
- 1370 0638 00000000 		.word	__esos_u32SystemFlags
- 1371 063c 00000000 		.word	__stChildTaskTx
- 1372 0640 00000000 		.word	.LANCHOR8
- 1373 0644 00000000 		.word	.LANCHOR5
- 1374 0648 00000000 		.word	.LANCHOR9
- 1375 064c 00000000 		.word	.LANCHOR11
- 1376 0650 00000000 		.word	.LANCHOR10
- 1377 0654 00000000 		.word	.LANCHOR0
- 1378              	.L95:
+ 1078 0462 2380     		strh	r3, [r4]	@ movhi
+ 1079 0464 62E6     		b	.L46
+ 1080              	.L108:
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 1081              		.loc 2 170 5 discriminator 2 view .LVU306
+ 1082 0466 0423     		movs	r3, #4
+ 1083 0468 A370     		strb	r3, [r4, #2]
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 1084              		.loc 2 170 5 discriminator 2 view .LVU307
+ 1085 046a 0325     		movs	r5, #3
+ 1086 046c 6FE0     		b	.L48
+ 1087              	.L75:
+ 170:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8( 'L' );
+ 1088              		.loc 2 170 5 discriminator 5 view .LVU308
+ 1089 046e 43F00103 		orr	r3, r3, #1
+ 1090 0472 A370     		strb	r3, [r4, #2]
+ 1091 0474 73E7     		b	.L76
+ 1092              	.L109:
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 1093              		.loc 2 171 5 discriminator 2 view .LVU309
+ 1094 0476 0423     		movs	r3, #4
+ 1095 0478 A370     		strb	r3, [r4, #2]
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 1096              		.loc 2 171 5 discriminator 2 view .LVU310
+ 1097 047a 0325     		movs	r5, #3
+ 1098 047c 67E0     		b	.L48
+ 1099              	.L78:
+ 171:src/m4_timer_uart_app.c **** 				ESOS_TASK_WAIT_ON_SEND_UINT8_AS_DEC_STRING( u8_incoming );
+ 1100              		.loc 2 171 5 discriminator 5 view .LVU311
+ 1101 047e A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1102 0480 43F00103 		orr	r3, r3, #1
+ 1103 0484 A370     		strb	r3, [r4, #2]
+ 1104 0486 87E7     		b	.L79
+ 1105              	.L110:
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1106              		.loc 2 172 5 discriminator 2 view .LVU312
+ 1107 0488 0423     		movs	r3, #4
+ 1108 048a A370     		strb	r3, [r4, #2]
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1109              		.loc 2 172 5 discriminator 2 view .LVU313
+ 1110 048c 0325     		movs	r5, #3
+ 1111 048e 5EE0     		b	.L48
+ 1112              	.L81:
+ 172:src/m4_timer_uart_app.c **** 				ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1113              		.loc 2 172 5 discriminator 5 view .LVU314
+ 1114 0490 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1115 0492 43F00103 		orr	r3, r3, #1
+ 1116 0496 A370     		strb	r3, [r4, #2]
+ 1117 0498 97E7     		b	.L82
+ 1118              	.L102:
+ 183:src/m4_timer_uart_app.c **** 			b_changeFlagSkip = TRUE;
+ 1119              		.loc 2 183 4 view .LVU315
+ 183:src/m4_timer_uart_app.c **** 			b_changeFlagSkip = TRUE;
+ 1120              		.loc 2 183 17 is_stmt 0 view .LVU316
+ 1121 049a 0123     		movs	r3, #1
+ 1122 049c 324A     		ldr	r2, .L116+20
+ 1123 049e 1370     		strb	r3, [r2]
+ARM GAS  /tmp/ccyXqcsa.s 			page 30
+
+
+ 184:src/m4_timer_uart_app.c **** 			u16_changePeriod = 0;
+ 1124              		.loc 2 184 4 is_stmt 1 view .LVU317
+ 184:src/m4_timer_uart_app.c **** 			u16_changePeriod = 0;
+ 1125              		.loc 2 184 21 is_stmt 0 view .LVU318
+ 1126 04a0 324A     		ldr	r2, .L116+24
+ 1127 04a2 1370     		strb	r3, [r2]
+ 185:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
+ 1128              		.loc 2 185 4 is_stmt 1 view .LVU319
+ 185:src/m4_timer_uart_app.c **** 			u8_exclamCount = 0;
+ 1129              		.loc 2 185 21 is_stmt 0 view .LVU320
+ 1130 04a4 0023     		movs	r3, #0
+ 1131 04a6 334A     		ldr	r2, .L116+32
+ 1132 04a8 1380     		strh	r3, [r2]	@ movhi
+ 186:src/m4_timer_uart_app.c **** 		}
+ 1133              		.loc 2 186 4 is_stmt 1 view .LVU321
+ 186:src/m4_timer_uart_app.c **** 		}
+ 1134              		.loc 2 186 19 is_stmt 0 view .LVU322
+ 1135 04aa 2E4A     		ldr	r2, .L116+16
+ 1136 04ac 1370     		strb	r3, [r2]
+ 1137 04ae 9CE7     		b	.L59
+ 1138              	.L85:
+ 202:src/m4_timer_uart_app.c **** 			{
+ 1139              		.loc 2 202 9 is_stmt 1 view .LVU323
+ 202:src/m4_timer_uart_app.c **** 			{
+ 1140              		.loc 2 202 11 is_stmt 0 view .LVU324
+ 1141 04b0 012B     		cmp	r3, #1
+ 1142 04b2 14D0     		beq	.L112
+ 209:src/m4_timer_uart_app.c **** 			{
+ 1143              		.loc 2 209 9 is_stmt 1 view .LVU325
+ 209:src/m4_timer_uart_app.c **** 			{
+ 1144              		.loc 2 209 11 is_stmt 0 view .LVU326
+ 1145 04b4 022B     		cmp	r3, #2
+ 1146 04b6 22D0     		beq	.L113
+ 216:src/m4_timer_uart_app.c **** 			{
+ 1147              		.loc 2 216 9 is_stmt 1 view .LVU327
+ 216:src/m4_timer_uart_app.c **** 			{
+ 1148              		.loc 2 216 11 is_stmt 0 view .LVU328
+ 1149 04b8 032B     		cmp	r3, #3
+ 1150 04ba AFD1     		bne	.L84
+ 218:src/m4_timer_uart_app.c **** 				u16_encode_periodHalf = u16_changePeriod / 2;
+ 1151              		.loc 2 218 5 is_stmt 1 view .LVU329
+ 218:src/m4_timer_uart_app.c **** 				u16_encode_periodHalf = u16_changePeriod / 2;
+ 1152              		.loc 2 218 41 is_stmt 0 view .LVU330
+ 1153 04bc 254B     		ldr	r3, .L116
+ 1154 04be 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1155 04c0 2C4A     		ldr	r2, .L116+32
+ 1156 04c2 1188     		ldrh	r1, [r2]
+ 1157 04c4 0B44     		add	r3, r3, r1
+ 1158 04c6 303B     		subs	r3, r3, #48
+ 1159 04c8 9BB2     		uxth	r3, r3
+ 218:src/m4_timer_uart_app.c **** 				u16_encode_periodHalf = u16_changePeriod / 2;
+ 1160              		.loc 2 218 22 view .LVU331
+ 1161 04ca 1380     		strh	r3, [r2]	@ movhi
+ 219:src/m4_timer_uart_app.c **** 				
+ 1162              		.loc 2 219 5 is_stmt 1 view .LVU332
+ 219:src/m4_timer_uart_app.c **** 				
+ 1163              		.loc 2 219 27 is_stmt 0 view .LVU333
+ARM GAS  /tmp/ccyXqcsa.s 			page 31
+
+
+ 1164 04cc 5B08     		lsrs	r3, r3, #1
+ 1165 04ce 2A4A     		ldr	r2, .L116+36
+ 1166 04d0 1380     		strh	r3, [r2]	@ movhi
+ 221:src/m4_timer_uart_app.c **** 				u8_digitCount = 0;
+ 1167              		.loc 2 221 5 is_stmt 1 view .LVU334
+ 221:src/m4_timer_uart_app.c **** 				u8_digitCount = 0;
+ 1168              		.loc 2 221 18 is_stmt 0 view .LVU335
+ 1169 04d2 0023     		movs	r3, #0
+ 1170 04d4 244A     		ldr	r2, .L116+20
+ 1171 04d6 1370     		strb	r3, [r2]
+ 222:src/m4_timer_uart_app.c **** 			}
+ 1172              		.loc 2 222 5 is_stmt 1 view .LVU336
+ 222:src/m4_timer_uart_app.c **** 			}
+ 1173              		.loc 2 222 19 is_stmt 0 view .LVU337
+ 1174 04d8 254A     		ldr	r2, .L116+28
+ 1175 04da 1370     		strb	r3, [r2]
+ 1176 04dc 9EE7     		b	.L84
+ 1177              	.L112:
+ 204:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 100);
+ 1178              		.loc 2 204 5 is_stmt 1 view .LVU338
+ 1179 04de 0133     		adds	r3, r3, #1
+ 1180 04e0 234A     		ldr	r2, .L116+28
+ 1181 04e2 1370     		strb	r3, [r2]
+ 205:src/m4_timer_uart_app.c **** 			}
+ 1182              		.loc 2 205 5 view .LVU339
+ 205:src/m4_timer_uart_app.c **** 			}
+ 1183              		.loc 2 205 57 is_stmt 0 view .LVU340
+ 1184 04e4 1B4B     		ldr	r3, .L116
+ 1185 04e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1186 04e8 303B     		subs	r3, r3, #48
+ 205:src/m4_timer_uart_app.c **** 			}
+ 1187              		.loc 2 205 41 view .LVU341
+ 1188 04ea 03EB8303 		add	r3, r3, r3, lsl #2
+ 1189 04ee 03EB8303 		add	r3, r3, r3, lsl #2
+ 1190 04f2 2049     		ldr	r1, .L116+32
+ 1191 04f4 0A88     		ldrh	r2, [r1]
+ 1192 04f6 02EB8303 		add	r3, r2, r3, lsl #2
+ 205:src/m4_timer_uart_app.c **** 			}
+ 1193              		.loc 2 205 22 view .LVU342
+ 1194 04fa 0B80     		strh	r3, [r1]	@ movhi
+ 1195 04fc 8EE7     		b	.L84
+ 1196              	.L113:
+ 211:src/m4_timer_uart_app.c **** 				u16_changePeriod = u16_changePeriod + ((u8_incoming - '0') * 10);
+ 1197              		.loc 2 211 5 is_stmt 1 view .LVU343
+ 1198 04fe 0133     		adds	r3, r3, #1
+ 1199 0500 1B4A     		ldr	r2, .L116+28
+ 1200 0502 1370     		strb	r3, [r2]
+ 212:src/m4_timer_uart_app.c **** 			}
+ 1201              		.loc 2 212 5 view .LVU344
+ 212:src/m4_timer_uart_app.c **** 			}
+ 1202              		.loc 2 212 57 is_stmt 0 view .LVU345
+ 1203 0504 134B     		ldr	r3, .L116
+ 1204 0506 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1205 0508 303B     		subs	r3, r3, #48
+ 212:src/m4_timer_uart_app.c **** 			}
+ 1206              		.loc 2 212 41 view .LVU346
+ 1207 050a 03EB8303 		add	r3, r3, r3, lsl #2
+ARM GAS  /tmp/ccyXqcsa.s 			page 32
+
+
+ 1208 050e 1949     		ldr	r1, .L116+32
+ 1209 0510 0A88     		ldrh	r2, [r1]
+ 1210 0512 02EB4303 		add	r3, r2, r3, lsl #1
+ 212:src/m4_timer_uart_app.c **** 			}
+ 1211              		.loc 2 212 22 view .LVU347
+ 1212 0516 0B80     		strh	r3, [r1]	@ movhi
+ 1213 0518 80E7     		b	.L84
+ 1214              	.L111:
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1215              		.loc 2 230 4 is_stmt 1 discriminator 2 view .LVU348
+ 1216 051a 0423     		movs	r3, #4
+ 1217 051c A370     		strb	r3, [r4, #2]
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1218              		.loc 2 230 4 discriminator 2 view .LVU349
+ 1219 051e 0325     		movs	r5, #3
+ 1220 0520 15E0     		b	.L48
+ 1221              	.L90:
+ 230:src/m4_timer_uart_app.c **** 			ESOS_TASK_WAIT_ON_SEND_UINT8( u8_incoming );
+ 1222              		.loc 2 230 4 discriminator 5 view .LVU350
+ 1223 0522 43F00103 		orr	r3, r3, #1
+ 1224 0526 A370     		strb	r3, [r4, #2]
+ 1225 0528 8EE7     		b	.L91
+ 1226              	.L104:
+ 231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1227              		.loc 2 231 4 discriminator 2 view .LVU351
+ 1228 052a 0423     		movs	r3, #4
+ 1229 052c A370     		strb	r3, [r4, #2]
+ 231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1230              		.loc 2 231 4 discriminator 2 view .LVU352
+ 1231 052e 0325     		movs	r5, #3
+ 1232 0530 0DE0     		b	.L48
+ 1233              	.L93:
+ 231:src/m4_timer_uart_app.c **** 			ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
+ 1234              		.loc 2 231 4 discriminator 5 view .LVU353
+ 1235 0532 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 1236 0534 43F00103 		orr	r3, r3, #1
+ 1237 0538 A370     		strb	r3, [r4, #2]
+ 1238 053a 08E6     		b	.L94
+ 1239              	.L88:
  233:src/m4_timer_uart_app.c **** 		}
  234:src/m4_timer_uart_app.c **** 		
  235:src/m4_timer_uart_app.c **** 		else
  236:src/m4_timer_uart_app.c **** 		{
  237:src/m4_timer_uart_app.c **** 			b_skipPrint = FALSE;
- 1379              		.loc 2 237 4 view .LVU373
- 1380              		.loc 2 237 16 is_stmt 0 view .LVU374
- 1381 0658 054B     		ldr	r3, .L127
- 1382 065a 0022     		movs	r2, #0
- 1383 065c 1A70     		strb	r2, [r3]
- 1384 065e 7AE5     		b	.L36
- 1385              	.LVL27:
- 1386              	.L32:
+ 1240              		.loc 2 237 4 view .LVU354
+ 1241              		.loc 2 237 16 is_stmt 0 view .LVU355
+ 1242 053c 084B     		ldr	r3, .L116+12
+ 1243 053e 0022     		movs	r2, #0
+ 1244 0540 1A70     		strb	r2, [r3]
+ 1245 0542 CFE5     		b	.L36
+ 1246              	.LVL28:
+ 1247              	.L37:
  238:src/m4_timer_uart_app.c **** 		}
  239:src/m4_timer_uart_app.c **** 		
  240:src/m4_timer_uart_app.c **** 		} // endof while(TRUE)
  241:src/m4_timer_uart_app.c **** 	ESOS_TASK_END();
- 1387              		.loc 2 241 2 is_stmt 1 view .LVU375
- 1388              		.loc 2 241 2 view .LVU376
- 1389 0660 0823     		movs	r3, #8
- 1390 0662 A370     		strb	r3, [r4, #2]
- 1391              		.loc 2 241 2 view .LVU377
- 1392 0664 0023     		movs	r3, #0
- 1393 0666 2380     		strh	r3, [r4]	@ movhi
- 1394              		.loc 2 241 2 view .LVU378
- 1395              		.loc 2 241 2 view .LVU379
- 1396              		.loc 2 241 2 view .LVU380
- 1397 0668 0325     		movs	r5, #3
- 1398              	.LVL28:
- 1399              	.L49:
- 1400              		.loc 2 241 17 discriminator 1 view .LVU381
+ 1248              		.loc 2 241 2 is_stmt 1 view .LVU356
+ARM GAS  /tmp/ccyXqcsa.s 			page 33
+
+
+ 1249              		.loc 2 241 2 view .LVU357
+ 1250 0544 0823     		movs	r3, #8
+ 1251 0546 A370     		strb	r3, [r4, #2]
+ 1252              		.loc 2 241 2 view .LVU358
+ 1253 0548 0023     		movs	r3, #0
+ 1254 054a 2380     		strh	r3, [r4]	@ movhi
+ 1255              		.loc 2 241 2 view .LVU359
+ 1256              		.loc 2 241 2 view .LVU360
+ 1257              		.loc 2 241 2 view .LVU361
+ 1258 054c 0325     		movs	r5, #3
+ 1259              	.LVL29:
+ 1260              	.L48:
+ 1261              		.loc 2 241 17 discriminator 1 view .LVU362
  242:src/m4_timer_uart_app.c **** } // end usart_comms()
- 1401              		.loc 2 242 1 is_stmt 0 discriminator 1 view .LVU382
- 1402 066a 2846     		mov	r0, r5
- 1403 066c 70BD     		pop	{r4, r5, r6, pc}
- 1404              	.LVL29:
- 1405              	.L128:
- 1406              		.loc 2 242 1 discriminator 1 view .LVU383
- 1407 066e 00BF     		.align	2
-ARM GAS  /tmp/ccIJtQZY.s 			page 35
-
-
- 1408              	.L127:
- 1409 0670 00000000 		.word	.LANCHOR8
- 1410              		.cfi_endproc
- 1411              	.LFE11:
- 1413              		.section	.text.__user_init_hw,"ax",%progbits
- 1414              		.align	1
- 1415              		.global	__user_init_hw
- 1416              		.syntax unified
- 1417              		.thumb
- 1418              		.thumb_func
- 1420              	__user_init_hw:
- 1421              	.LFB12:
+ 1262              		.loc 2 242 1 is_stmt 0 discriminator 1 view .LVU363
+ 1263 054e 2846     		mov	r0, r5
+ 1264 0550 70BD     		pop	{r4, r5, r6, pc}
+ 1265              	.LVL30:
+ 1266              	.L117:
+ 1267              		.loc 2 242 1 discriminator 1 view .LVU364
+ 1268 0552 00BF     		.align	2
+ 1269              	.L116:
+ 1270 0554 00000000 		.word	.LANCHOR1
+ 1271 0558 00000000 		.word	__esos_u32SystemFlags
+ 1272 055c 00000000 		.word	__stChildTaskTx
+ 1273 0560 00000000 		.word	.LANCHOR8
+ 1274 0564 00000000 		.word	.LANCHOR5
+ 1275 0568 00000000 		.word	.LANCHOR9
+ 1276 056c 00000000 		.word	.LANCHOR10
+ 1277 0570 00000000 		.word	.LANCHOR12
+ 1278 0574 00000000 		.word	.LANCHOR11
+ 1279 0578 00000000 		.word	.LANCHOR0
+ 1280              		.cfi_endproc
+ 1281              	.LFE11:
+ 1283              		.section	.text.__user_init_hw,"ax",%progbits
+ 1284              		.align	1
+ 1285              		.global	__user_init_hw
+ 1286              		.syntax unified
+ 1287              		.thumb
+ 1288              		.thumb_func
+ 1290              	__user_init_hw:
+ 1291              	.LFB12:
  243:src/m4_timer_uart_app.c **** 
  244:src/m4_timer_uart_app.c **** /************************************************************************
  245:src/m4_timer_uart_app.c ****  * User supplied functions
  246:src/m4_timer_uart_app.c ****  ************************************************************************
  247:src/m4_timer_uart_app.c ****  */
  248:src/m4_timer_uart_app.c **** void __user_init_hw(void) {
- 1422              		.loc 2 248 27 is_stmt 1 view -0
- 1423              		.cfi_startproc
- 1424              		@ args = 0, pretend = 0, frame = 0
- 1425              		@ frame_needed = 0, uses_anonymous_args = 0
- 1426 0000 08B5     		push	{r3, lr}
- 1427              	.LCFI5:
- 1428              		.cfi_def_cfa_offset 8
- 1429              		.cfi_offset 3, -8
- 1430              		.cfi_offset 14, -4
+ 1292              		.loc 2 248 27 is_stmt 1 view -0
+ 1293              		.cfi_startproc
+ 1294              		@ args = 0, pretend = 0, frame = 0
+ 1295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1296 0000 08B5     		push	{r3, lr}
+ 1297              	.LCFI5:
+ 1298              		.cfi_def_cfa_offset 8
+ 1299              		.cfi_offset 3, -8
+ 1300              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccyXqcsa.s 			page 34
+
+
  249:src/m4_timer_uart_app.c ****   /* GPIO Ports Clock Enable */
  250:src/m4_timer_uart_app.c ****   rcc_periph_clock_enable(GPIOA);
- 1431              		.loc 2 250 3 view .LVU385
- 1432 0002 0020     		movs	r0, #0
- 1433 0004 FFF7FEFF 		bl	rcc_periph_clock_enable
- 1434              	.LVL30:
+ 1301              		.loc 2 250 3 view .LVU366
+ 1302 0002 0020     		movs	r0, #0
+ 1303 0004 FFF7FEFF 		bl	rcc_periph_clock_enable
+ 1304              	.LVL31:
  251:src/m4_timer_uart_app.c ****   rcc_periph_clock_enable(GPIOC);
- 1435              		.loc 2 251 3 view .LVU386
- 1436 0008 4FF40060 		mov	r0, #2048
- 1437 000c FFF7FEFF 		bl	rcc_periph_clock_enable
- 1438              	.LVL31:
+ 1305              		.loc 2 251 3 view .LVU367
+ 1306 0008 4FF40060 		mov	r0, #2048
+ 1307 000c FFF7FEFF 		bl	rcc_periph_clock_enable
+ 1308              	.LVL32:
  252:src/m4_timer_uart_app.c **** 
  253:src/m4_timer_uart_app.c ****   /*Configure GPIO pin : PC13 */
  254:src/m4_timer_uart_app.c ****   gpio_mode_setup(B1_Port, GPIO_MODE_INPUT, GPIO_PUPD_NONE, B1_Pin);
- 1439              		.loc 2 254 3 view .LVU387
- 1440 0010 4FF40053 		mov	r3, #8192
- 1441 0014 0022     		movs	r2, #0
- 1442 0016 1146     		mov	r1, r2
- 1443 0018 0548     		ldr	r0, .L131
- 1444 001a FFF7FEFF 		bl	gpio_mode_setup
- 1445              	.LVL32:
+ 1309              		.loc 2 254 3 view .LVU368
+ 1310 0010 4FF40053 		mov	r3, #8192
+ 1311 0014 0022     		movs	r2, #0
+ 1312 0016 1146     		mov	r1, r2
+ 1313 0018 0548     		ldr	r0, .L120
+ 1314 001a FFF7FEFF 		bl	gpio_mode_setup
+ 1315              	.LVL33:
  255:src/m4_timer_uart_app.c **** 
  256:src/m4_timer_uart_app.c ****   /*Configure GPIO pin : LED2_Pin */
  257:src/m4_timer_uart_app.c ****   gpio_mode_setup(LD2_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LD2_Pin);
- 1446              		.loc 2 257 3 view .LVU388
- 1447 001e 2023     		movs	r3, #32
- 1448 0020 0022     		movs	r2, #0
- 1449 0022 0121     		movs	r1, #1
- 1450 0024 4FF09040 		mov	r0, #1207959552
- 1451 0028 FFF7FEFF 		bl	gpio_mode_setup
-ARM GAS  /tmp/ccIJtQZY.s 			page 36
-
-
- 1452              	.LVL33:
+ 1316              		.loc 2 257 3 view .LVU369
+ 1317 001e 2023     		movs	r3, #32
+ 1318 0020 0022     		movs	r2, #0
+ 1319 0022 0121     		movs	r1, #1
+ 1320 0024 4FF09040 		mov	r0, #1207959552
+ 1321 0028 FFF7FEFF 		bl	gpio_mode_setup
+ 1322              	.LVL34:
  258:src/m4_timer_uart_app.c **** 
  259:src/m4_timer_uart_app.c **** }
- 1453              		.loc 2 259 1 is_stmt 0 view .LVU389
- 1454 002c 08BD     		pop	{r3, pc}
- 1455              	.L132:
- 1456 002e 00BF     		.align	2
- 1457              	.L131:
- 1458 0030 00080048 		.word	1207961600
- 1459              		.cfi_endproc
- 1460              	.LFE12:
- 1462              		.section	.rodata.user_init.str1.4,"aMS",%progbits,1
- 1463              		.align	2
- 1464              	.LC0:
- 1465 0000 0A737263 		.ascii	"\012src/m4_timer_uart_app.c, built on Mar 22 2022 a"
- 1465      2F6D345F 
- 1465      74696D65 
- 1465      725F7561 
- 1465      72745F61 
- 1466 0030 74203231 		.ascii	"t 21:24:25\012\000"
- 1466      3A32343A 
- 1466      32350A00 
- 1467              		.section	.text.user_init,"ax",%progbits
- 1468              		.align	1
- 1469              		.global	user_init
- 1470              		.syntax unified
- 1471              		.thumb
- 1472              		.thumb_func
- 1474              	user_init:
- 1475              	.LFB13:
+ 1323              		.loc 2 259 1 is_stmt 0 view .LVU370
+ 1324 002c 08BD     		pop	{r3, pc}
+ 1325              	.L121:
+ 1326 002e 00BF     		.align	2
+ 1327              	.L120:
+ 1328 0030 00080048 		.word	1207961600
+ 1329              		.cfi_endproc
+ 1330              	.LFE12:
+ 1332              		.section	.rodata.user_init.str1.4,"aMS",%progbits,1
+ 1333              		.align	2
+ 1334              	.LC0:
+ 1335 0000 0A737263 		.ascii	"\012src/m4_timer_uart_app.c, built on Mar 23 2022 a"
+ 1335      2F6D345F 
+ 1335      74696D65 
+ 1335      725F7561 
+ 1335      72745F61 
+ 1336 0030 74203038 		.ascii	"t 08:24:34\012\000"
+ 1336      3A32343A 
+ 1336      33340A00 
+ 1337              		.section	.text.user_init,"ax",%progbits
+ 1338              		.align	1
+ 1339              		.global	user_init
+ 1340              		.syntax unified
+ 1341              		.thumb
+ARM GAS  /tmp/ccyXqcsa.s 			page 35
+
+
+ 1342              		.thumb_func
+ 1344              	user_init:
+ 1345              	.LFB13:
  260:src/m4_timer_uart_app.c **** 
  261:src/m4_timer_uart_app.c **** 
  262:src/m4_timer_uart_app.c **** 
@@ -2158,9 +2071,6 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
  284:src/m4_timer_uart_app.c ****  *                  directly!!!  The ES_OS must be aware of the interrupts
  285:src/m4_timer_uart_app.c ****  *                  and provides osXXXXXXX functions for the user to use.
  286:src/m4_timer_uart_app.c ****  *                  Using these ES_OS-provided functions, the user may
-ARM GAS  /tmp/ccIJtQZY.s 			page 37
-
-
  287:src/m4_timer_uart_app.c ****  *                  (and probably should) initialize, register, and enable
  288:src/m4_timer_uart_app.c ****  *                  interrupts in this routine.
  289:src/m4_timer_uart_app.c ****  *
@@ -2171,30 +2081,33 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
  294:src/m4_timer_uart_app.c ****  *
  295:src/m4_timer_uart_app.c ****  *****************************************************************************/
  296:src/m4_timer_uart_app.c **** void user_init(void) {
- 1476              		.loc 2 296 22 is_stmt 1 view -0
- 1477              		.cfi_startproc
- 1478              		@ args = 0, pretend = 0, frame = 0
- 1479              		@ frame_needed = 0, uses_anonymous_args = 0
- 1480 0000 08B5     		push	{r3, lr}
- 1481              	.LCFI6:
- 1482              		.cfi_def_cfa_offset 8
- 1483              		.cfi_offset 3, -8
- 1484              		.cfi_offset 14, -4
+ 1346              		.loc 2 296 22 is_stmt 1 view -0
+ 1347              		.cfi_startproc
+ 1348              		@ args = 0, pretend = 0, frame = 0
+ 1349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1350 0000 08B5     		push	{r3, lr}
+ 1351              	.LCFI6:
+ 1352              		.cfi_def_cfa_offset 8
+ 1353              		.cfi_offset 3, -8
+ 1354              		.cfi_offset 14, -4
  297:src/m4_timer_uart_app.c **** 
  298:src/m4_timer_uart_app.c ****   // setup our software structures here
  299:src/m4_timer_uart_app.c ****   
  300:src/m4_timer_uart_app.c ****   // call our function to setup the hardware we like it.
  301:src/m4_timer_uart_app.c ****   __user_init_hw();
- 1485              		.loc 2 301 3 view .LVU391
- 1486 0002 FFF7FEFF 		bl	__user_init_hw
- 1487              	.LVL34:
+ 1355              		.loc 2 301 3 view .LVU372
+ 1356 0002 FFF7FEFF 		bl	__user_init_hw
+ 1357              	.LVL35:
+ARM GAS  /tmp/ccyXqcsa.s 			page 36
+
+
  302:src/m4_timer_uart_app.c **** 
  303:src/m4_timer_uart_app.c ****   // Drive the UART directly.....  to print the HELLO_MSG
  304:src/m4_timer_uart_app.c ****   __esos_unsafe_PutString( HELLO_MSG );
- 1488              		.loc 2 304 3 view .LVU392
- 1489 0006 0548     		ldr	r0, .L135
- 1490 0008 FFF7FEFF 		bl	__esos_unsafe_PutString
- 1491              	.LVL35:
+ 1358              		.loc 2 304 3 view .LVU373
+ 1359 0006 0548     		ldr	r0, .L124
+ 1360 0008 FFF7FEFF 		bl	__esos_unsafe_PutString
+ 1361              	.LVL36:
  305:src/m4_timer_uart_app.c **** 
  306:src/m4_timer_uart_app.c ****   /*
  307:src/m4_timer_uart_app.c ****    * Now, let's get down and dirty with ESOS and our user tasks
@@ -2203,172 +2116,173 @@ ARM GAS  /tmp/ccIJtQZY.s 			page 1
  310:src/m4_timer_uart_app.c ****    *   the ESOS scheduler.
  311:src/m4_timer_uart_app.c ****    */
  312:src/m4_timer_uart_app.c ****   esos_RegisterTask( flash_LED );
- 1492              		.loc 2 312 3 view .LVU393
- 1493 000c 0448     		ldr	r0, .L135+4
- 1494 000e FFF7FEFF 		bl	esos_RegisterTask
- 1495              	.LVL36:
+ 1362              		.loc 2 312 3 view .LVU374
+ 1363 000c 0448     		ldr	r0, .L124+4
+ 1364 000e FFF7FEFF 		bl	esos_RegisterTask
+ 1365              	.LVL37:
  313:src/m4_timer_uart_app.c ****   esos_RegisterTask( usart_comms );
- 1496              		.loc 2 313 3 view .LVU394
- 1497 0012 0448     		ldr	r0, .L135+8
- 1498 0014 FFF7FEFF 		bl	esos_RegisterTask
- 1499              	.LVL37:
+ 1366              		.loc 2 313 3 view .LVU375
+ 1367 0012 0448     		ldr	r0, .L124+8
+ 1368 0014 FFF7FEFF 		bl	esos_RegisterTask
+ 1369              	.LVL38:
  314:src/m4_timer_uart_app.c **** 
  315:src/m4_timer_uart_app.c **** } // end user_init()
- 1500              		.loc 2 315 1 is_stmt 0 view .LVU395
- 1501 0018 08BD     		pop	{r3, pc}
- 1502              	.L136:
- 1503 001a 00BF     		.align	2
-ARM GAS  /tmp/ccIJtQZY.s 			page 38
+ 1370              		.loc 2 315 1 is_stmt 0 view .LVU376
+ 1371 0018 08BD     		pop	{r3, pc}
+ 1372              	.L125:
+ 1373 001a 00BF     		.align	2
+ 1374              	.L124:
+ 1375 001c 00000000 		.word	.LC0
+ 1376 0020 00000000 		.word	flash_LED
+ 1377 0024 00000000 		.word	usart_comms
+ 1378              		.cfi_endproc
+ 1379              	.LFE13:
+ 1381              		.section	.bss.ac_charArr.6,"aw",%nobits
+ 1382              		.align	2
+ 1383              		.set	.LANCHOR6,. + 0
+ 1386              	ac_charArr.6:
+ 1387 0000 00000000 		.space	10
+ 1387      00000000 
+ 1387      0000
+ 1388              		.section	.bss.b_changeFlag.3,"aw",%nobits
+ 1389              		.set	.LANCHOR9,. + 0
+ 1392              	b_changeFlag.3:
+ 1393 0000 00       		.space	1
+ 1394              		.section	.bss.b_changeFlagSkip.2,"aw",%nobits
+ 1395              		.set	.LANCHOR10,. + 0
+ 1398              	b_changeFlagSkip.2:
+ 1399 0000 00       		.space	1
+ 1400              		.section	.bss.b_skipPrint.4,"aw",%nobits
+ 1401              		.set	.LANCHOR8,. + 0
+ 1404              	b_skipPrint.4:
+ 1405 0000 00       		.space	1
+ 1406              		.section	.bss.u16_changePeriod.1,"aw",%nobits
+ 1407              		.align	1
+ARM GAS  /tmp/ccyXqcsa.s 			page 37
 
 
- 1504              	.L135:
- 1505 001c 00000000 		.word	.LC0
- 1506 0020 00000000 		.word	flash_LED
- 1507 0024 00000000 		.word	usart_comms
- 1508              		.cfi_endproc
- 1509              	.LFE13:
- 1511              		.section	.bss.ac_charArr.5,"aw",%nobits
- 1512              		.align	2
- 1513              		.set	.LANCHOR6,. + 0
- 1516              	ac_charArr.5:
- 1517 0000 00000000 		.space	10
- 1517      00000000 
- 1517      0000
- 1518              		.section	.bss.b_changeFlag.2,"aw",%nobits
- 1519              		.set	.LANCHOR9,. + 0
- 1522              	b_changeFlag.2:
- 1523 0000 00       		.space	1
- 1524              		.section	.bss.b_skipPrint.3,"aw",%nobits
- 1525              		.set	.LANCHOR8,. + 0
- 1528              	b_skipPrint.3:
- 1529 0000 00       		.space	1
- 1530              		.section	.bss.u16_changePeriod.1,"aw",%nobits
- 1531              		.align	1
- 1532              		.set	.LANCHOR10,. + 0
- 1535              	u16_changePeriod.1:
- 1536 0000 0000     		.space	2
- 1537              		.section	.bss.u16_encode_periodHalf,"aw",%nobits
- 1538              		.align	1
- 1539              		.set	.LANCHOR0,. + 0
- 1542              	u16_encode_periodHalf:
- 1543 0000 0000     		.space	2
- 1544              		.section	.bss.u8_charCount.4,"aw",%nobits
- 1545              		.set	.LANCHOR7,. + 0
- 1548              	u8_charCount.4:
- 1549 0000 00       		.space	1
- 1550              		.section	.bss.u8_countDecode.8,"aw",%nobits
- 1551              		.set	.LANCHOR3,. + 0
- 1554              	u8_countDecode.8:
- 1555 0000 00       		.space	1
- 1556              		.section	.bss.u8_countEncode.9,"aw",%nobits
- 1557              		.set	.LANCHOR2,. + 0
- 1560              	u8_countEncode.9:
- 1561 0000 00       		.space	1
- 1562              		.section	.bss.u8_digitCount.0,"aw",%nobits
- 1563              		.set	.LANCHOR11,. + 0
- 1566              	u8_digitCount.0:
- 1567 0000 00       		.space	1
- 1568              		.section	.bss.u8_exclamCount.6,"aw",%nobits
- 1569              		.set	.LANCHOR5,. + 0
- 1572              	u8_exclamCount.6:
- 1573 0000 00       		.space	1
- 1574              		.section	.bss.u8_incoming.10,"aw",%nobits
- 1575              		.set	.LANCHOR1,. + 0
- 1578              	u8_incoming.10:
- 1579 0000 00       		.space	1
- 1580              		.section	.rodata.au8_key.7,"a"
- 1581              		.align	2
-ARM GAS  /tmp/ccIJtQZY.s 			page 39
-
-
- 1582              		.set	.LANCHOR4,. + 0
- 1585              	au8_key.7:
- 1586 0000 54454E4E 		.ascii	"TENNESSEETECH"
- 1586      45535345 
- 1586      45544543 
- 1586      48
- 1587              		.text
- 1588              	.Letext0:
- 1589              		.file 3 "/home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_defa
- 1590              		.file 4 "/home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h
- 1591              		.file 5 "/home/callie/esos32/include/lc-switch.h"
- 1592              		.file 6 "/home/callie/esos32/include/esos_cb.h"
- 1593              		.file 7 "/home/callie/esos32/include/esos_mail.h"
- 1594              		.file 8 "/home/callie/esos32/include/esos_task.h"
- 1595              		.file 9 "/home/callie/esos32/include/esos_comm.h"
- 1596              		.file 10 "/home/callie/esos32/include/esos.h"
- 1597              		.file 11 "/home/callie/libopencm3/include/libopencm3/stm32/common/rcc_common_all.h"
- 1598              		.file 12 "/home/callie/libopencm3/include/libopencm3/stm32/common/gpio_common_f234.h"
- 1599              		.file 13 "/home/callie/Downloads/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdlib.h"
- 1600              		.file 14 "/home/callie/libopencm3/include/libopencm3/stm32/common/gpio_common_all.h"
- 1601              		.file 15 "/home/callie/esos32/include/all_generic.h"
-ARM GAS  /tmp/ccIJtQZY.s 			page 40
+ 1408              		.set	.LANCHOR11,. + 0
+ 1411              	u16_changePeriod.1:
+ 1412 0000 0000     		.space	2
+ 1413              		.section	.bss.u8_charCount.5,"aw",%nobits
+ 1414              		.set	.LANCHOR7,. + 0
+ 1417              	u8_charCount.5:
+ 1418 0000 00       		.space	1
+ 1419              		.section	.bss.u8_countDecode.9,"aw",%nobits
+ 1420              		.set	.LANCHOR3,. + 0
+ 1423              	u8_countDecode.9:
+ 1424 0000 00       		.space	1
+ 1425              		.section	.bss.u8_countEncode.10,"aw",%nobits
+ 1426              		.set	.LANCHOR2,. + 0
+ 1429              	u8_countEncode.10:
+ 1430 0000 00       		.space	1
+ 1431              		.section	.bss.u8_digitCount.0,"aw",%nobits
+ 1432              		.set	.LANCHOR12,. + 0
+ 1435              	u8_digitCount.0:
+ 1436 0000 00       		.space	1
+ 1437              		.section	.bss.u8_exclamCount.7,"aw",%nobits
+ 1438              		.set	.LANCHOR5,. + 0
+ 1441              	u8_exclamCount.7:
+ 1442 0000 00       		.space	1
+ 1443              		.section	.bss.u8_incoming.11,"aw",%nobits
+ 1444              		.set	.LANCHOR1,. + 0
+ 1447              	u8_incoming.11:
+ 1448 0000 00       		.space	1
+ 1449              		.section	.data.u16_encode_periodHalf,"aw"
+ 1450              		.align	1
+ 1451              		.set	.LANCHOR0,. + 0
+ 1454              	u16_encode_periodHalf:
+ 1455 0000 FA00     		.short	250
+ 1456              		.section	.rodata.au8_key.8,"a"
+ 1457              		.align	2
+ 1458              		.set	.LANCHOR4,. + 0
+ 1461              	au8_key.8:
+ 1462 0000 54454E4E 		.ascii	"TENNESSEETECH"
+ 1462      45535345 
+ 1462      45544543 
+ 1462      48
+ 1463              		.text
+ 1464              	.Letext0:
+ 1465              		.file 3 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 1466              		.file 4 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eabi
+ 1467              		.file 5 "/home/ryan/Documents/Github/esos32/include/lc-switch.h"
+ 1468              		.file 6 "/home/ryan/Documents/Github/esos32/include/esos_cb.h"
+ 1469              		.file 7 "/home/ryan/Documents/Github/esos32/include/esos_mail.h"
+ 1470              		.file 8 "/home/ryan/Documents/Github/esos32/include/esos_task.h"
+ 1471              		.file 9 "/home/ryan/Documents/Github/esos32/include/esos_comm.h"
+ 1472              		.file 10 "/home/ryan/Documents/Github/esos32/include/esos.h"
+ 1473              		.file 11 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 1474              		.file 12 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 1475              		.file 13 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/ARM/gcc-arm-none-eab
+ 1476              		.file 14 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
+ 1477              		.file 15 "/home/ryan/Documents/Github/esos32/include/all_generic.h"
+ARM GAS  /tmp/ccyXqcsa.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 m4_timer_uart_app.c
-     /tmp/ccIJtQZY.s:20     .text.TOGGLE_LD2:0000000000000000 $t
-     /tmp/ccIJtQZY.s:25     .text.TOGGLE_LD2:0000000000000000 TOGGLE_LD2
-     /tmp/ccIJtQZY.s:48     .text.IS_B1_RELEASED:0000000000000000 $t
-     /tmp/ccIJtQZY.s:53     .text.IS_B1_RELEASED:0000000000000000 IS_B1_RELEASED
-     /tmp/ccIJtQZY.s:84     .text.IS_B1_RELEASED:0000000000000018 $d
-     /tmp/ccIJtQZY.s:89     .text.flash_LED:0000000000000000 $t
-     /tmp/ccIJtQZY.s:95     .text.flash_LED:0000000000000000 flash_LED
-     /tmp/ccIJtQZY.s:257    .text.flash_LED:00000000000000c0 $d
-     /tmp/ccIJtQZY.s:262    .text.IS_B1_PRESSED:0000000000000000 $t
-     /tmp/ccIJtQZY.s:267    .text.IS_B1_PRESSED:0000000000000000 IS_B1_PRESSED
-     /tmp/ccIJtQZY.s:297    .text.usart_comms:0000000000000000 $t
-     /tmp/ccIJtQZY.s:303    .text.usart_comms:0000000000000000 usart_comms
-     /tmp/ccIJtQZY.s:345    .text.usart_comms:0000000000000024 $d
-     /tmp/ccIJtQZY.s:424    .text.usart_comms:00000000000000c2 $t
-     /tmp/ccIJtQZY.s:880    .text.usart_comms:0000000000000338 $d
-     /tmp/ccIJtQZY.s:897    .text.usart_comms:0000000000000370 $t
-     /tmp/ccIJtQZY.s:1369   .text.usart_comms:0000000000000634 $d
-     /tmp/ccIJtQZY.s:1381   .text.usart_comms:0000000000000658 $t
-     /tmp/ccIJtQZY.s:1409   .text.usart_comms:0000000000000670 $d
-     /tmp/ccIJtQZY.s:1414   .text.__user_init_hw:0000000000000000 $t
-     /tmp/ccIJtQZY.s:1420   .text.__user_init_hw:0000000000000000 __user_init_hw
-     /tmp/ccIJtQZY.s:1458   .text.__user_init_hw:0000000000000030 $d
-     /tmp/ccIJtQZY.s:1463   .rodata.user_init.str1.4:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1468   .text.user_init:0000000000000000 $t
-     /tmp/ccIJtQZY.s:1474   .text.user_init:0000000000000000 user_init
-     /tmp/ccIJtQZY.s:1505   .text.user_init:000000000000001c $d
-     /tmp/ccIJtQZY.s:1512   .bss.ac_charArr.5:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1516   .bss.ac_charArr.5:0000000000000000 ac_charArr.5
-     /tmp/ccIJtQZY.s:1522   .bss.b_changeFlag.2:0000000000000000 b_changeFlag.2
-     /tmp/ccIJtQZY.s:1523   .bss.b_changeFlag.2:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1528   .bss.b_skipPrint.3:0000000000000000 b_skipPrint.3
-     /tmp/ccIJtQZY.s:1529   .bss.b_skipPrint.3:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1531   .bss.u16_changePeriod.1:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1535   .bss.u16_changePeriod.1:0000000000000000 u16_changePeriod.1
-     /tmp/ccIJtQZY.s:1538   .bss.u16_encode_periodHalf:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1542   .bss.u16_encode_periodHalf:0000000000000000 u16_encode_periodHalf
-     /tmp/ccIJtQZY.s:1548   .bss.u8_charCount.4:0000000000000000 u8_charCount.4
-     /tmp/ccIJtQZY.s:1549   .bss.u8_charCount.4:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1554   .bss.u8_countDecode.8:0000000000000000 u8_countDecode.8
-     /tmp/ccIJtQZY.s:1555   .bss.u8_countDecode.8:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1560   .bss.u8_countEncode.9:0000000000000000 u8_countEncode.9
-     /tmp/ccIJtQZY.s:1561   .bss.u8_countEncode.9:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1566   .bss.u8_digitCount.0:0000000000000000 u8_digitCount.0
-     /tmp/ccIJtQZY.s:1567   .bss.u8_digitCount.0:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1572   .bss.u8_exclamCount.6:0000000000000000 u8_exclamCount.6
-     /tmp/ccIJtQZY.s:1573   .bss.u8_exclamCount.6:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1578   .bss.u8_incoming.10:0000000000000000 u8_incoming.10
-     /tmp/ccIJtQZY.s:1579   .bss.u8_incoming.10:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1581   .rodata.au8_key.7:0000000000000000 $d
-     /tmp/ccIJtQZY.s:1585   .rodata.au8_key.7:0000000000000000 au8_key.7
+     /tmp/ccyXqcsa.s:20     .text.TOGGLE_LD2:0000000000000000 $t
+     /tmp/ccyXqcsa.s:25     .text.TOGGLE_LD2:0000000000000000 TOGGLE_LD2
+     /tmp/ccyXqcsa.s:48     .text.IS_B1_RELEASED:0000000000000000 $t
+     /tmp/ccyXqcsa.s:53     .text.IS_B1_RELEASED:0000000000000000 IS_B1_RELEASED
+     /tmp/ccyXqcsa.s:84     .text.IS_B1_RELEASED:0000000000000018 $d
+     /tmp/ccyXqcsa.s:89     .text.flash_LED:0000000000000000 $t
+     /tmp/ccyXqcsa.s:95     .text.flash_LED:0000000000000000 flash_LED
+     /tmp/ccyXqcsa.s:252    .text.flash_LED:00000000000000bc $d
+     /tmp/ccyXqcsa.s:257    .text.IS_B1_PRESSED:0000000000000000 $t
+     /tmp/ccyXqcsa.s:262    .text.IS_B1_PRESSED:0000000000000000 IS_B1_PRESSED
+     /tmp/ccyXqcsa.s:292    .text.usart_comms:0000000000000000 $t
+     /tmp/ccyXqcsa.s:298    .text.usart_comms:0000000000000000 usart_comms
+     /tmp/ccyXqcsa.s:342    .text.usart_comms:0000000000000024 $d
+     /tmp/ccyXqcsa.s:362    .text.usart_comms:000000000000004c $t
+     /tmp/ccyXqcsa.s:849    .text.usart_comms:0000000000000300 $d
+     /tmp/ccyXqcsa.s:864    .text.usart_comms:0000000000000330 $t
+     /tmp/ccyXqcsa.s:1270   .text.usart_comms:0000000000000554 $d
+     /tmp/ccyXqcsa.s:1284   .text.__user_init_hw:0000000000000000 $t
+     /tmp/ccyXqcsa.s:1290   .text.__user_init_hw:0000000000000000 __user_init_hw
+     /tmp/ccyXqcsa.s:1328   .text.__user_init_hw:0000000000000030 $d
+     /tmp/ccyXqcsa.s:1333   .rodata.user_init.str1.4:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1338   .text.user_init:0000000000000000 $t
+     /tmp/ccyXqcsa.s:1344   .text.user_init:0000000000000000 user_init
+     /tmp/ccyXqcsa.s:1375   .text.user_init:000000000000001c $d
+     /tmp/ccyXqcsa.s:1382   .bss.ac_charArr.6:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1386   .bss.ac_charArr.6:0000000000000000 ac_charArr.6
+     /tmp/ccyXqcsa.s:1392   .bss.b_changeFlag.3:0000000000000000 b_changeFlag.3
+     /tmp/ccyXqcsa.s:1393   .bss.b_changeFlag.3:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1398   .bss.b_changeFlagSkip.2:0000000000000000 b_changeFlagSkip.2
+     /tmp/ccyXqcsa.s:1399   .bss.b_changeFlagSkip.2:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1404   .bss.b_skipPrint.4:0000000000000000 b_skipPrint.4
+     /tmp/ccyXqcsa.s:1405   .bss.b_skipPrint.4:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1407   .bss.u16_changePeriod.1:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1411   .bss.u16_changePeriod.1:0000000000000000 u16_changePeriod.1
+     /tmp/ccyXqcsa.s:1417   .bss.u8_charCount.5:0000000000000000 u8_charCount.5
+     /tmp/ccyXqcsa.s:1418   .bss.u8_charCount.5:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1423   .bss.u8_countDecode.9:0000000000000000 u8_countDecode.9
+     /tmp/ccyXqcsa.s:1424   .bss.u8_countDecode.9:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1429   .bss.u8_countEncode.10:0000000000000000 u8_countEncode.10
+     /tmp/ccyXqcsa.s:1430   .bss.u8_countEncode.10:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1435   .bss.u8_digitCount.0:0000000000000000 u8_digitCount.0
+     /tmp/ccyXqcsa.s:1436   .bss.u8_digitCount.0:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1441   .bss.u8_exclamCount.7:0000000000000000 u8_exclamCount.7
+     /tmp/ccyXqcsa.s:1442   .bss.u8_exclamCount.7:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1447   .bss.u8_incoming.11:0000000000000000 u8_incoming.11
+     /tmp/ccyXqcsa.s:1448   .bss.u8_incoming.11:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1450   .data.u16_encode_periodHalf:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1454   .data.u16_encode_periodHalf:0000000000000000 u16_encode_periodHalf
+     /tmp/ccyXqcsa.s:1457   .rodata.au8_key.8:0000000000000000 $d
+     /tmp/ccyXqcsa.s:1461   .rodata.au8_key.8:0000000000000000 au8_key.8
 
 UNDEFINED SYMBOLS
 gpio_toggle
 gpio_get
 __esos_hw_GetSystemTickCount
-ARM GAS  /tmp/ccIJtQZY.s 			page 41
+ARM GAS  /tmp/ccyXqcsa.s 			page 39
 
 
 __esos_hasTickDurationPassed
 __esos_getBuffer
-itoa
 __esos_OutChar
+itoa
 __stChildTaskRx
 __esos_u32SystemFlags
 __stChildTaskTx

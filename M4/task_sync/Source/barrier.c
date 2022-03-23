@@ -16,6 +16,7 @@ ESOS_SEMAPHORE(Consumer4);
 ESOS_SEMAPHORE(Consumer5);
 ESOS_SEMAPHORE(Consumer6);
 
+//Task does what it says, is a heartbeat using LED2
 ESOS_USER_TASK(led_heartbeat){
   ESOS_TASK_BEGIN();
   while (TRUE) 
@@ -26,6 +27,10 @@ ESOS_USER_TASK(led_heartbeat){
   ESOS_TASK_END();
 }
 
+/* The following consumer tasks are all incredibly similar copies of eachother
+ * They wait for threads to open and other tasks to finish and then wait a random
+ * number of seconds between 0-16 to simulate work being done
+ */
 ESOS_USER_TASK(consumer1){
   ESOS_TASK_BEGIN();
   while(true){
@@ -42,13 +47,14 @@ ESOS_USER_TASK(consumer1){
     ESOS_TASK_WAIT_SEMAPHORE(Consumer5, 1);
     ESOS_TASK_WAIT_SEMAPHORE(Consumer6, 1);
     ++u8_passed_programs;
+    //Check if a new cycle begins
     if(u8_passed_programs == 6){
       u8_passed_programs = 0;
       ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
       ESOS_TASK_WAIT_ON_SEND_STRING("New Cycle\n\r");
       ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
     }
-    ESOS_TASK_WAIT_TICKS(100);
+    ESOS_TASK_WAIT_TICKS(100); //I added this wait so that tasks at the end of a cycle don't race to be the first in the next cycle
   }
   ESOS_TASK_END();
 }
@@ -70,13 +76,14 @@ ESOS_USER_TASK(consumer2){
     ESOS_TASK_WAIT_SEMAPHORE(Consumer5, 1);
     ESOS_TASK_WAIT_SEMAPHORE(Consumer6, 1);
     ++u8_passed_programs;
+    //Check if a new cycle begins
     if(u8_passed_programs == 6){
       u8_passed_programs = 0;
       ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
       ESOS_TASK_WAIT_ON_SEND_STRING("New Cycle\n\r");
       ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
     }
-    ESOS_TASK_WAIT_TICKS(100);
+    ESOS_TASK_WAIT_TICKS(100); //I added this wait so that tasks at the end of a cycle don't race to be the first in the next cycle
   }
   ESOS_TASK_END();
 }
@@ -97,13 +104,14 @@ ESOS_USER_TASK(consumer3){
     ESOS_TASK_WAIT_SEMAPHORE(Consumer5, 1);
     ESOS_TASK_WAIT_SEMAPHORE(Consumer6, 1);
     ++u8_passed_programs;
+    //Check if a new cycle begins
     if(u8_passed_programs == 6){
       u8_passed_programs = 0;
       ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
       ESOS_TASK_WAIT_ON_SEND_STRING("New Cycle\n\r");
       ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
     }
-    ESOS_TASK_WAIT_TICKS(100);
+    ESOS_TASK_WAIT_TICKS(100); //I added this wait so that tasks at the end of a cycle don't race to be the first in the next cycle
   }
   ESOS_TASK_END();
 }
@@ -124,13 +132,14 @@ ESOS_USER_TASK(consumer4){
     ESOS_TASK_WAIT_SEMAPHORE(Consumer5, 1);
     ESOS_TASK_WAIT_SEMAPHORE(Consumer6, 1);
     ++u8_passed_programs;
+    //Check if a new cycle begins
     if(u8_passed_programs == 6){
       u8_passed_programs = 0;
       ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
       ESOS_TASK_WAIT_ON_SEND_STRING("New Cycle\n\r");
       ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
     }
-    ESOS_TASK_WAIT_TICKS(100);
+    ESOS_TASK_WAIT_TICKS(100); //I added this wait so that tasks at the end of a cycle don't race to be the first in the next cycle
   }
   ESOS_TASK_END();
 }
@@ -151,13 +160,14 @@ ESOS_USER_TASK(consumer5){
     ESOS_TASK_WAIT_SEMAPHORE(Consumer4, 1);
     ESOS_TASK_WAIT_SEMAPHORE(Consumer6, 1);
     ++u8_passed_programs;
+    //Check if a new cycle begins
     if(u8_passed_programs == 6){
       u8_passed_programs = 0;
       ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
       ESOS_TASK_WAIT_ON_SEND_STRING("New Cycle\n\r");
       ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
     }
-    ESOS_TASK_WAIT_TICKS(100);
+    ESOS_TASK_WAIT_TICKS(100); //I added this wait so that tasks at the end of a cycle don't race to be the first in the next cycle
   }
   ESOS_TASK_END();
 }
@@ -178,17 +188,19 @@ ESOS_USER_TASK(consumer6){
     ESOS_TASK_WAIT_SEMAPHORE(Consumer4, 1);
     ESOS_TASK_WAIT_SEMAPHORE(Consumer5, 1);
     ++u8_passed_programs;
+    //Check if a new cycle begins
     if(u8_passed_programs == 6){
       u8_passed_programs = 0;
       ESOS_TASK_WAIT_ON_AVAILABLE_OUT_COMM();
       ESOS_TASK_WAIT_ON_SEND_STRING("New Cycle\n\r");
       ESOS_TASK_SIGNAL_AVAILABLE_OUT_COMM();
     }
-    ESOS_TASK_WAIT_TICKS(100);
+    ESOS_TASK_WAIT_TICKS(100); //I added this wait so that tasks at the end of a cycle don't race to be the first in the next cycle
   }
   ESOS_TASK_END();
 }
 
+//Child of Initialze task, sets up some software structures for the program
 ESOS_CHILD_TASK(create_consumer_producers, const uint8_t u8_numC){
   ESOS_TASK_BEGIN();
 u8_max_threads = u8_numC;
@@ -198,6 +210,8 @@ u8_max_threads = u8_numC;
   ESOS_TASK_END();
 }
 
+//Is the first task to run, sets up the structure and get's the ball running for the program
+//This program is dependant upon the user input obtained from this function
 ESOS_USER_TASK(Initialize){
   ESOS_TASK_BEGIN();
 
@@ -239,11 +253,13 @@ void user_init(void){
   esos_RegisterTask(consumer6);
 }
 
+//Initialize Hardware
 void init_hw(){
   rcc_periph_clock_enable(GPIOA);
   gpio_mode_setup(LED2_GPIO_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, LED2_Pin);
 }
 
+//Initialize Software
 void init_sw(){
   ESOS_INIT_SEMAPHORE(threads, 0);
   ESOS_INIT_SEMAPHORE(Consumer1, 0);

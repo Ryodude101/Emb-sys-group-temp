@@ -22,10 +22,10 @@
     #define LED2_Pin GPIO5  //Pin number for PA5, the LED2 pin, can be found in nucleo board 64 user manual
     #define LED2_GPIO_Port GPIOA  //PORTA address, can be found in libopencm3 docs
 
-    uint8_t u8_max_threads = 3;
-    uint8_t u8_passed_programs = 0;
+    uint8_t u8_max_threads = 3; //Global used to keep track of the max number of threads
+    uint8_t u8_passed_programs = 0; //Global used to keep track of progress in the cycle
 
-    void init_hw();
-    void init_sw();
+    void init_hw(); //Initialize Hardware
+    void init_sw(); //Initialize Software
 
 #endif

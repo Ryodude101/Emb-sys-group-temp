@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc3yE4xW.s 			page 1
+ARM GAS  /tmp/ccm9gKkk.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
   28:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 
   29:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** /**
   30:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  * \addtogroup ESOS_UART_Service
-ARM GAS  /tmp/cc3yE4xW.s 			page 2
+ARM GAS  /tmp/ccm9gKkk.s 			page 2
 
 
   31:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  * @{
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
   50 0014 1360     		str	r3, [r2]
   63:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 	  
   64:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****     // HAL_UART_Transmit_IT requires a pointer to the data, so
-ARM GAS  /tmp/cc3yE4xW.s 			page 3
+ARM GAS  /tmp/ccm9gKkk.s 			page 3
 
 
   65:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****     //  have CB return the data to a local variable and pass that
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
   94              		@ frame_needed = 0, uses_anonymous_args = 0
   95              		@ link register save eliminated.
   78:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****   __esos_ClearSystemFlag(__ESOS_SYS_COMM_TX_ONGOING);
-ARM GAS  /tmp/cc3yE4xW.s 			page 4
+ARM GAS  /tmp/ccm9gKkk.s 			page 4
 
 
   96              		.loc 1 78 3 view .LVU12
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  129              		.loc 1 101 7 is_stmt 0 view .LVU16
  130 0002 4FF04023 		mov	r3, #1073758208
  131 0006 D3F80034 		ldr	r3, [r3, #1024]
-ARM GAS  /tmp/cc3yE4xW.s 			page 5
+ARM GAS  /tmp/ccm9gKkk.s 			page 5
 
 
  132              		.loc 1 101 4 view .LVU17
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  124:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****     		//empty TX buffer, disable the interrupt, do not clear the flag
  125:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****     		usart_disable_tx_interrupt(USART_CONSOLE);
  162              		.loc 1 125 7 is_stmt 1 view .LVU28
-ARM GAS  /tmp/cc3yE4xW.s 			page 6
+ARM GAS  /tmp/ccm9gKkk.s 			page 6
 
 
  163 0042 1148     		ldr	r0, .L19+4
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  140:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 	//else if(((USART_CR1(USART_CONSOLE) & USART_CR3_EIE) != 0) &&
  141:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 	//   ((USART_ISR(USART_CONSOLE) & USART_ISR_ORE) != 0 ))
  142:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 	//{
-ARM GAS  /tmp/cc3yE4xW.s 			page 7
+ARM GAS  /tmp/ccm9gKkk.s 			page 7
 
 
  143:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 	//   // Error handler for the UART
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  150:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *  - Format is 8 data bits, no parity, 1 stop bit
  151:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *  - CTS, RTS, and BCLK not used
  152:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *
-ARM GAS  /tmp/cc3yE4xW.s 			page 8
+ARM GAS  /tmp/ccm9gKkk.s 			page 8
 
 
  153:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *  \param u32_baudRate The baud rate to use.
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  278 002e 0823     		movs	r3, #8
  279 0030 0122     		movs	r2, #1
  280 0032 1146     		mov	r1, r2
-ARM GAS  /tmp/cc3yE4xW.s 			page 9
+ARM GAS  /tmp/ccm9gKkk.s 			page 9
 
 
  281 0034 4FF09040 		mov	r0, #1207959552
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  324 0080 2046     		mov	r0, r4
  325 0082 FFF7FEFF 		bl	usart_set_flow_control
  326              	.LVL23:
-ARM GAS  /tmp/cc3yE4xW.s 			page 10
+ARM GAS  /tmp/ccm9gKkk.s 			page 10
 
 
  180:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 	
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  204:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 
  205:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** 
  206:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** /******************************************************************************
-ARM GAS  /tmp/cc3yE4xW.s 			page 11
+ARM GAS  /tmp/ccm9gKkk.s 			page 11
 
 
  207:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  * Function:        void _esos_hw_InitSerialUart( void )
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  236:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *          number of uint8_ts that can be RX-ed before the buffers
  237:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *          overflow
  238:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *
-ARM GAS  /tmp/cc3yE4xW.s 			page 12
+ARM GAS  /tmp/ccm9gKkk.s 			page 12
 
 
  239:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  * Side Effects:    None
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  274:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *
  275:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c ****  *****************************************************************************/
  276:/home/ryan/Documents/Github/esos32/src/stm32l4_ocm3/esos_stm32l4_rs232.c **** uint8_t esos_GetCommSystemMaxOutDataLen(void) {
-ARM GAS  /tmp/cc3yE4xW.s 			page 13
+ARM GAS  /tmp/ccm9gKkk.s 			page 13
 
 
  407              		.loc 1 276 47 is_stmt 1 view -0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  442              		.section	.bss.u8_uartRXbuf,"aw",%nobits
  443              		.set	.LANCHOR1,. + 0
  446              	u8_uartRXbuf:
-ARM GAS  /tmp/cc3yE4xW.s 			page 14
+ARM GAS  /tmp/ccm9gKkk.s 			page 14
 
 
  447 0000 00       		.space	1
@@ -798,35 +798,35 @@ ARM GAS  /tmp/cc3yE4xW.s 			page 1
  463              		.file 9 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/li
  464              		.file 10 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
  465              		.file 11 "/home/ryan/Documents/Gitlab/embedded-systems-development-milestones/libopencm3/include/l
-ARM GAS  /tmp/cc3yE4xW.s 			page 15
+ARM GAS  /tmp/ccm9gKkk.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 esos_stm32l4_rs232.c
-     /tmp/cc3yE4xW.s:20     .text.__esos_hw_signal_start_tx:0000000000000000 $t
-     /tmp/cc3yE4xW.s:26     .text.__esos_hw_signal_start_tx:0000000000000000 __esos_hw_signal_start_tx
-     /tmp/cc3yE4xW.s:75     .text.__esos_hw_signal_start_tx:0000000000000034 $d
-     /tmp/cc3yE4xW.s:83     .text.__esos_hw_signal_stop_tx:0000000000000000 $t
-     /tmp/cc3yE4xW.s:89     .text.__esos_hw_signal_stop_tx:0000000000000000 __esos_hw_signal_stop_tx
-     /tmp/cc3yE4xW.s:106    .text.__esos_hw_signal_stop_tx:000000000000000c $d
-     /tmp/cc3yE4xW.s:111    .text.usart2_isr:0000000000000000 $t
-     /tmp/cc3yE4xW.s:117    .text.usart2_isr:0000000000000000 usart2_isr
-     /tmp/cc3yE4xW.s:221    .text.usart2_isr:0000000000000084 $d
-     /tmp/cc3yE4xW.s:231    .text.__esos_configUART1:0000000000000000 $t
-     /tmp/cc3yE4xW.s:237    .text.__esos_configUART1:0000000000000000 __esos_configUART1
-     /tmp/cc3yE4xW.s:346    .text.__esos_configUART1:000000000000009c $d
-     /tmp/cc3yE4xW.s:351    .text.__esos_hw_InitCommSystem:0000000000000000 $t
-     /tmp/cc3yE4xW.s:357    .text.__esos_hw_InitCommSystem:0000000000000000 __esos_hw_InitCommSystem
-     /tmp/cc3yE4xW.s:378    .text.esos_GetCommSystemMaxInDataLen:0000000000000000 $t
-     /tmp/cc3yE4xW.s:384    .text.esos_GetCommSystemMaxInDataLen:0000000000000000 esos_GetCommSystemMaxInDataLen
-     /tmp/cc3yE4xW.s:399    .text.esos_GetCommSystemMaxOutDataLen:0000000000000000 $t
-     /tmp/cc3yE4xW.s:405    .text.esos_GetCommSystemMaxOutDataLen:0000000000000000 esos_GetCommSystemMaxOutDataLen
-     /tmp/cc3yE4xW.s:420    .text._esos_hw_GetSerialUartVersion:0000000000000000 $t
-     /tmp/cc3yE4xW.s:426    .text._esos_hw_GetSerialUartVersion:0000000000000000 _esos_hw_GetSerialUartVersion
-     /tmp/cc3yE4xW.s:452    .bss.u8_uartTXbuf:0000000000000000 u8_uartTXbuf
-     /tmp/cc3yE4xW.s:446    .bss.u8_uartRXbuf:0000000000000000 u8_uartRXbuf
-     /tmp/cc3yE4xW.s:447    .bss.u8_uartRXbuf:0000000000000000 $d
-     /tmp/cc3yE4xW.s:453    .bss.u8_uartTXbuf:0000000000000000 $d
+     /tmp/ccm9gKkk.s:20     .text.__esos_hw_signal_start_tx:0000000000000000 $t
+     /tmp/ccm9gKkk.s:26     .text.__esos_hw_signal_start_tx:0000000000000000 __esos_hw_signal_start_tx
+     /tmp/ccm9gKkk.s:75     .text.__esos_hw_signal_start_tx:0000000000000034 $d
+     /tmp/ccm9gKkk.s:83     .text.__esos_hw_signal_stop_tx:0000000000000000 $t
+     /tmp/ccm9gKkk.s:89     .text.__esos_hw_signal_stop_tx:0000000000000000 __esos_hw_signal_stop_tx
+     /tmp/ccm9gKkk.s:106    .text.__esos_hw_signal_stop_tx:000000000000000c $d
+     /tmp/ccm9gKkk.s:111    .text.usart2_isr:0000000000000000 $t
+     /tmp/ccm9gKkk.s:117    .text.usart2_isr:0000000000000000 usart2_isr
+     /tmp/ccm9gKkk.s:221    .text.usart2_isr:0000000000000084 $d
+     /tmp/ccm9gKkk.s:231    .text.__esos_configUART1:0000000000000000 $t
+     /tmp/ccm9gKkk.s:237    .text.__esos_configUART1:0000000000000000 __esos_configUART1
+     /tmp/ccm9gKkk.s:346    .text.__esos_configUART1:000000000000009c $d
+     /tmp/ccm9gKkk.s:351    .text.__esos_hw_InitCommSystem:0000000000000000 $t
+     /tmp/ccm9gKkk.s:357    .text.__esos_hw_InitCommSystem:0000000000000000 __esos_hw_InitCommSystem
+     /tmp/ccm9gKkk.s:378    .text.esos_GetCommSystemMaxInDataLen:0000000000000000 $t
+     /tmp/ccm9gKkk.s:384    .text.esos_GetCommSystemMaxInDataLen:0000000000000000 esos_GetCommSystemMaxInDataLen
+     /tmp/ccm9gKkk.s:399    .text.esos_GetCommSystemMaxOutDataLen:0000000000000000 $t
+     /tmp/ccm9gKkk.s:405    .text.esos_GetCommSystemMaxOutDataLen:0000000000000000 esos_GetCommSystemMaxOutDataLen
+     /tmp/ccm9gKkk.s:420    .text._esos_hw_GetSerialUartVersion:0000000000000000 $t
+     /tmp/ccm9gKkk.s:426    .text._esos_hw_GetSerialUartVersion:0000000000000000 _esos_hw_GetSerialUartVersion
+     /tmp/ccm9gKkk.s:452    .bss.u8_uartTXbuf:0000000000000000 u8_uartTXbuf
+     /tmp/ccm9gKkk.s:446    .bss.u8_uartRXbuf:0000000000000000 u8_uartRXbuf
+     /tmp/ccm9gKkk.s:447    .bss.u8_uartRXbuf:0000000000000000 $d
+     /tmp/ccm9gKkk.s:453    .bss.u8_uartTXbuf:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __esos_CB_ReadUINT8
